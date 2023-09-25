@@ -1,5 +1,5 @@
 {
-    "name": "Controls",
+    "name": "PlayerActions",
     "maps": [
         {
             "name": "PlayerActions",
@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Tag",
+                    "type": "Button",
+                    "id": "939ba65e-a61d-41c9-82a7-4162a9930884",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -70,6 +79,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "be77f977-2676-41dc-be8a-70ca870735c6",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
