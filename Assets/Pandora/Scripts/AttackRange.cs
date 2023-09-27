@@ -29,7 +29,7 @@ namespace Pandora.Scripts
         private void OnTriggerStay2D(Collider2D col)
         {
             var hitAble = col.gameObject.GetComponent<IHitAble>();
-            if (hitAble != null || _hitted.Contains(hitAble))
+            if (hitAble != null && !_hitted.Contains(hitAble))
             {
                 _hitted.Add(hitAble);
                 hitAble.Hit(_damage, _buffs);
