@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Pandora.Scripts.Enemy
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour, IHitAble
     {
         // Components
         private Rigidbody2D rb;
@@ -24,7 +25,7 @@ namespace Pandora.Scripts.Enemy
         }
 
 
-        public void Hit(float damage, Buff buff)
+        public void Hit(float damage, List<Buff> buff)
         {
             anim.SetTrigger(Hit1);
         }
