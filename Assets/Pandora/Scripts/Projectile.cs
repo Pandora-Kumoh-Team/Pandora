@@ -13,7 +13,7 @@ namespace Pandora.Scripts
         
         // Variables
         private float _speed;
-        private float _damage;
+        private float _damage = 10f; // 임시 데메지
         private float _lifeTime;
         private List<Buff> _buffs;
 

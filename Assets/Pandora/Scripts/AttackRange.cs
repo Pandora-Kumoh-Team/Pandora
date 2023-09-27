@@ -7,7 +7,7 @@ namespace Pandora.Scripts
 {
     public class AttackRange : MonoBehaviour
     {
-        private float _damage;
+        private float _damage = 10f; // 임시 데메지
         private List<Buff> _buffs = new List<Buff>();
         private List<IHitAble> _hitted = new List<IHitAble>();
         
