@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Pandora.Scripts.Enemy;
 using UnityEngine;
 
 namespace Pandora.Scripts
@@ -14,6 +15,7 @@ namespace Pandora.Scripts
         private float _speed;
         private float _damage;
         private float _lifeTime;
+        private List<Buff> _buffs;
 
         private void Awake()
         {
@@ -41,6 +43,16 @@ namespace Pandora.Scripts
             _lifeTime -= Time.deltaTime;
             if (_lifeTime <= 0)
             {
+                Destroy(gameObject);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            var hitAble = col.gameObject.GetComponent<IHitAble>();
+            if (hitAble != null)
+            {
+                hitAble.Hit(_damage, _buffs);
                 Destroy(gameObject);
             }
         }
