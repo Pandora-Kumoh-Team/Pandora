@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
     // 태그 관련
     private bool isOnControl;
     public bool onControlInit = true;
-    
+    private static readonly int WalkDir = Animator.StringToHash("WalkDir");
+
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -73,9 +74,9 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(AttackCoroutine());
     }
     
+    // 공격 타입별로 하위 클래스에서 정의
     protected virtual IEnumerator AttackCoroutine()
     {
-        // 공격 타입별로 하위 클래스에서 정의
         yield return null;
     }
     
@@ -84,6 +85,53 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputValue value)
     {
         moveDir = value.Get<Vector2>();
+        if(moveDir.magnitude < 0.1f)
+        {
+            anim.SetInteger(WalkDir, -1);
+        }
+        else
+        {
+            SetMoveAnimation(moveDir);
+        }
+    }
+
+    private void SetMoveAnimation(Vector2 moveDir)
+    {
+        // Vector2.right 와 moveDir 사이의 각도 계산
+        float angle = Vector2.SignedAngle(Vector2.right, moveDir);
+        // 각도에 따라 8방향으로 애니메이션 설정
+        if (angle >= -22.5f && angle < 22.5f)
+        {
+            anim.SetInteger(WalkDir, 0);
+        }
+        else if (angle >= 22.5f && angle < 67.5f)
+        {
+            anim.SetInteger(WalkDir, 1);
+        }
+        else if (angle >= 67.5f && angle < 112.5f)
+        {
+            anim.SetInteger(WalkDir, 2);
+        }
+        else if (angle >= 112.5f && angle < 157.5f)
+        {
+            anim.SetInteger(WalkDir, 3);
+        }
+        else if (angle >= 157.5f || angle < -157.5f)
+        {
+            anim.SetInteger(WalkDir, 4);
+        }
+        else if (angle >= -157.5f && angle < -112.5f)
+        {
+            anim.SetInteger(WalkDir, 5);
+        }
+        else if (angle >= -112.5f && angle < -67.5f)
+        {
+            anim.SetInteger(WalkDir, 6);
+        }
+        else if (angle >= -67.5f && angle < -22.5f)
+        {
+            anim.SetInteger(WalkDir, 7);
+        }
     }
     
     public void OnTag(InputValue value)
