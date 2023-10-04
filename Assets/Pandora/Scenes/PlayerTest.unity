@@ -412,6 +412,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -442960042, guid: 82ec56bb9b2cc8746ab046bb518981ed, type: 3}
+    - target: {fileID: 9056849970550305182, guid: 932187468dfd6fc48890fd50cb6ac7e4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5f8fd7c991c5c094ca3bb4ac653882ae, type: 2}
     m_RemovedComponents:
     - {fileID: 1973227437629469767, guid: 932187468dfd6fc48890fd50cb6ac7e4, type: 3}
     m_RemovedGameObjects: []
@@ -834,7 +838,7 @@ PrefabInstance:
     - target: {fileID: 8935002089603691318, guid: 932187468dfd6fc48890fd50cb6ac7e4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b5999a6975f43dd4590926306eead31c, type: 3}
+      objectReference: {fileID: 1261737116, guid: 6d4f6e4bbeb726048b0e6237c7815814, type: 3}
     m_RemovedComponents:
     - {fileID: 1973227437629469767, guid: 932187468dfd6fc48890fd50cb6ac7e4, type: 3}
     m_RemovedGameObjects: []
@@ -878,7 +882,7 @@ Animator:
   m_GameObject: {fileID: 1698848660}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca9ed19cdbc7ca94e8ac69fe71539fd3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
