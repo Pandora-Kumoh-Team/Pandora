@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         isOnControl = onControlInit;
+        anim.SetInteger(WalkDir, -1);
     }
 
     void Update()
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
+        if (!isOnControl) return;
         moveDir = value.Get<Vector2>();
         if(moveDir.magnitude < 0.1f)
         {
@@ -141,6 +143,7 @@ public class PlayerController : MonoBehaviour
     
     public void OnAttack(InputValue value)
     {
+        if (!isOnControl) return;
         // press 여부 저장
         attackDir = value.Get<Vector2>();
         if(attackDir.magnitude > 0.5f)
