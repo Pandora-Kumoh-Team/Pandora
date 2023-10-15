@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Pandora.Scripts
 {
@@ -21,8 +22,14 @@ namespace Pandora.Scripts
             }
         }
         
+        public GameObject player;
         // 숫차로 출력되는 데메지 이펙트 프리팹
         // Insistate 후 Init() 호출하여 사용
         public GameObject damageEffect;
+
+        private void Start()
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 }

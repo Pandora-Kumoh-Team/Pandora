@@ -26,14 +26,16 @@ public class PlayerController : MonoBehaviour
     // 태그 관련
     private bool isOnControl;
     public bool onControlInit = true;
-    private static readonly int WalkDir = Animator.StringToHash("WalkDir");
+    private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
+    private static readonly int Attack1 = Animator.StringToHash("Attack");
+    private static readonly int CachedAttackDir = Animator.StringToHash("AttackDir");
 
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         isOnControl = onControlInit;
-        anim.SetInteger(WalkDir, -1);
+        anim.SetInteger(CachedMoveDir, -1);
     }
 
     void Update()
@@ -71,8 +73,30 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        //anim.SetTrigger("Attack");
+        SetAttackAnimation();
         StartCoroutine(AttackCoroutine());
+    }
+    private void SetAttackAnimation()
+    {
+        anim.SetTrigger(Attack1);
+        float angle = Vector2.SignedAngle(Vector2.right, attackDir);
+        // 각도에 따라 4방향으로 공격 애니메이션을 재생한다.
+        if (angle >= -45 && angle < 45)
+        {
+            anim.SetInteger(CachedAttackDir, 0);
+        }
+        else if (angle >= 45 && angle < 135)
+        {
+            anim.SetInteger(CachedAttackDir, 1);
+        }
+        else if (angle >= 135 || angle < -135)
+        {
+            anim.SetInteger(CachedAttackDir, 2);
+        }
+        else if (angle >= -135 && angle < -45)
+        {
+            anim.SetInteger(CachedAttackDir, 3);
+        }
     }
     
     // 공격 타입별로 하위 클래스에서 정의
@@ -89,7 +113,7 @@ public class PlayerController : MonoBehaviour
         moveDir = value.Get<Vector2>();
         if(moveDir.magnitude < 0.1f)
         {
-            anim.SetInteger(WalkDir, -1);
+            anim.SetInteger(CachedMoveDir, -1);
         }
         else
         {
@@ -104,35 +128,35 @@ public class PlayerController : MonoBehaviour
         // 각도에 따라 8방향으로 애니메이션 설정
         if (angle >= -22.5f && angle < 22.5f)
         {
-            anim.SetInteger(WalkDir, 0);
+            anim.SetInteger(CachedMoveDir, 0);
         }
         else if (angle >= 22.5f && angle < 67.5f)
         {
-            anim.SetInteger(WalkDir, 1);
+            anim.SetInteger(CachedMoveDir, 1);
         }
         else if (angle >= 67.5f && angle < 112.5f)
         {
-            anim.SetInteger(WalkDir, 2);
+            anim.SetInteger(CachedMoveDir, 2);
         }
         else if (angle >= 112.5f && angle < 157.5f)
         {
-            anim.SetInteger(WalkDir, 3);
+            anim.SetInteger(CachedMoveDir, 3);
         }
         else if (angle >= 157.5f || angle < -157.5f)
         {
-            anim.SetInteger(WalkDir, 4);
+            anim.SetInteger(CachedMoveDir, 4);
         }
         else if (angle >= -157.5f && angle < -112.5f)
         {
-            anim.SetInteger(WalkDir, 5);
+            anim.SetInteger(CachedMoveDir, 5);
         }
         else if (angle >= -112.5f && angle < -67.5f)
         {
-            anim.SetInteger(WalkDir, 6);
+            anim.SetInteger(CachedMoveDir, 6);
         }
         else if (angle >= -67.5f && angle < -22.5f)
         {
-            anim.SetInteger(WalkDir, 7);
+            anim.SetInteger(CachedMoveDir, 7);
         }
     }
     
