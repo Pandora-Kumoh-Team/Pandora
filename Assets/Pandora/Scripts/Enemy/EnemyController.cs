@@ -24,7 +24,7 @@ namespace Pandora.Scripts.Enemy
         // Update is called once per frame
         void Update()
         {
-
+            rb.velocity = Vector3.zero; // 밀림 방지
         }
 
 
