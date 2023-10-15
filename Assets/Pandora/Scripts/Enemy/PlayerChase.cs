@@ -40,9 +40,10 @@ public class PlayerChase : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collision)
-    {
+    {transform.parent.GetComponent<Animator>().SetFloat("Speed", direction.magnitude);
         if (target == collision.gameObject)
         {
+            transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
             target = null;
         }
     }
