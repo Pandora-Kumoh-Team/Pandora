@@ -6,8 +6,9 @@ public class FollowState : StateMachineBehaviour
 {
     Transform bossTransform;
     BossController enemyBoss;
-    [SerializeField] private float followDistance = 10.0f;
-    [SerializeField] private float moveToward = 5.0f;
+    [SerializeField] private float followDistance = 4.0f;
+    [SerializeField] private float moveToward = 1.0f;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -23,11 +24,11 @@ public class FollowState : StateMachineBehaviour
             animator.SetBool("isBack", true);
             animator.SetBool("isFollow", false);
         }
-        else if (Vector2.Distance(enemyBoss.player.position, bossTransform.position) > 2f) //일정 거리 떨어져있으면 플레이어 따라가기
+        else if (Vector2.Distance(enemyBoss.player.position, bossTransform.position) > moveToward) //일정 거리 떨어져있으면 플레이어 따라가기
         {
             bossTransform.position = Vector2.MoveTowards(bossTransform.position, enemyBoss.player.position, Time.deltaTime * enemyBoss.moveSpeed);
         }
-        else if(Vector2.Distance(enemyBoss.player.position, bossTransform.position) > 1f) //Ready상태로 변환
+        else // Ready 상태 변환
         {
             animator.SetBool("isBack", false);
             animator.SetBool("isFollow", false);

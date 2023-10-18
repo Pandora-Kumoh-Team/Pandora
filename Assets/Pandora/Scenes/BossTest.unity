@@ -513,6 +513,7 @@ GameObject:
   - component: {fileID: 1626357830}
   - component: {fileID: 1626357829}
   - component: {fileID: 1626357833}
+  - component: {fileID: 1626357834}
   m_Layer: 0
   m_Name: StageBoss
   m_TagString: Untagged
@@ -648,6 +649,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  home: {x: 0, y: 0}
+  moveSpeed: 1
+  attackCooltime: 2
+  attackDelay: 0
+--- !u!58 &1626357834
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626357828}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.05, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.3
 --- !u!1 &1937200588 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1300399048447396293, guid: 932187468dfd6fc48890fd50cb6ac7e4, type: 3}
