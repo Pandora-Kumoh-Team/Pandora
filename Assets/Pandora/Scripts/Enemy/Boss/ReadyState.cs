@@ -6,7 +6,7 @@ public class ReadyState : StateMachineBehaviour
 {
     Transform bossTransform;
     BossController enemyBoss;
-    [SerializeField] private float attack02Distance = 2f;
+    [SerializeField] private float followDistance = 1.0f;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,16 +17,11 @@ public class ReadyState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (enemyBoss.attackDelay <= 0) //딜레이가 0보다 작으면 근접 공격
+        if (enemyBoss.attackDelay <= 0) //딜레이가 0보다 작으면 원거리 공격
         {
-            animator.SetTrigger("Attack01");
-        }
-        
+            animator.SetTrigger("Attack");
 
-        if(enemyBoss.attackDelay <= 0 && Vector2.Distance(enemyBoss.player.position, bossTransform.position) > attack02Distance)
-        {
-            animator.SetTrigger("Attack02");
-        }else if (Vector2.Distance(enemyBoss.player.position, bossTransform.position) > 3f)
+        }else if (Vector2.Distance(enemyBoss.player.position, bossTransform.position) > followDistance)
         {
             animator.SetBool("isFollow", true);
         }

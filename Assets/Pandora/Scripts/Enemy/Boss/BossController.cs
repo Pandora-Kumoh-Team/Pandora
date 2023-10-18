@@ -22,7 +22,7 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(attackDelay >= 0)
+        if (attackDelay >= 0)
         {
             attackDelay -= Time.deltaTime;
         }

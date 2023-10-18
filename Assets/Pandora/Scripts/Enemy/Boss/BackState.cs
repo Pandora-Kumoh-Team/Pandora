@@ -7,7 +7,7 @@ public class BackState : StateMachineBehaviour
     Transform bossTransform;
     BossController enemyBoss;
     [SerializeField] private float followDistance = 4.0f;
-    [SerializeField] private float backDistance = 0.5f;
+    [SerializeField] private float backDistance = 0.1f;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
