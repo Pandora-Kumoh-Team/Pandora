@@ -98,6 +98,7 @@ namespace Pandora.Scripts.Player
         
         public void AddBuffs(List<Buff> buffs)
         {
+            if(buffs == null) return;
             _buffs.AddRange(buffs);
         }
 
