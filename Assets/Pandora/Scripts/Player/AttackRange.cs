@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Pandora.Scripts.Enemy;
 using UnityEngine;
 
-namespace Pandora.Scripts
+namespace Pandora.Scripts.Player
 {
     public class AttackRange : MonoBehaviour
     {
