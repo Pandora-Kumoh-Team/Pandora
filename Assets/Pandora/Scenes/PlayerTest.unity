@@ -352,6 +352,61 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2.0625}
   m_Direction: 0
+--- !u!1 &1128821285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1128821287}
+  - component: {fileID: 1128821286}
+  m_Layer: 0
+  m_Name: StatDebug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1128821286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128821285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d4fa96732348819f2f5acfe1c908a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _nowHealth: 100
+  _baseDamage: 10
+  _attackPower: 1
+  _defencePower: 0
+  _speed: 3
+  _attackRange: 1
+  _attackSpeed: 1
+  _criticalChance: 0
+  _criticalDamageTimes: 2
+  _dodgeChance: 0
+--- !u!4 &1128821287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128821285}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.15, y: 3.8500004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1603639442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -450,7 +505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c97755614c41fd851cf3104430fdb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tmpSpeed: 5
   onControlInit: 1
 --- !u!1 &1698848660 stripped
 GameObject:
@@ -868,7 +922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267ef9f2de5d417daddc9cb466a8a039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tmpSpeed: 5
   onControlInit: 0
   projectile: {fileID: 6870167997499708224, guid: 77ccc9f0a54fa13429b9f969de195a1c, type: 3}
   projectileSpeed: 15

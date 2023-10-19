@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,19 +13,24 @@ namespace Pandora.Scripts.Player
         // variables for the projectile
         public float projectileSpeed;
 
-        public override void Start()
+        public override void AttackRangeChanged(float newRange)
         {
-            base.Start();
+            base.AttackRangeChanged(newRange);
+            if(projectile != null)
+                projectile.GetComponent<Projectile>().maxDistance = newRange * 5;
         }
-
+        
         // 공격 코루틴
-        protected override IEnumerator AttackCoroutine()
+        protected override IEnumerator AttackCoroutine(float damage, List<Buff> buffs)
         {
             // 투사체 생성
             GameObject projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity);
             //
             yield return null;
-            projectileInstance.GetComponent<Projectile>().SetDirection(attackDir, projectileSpeed);
+            var pj = projectileInstance.GetComponent<Projectile>();
+            pj.SetDirection(attackDir, projectileSpeed);
+            pj.SetDamage(damage);
+            pj.SetBuffs(buffs);
         }
     }
 }
