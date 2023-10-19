@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pandora.Scripts.System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -76,7 +77,7 @@ namespace Pandora.Scripts.Player
 
         #region 피격 관련
 
-        public void Hit(float damage, List<Buff> buffs)
+        public void Hurt(float damage, List<Buff> buffs)
         {
             // 회피 판정
             var rand = Random.Range(0, 100);
@@ -87,14 +88,16 @@ namespace Pandora.Scripts.Player
             }
         
             // 피격
-            _playerStat.NowHealth -= damage * _playerStat.DefencePower;
+            _playerStat.NowHealth -= damage * (1f - _playerStat.DefencePower);
+            EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, _playerStat.NowHealth);
             if (_playerStat.NowHealth <= 0)
             {
                 Die();
             }
+            
+            // 버프 적용
+            if (buffs == null) return;
             _playerStat.AddBuffs(buffs);
-        
-            // 버프 코루틴
             foreach (var buff in buffs)
             {
                 StartCoroutine(RemoveBuffAfterDuration(buff));

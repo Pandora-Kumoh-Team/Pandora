@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Pandora.Scripts
+namespace Pandora.Scripts.System
 {
     public class GameManager : MonoBehaviour
     {
