@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Pandora.Scripts.Effect;
+using Pandora.Scripts.System;
 using UnityEngine;
 
 namespace Pandora.Scripts.Enemy
