@@ -1,184 +1,263 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Pandora.Scripts.Player;
+using Pandora.Scripts.System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
-public class PlayerController : MonoBehaviour
+namespace Pandora.Scripts.Player
 {
-    // Components
-    private Rigidbody2D rb;
-    private Animator anim;
-    
-    // Tmp Status
-    public float tmpSpeed = 5f;
-    private float tmpAttackCoolTime;
-    
-    // Variables
-    // 이동 관련
-    private Vector2 moveDir;
-
-    // 공격 관련
-    protected Vector2 attackDir;
-    private bool isOnAttack;
-    
-    // 태그 관련
-    private bool isOnControl;
-    public bool onControlInit = true;
-    private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
-    private static readonly int Attack1 = Animator.StringToHash("Attack");
-    private static readonly int CachedAttackDir = Animator.StringToHash("AttackDir");
-
-    public virtual void Start()
+    public class PlayerController : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        isOnControl = onControlInit;
-        anim.SetInteger(CachedMoveDir, -1);
-    }
+        // Components
+        private Rigidbody2D rb;
+        private Animator anim;
+    
+        // Stat
+        public PlayerStat _playerStat;
+    
+        // Variables
+        // 이동 관련
+        private Vector2 moveDir;
 
-    void Update()
-    {
-        // 조작 중 상태
-        if(isOnControl)
+        // 공격 관련
+        protected Vector2 attackDir;
+        private float attackCoolTime;
+        private bool isOnAttack;
+    
+        // 태그 관련
+        private bool isOnControl;
+        public bool onControlInit = true;
+        
+        private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
+        private static readonly int Attack1 = Animator.StringToHash("Attack");
+        private static readonly int CachedAttackDir = Animator.StringToHash("AttackDir");
+
+        public virtual void Start()
         {
-            // 이동
-            rb.velocity = moveDir * tmpSpeed;
-            
-            // 공격
-            if(tmpAttackCoolTime > 0)
+            rb = GetComponent<Rigidbody2D>();
+            anim = GetComponent<Animator>();
+            isOnControl = onControlInit;
+            anim.SetInteger(CachedMoveDir, -1);
+            _playerStat = new PlayerStat();
+        }
+
+        void Update()
+        {
+            // 조작 중 상태
+            if(isOnControl)
             {
-                tmpAttackCoolTime -= Time.deltaTime;
+                // 이동
+                rb.velocity = moveDir * _playerStat.Speed;
+            
+                // 공격
+                if(attackCoolTime > 0)
+                {
+                    attackCoolTime -= Time.deltaTime;
+                }
+                else
+                {
+                    if(isOnAttack)
+                    {
+                        Attack();
+                        attackCoolTime = 1 / _playerStat.AttackSpeed;
+                    }
+                }
+            }
+        
+            // Ai 이동 상태
+            else
+            {
+                rb.velocity = Vector2.zero;
+                // TODO : move by AI
+            }
+        
+        }
+    
+
+        #region 피격 관련
+
+        public void Hurt(float damage, List<Buff> buffs)
+        {
+            // 회피 판정
+            var rand = Random.Range(0, 100);
+            if (rand < _playerStat.DodgeChance)
+            {
+                Dodge();
+                return;
+            }
+        
+            // 피격
+            _playerStat.NowHealth -= damage * (1f - _playerStat.DefencePower);
+            EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, _playerStat.NowHealth);
+            if (_playerStat.NowHealth <= 0)
+            {
+                Die();
+            }
+            
+            // 버프 적용
+            if (buffs == null) return;
+            _playerStat.AddBuffs(buffs);
+            foreach (var buff in buffs)
+            {
+                StartCoroutine(RemoveBuffAfterDuration(buff));
+            }
+        }
+
+        private void Dodge()
+        {
+            // TODO : 회피
+        }
+
+        private IEnumerator RemoveBuffAfterDuration(Buff buff)
+        {
+            yield return new WaitForSeconds(buff.Duration);
+            _playerStat.RemoveBuff(buff);
+        }
+
+        public void Die()
+        {
+            // TODO : Die
+        }
+    
+
+        #endregion
+
+        #region 공격 관련
+
+        private void Attack()
+        {
+            SetAttackAnimation();
+        
+            // 크리티컬 여부 판단
+            var rand = Random.Range(0, 100);
+            var damage = _playerStat.BaseDamage * _playerStat.AttackPower;
+            if (rand < _playerStat.CriticalChance)
+            {
+                damage *= _playerStat.CriticalDamageTimes;
+            }
+        
+            StartCoroutine(AttackCoroutine(damage, _playerStat.GetAttackBuffs()));
+        }
+        private void SetAttackAnimation()
+        {
+            anim.SetTrigger(Attack1);
+            float angle = Vector2.SignedAngle(Vector2.right, attackDir);
+            // 각도에 따라 4방향으로 공격 애니메이션을 재생한다.
+            if (angle >= -45 && angle < 45)
+            {
+                anim.SetInteger(CachedAttackDir, 0);
+            }
+            else if (angle >= 45 && angle < 135)
+            {
+                anim.SetInteger(CachedAttackDir, 1);
+            }
+            else if (angle >= 135 || angle < -135)
+            {
+                anim.SetInteger(CachedAttackDir, 2);
+            }
+            else if (angle >= -135 && angle < -45)
+            {
+                anim.SetInteger(CachedAttackDir, 3);
+            }
+        }
+    
+        /// <summary>
+        ///  공격 타입별로 하위 클래스에서 정의
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IEnumerator AttackCoroutine(float damage, List<Buff> buffs)
+        {
+            yield return null;
+        }
+    
+        /// <summary>
+        /// 공격 타입별 사거리 변화 처리
+        /// 첫 부분에 base.AttackRangeChanged()를 호출해야 함
+        /// </summary>
+        /// <param name="value">변경 후 사거리</param>
+        public virtual void AttackRangeChanged(float value)
+        {
+            _playerStat.AttackRange = value;
+        }
+
+        #endregion
+    
+        #region InputSystemEvents
+
+        public void OnMove(InputValue value)
+        {
+            if (!isOnControl) return;
+            moveDir = value.Get<Vector2>();
+            if(moveDir.magnitude < 0.1f)
+            {
+                anim.SetInteger(CachedMoveDir, -1);
             }
             else
             {
-                if(isOnAttack)
-                {
-                    Attack();
-                    tmpAttackCoolTime = 0.5f;
-                }
+                SetMoveAnimation(moveDir);
             }
         }
-        
-        // Ai 이동 상태
-        else
-        {
-            // stop
-            rb.velocity = Vector2.zero;
-            // TODO : move by AI
-        }
-        
-    }
 
-    private void Attack()
-    {
-        SetAttackAnimation();
-        StartCoroutine(AttackCoroutine());
-    }
-    private void SetAttackAnimation()
-    {
-        anim.SetTrigger(Attack1);
-        float angle = Vector2.SignedAngle(Vector2.right, attackDir);
-        // 각도에 따라 4방향으로 공격 애니메이션을 재생한다.
-        if (angle >= -45 && angle < 45)
+        private void SetMoveAnimation(Vector2 moveDirection)
         {
-            anim.SetInteger(CachedAttackDir, 0);
+            // Vector2.right 와 moveDir 사이의 각도 계산
+            float angle = Vector2.SignedAngle(Vector2.right, moveDirection);
+            // 각도에 따라 8방향으로 애니메이션 설정
+            if (angle >= -22.5f && angle < 22.5f)
+            {
+                anim.SetInteger(CachedMoveDir, 0);
+            }
+            else if (angle >= 22.5f && angle < 67.5f)
+            {
+                anim.SetInteger(CachedMoveDir, 1);
+            }
+            else if (angle >= 67.5f && angle < 112.5f)
+            {
+                anim.SetInteger(CachedMoveDir, 2);
+            }
+            else if (angle >= 112.5f && angle < 157.5f)
+            {
+                anim.SetInteger(CachedMoveDir, 3);
+            }
+            else if (angle >= 157.5f || angle < -157.5f)
+            {
+                anim.SetInteger(CachedMoveDir, 4);
+            }
+            else if (angle >= -157.5f && angle < -112.5f)
+            {
+                anim.SetInteger(CachedMoveDir, 5);
+            }
+            else if (angle >= -112.5f && angle < -67.5f)
+            {
+                anim.SetInteger(CachedMoveDir, 6);
+            }
+            else if (angle >= -67.5f && angle < -22.5f)
+            {
+                anim.SetInteger(CachedMoveDir, 7);
+            }
         }
-        else if (angle >= 45 && angle < 135)
-        {
-            anim.SetInteger(CachedAttackDir, 1);
-        }
-        else if (angle >= 135 || angle < -135)
-        {
-            anim.SetInteger(CachedAttackDir, 2);
-        }
-        else if (angle >= -135 && angle < -45)
-        {
-            anim.SetInteger(CachedAttackDir, 3);
-        }
-    }
     
-    // 공격 타입별로 하위 클래스에서 정의
-    protected virtual IEnumerator AttackCoroutine()
-    {
-        yield return null;
-    }
+        public void OnTag(InputValue value)
+        {
+            isOnControl = !isOnControl;
+        }
     
-    #region InputSystemEvents
+        public void OnAttack(InputValue value)
+        {
+            if (!isOnControl) return;
+            // press 여부 저장
+            attackDir = value.Get<Vector2>();
+            if(attackDir.magnitude > 0.5f)
+            {
+                isOnAttack = true;
+            }
+            else
+            {
+                isOnAttack = false;
+            }
+        }
 
-    public void OnMove(InputValue value)
-    {
-        if (!isOnControl) return;
-        moveDir = value.Get<Vector2>();
-        if(moveDir.magnitude < 0.1f)
-        {
-            anim.SetInteger(CachedMoveDir, -1);
-        }
-        else
-        {
-            SetMoveAnimation(moveDir);
-        }
+        #endregion
     }
-
-    private void SetMoveAnimation(Vector2 moveDir)
-    {
-        // Vector2.right 와 moveDir 사이의 각도 계산
-        float angle = Vector2.SignedAngle(Vector2.right, moveDir);
-        // 각도에 따라 8방향으로 애니메이션 설정
-        if (angle >= -22.5f && angle < 22.5f)
-        {
-            anim.SetInteger(CachedMoveDir, 0);
-        }
-        else if (angle >= 22.5f && angle < 67.5f)
-        {
-            anim.SetInteger(CachedMoveDir, 1);
-        }
-        else if (angle >= 67.5f && angle < 112.5f)
-        {
-            anim.SetInteger(CachedMoveDir, 2);
-        }
-        else if (angle >= 112.5f && angle < 157.5f)
-        {
-            anim.SetInteger(CachedMoveDir, 3);
-        }
-        else if (angle >= 157.5f || angle < -157.5f)
-        {
-            anim.SetInteger(CachedMoveDir, 4);
-        }
-        else if (angle >= -157.5f && angle < -112.5f)
-        {
-            anim.SetInteger(CachedMoveDir, 5);
-        }
-        else if (angle >= -112.5f && angle < -67.5f)
-        {
-            anim.SetInteger(CachedMoveDir, 6);
-        }
-        else if (angle >= -67.5f && angle < -22.5f)
-        {
-            anim.SetInteger(CachedMoveDir, 7);
-        }
-    }
-    
-    public void OnTag(InputValue value)
-    {
-        isOnControl = !isOnControl;
-    }
-    
-    public void OnAttack(InputValue value)
-    {
-        if (!isOnControl) return;
-        // press 여부 저장
-        attackDir = value.Get<Vector2>();
-        if(attackDir.magnitude > 0.5f)
-        {
-            isOnAttack = true;
-        }
-        else
-        {
-            isOnAttack = false;
-        }
-    }
-
-    #endregion
 }
