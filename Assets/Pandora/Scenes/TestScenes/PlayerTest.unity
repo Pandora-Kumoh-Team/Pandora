@@ -952,6 +952,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5459641825337354994, guid: bf65d22b308305a45ad4d674ae71c4a7, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459641825337354994, guid: bf65d22b308305a45ad4d674ae71c4a7, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1240,7 +1248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5878088165441548464, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6178490899169241089, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
       propertyPath: m_AnchorMax.x
