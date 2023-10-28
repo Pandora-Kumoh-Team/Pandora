@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using DarkPixelRPGUI.Scripts.UI.Equipment;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Pandora.Scripts.System
+namespace Pandora.Scripts.System.Event
 {
     /// <summary>
     /// 이벤트 리스트

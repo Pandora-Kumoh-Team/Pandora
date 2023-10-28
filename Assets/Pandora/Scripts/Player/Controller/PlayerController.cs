@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Pandora.Scripts.System;
+using Pandora.Scripts.System.Event;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-namespace Pandora.Scripts.Player
+namespace Pandora.Scripts.Player.Controller
 {
     public class PlayerController : MonoBehaviour
     {
@@ -13,6 +14,11 @@ namespace Pandora.Scripts.Player
         private Rigidbody2D rb;
         private Animator anim;
     
+        /// <summary>
+        /// 플레이어 캐릭터 고유번호, UI와 연동
+        /// </summary>
+        public int playerCharacterId = -1;
+        
         // Stat
         public PlayerStat _playerStat;
     
@@ -40,6 +46,12 @@ namespace Pandora.Scripts.Player
             isOnControl = onControlInit;
             anim.SetInteger(CachedMoveDir, -1);
             _playerStat = new PlayerStat();
+            
+            if(playerCharacterId == -1)
+            {
+                Debug.LogError("Player Character Id is not set");
+            }
+            CallHealthChangedEvent();
         }
 
         void Update()
@@ -86,10 +98,13 @@ namespace Pandora.Scripts.Player
                 Dodge();
                 return;
             }
-        
-            // 피격
+            
+            // 피격 피해 적용
             _playerStat.NowHealth -= damage * (1f - _playerStat.DefencePower);
-            EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, _playerStat.NowHealth);
+            
+            // 피격 이벤트 호출
+            CallHealthChangedEvent();
+            
             if (_playerStat.NowHealth <= 0)
             {
                 Die();
@@ -107,6 +122,12 @@ namespace Pandora.Scripts.Player
         private void Dodge()
         {
             // TODO : 회피
+        }
+        
+        private void CallHealthChangedEvent()
+        {
+            var param = new PlayerHealthChangedParam(_playerStat.NowHealth, _playerStat.MaxHealth, playerCharacterId);
+            EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, param);
         }
 
         private IEnumerator RemoveBuffAfterDuration(Buff buff)

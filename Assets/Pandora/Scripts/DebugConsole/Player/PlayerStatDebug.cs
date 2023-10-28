@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Pandora.Scripts.Player;
+using Pandora.Scripts.Player.Controller;
 using UnityEngine;
 
 namespace Pandora.Scripts.DebugConsole.Player
