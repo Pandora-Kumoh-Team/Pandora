@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using Pandora.Scripts.Effect;
 using Pandora.Scripts.System;
 using UnityEngine;
@@ -15,11 +17,15 @@ namespace Pandora.Scripts.Enemy
         // Animator Hashes
         private static readonly int Hit1 = Animator.StringToHash("Hit");
 
+        //Status
+        public EnemyStatus _enemyStatus;
+
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             capsuleCollider = GetComponent<CapsuleCollider2D>();
+            _enemyStatus = new EnemyStatus(this.gameObject.name);
         }
 
         // Update is called once per frame
