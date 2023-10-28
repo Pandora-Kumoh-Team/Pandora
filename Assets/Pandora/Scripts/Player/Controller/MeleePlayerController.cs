@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pandora.Scripts.Player
+namespace Pandora.Scripts.Player.Controller
 {
     public class MeleePlayerController : PlayerController
     {

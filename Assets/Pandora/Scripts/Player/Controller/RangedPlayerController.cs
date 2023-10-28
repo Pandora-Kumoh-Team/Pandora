@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Pandora.Scripts.Player
+namespace Pandora.Scripts.Player.Controller
 {
     public class RangedPlayerController : PlayerController
     {
