@@ -5,6 +5,8 @@ namespace Pandora.Scripts.System
 {
     public class GameManager : MonoBehaviour
     {
+        public PoolManager pool;
+
         // Singleton class
         public static GameManager Instance { get; private set; }
         

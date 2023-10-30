@@ -25,7 +25,12 @@ namespace Pandora.Scripts.Enemy
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             capsuleCollider = GetComponent<CapsuleCollider2D>();
-            _enemyStatus = new EnemyStatus(this.gameObject.name);
+
+            //오브젝트 풀링으로 인한 clone 제거
+            if(this.gameObject.name.Contains("(Clone)"))
+                _enemyStatus = new EnemyStatus(this.gameObject.name.Replace("(Clone)",""));
+            else
+                _enemyStatus = new EnemyStatus(this.gameObject.name);
         }
 
         // Update is called once per frame
@@ -44,6 +49,19 @@ namespace Pandora.Scripts.Enemy
             var damageEffect = Instantiate(GameManager.Instance.damageEffect, position, Quaternion.identity);
             damageEffect.GetComponent<FadeTextEffect>()
                 .Init(damage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);
+
+            //피해 계산
+            _enemyStatus.NowHealth -= damage;
+
+            //hp 0에 도달 시 비활성화
+            if (_enemyStatus.NowHealth <=0)
+                gameObject.SetActive(false);
+        }
+        
+        //스포너에 의해 활성화 될 시 스탯 초기화
+        private void OnEnable()
+        {
+            _enemyStatus = new EnemyStatus(this.gameObject.name);
         }
     }
 }
