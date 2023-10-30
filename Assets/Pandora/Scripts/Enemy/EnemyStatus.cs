@@ -27,6 +27,8 @@ public class EnemyStatus
     // 101 : Mushroom
     // 102 : Skeleton
     //
+    // [Test]
+    // 999 : TestDummy
     //-------------------
 
     public EnemyStatus(string mobName)
@@ -44,6 +46,9 @@ public class EnemyStatus
                 break;
             case "Skeleton":
                 _code = 102; _maxHealth = 100; _nowHealth = 100; _baseDamage = 4; _attackPower = 2; _defencePower = 3; _speed = 1; _attackSpeed = 1;
+                break;
+            case "TestDummy":
+                _code = 999; _maxHealth = float.MaxValue; _nowHealth = float.MaxValue; _baseDamage = 0; _attackPower = 0; _defencePower = 0; _speed = 0; _attackSpeed = 0;
                 break;
         }
     }
