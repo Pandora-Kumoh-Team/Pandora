@@ -34,19 +34,20 @@ public class EnemyStatus
         switch (mobName)
         {
             case "FlyingEye":
-                _code = 000; _maxHealth = 5; _nowHealth = 5; _baseDamage = 2; _attackPower = 1; _defencePower = 0; _speed = 1; _attackSpeed = 1;
+                _code = 000; _maxHealth = 20; _nowHealth = 20; _baseDamage = 2; _attackPower = 1; _defencePower = 0; _speed = 1; _attackSpeed = 1;
                 break;
             case "Goblin":
-                _code = 100; _maxHealth = 10; _nowHealth = 10; _baseDamage = 2; _attackPower = 2; _defencePower = 1; _speed = 1; _attackSpeed = 1;
+                _code = 100; _maxHealth = 30; _nowHealth = 30; _baseDamage = 2; _attackPower = 2; _defencePower = 1; _speed = 1; _attackSpeed = 1;
                 break;
             case "Mushroom":
-                _code = 101; _maxHealth = 15; _nowHealth = 15; _baseDamage = 3; _attackPower = 2; _defencePower = 2; _speed = 1; _attackSpeed = 1;
+                _code = 101; _maxHealth = 40; _nowHealth = 40; _baseDamage = 3; _attackPower = 2; _defencePower = 2; _speed = 1; _attackSpeed = 1;
                 break;
             case "Skeleton":
-                _code = 102; _maxHealth = 20; _nowHealth = 20; _baseDamage = 4; _attackPower = 2; _defencePower = 3; _speed = 1; _attackSpeed = 1;
+                _code = 102; _maxHealth = 100; _nowHealth = 100; _baseDamage = 4; _attackPower = 2; _defencePower = 3; _speed = 1; _attackSpeed = 1;
                 break;
         }
     }
+
     // 최대 체력
     public float MaxHealth
     {
