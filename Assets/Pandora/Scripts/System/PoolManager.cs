@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    //...¿ÀºêÁ§Æ® Ç®¸µÀ» ÀÌ¿ëÇÑ ¸ó½ºÅÍ ½ºÆù 
+    //...ì˜¤ë¸Œì íŠ¸ í’€ë§ì„ ì´ìš©í•œ ëª¬ìŠ¤í„° ìŠ¤í° 
 
     public GameObject[] prefabs;
     public int numObject;
@@ -22,7 +22,7 @@ public class PoolManager : MonoBehaviour
     {
         GameObject select = null;
 
-        // ºñÈ°¼ºÈ­ µÈ ¿ÀºêÁ§Æ® Á¢±Ù
+        // ë¹„í™œì„±í™” ëœ ì˜¤ë¸Œì íŠ¸ ì ‘ê·¼
         foreach (GameObject item in pools[index])
         {
             if(!item.activeSelf)
@@ -35,7 +35,7 @@ public class PoolManager : MonoBehaviour
 
         if(!select)
         {
-            //»õ·Ó°Ô »ı¼º
+            //ìƒˆë¡­ê²Œ ìƒì„±
             numObject++;
             select = Instantiate(prefabs[index], transform);
             select.SetActive(true);

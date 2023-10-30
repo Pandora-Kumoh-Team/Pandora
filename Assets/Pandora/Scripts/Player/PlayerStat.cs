@@ -81,6 +81,12 @@ namespace Pandora.Scripts.Player
             get => _dodgeChance + _buffs.Sum(buff => buff.DodgeChanceChange);
             set => _dodgeChance = value;
         }
+        
+        public float NonControlHpRecovery
+        {
+            get => _nonControlHpRecovery;
+            set => _nonControlHpRecovery = value;
+        }
 
         private float _maxHealth = 100;
         private float _nowHealth = 100;
@@ -93,6 +99,7 @@ namespace Pandora.Scripts.Player
         private float _criticalChance = 0;
         private float _criticalDamageTimes = 2;
         private float _dodgeChance = 0;
+        private float _nonControlHpRecovery = 1;
         private List<Buff> _buffs = new List<Buff>();
         private List<Buff> _attackBuffs = new List<Buff>();
         
