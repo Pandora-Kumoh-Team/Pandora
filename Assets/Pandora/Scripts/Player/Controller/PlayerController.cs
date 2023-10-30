@@ -81,6 +81,9 @@ namespace Pandora.Scripts.Player.Controller
             else
             {
                 rb.velocity = Vector2.zero;
+                _playerStat.NowHealth += _playerStat.NonControlHpRecovery * Time.deltaTime;
+                CallHealthChangedEvent();
+                
                 // TODO : move by AI
             }
         
@@ -101,8 +104,6 @@ namespace Pandora.Scripts.Player.Controller
             
             // 피격 피해 적용
             _playerStat.NowHealth -= damage * (1f - _playerStat.DefencePower);
-            
-            // 피격 이벤트 호출
             CallHealthChangedEvent();
             
             if (_playerStat.NowHealth <= 0)
