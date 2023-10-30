@@ -61,7 +61,10 @@ namespace Pandora.Scripts.Enemy
         //스포너에 의해 활성화 될 시 스탯 초기화
         private void OnEnable()
         {
-            _enemyStatus = new EnemyStatus(this.gameObject.name);
+            if (this.gameObject.name.Contains("(Clone)"))
+                _enemyStatus = new EnemyStatus(this.gameObject.name.Replace("(Clone)", ""));
+            else
+                _enemyStatus = new EnemyStatus(this.gameObject.name);
         }
     }
 }
