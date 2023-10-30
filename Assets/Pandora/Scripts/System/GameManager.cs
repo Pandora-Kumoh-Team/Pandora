@@ -39,8 +39,9 @@ namespace Pandora.Scripts.System
             inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<Canvas>();
         }
         
-        public void ExitGame()
+        public static void ExitGame()
         {
+            // 게임 종료 전처리가 필요하다면 여기서 처리
             Application.Quit();
         }
     }
