@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Pandora.Scripts.Enemy;
 using UnityEngine;
 
@@ -21,6 +22,9 @@ namespace Pandora.Scripts.Player
 
         public void SetDirection(Vector2 direction, float speed)
         {
+            // 이동 방향으로 회전
+            var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             _rigidbody2D.velocity = direction.normalized * speed;
         }
         
@@ -63,14 +67,14 @@ namespace Pandora.Scripts.Player
             _beforePosition = transform.position;
             if (_movedDistance > maxDistance)
             {
-                Destroy(gameObject);
+                StartCoroutine(DestroyAfterParticle());
             }
             
             // life time
             _lifeTime -= Time.deltaTime;
             if (_lifeTime <= 0)
             {
-                Destroy(gameObject);
+                StartCoroutine(DestroyAfterParticle());
             }
         }
 
@@ -80,8 +84,18 @@ namespace Pandora.Scripts.Player
             if (hitAble != null)
             {
                 hitAble.Hit(_damage, _buffs);
-                Destroy(gameObject);
+                StartCoroutine(DestroyAfterParticle());
             }
+        }
+        
+        // 파티클 대기 후 삭제 코루틴
+        private IEnumerator DestroyAfterParticle()
+        {
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
+            _rigidbody2D.velocity = Vector2.zero;
+            yield return new WaitForSeconds(0.5f);
+            Destroy(gameObject);
         }
 
     }
