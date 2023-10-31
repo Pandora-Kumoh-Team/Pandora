@@ -26,7 +26,6 @@ namespace Pandora.Scripts.Player.Controller
             if(projectile != null)
             {
                 _projectileRange = newRange * AttackRangeMagnitude;
-                Debug.Log(newRange * AttackRangeMagnitude);
             }
             else
             {
