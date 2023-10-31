@@ -13,6 +13,7 @@ namespace Pandora.Scripts.Player.Controller
         // Components
         private Rigidbody2D rb;
         private Animator anim;
+        private PlayerAI ai;
     
         /// <summary>
         /// 플레이어 캐릭터 고유번호, UI와 연동
@@ -24,12 +25,12 @@ namespace Pandora.Scripts.Player.Controller
     
         // Variables
         // 이동 관련
-        private Vector2 moveDir;
+        public Vector2 moveDir;
 
         // 공격 관련
-        protected Vector2 attackDir;
+        public Vector2 attackDir;
         private float attackCoolTime;
-        private bool isOnAttack;
+        private bool isAttackKeyPressed;
     
         // 태그 관련
         private bool isOnControl;
@@ -43,7 +44,10 @@ namespace Pandora.Scripts.Player.Controller
         {
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
+            ai = GetComponent<PlayerAI>();
+            
             isOnControl = onControlInit;
+            ai.enabled = !onControlInit;
             anim.SetInteger(CachedMoveDir, -1);
             _playerStat = new PlayerStat();
             
@@ -56,37 +60,25 @@ namespace Pandora.Scripts.Player.Controller
 
         void Update()
         {
-            // 조작 중 상태
-            if(isOnControl)
+            // 이동
+            rb.velocity = moveDir * _playerStat.Speed;
+            if(moveDir.magnitude < 0.1f)
             {
-                // 이동
-                rb.velocity = moveDir * _playerStat.Speed;
-            
-                // 공격
-                if(attackCoolTime > 0)
-                {
-                    attackCoolTime -= Time.deltaTime;
-                }
-                else
-                {
-                    if(isOnAttack)
-                    {
-                        Attack();
-                        attackCoolTime = 1 / _playerStat.AttackSpeed;
-                    }
-                }
+                anim.SetInteger(CachedMoveDir, -1);
             }
-        
-            // Ai 이동 상태
             else
             {
-                rb.velocity = Vector2.zero;
-                _playerStat.NowHealth += _playerStat.NonControlHpRecovery * Time.deltaTime;
-                CallHealthChangedEvent();
-                
-                // TODO : move by AI
+                SetMoveAnimation(moveDir);
             }
-        
+            
+            if(!CanAttack())
+            {
+                attackCoolTime -= Time.deltaTime;
+            }
+            if(isOnControl && isAttackKeyPressed && CanAttack())
+            {
+                Attack();
+            }
         }
     
 
@@ -124,8 +116,8 @@ namespace Pandora.Scripts.Player.Controller
         {
             // TODO : 회피
         }
-        
-        private void CallHealthChangedEvent()
+
+        public void CallHealthChangedEvent()
         {
             var param = new PlayerHealthChangedParam(_playerStat.NowHealth, _playerStat.MaxHealth, playerCharacterId);
             EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, param);
@@ -147,8 +139,31 @@ namespace Pandora.Scripts.Player.Controller
 
         #region 공격 관련
 
-        private void Attack()
+        // Input System에서 호출
+        public void OnAttack(InputValue value)
         {
+            if (!isOnControl) return;
+            // press 여부 저장
+            attackDir = value.Get<Vector2>();
+            if(attackDir.magnitude > 0.5f)
+            {
+                isAttackKeyPressed = true;
+            }
+            else
+            {
+                isAttackKeyPressed = false;
+            }
+        }
+
+        public bool CanAttack()
+        {
+            return attackCoolTime < 0;
+        }
+
+        public void Attack()
+        {
+            attackCoolTime = 1 / _playerStat.AttackSpeed;
+            
             SetAttackAnimation();
         
             // 크리티컬 여부 판단
@@ -204,21 +219,13 @@ namespace Pandora.Scripts.Player.Controller
         }
 
         #endregion
-    
-        #region InputSystemEvents
+
+        #region 이동 관련
 
         public void OnMove(InputValue value)
         {
             if (!isOnControl) return;
             moveDir = value.Get<Vector2>();
-            if(moveDir.magnitude < 0.1f)
-            {
-                anim.SetInteger(CachedMoveDir, -1);
-            }
-            else
-            {
-                SetMoveAnimation(moveDir);
-            }
         }
 
         private void SetMoveAnimation(Vector2 moveDirection)
@@ -259,27 +266,14 @@ namespace Pandora.Scripts.Player.Controller
                 anim.SetInteger(CachedMoveDir, 7);
             }
         }
-    
+        
+
+        #endregion
+        
         public void OnTag(InputValue value)
         {
             isOnControl = !isOnControl;
+            ai.enabled = !isOnControl;
         }
-    
-        public void OnAttack(InputValue value)
-        {
-            if (!isOnControl) return;
-            // press 여부 저장
-            attackDir = value.Get<Vector2>();
-            if(attackDir.magnitude > 0.5f)
-            {
-                isOnAttack = true;
-            }
-            else
-            {
-                isOnAttack = false;
-            }
-        }
-
-        #endregion
     }
 }

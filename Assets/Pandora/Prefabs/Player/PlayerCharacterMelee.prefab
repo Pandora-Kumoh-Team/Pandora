@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4062504275897932036}
+  - component: {fileID: 1149615170628072552}
+  - component: {fileID: 6612939485274714206}
   - component: {fileID: 5592853203191405790}
   - component: {fileID: 7467079097659203110}
   - component: {fileID: 7515819654774594542}
-  - component: {fileID: 1149615170628072552}
   - component: {fileID: 5423754412656916691}
   - component: {fileID: 6807539854828870946}
   m_Layer: 6
@@ -38,6 +39,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1149615170628072552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964942453664939683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c97755614c41fd851cf3104430fdb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCharacterId: -1
+  moveDir: {x: 0, y: 0}
+  attackDir: {x: 0, y: 0}
+  onControlInit: 1
+--- !u!114 &6612939485274714206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964942453664939683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36e5f6729ac4970a2fd3f7ac0ea1283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &5592853203191405790
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -152,19 +181,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1149615170628072552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964942453664939683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6c97755614c41fd851cf3104430fdb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onControlInit: 1
 --- !u!114 &5423754412656916691
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Pandora.Scripts.Enemy;
+using Pandora.Scripts.System.Event;
 using UnityEngine;
 
 namespace Pandora.Scripts.Player
@@ -32,6 +34,7 @@ namespace Pandora.Scripts.Player
             {
                 _hitted.Add(hitAble);
                 hitAble.Hit(_damage, _buffs);
+                EventManager.Instance.TriggerEvent(PandoraEventType.PlayerAttackEnemy, col.gameObject);
             }
         }
     }
