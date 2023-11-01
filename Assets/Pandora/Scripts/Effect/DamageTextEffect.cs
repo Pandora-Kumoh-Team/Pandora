@@ -9,7 +9,7 @@ namespace Pandora.Scripts.Effect
         private void OnTriggerStay2D(Collider2D other)
         {
             var otherDamageEffect = other.GetComponent<DamageTextEffect>();
-            if (otherDamageEffect != null)
+            if (otherDamageEffect != null && transform.parent == otherDamageEffect.transform.parent)
             {
                 // 둘 중 하나만 제거해야 하기 때문에 둘 중 생긴지 오래된 것을 제거한다
                 if (fadeTimer < otherDamageEffect.fadeTimer) return;

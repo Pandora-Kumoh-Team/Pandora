@@ -46,7 +46,7 @@ namespace Pandora.Scripts.Enemy
             
             // damage 이펙트 출력
             var position = transform.position + new Vector3(0, capsuleCollider.size.y / 2, 0);
-            var damageEffect = Instantiate(GameManager.Instance.damageEffect, position, Quaternion.identity);
+            var damageEffect = Instantiate(GameManager.Instance.damageEffect, position, Quaternion.identity, transform);
             damageEffect.GetComponent<FadeTextEffect>()
                 .Init(damage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);
 
@@ -65,6 +65,16 @@ namespace Pandora.Scripts.Enemy
                 _enemyStatus = new EnemyStatus(this.gameObject.name.Replace("(Clone)", ""));
             else
                 _enemyStatus = new EnemyStatus(this.gameObject.name);
+        }
+
+        private void OnDisable()
+        {
+            // 출력된 이펙트 제거
+            foreach (Transform child in transform)
+            {
+                if(child.gameObject.GetComponent<FadeTextEffect>() != null)
+                    Destroy(child.gameObject);
+            }
         }
     }
 }
