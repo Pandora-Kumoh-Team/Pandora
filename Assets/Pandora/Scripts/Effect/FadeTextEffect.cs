@@ -9,9 +9,9 @@ namespace Pandora.Scripts.Effect
         float speed = 1f;
         float fadeSpeed = 1f;
         float fadeTime = 0.5f;
-        float fadeTimer = 0f;
-        float moveTimer = 0f;
-        float moveTime = 0.5f;
+        protected float fadeTimer = 0f;
+        protected float moveTimer = 0f;
+        protected float moveTime = 0.5f;
         float moveSpeed = 1f;
         Vector3 moveDirection = Vector3.up;
         Vector3 moveAmount = Vector3.zero;
