@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Pandora.Scripts.System.Event;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Pandora.Scripts.Player.Controller
 {
@@ -12,11 +14,13 @@ namespace Pandora.Scripts.Player.Controller
 
         private AIState _currentState;
         private GameObject _target;
+        private Vector2 _movePoint;
         private float _minTargetDistance;
         private bool isTargetPlayer;
 
         private enum AIState
         {
+            Idle,
             MoveToTarget,
             MoveToPoint,
             Dead
@@ -26,6 +30,7 @@ namespace Pandora.Scripts.Player.Controller
         {
             _playerController = GetComponent<PlayerController>();
             EventManager.Instance.AddListener(PandoraEventType.PlayerAttackEnemy, this);
+            _currentState = AIState.Idle;
         }
         
         private void OnDestroy()
@@ -37,6 +42,9 @@ namespace Pandora.Scripts.Player.Controller
         {
             switch (_currentState)
             {
+                case AIState.Idle:
+                    Idle();
+                    break;
                 case AIState.MoveToTarget:
                     MoveToTarget();
                     break;
@@ -52,6 +60,20 @@ namespace Pandora.Scripts.Player.Controller
             
             _playerController._playerStat.NowHealth += _playerController._playerStat.NonControlHpRecovery * Time.deltaTime;
             _playerController.CallHealthChangedEvent();
+        }
+
+        protected void Idle()
+        {
+            if(_target != null)
+            {
+                _currentState = AIState.MoveToTarget;
+            }
+            else
+            {
+                _movePoint = new Vector2(transform.position.x + UnityEngine.Random.Range(-0.5f, 0.5f),
+                    transform.position.y + UnityEngine.Random.Range(-0.5f, 0.5f));
+                _playerController.moveDir = _movePoint - (Vector2)transform.position;
+            }
         }
 
         protected void MoveToTarget()
@@ -97,7 +119,15 @@ namespace Pandora.Scripts.Player.Controller
 
         protected void MoveToPoint()
         {
-            // TODO : 공격하지 않고 긴급 회피
+            // 이동 지점 도달시 다시 Idle 상태로
+            if (Vector2.Distance(transform.position, _movePoint) < 0.1f)
+            {
+                _currentState = AIState.Idle;
+            }
+            else
+            {
+                _playerController.moveDir = (_movePoint - (Vector2)transform.position).normalized;
+            }
         }
         
         protected void Dead()
