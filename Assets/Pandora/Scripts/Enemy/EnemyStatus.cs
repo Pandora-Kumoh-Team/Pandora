@@ -29,6 +29,11 @@ public class EnemyStatus
     //
     // [Test]
     // 999 : TestDummy
+    //
+    // [boss]
+    //  103: 1stage boss
+    //  104: 2stage boss
+    //  105: 3stage boss
     //-------------------
 
     public EnemyStatus(string mobName)
