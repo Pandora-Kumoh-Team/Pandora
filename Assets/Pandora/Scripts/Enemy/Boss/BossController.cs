@@ -1,43 +1,79 @@
+using Pandora.Scripts;
+using Pandora.Scripts.Effect;
+using Pandora.Scripts.Enemy;
+using Pandora.Scripts.System;
+using Pandora.Scripts.System.Event;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class BossController : MonoBehaviour
+namespace Pandora.Scripts.Enemy
 {
-    Animator animator;
-    public Transform player;
-    public Vector2 home;
-    public float moveSpeed = 1.0f;
-
-    public float attackCooltime = 2;
-    public float attackDelay;
-    // Start is called before the first frame update
-    void Start()
+    public class BossController : MonoBehaviour, IHitAble
     {
-        animator = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        home = transform.position;
-    }
+        //Component
+        private Rigidbody2D rb;
+        private Animator anim;
+        private PolygonCollider2D polygonCollider;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (attackDelay >= 0)
+        //Animator Hashes
+
+        //Status
+        public EnemyStatus _enemyStatus;
+        // Start is called before the first frame update
+        void Start()
         {
-            attackDelay -= Time.deltaTime;
+            rb = GetComponent<Rigidbody2D>();
+            anim = GetComponent<Animator>();
+            polygonCollider = GetComponent<PolygonCollider2D>();
+
+            _enemyStatus = new EnemyStatus(this.gameObject.name);
         }
-    }
 
-    //TODO 캐릭터 좌 Animator가 없어서 나중에 추가해서 적용하기.
-    public void DiretionEnemy(float target, float baseObj)
-    {
-        if(target < baseObj)
+        // Update is called once per frame
+        void Update()
         {
-            animator.SetFloat("Direction",-1);
+            rb.velocity = Vector3.zero; //밀림 방지
         }
-        else
+        public void Hit(float damage, List<Buff> buff)
         {
-            animator.SetFloat("Direction", 1);
+            anim.SetTrigger("Hit");
+
+            //damage effect
+            var effectPosition = transform.position + new Vector3(1.5f, 1f, 0);
+            var damageEffect = Instantiate(GameManager.Instance.damageEffect, effectPosition, Quaternion.identity, transform);
+            damageEffect.GetComponent<FadeTextEffect>()
+                .Init(damage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);//DamageEffect 생성
+
+            //피해 계산
+            _enemyStatus.NowHealth -= damage;
+            CallHealthChangeEvetnt();
+
+            //hp 0에 도달 시
+            if (_enemyStatus.NowHealth <= 0)
+            {
+                anim.SetTrigger("Death"); //죽는 모션 -> 죽는 모션 끝나면 삭제
+                Destroy(this.gameObject);
+            }
+        }
+        private void OnDisable()
+        {
+            // 출력된 이펙트 제거
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.GetComponent<FadeTextEffect>() != null)
+                    Destroy(child.gameObject);
+            }
+        }
+        public void Attack() //애니메이션 공격 끝날 시점에 타격 데미지 설정
+        {
+            Debug.Log("Player Attack");
+        }
+        private void CallHealthChangeEvetnt()
+        {
+            var param = new BossHealthChangedParam(_enemyStatus.NowHealth, _enemyStatus.MaxHealth);
+            EventManager.Instance.TriggerEvent(PandoraEventType.BossHealthChanged, param);
         }
     }
 }
