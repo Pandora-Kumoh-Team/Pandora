@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MobAI : MonoBehaviour
+public class MeleeMobAI : MonoBehaviour
 {
     private float timer;
     private float waitingTime;
     private float randomMoveTime;
-    private bool isConduct = false;
+    private bool isConduct;
     private float ranDir1;
     private float ranDir2;
 
@@ -25,6 +25,7 @@ public class MobAI : MonoBehaviour
 
     private void Start()
     {
+        isConduct = false;
         timer = 0.0f;
         waitingTime = 1.5f;
         parentName = transform.parent.name;
@@ -37,16 +38,15 @@ public class MobAI : MonoBehaviour
         if (timer > 0.5)
             transform.parent.transform.Find("AttackRange").gameObject.SetActive(false);
 
-        if(!isConduct) //어떠한 행동도 하고 있지 않을때
+        if (!isConduct) //어떠한 행동도 하고 있지 않을때
         {
             //랜덤하게 이동
             if (randomMoveTime == 0)
             {
                 ranDir1 = Random.Range(-1f, 1f);
                 ranDir2 = Random.Range(-1f, 1f);
-            }
-            else if (randomMoveTime >= 0 && randomMoveTime < 3)
                 transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
+            }
             else if (randomMoveTime >= 3 && randomMoveTime < 6)
             {
                 Vector3 ranVec = new Vector3(ranDir1, ranDir2, 0);
@@ -67,7 +67,6 @@ public class MobAI : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        isConduct = true;
         float distance = 0.0f;
 
         //플레이어 식별
@@ -81,6 +80,7 @@ public class MobAI : MonoBehaviour
         //대기시간이 아닐 경우
         if (timer > waitingTime && target == collision.gameObject)
         {
+            isConduct = true;
             direction = target.transform.position - transform.parent.position;
             direction.Normalize();
 
