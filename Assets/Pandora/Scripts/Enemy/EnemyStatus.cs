@@ -31,9 +31,9 @@ public class EnemyStatus
     // 999 : TestDummy
     //
     // [boss]
-    //  103: 1StageBoss
-    //  104: 2StageBoss
-    //  105: 3StageBoss
+    //  300: 1StageBoss
+    //  301: 2StageBoss
+    //  302: 3StageBoss
     //-------------------
 
     public EnemyStatus(string mobName)
@@ -53,7 +53,7 @@ public class EnemyStatus
                 _code = 102; _maxHealth = 100; _nowHealth = 100; _baseDamage = 4; _attackPower = 2; _defencePower = 3; _speed = 1; _attackSpeed = 1;
                 break;
             case "1StageBoss":
-                _code = 103; _maxHealth = 500; _nowHealth = 500; _baseDamage = 8; _attackPower = 4; _defencePower = 5; _speed = 2; _attackSpeed = 2;
+                _code = 300; _maxHealth = 500; _nowHealth = 500; _baseDamage = 8; _attackPower = 4; _defencePower = 5; _speed = 2; _attackSpeed = 2;
                 break;
             case "TestDummy":
                 _code = 999; _maxHealth = float.MaxValue; _nowHealth = float.MaxValue; _baseDamage = 0; _attackPower = 0; _defencePower = 0; _speed = 0; _attackSpeed = 0;
