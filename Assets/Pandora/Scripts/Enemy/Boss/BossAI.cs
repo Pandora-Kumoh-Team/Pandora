@@ -1,110 +1,109 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
-
-    public class BossAI : MonoBehaviour
+namespace Pandora.Scripts.Enemy
 {
-    // Components
-    private Vector3 direction;
-    private GameObject target;
-    private string parentName;
-    private Vector3 myPos;
-    private Animator parentAnimation;
-
-    //Status
-    public float speed = 2.0f; //임시
-
-    private float timer;
-    private int waitingTime;
-
-    public float attackRange = 2f; //임시
-    Vector3 attackRangePos;
-
-    private void Start()
+    public class BossAI : MonoBehaviour
     {
-        timer = 0.0f;
-        waitingTime = 2;
-        parentName = transform.parent.name;
-        attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
-        myPos = transform.position;
-        parentAnimation = transform.parent.GetComponent<Animator>();
-    }
+        // Components
+        private Vector3 direction;
+        private GameObject target;
+        private string parentName;
+        private Vector3 myPos;
+        private Animator parentAnimation;
 
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer > 0.5)
-            transform.parent.transform.Find("AttackRange").gameObject.SetActive(false);
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        float distance = 0.0f;
-        //플레이어 식별
-        if (collision.gameObject.tag.Equals("Player"))
+        //Status
+        public float speed;
+
+        private float timer;
+        private int waitingTime;
+
+        public float attackRange = 2f;
+        Vector3 attackRangePos;
+
+        private void Start()
         {
-            /*if(타겟이 블루라면){
-                target = 설정해주고 -> ObjectName으로 찾아서 설정
+            speed = transform.parent.GetComponent<BossController>()._enemyStatus.Speed; //보스에 설정된 스피드로 설정
+            timer = 0.0f;
+            waitingTime = 2;
+            parentName = transform.parent.name;
+            attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
+            myPos = transform.position;
+            parentAnimation = transform.parent.GetComponent<Animator>();
+        }
+
+        private void Update()
+        {
+            timer += Time.deltaTime;
+            if (timer > 0.5)
+                transform.parent.transform.Find("AttackRange").gameObject.SetActive(false);
+        }
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            float distance = 0.0f;
+            //플레이어 식별
+            if (collision.gameObject.tag.Equals("Player"))
+            {
+                /*if(타겟이 블루라면){
+                    target = 설정해주고 -> ObjectName으로 찾아서 설정
+                }
+                else (타겟이 레드라면) {
+                    target = 설정해주고  -> ObjectName으로 찾아서 설정
+                }
+                */
+                target = collision.gameObject;
             }
-            else (타겟이 레드라면) {
-                target = 설정해주고  -> ObjectName으로 찾아서 설정
+            //플레이어와의 거리 측정
+            if (target != null)
+            {
+                //자신의 부모[보스 obj와 플레이어와의 거리
+                distance = Vector2.Distance(transform.parent.position, target.transform.position);
             }
-            */
-            target = collision.gameObject;
+            if (timer > waitingTime && target == collision.gameObject)
+            {
+                setDirection();
+                selectBehavior(distance);
+            }
+
         }
-        //플레이어와의 거리 측정
-        if (target != null)
+        private void setDirection() //TODO 방향 전환 오류 [수정]
         {
-            //자신의 부모[보스 obj와 플레이어와의 거리
-            distance = Vector2.Distance(transform.parent.position, target.transform.position);
+            direction = target.transform.position - transform.parent.position; //바라보는 방향
+            direction.Normalize(); //정규화
+
+            //방향 전환
+            if (direction.x < 0) //왼쪽을 바라보는 경우
+            {
+                transform.parent.GetComponent<Animator>().SetFloat("Direction", -1);
+                GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition = new Vector3(-attackRangePos.x, attackRangePos.y, 0);
+            }
+            else
+            {
+                transform.parent.GetComponent<Animator>().SetFloat("Direction", 1);
+                GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition = new Vector3(attackRangePos.x, attackRangePos.y, 0);
+            }
         }
-        if (timer > waitingTime && target == collision.gameObject)
+        private void selectBehavior(float distance)
         {
-            setDirection();
-            selectBehavior(distance);
+            if (distance > attackRange) //거리가 공격 범위 밖에 있을 때
+            {
+                transform.parent.position += direction * speed * Time.deltaTime; //플레이어 방향으로 이동
+                parentAnimation.SetBool("isFollow", true); //애니메이션을 플레이어 따라가는 걸로 조정
+            }
+            else //공격 범위 내에 있다면
+            {
+                parentAnimation.SetTrigger("Attack");
+                parentAnimation.SetBool("isFollow", false); //Idle 상태
+                timer = 0;
+                GameObject.Find(parentName).transform.Find("AttackRange").gameObject.SetActive(true);
+            }
         }
 
-    }
-    private void setDirection() //TODO 방향 전환 오류 [수정]
-    {
-        direction = target.transform.position - transform.parent.position; //바라보는 방향
-        direction.Normalize(); //정규화
 
-        //방향 전환
-        if(direction.x < 0) //왼쪽을 바라보는 경우
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            transform.parent.GetComponent<Animator>().SetFloat("Direction", -1);
-            GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition = new Vector3(-attackRangePos.x, attackRangePos.y, 0);
-        }
-        else
-        {
-            transform.parent.GetComponent<Animator>().SetFloat("Direction", 1);
-            GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition = new Vector3(attackRangePos.x, attackRangePos.y, 0);
-        }
-    }
-    private void selectBehavior(float distance)
-    {
-        if(distance > attackRange) //거리가 공격 범위 밖에 있을 때
-        {
-            transform.parent.position += direction * speed * Time.deltaTime; //플레이어 방향으로 이동
-            parentAnimation.SetBool("isFollow", true); //애니메이션을 플레이어 따라가는 걸로 조정
-        }else //공격 범위 내에 있다면
-        {
-            parentAnimation.SetTrigger("Attack");
-            parentAnimation.SetBool("isFollow", false); //Idle 상태
-            timer = 0;
-            GameObject.Find(parentName).transform.Find("AttackRange").gameObject.SetActive(true);
-        }
-    }
-
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (target == collision.gameObject)
-        {
-            target = null;
+            if (target == collision.gameObject)
+            {
+                target = null;
+            }
         }
     }
 }
