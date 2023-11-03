@@ -84,7 +84,7 @@ namespace Pandora.Scripts.Player.Controller
 
         #region 피격 관련
 
-        public void Hurt(float damage, List<Buff> buffs)
+        public void Hurt(float damage, List<Buff> buffs, GameObject attacker)
         {
             // 회피 판정
             var rand = Random.Range(0, 100);
@@ -97,7 +97,9 @@ namespace Pandora.Scripts.Player.Controller
             // 피격 피해 적용
             _playerStat.NowHealth -= damage * (1f - _playerStat.DefencePower);
             CallHealthChangedEvent();
-            
+            if (!isOnControl)
+                ai._target = attacker;
+
             if (_playerStat.NowHealth <= 0)
             {
                 Die();

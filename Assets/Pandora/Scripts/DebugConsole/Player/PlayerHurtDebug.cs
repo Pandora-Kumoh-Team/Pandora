@@ -11,7 +11,7 @@ namespace Pandora.Scripts.DebugConsole.Player
         {
             if(col.CompareTag("Player"))
             {
-                col.GetComponent<PlayerController>().Hurt(10, null);
+                col.GetComponent<PlayerController>().Hurt(10, null, gameObject);
             }
         }
     }
