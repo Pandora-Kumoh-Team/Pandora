@@ -3,8 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MobAI : MonoBehaviour
+public class MeleeMobAI : MonoBehaviour
 {
+    private float timer;
+    private float waitingTime;
+    private float randomMoveTime;
+    private bool isConduct;
+    private float ranDir1;
+    private float ranDir2;
+
     // Components
     private Vector3 direction;
     private GameObject target;
@@ -13,16 +20,14 @@ public class MobAI : MonoBehaviour
     //Status
     public float speed = 1.0f; //임시
 
-    private float timer;
-    private int waitingTime;
-
     public float attackRange = 1f; //임시
     Vector3 attackRangePos;
 
     private void Start()
     {
+        isConduct = false;
         timer = 0.0f;
-        waitingTime = 2;
+        waitingTime = 1.5f;
         parentName = transform.parent.name;
         attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
     }
@@ -32,6 +37,32 @@ public class MobAI : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > 0.5)
             transform.parent.transform.Find("AttackRange").gameObject.SetActive(false);
+
+        if (!isConduct) //어떠한 행동도 하고 있지 않을때
+        {
+            //랜덤하게 이동
+            if (randomMoveTime == 0)
+            {
+                ranDir1 = Random.Range(-1f, 1f);
+                ranDir2 = Random.Range(-1f, 1f);
+                transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
+            }
+            else if (randomMoveTime >= 3 && randomMoveTime < 6)
+            {
+                Vector3 ranVec = new Vector3(ranDir1, ranDir2, 0);
+                transform.parent.position += ranVec * speed * Time.deltaTime;
+                transform.parent.GetComponent<Animator>().SetFloat("Speed", ranVec.magnitude);
+                if (ranVec.x < 0)
+                    transform.parent.GetComponent<SpriteRenderer>().flipX = true;
+                else
+                    transform.parent.GetComponent<SpriteRenderer>().flipX = false;
+            }
+        }
+        randomMoveTime += Time.deltaTime;
+
+        if (randomMoveTime >= 6)
+            randomMoveTime = 0;
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -49,6 +80,7 @@ public class MobAI : MonoBehaviour
         //대기시간이 아닐 경우
         if (timer > waitingTime && target == collision.gameObject)
         {
+            isConduct = true;
             direction = target.transform.position - transform.parent.position;
             direction.Normalize();
 
@@ -87,6 +119,7 @@ public class MobAI : MonoBehaviour
         {
             target = null;
             transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
+            isConduct = false;
         }
     }
 }
