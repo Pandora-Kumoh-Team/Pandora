@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
@@ -41,10 +42,16 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
     private void OnTriggerStay2D(Collider2D collision)
     {
         float distance = 0.0f;
-        Debug.Log("trigger");
         //플레이어 식별
-        if (collision.gameObject.tag.Equals("Player") && target == null)
+        if (collision.gameObject.tag.Equals("Player"))
         {
+            /*if(타겟이 블루라면){
+                target = 설정해주고 -> ObjectName으로 찾아서 설정
+            }
+            else (타겟이 레드라면) {
+                target = 설정해주고  -> ObjectName으로 찾아서 설정
+            }
+            */
             target = collision.gameObject;
         }
         //플레이어와의 거리 측정
@@ -60,7 +67,7 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
         }
 
     }
-    private void setDirection()
+    private void setDirection() //TODO 방향 전환 오류 [수정]
     {
         direction = target.transform.position - transform.parent.position; //바라보는 방향
         direction.Normalize(); //정규화
@@ -68,12 +75,12 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
         //방향 전환
         if(direction.x < 0) //왼쪽을 바라보는 경우
         {
-            transform.parent.GetComponent<SpriteRenderer>().flipX = true;
+            transform.parent.GetComponent<Animator>().SetFloat("Direction", -1);
             GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition = new Vector3(-attackRangePos.x, attackRangePos.y, 0);
         }
         else
         {
-            transform.parent.GetComponent<SpriteRenderer>().flipX = false;
+            transform.parent.GetComponent<Animator>().SetFloat("Direction", 1);
             GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition = new Vector3(attackRangePos.x, attackRangePos.y, 0);
         }
     }
