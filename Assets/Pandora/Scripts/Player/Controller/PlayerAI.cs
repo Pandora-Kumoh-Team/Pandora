@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Pandora.Scripts.System.Event;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 namespace Pandora.Scripts.Player.Controller
 {
@@ -13,10 +14,14 @@ namespace Pandora.Scripts.Player.Controller
         private Animator _animator;
 
         private AIState _currentState;
-        private GameObject _target;
+        public GameObject _target;
         private Vector2 _movePoint;
         private float _minTargetDistance;
         private bool isTargetPlayer;
+        
+        private float idleWaitTime;
+        
+        public float maxOtherPlayerDistance = 10f;
 
         private enum AIState
         {
@@ -31,15 +36,24 @@ namespace Pandora.Scripts.Player.Controller
             _playerController = GetComponent<PlayerController>();
             EventManager.Instance.AddListener(PandoraEventType.PlayerAttackEnemy, this);
             _currentState = AIState.Idle;
+            _movePoint = transform.position;
         }
         
         private void OnDestroy()
         {
-            EventManager.Instance.RemoveListener(PandoraEventType.PlayerHealthChanged, this);
+            EventManager.Instance.RemoveListener(PandoraEventType.PlayerAttackEnemy, this);
         }
 
         private void Update()
         {
+            // 조작 플레이어와 멀리 떨어지면 조작 플레이어에게 이동
+            var otherPlayer = PlayerManager.Instance.GetOtherPlayer(gameObject);
+            var distanceToOtherPlayer = Vector2.Distance(transform.position, otherPlayer.transform.position);
+            if (distanceToOtherPlayer > maxOtherPlayerDistance)
+            {
+                _currentState = AIState.MoveToPoint;
+                _movePoint = otherPlayer.transform.position;
+            }
             switch (_currentState)
             {
                 case AIState.Idle:
@@ -64,15 +78,29 @@ namespace Pandora.Scripts.Player.Controller
 
         protected void Idle()
         {
-            if(_target != null)
+            // 상하좌우중 랜덤으로 이동 포인트 설정
+            if(((Vector2)transform.position - _movePoint).magnitude >= 0.05f)
             {
-                _currentState = AIState.MoveToTarget;
+                _playerController.moveDir = _movePoint - (Vector2)transform.position;
+                idleWaitTime = Random.Range(0, 3f);
             }
             else
             {
-                _movePoint = new Vector2(transform.position.x + UnityEngine.Random.Range(-0.5f, 0.5f),
-                    transform.position.y + UnityEngine.Random.Range(-0.5f, 0.5f));
-                _playerController.moveDir = _movePoint - (Vector2)transform.position;
+                _playerController.moveDir = Vector2.zero;
+                if (idleWaitTime > 0)
+                    idleWaitTime -= Time.deltaTime;
+                else
+                {
+                    var random = Random.Range(0, 4);
+                    _movePoint = random switch
+                    {
+                        0 => new Vector2(transform.position.x + 0.3f, transform.position.y),
+                        1 => new Vector2(transform.position.x - 0.3f, transform.position.y),
+                        2 => new Vector2(transform.position.x, transform.position.y + 0.3f),
+                        3 => new Vector2(transform.position.x, transform.position.y - 0.3f),
+                        _ => _movePoint
+                    };
+                }
             }
         }
 
@@ -142,11 +170,13 @@ namespace Pandora.Scripts.Player.Controller
 
         public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)
         {
-            if(pandoraEventType != PandoraEventType.PlayerAttackEnemy) return;
-            _target = (GameObject) param;
-            _currentState = AIState.MoveToTarget;
-            isTargetPlayer = false;
-            _minTargetDistance = _playerController._playerStat.AttackRange;
+            if(pandoraEventType == PandoraEventType.PlayerAttackEnemy)
+            {
+                _target = (GameObject)param;
+                _currentState = AIState.MoveToTarget;
+                isTargetPlayer = false;
+                _minTargetDistance = _playerController._playerStat.AttackRange;
+            }
         }
     }
 }
