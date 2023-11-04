@@ -11,8 +11,7 @@ namespace Pandora.Scripts.Enemy
         private Animator parentAnimation;
 
         //Status
-        public float speed;
-
+        private float speed;
         private float timer;
         private int waitingTime;
 
@@ -21,13 +20,13 @@ namespace Pandora.Scripts.Enemy
 
         private void Start()
         {
-            speed = transform.parent.GetComponent<BossController>()._enemyStatus.Speed; //보스에 설정된 스피드로 설정
             timer = 0.0f;
             waitingTime = 2;
             parentName = transform.parent.name;
             attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
             myPos = transform.position;
             parentAnimation = transform.parent.GetComponent<Animator>();
+            speed = transform.parent.GetComponent<BossController>()._enemyStatus.Speed; //보스에 설정된 스피드로 설정
         }
 
         private void Update()
