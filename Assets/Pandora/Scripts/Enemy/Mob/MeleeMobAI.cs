@@ -20,14 +20,14 @@ public class MeleeMobAI : MonoBehaviour
     //Status
     public float speed = 1.0f; //임시
 
-    public float attackRange = 1f; //임시
+    public float attackRange = 0.5f; //임시
     Vector3 attackRangePos;
 
     private void Start()
     {
         isConduct = false;
         timer = 0.0f;
-        waitingTime = 1.5f;
+        waitingTime = 1.0f;
         parentName = transform.parent.name;
         attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
     }
@@ -37,6 +37,13 @@ public class MeleeMobAI : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > 0.5)
             transform.parent.transform.Find("AttackRange").gameObject.SetActive(false);
+
+        //피격 시 경직 시간 초기화
+        if(transform.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+        {
+            transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
+            timer = 0.8f;
+        }
 
         if (!isConduct) //어떠한 행동도 하고 있지 않을때
         {
