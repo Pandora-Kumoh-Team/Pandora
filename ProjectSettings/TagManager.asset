@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Enemy
-  - AttackRange
-  - DamageText
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -40,19 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: BG
-    uniqueID: 4290311841
-    locked: 0
-  - name: BackCharacterEffect
-    uniqueID: 972226051
-    locked: 0
-  - name: Character
-    uniqueID: 1361038713
-    locked: 0
-  - name: FrontCharacterEffect
-    uniqueID: 3928739619
-    locked: 0
-  - name: FG
-    uniqueID: 404974281
     locked: 0
