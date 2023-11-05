@@ -8,27 +8,28 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UIElements;
 
 namespace Pandora.Scripts.Enemy
 {
-    public class BossController : MonoBehaviour, IHitAble
+    public class FirstBossController : MonoBehaviour, IHitAble
     {
         //Component
         private Rigidbody2D rb;
         private Animator anim;
         private PolygonCollider2D polygonCollider;
-        private Object target;
+        private GameObject target;
 
         //Animator Hashes
 
         //Status
         public EnemyStatus _enemyStatus;
-        // Start is called before the first frame update
         private void Awake()
         {
             _enemyStatus = new EnemyStatus(this.gameObject.name);
         }
+
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -56,6 +57,11 @@ namespace Pandora.Scripts.Enemy
             //피해 계산
             _enemyStatus.NowHealth -= damage;
             CallHealthChangeEvetnt();
+
+            if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6) //체력이 60%일 때
+            {
+                StartCoroutine(KnifeThrow());
+            }
             //hp 0에 도달 시
             if (_enemyStatus.NowHealth <= 0)
             {
@@ -73,8 +79,7 @@ namespace Pandora.Scripts.Enemy
         }
         public void Attack() //애니메이션 공격 끝날 시점에 타격 데미지 설정
         {
-            Debug.Log("기본 공격");
-            target.GetComponent<PlayerController>().Hurt(_enemyStatus.AttackPower, null); //TODO 데미지는 들어감 -> But 빨간색 캐릭터만 들어감.
+            target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage, null); //TODO 데미지는 들어감 -> But 빨간색 캐릭터만 들어감.
         }
         private void CallHealthChangeEvetnt()
         {
@@ -89,14 +94,29 @@ namespace Pandora.Scripts.Enemy
         }
         IEnumerator GetBuffMode()
         {
-            float delay = 15f;
+            float delay = 10f;
             while (true)
             {
                 yield return new WaitForSeconds(delay);
-                Debug.Log("Defense");
                 anim.SetTrigger("Defense");
-                _enemyStatus.DefencePower += 2f; //방어 모드 활성화 시 계속해서 방어율 증가
-                Debug.Log(_enemyStatus.DefencePower); 
+                _enemyStatus.DefencePower += 1f; //방어 모드 활성화 시 계속해서 방어율 증가
+                Debug.Log("Defense: "+_enemyStatus.DefencePower.ToString());
+                yield return new WaitForSeconds(delay);
+            }
+        }
+        IEnumerator KnifeThrow() //칼을 던지는 패턴
+        {
+            GameObject obj = transform.Find("KnifeGenerator").gameObject;
+            float delay = 10f;
+            while (true)
+            {
+                yield return new WaitForSeconds(delay);
+                //칼 생성 및 던지기
+                obj.GetComponent<KnifeGenerator>().Fire("left");
+                obj.GetComponent<KnifeGenerator>().Fire("right");
+                obj.GetComponent<KnifeGenerator>().Fire("up");
+                obj.GetComponent<KnifeGenerator>().Fire("down");
+                yield return new WaitForSeconds(delay);
             }
         }
     }
