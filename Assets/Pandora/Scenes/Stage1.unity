@@ -562,10 +562,6 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7702048556647724396, guid: 9ac79d4d41ee6b54f8b2e9d990489b2f, type: 3}
-      propertyPath: maxOtherPlayerDistance
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7784474912588609791, guid: 9ac79d4d41ee6b54f8b2e9d990489b2f, type: 3}
       propertyPath: maxOtherPlayerDistance
       value: 5

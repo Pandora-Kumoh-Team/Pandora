@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2497060502520129570}
   - component: {fileID: 1266207913369286602}
   - component: {fileID: 4734284233731415661}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  attack: 1
 --- !u!1 &3343593930727103347
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +117,7 @@ Transform:
   m_Children:
   - {fileID: 2497060502520129570}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7141289428906782049
 SpriteRenderer:
