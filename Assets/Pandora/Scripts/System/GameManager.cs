@@ -33,6 +33,7 @@ namespace Pandora.Scripts.System
         // 숫차로 출력되는 데메지 이펙트 프리팹
         // Insistate 후 Init() 호출하여 사용
         public GameObject damageEffect;
+        public GameObject bloodParticle;
         
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
