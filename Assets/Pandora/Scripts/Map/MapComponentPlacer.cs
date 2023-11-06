@@ -23,15 +23,14 @@ namespace Pandora.Scripts.Map
 
         public void InitMapComponents()
         {
-            var randIndex = Random.Range(0, divideSpace.spaceList.Count);
-            var playerStartRoom = divideSpace.spaceList[randIndex];
+            var playerStartRoom = divideSpace.spaceList[0];
             PlayerManager.Instance.transform.position =
                 new Vector2(playerStartRoom.Center().x, playerStartRoom.Center().y);
             
             // enemy parent
             var enemyParent = new GameObject("Enemies");
             
-            var bossRoom = divideSpace.spaceList[divideSpace.spaceList.Count - 1];
+            var bossRoom = divideSpace.spaceList[^1];
             var boosRomCenter = new Vector2(bossRoom.Center().x, bossRoom.Center().y);
             Instantiate(bossPrefab, boosRomCenter, Quaternion.identity, enemyParent.transform);
             
