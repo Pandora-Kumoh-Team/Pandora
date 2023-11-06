@@ -302,10 +302,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 915176988352724425, guid: 736d100021ca46c46b96084cf34a8f88, type: 3}
+      propertyPath: m_Name
+      value: ComponentPlacer
+      objectReference: {fileID: 0}
     - target: {fileID: 4104469472374112824, guid: 736d100021ca46c46b96084cf34a8f88, type: 3}
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
+    - target: {fileID: 4582415139547407945, guid: 736d100021ca46c46b96084cf34a8f88, type: 3}
+      propertyPath: bossPrefab
+      value: 
+      objectReference: {fileID: 8465872249017615955, guid: 4622e6ee8c7206f4f81fa4c53624b201, type: 3}
+    - target: {fileID: 4582415139547407945, guid: 736d100021ca46c46b96084cf34a8f88, type: 3}
+      propertyPath: mobPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582415139547407945, guid: 736d100021ca46c46b96084cf34a8f88, type: 3}
+      propertyPath: mobPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 3343593930727103347, guid: 5d389197b0ad7d541bcdd3d6ccbabe20, type: 3}
+    - target: {fileID: 4582415139547407945, guid: 736d100021ca46c46b96084cf34a8f88, type: 3}
+      propertyPath: mobPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 4967200875541738172, guid: 4fbb926bc51e39e42a7af2fca9baea77, type: 3}
+    - target: {fileID: 4582415139547407945, guid: 736d100021ca46c46b96084cf34a8f88, type: 3}
+      propertyPath: mobPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1487182555263759550, guid: f27385223f0dfd64f82faf5d2bdef537, type: 3}
+    - target: {fileID: 4582415139547407945, guid: 736d100021ca46c46b96084cf34a8f88, type: 3}
+      propertyPath: mobPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 883011995497824926, guid: a96ed5ec41f2c7941b6b2303a6d64fd1, type: 3}
     - target: {fileID: 7288638402502411172, guid: 736d100021ca46c46b96084cf34a8f88, type: 3}
       propertyPath: m_SortingLayer
       value: 1
