@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Pandora.Scripts.Enemy;
+using Pandora.Scripts.System.Event;
 using UnityEngine;
 
 namespace Pandora.Scripts.Player
@@ -84,6 +85,7 @@ namespace Pandora.Scripts.Player
             if (hitAble != null)
             {
                 hitAble.Hit(_damage, _buffs);
+                EventManager.Instance.TriggerEvent(PandoraEventType.PlayerAttackEnemy, col.gameObject);
                 StartCoroutine(DestroyAfterParticle());
             }
         }
