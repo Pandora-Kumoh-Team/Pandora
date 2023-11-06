@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3833935097584555152}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dad2d33a06041679505aae267217b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlFocusRate: 0.8
 --- !u!1001 &4021120579216902305
 PrefabInstance:
   m_ObjectHideFlags: 0
