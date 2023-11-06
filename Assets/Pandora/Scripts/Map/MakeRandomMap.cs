@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pandora.Scripts.Map;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,6 +16,8 @@ public class MakeRandomMap : MonoBehaviour
     private DivideSpace divideSpace;
     [SerializeField]
     private SpreadTilemap spreadTilemap;
+    [SerializeField]
+    private MapComponentPlacer mapComponentPlacer;
 
     private HashSet<Vector2Int> floor;
     private HashSet<Vector2Int> wall;
@@ -40,6 +43,8 @@ public class MakeRandomMap : MonoBehaviour
 
         spreadTilemap.SpreadFloorTilemap(floor);
         spreadTilemap.SpreadWallTilemap(wall);
+        
+        mapComponentPlacer.InitMapComponents();
     }
 
     private void MakeRandomRooms()
