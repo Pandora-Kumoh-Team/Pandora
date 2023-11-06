@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58223fd070ec43e98341161abf1cfa78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pool: {fileID: 0}
   inGameCanvas: {fileID: 0}
   damageEffect: {fileID: 7190103455111799235, guid: d5ed6e641facf774aa3f1099597d9dc7, type: 3}
+  bloodParticle: {fileID: 5588215494099173959, guid: 098ee1fcd3f1ad046bb09b8a69b68b6f, type: 3}
 --- !u!114 &2751909303547556125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +76,6 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 3dd0f670-bba4-4bf1-896d-294f58e28447
+  m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
