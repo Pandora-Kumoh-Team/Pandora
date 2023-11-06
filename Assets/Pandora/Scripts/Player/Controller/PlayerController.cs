@@ -120,7 +120,8 @@ namespace Pandora.Scripts.Player.Controller
             var damageEffect = Instantiate(GameManager.Instance.damageEffect, position, Quaternion.identity, transform);
             damageEffect.GetComponent<FadeTextEffect>()
                 .Init(damage.ToString(), Color.red, 1f, 0.5f, 0.05f, Vector3.up);
-
+            var bloodEffect =Instantiate(GameManager.Instance.bloodParticle, position, Quaternion.identity);
+            Destroy(bloodEffect, 1f);
             
             if (_playerStat.NowHealth <= 0)
             {
