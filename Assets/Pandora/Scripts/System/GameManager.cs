@@ -58,5 +58,11 @@ namespace Pandora.Scripts.System
             Time.timeScale = 0;
             inGameCanvas.transform.Find("GameOverPanel").gameObject.SetActive(true);
         }
+
+        public void GameClear()
+        {
+            Time.timeScale = 0;
+            inGameCanvas.transform.Find("GameClearPanel").gameObject.SetActive(true);
+        }
     }
 }
