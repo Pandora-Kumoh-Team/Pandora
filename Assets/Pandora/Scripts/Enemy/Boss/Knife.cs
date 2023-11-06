@@ -14,7 +14,8 @@ public class Knife : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Player와 부딫히거나 벽과 부딫히면 삭제
-        
+        if (collision.gameObject.GetComponent<PlayerController>() == null) return;
+        collision.gameObject.GetComponent<PlayerController>().Hurt(knifeDamage, null, gameObject);
+        Destroy(gameObject);
     }
 }
