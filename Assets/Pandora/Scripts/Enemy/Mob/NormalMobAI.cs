@@ -68,7 +68,7 @@ public class NormalMobAI : MonoBehaviour
             else
                 patternMoveTime = 0;
         }
-        transform.parent.position += patternVec * patternSpeed * Time.deltaTime;
+        transform.parent.GetComponent<Rigidbody2D>().velocity = patternVec * speed;
 
         patternMoveTime += Time.deltaTime;
         chaseMoveTime += Time.deltaTime;
@@ -97,7 +97,7 @@ public class NormalMobAI : MonoBehaviour
             
             direction = target.transform.position - transform.parent.position;
             direction.Normalize();
-            transform.parent.position += direction * speed * Time.deltaTime;
+            transform.parent.GetComponent<Rigidbody2D>().velocity = direction * speed;
             if (direction.x < 0)
                 transform.parent.GetComponent<SpriteRenderer>().flipX = true;
             else

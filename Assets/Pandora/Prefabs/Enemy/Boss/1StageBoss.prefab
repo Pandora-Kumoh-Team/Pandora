@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b564bf3aaf273469d7c57782009b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knife: {fileID: 8206214165297379765, guid: bbd5619e50fbd544b989b6c128c63b1a, type: 3}
-  knifeSpeed: 5
+  leftKnife: {fileID: 0}
+  rightKnife: {fileID: 0}
+  upKnife: {fileID: 0}
+  downKnife: {fileID: 0}
 --- !u!1 &5165326226113171589
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +347,7 @@ Transform:
   - {fileID: 256397089939727817}
   - {fileID: 7919502978387446315}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5029334982459094314
 SpriteRenderer:
@@ -385,8 +387,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1361038713
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -136622797, guid: b985a504654b6464b84dbe40b1e03507, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
