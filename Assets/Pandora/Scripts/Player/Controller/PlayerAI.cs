@@ -27,6 +27,7 @@ namespace Pandora.Scripts.Player.Controller
         {
             Idle,
             MoveToTarget,
+            MoveToOtherPlayer,
             MoveToPoint,
             Dead
         }
@@ -51,7 +52,7 @@ namespace Pandora.Scripts.Player.Controller
             var distanceToOtherPlayer = Vector2.Distance(transform.position, otherPlayer.transform.position);
             if (distanceToOtherPlayer > maxOtherPlayerDistance)
             {
-                _currentState = AIState.MoveToPoint;
+                _currentState = AIState.MoveToOtherPlayer;
                 _movePoint = otherPlayer.transform.position;
             }
             switch (_currentState)
@@ -62,6 +63,9 @@ namespace Pandora.Scripts.Player.Controller
                 case AIState.MoveToTarget:
                     MoveToTarget();
                     break;
+                case AIState.MoveToOtherPlayer:
+                    MoveToOtherPlayer();
+                    break;  
                 case AIState.MoveToPoint:
                     MoveToPoint();
                     break;
@@ -81,7 +85,7 @@ namespace Pandora.Scripts.Player.Controller
             // 상하좌우중 랜덤으로 이동 포인트 설정
             if(((Vector2)transform.position - _movePoint).magnitude >= 0.05f)
             {
-                _playerController.moveDir = _movePoint - (Vector2)transform.position;
+                _playerController.moveDir = (_movePoint - (Vector2)transform.position).normalized;
                 idleWaitTime = Random.Range(0, 3f);
             }
             else
@@ -108,9 +112,8 @@ namespace Pandora.Scripts.Player.Controller
         {
             if (_target == null)
             {
-                _target = PlayerManager.Instance.GetOtherPlayer(gameObject);
-                isTargetPlayer = true;
-                _minTargetDistance = 3f;
+                _currentState = AIState.MoveToOtherPlayer;
+                return;
             }
             
             _playerController.attackDir = (_target.transform.position - transform.position).normalized;
@@ -141,6 +144,27 @@ namespace Pandora.Scripts.Player.Controller
             }
             else
             {
+                _playerController.moveDir = Vector2.zero;
+            }
+        }
+        
+        private void MoveToOtherPlayer()
+        {
+            if (_target == null)
+            {
+                _target = PlayerManager.Instance.GetOtherPlayer(gameObject);
+                isTargetPlayer = true;
+                _minTargetDistance = 3f;
+            }
+            
+            var distance= Vector2.Distance(transform.position, _target.transform.position);
+            if (distance > _minTargetDistance)
+            {
+                _playerController.moveDir = (_target.transform.position - transform.position).normalized;
+            }
+            else
+            {
+                _currentState = AIState.Idle;
                 _playerController.moveDir = Vector2.zero;
             }
         }
