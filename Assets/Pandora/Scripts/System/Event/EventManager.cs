@@ -11,6 +11,7 @@ namespace Pandora.Scripts.System.Event
     {
         PlayerHealthChanged,
         BossHealthChanged,
+        PlayerAttackEnemy,
     }
     
     /// <summary>

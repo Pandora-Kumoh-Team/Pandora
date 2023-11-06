@@ -102,6 +102,11 @@ namespace Pandora.Scripts.Player
         private float _nonControlHpRecovery = 1;
         private List<Buff> _buffs = new List<Buff>();
         private List<Buff> _attackBuffs = new List<Buff>();
+
+        public void AddBuff(Buff buff)
+        {
+            _buffs.Add(buff);
+        }
         
         public void AddBuffs(List<Buff> buffs)
         {
