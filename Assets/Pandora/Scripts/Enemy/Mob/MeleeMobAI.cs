@@ -42,6 +42,7 @@ public class MeleeMobAI : MonoBehaviour
         if(transform.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Hit"))
         {
             transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
+            transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             timer = 0.8f;
         }
 
@@ -53,11 +54,14 @@ public class MeleeMobAI : MonoBehaviour
                 ranDir1 = Random.Range(-1f, 1f);
                 ranDir2 = Random.Range(-1f, 1f);
                 transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
+                transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
             else if (randomMoveTime >= 3 && randomMoveTime < 6)
             {
                 Vector3 ranVec = new Vector3(ranDir1, ranDir2, 0);
-                transform.parent.position += ranVec * speed * Time.deltaTime;
+                //transform.parent.position += ranVec * speed * Time.deltaTime;
+                // rigidbody로 변경
+                transform.parent.GetComponent<Rigidbody2D>().velocity = ranVec * speed;
                 transform.parent.GetComponent<Animator>().SetFloat("Speed", ranVec.magnitude);
                 if (ranVec.x < 0)
                     transform.parent.GetComponent<SpriteRenderer>().flipX = true;
@@ -106,12 +110,14 @@ public class MeleeMobAI : MonoBehaviour
             //공격 사정거리밖이면 범위 내의 플레이어를 추적
             if (distance > attackRange)
             {
-                transform.parent.position += direction * speed * Time.deltaTime;
+                // transform.parent.position += direction * speed * Time.deltaTime;
+                transform.parent.GetComponent<Rigidbody2D>().velocity = direction * speed;
                 transform.parent.GetComponent<Animator>().SetFloat("Speed", direction.magnitude);
             }
             //공격 사정거리에 들어왔을 경우 공격
             else
             {
+                transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 transform.parent.GetComponent<Animator>().SetTrigger("Attack");
                 transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
                 timer = 0;
@@ -126,6 +132,7 @@ public class MeleeMobAI : MonoBehaviour
         {
             target = null;
             transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
+            transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             isConduct = false;
         }
     }
