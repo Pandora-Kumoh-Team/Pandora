@@ -13,11 +13,14 @@ namespace Pandora.Scripts.Player.Controller
         public float projectileSpeed;
         private float _projectileRange = 1f;
 
-        private const float AttackRangeMagnitude = 3f;
+        private const float AttackRangeMagnitude = 1f;
 
         public override void Start()
         {
             base.Start();
+            // DEBUG : 플레이어 스텟의 사거리를 3배로 설정
+            // 후에는 원거리 플레이너캐릭터는 기본 사거리가 3이되도록 해야함
+            _playerStat.AttackRange *= 3;
             _projectileRange = _playerStat.AttackRange;
         }
         public override void AttackRangeChanged(float newRange)
