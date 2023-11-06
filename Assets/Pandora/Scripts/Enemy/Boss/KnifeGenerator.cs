@@ -1,3 +1,4 @@
+using Pandora.Scripts.Enemy;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Pipes;
@@ -10,7 +11,12 @@ public class KnifeGenerator : MonoBehaviour
     [SerializeField] private GameObject rightKnife;
     [SerializeField] private GameObject upKnife;
     [SerializeField] private GameObject downKnife;
-    public float knifeSpeed = 5.0f; //юс╫ц
+    private float knifeSpeed;
+
+    private void Start()
+    {
+        knifeSpeed = transform.parent.GetComponent<FirstBossController>()._enemyStatus.AttackSpeed;
+    }
 
     public void Fire(string type)
     {

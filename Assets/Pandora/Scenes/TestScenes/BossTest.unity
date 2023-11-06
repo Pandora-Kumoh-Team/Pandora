@@ -1273,11 +1273,19 @@ PrefabInstance:
     - target: {fileID: 7846899741329062437, guid: 4622e6ee8c7206f4f81fa4c53624b201, type: 3}
       propertyPath: downKnife
       value: 
-      objectReference: {fileID: 549892561387114862, guid: 38fa5b6a10bf70c45953129592b49956, type: 3}
+      objectReference: {fileID: 549892561387114862, guid: 127124af4fd91cb4eaaffe6e70cc29ee, type: 3}
     - target: {fileID: 7846899741329062437, guid: 4622e6ee8c7206f4f81fa4c53624b201, type: 3}
       propertyPath: leftKnife
       value: 
       objectReference: {fileID: 549892561387114862, guid: 38fa5b6a10bf70c45953129592b49956, type: 3}
+    - target: {fileID: 7846899741329062437, guid: 4622e6ee8c7206f4f81fa4c53624b201, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846899741329062437, guid: 4622e6ee8c7206f4f81fa4c53624b201, type: 3}
+      propertyPath: knifeSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7846899741329062437, guid: 4622e6ee8c7206f4f81fa4c53624b201, type: 3}
       propertyPath: rightKnife
       value: 
