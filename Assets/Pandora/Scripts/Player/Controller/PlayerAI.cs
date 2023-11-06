@@ -13,7 +13,7 @@ namespace Pandora.Scripts.Player.Controller
         private Rigidbody2D _rigidbody2D;
         private Animator _animator;
 
-        private AIState _currentState;
+        public AIState _currentState;
         public GameObject _target;
         private Vector2 _movePoint;
         private float _minTargetDistance;
@@ -23,7 +23,7 @@ namespace Pandora.Scripts.Player.Controller
         
         public float maxOtherPlayerDistance = 10f;
 
-        private enum AIState
+        public enum AIState
         {
             Idle,
             MoveToTarget,

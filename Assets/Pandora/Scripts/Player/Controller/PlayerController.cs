@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pandora.Scripts.Effect;
+using Pandora.Scripts.System;
 using Pandora.Scripts.System.Event;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -84,6 +86,12 @@ namespace Pandora.Scripts.Player.Controller
 
         #region 피격 관련
 
+        /// <summary>
+        /// 플레이어가 피격을 받았을 때 호출되는 함수
+        /// </summary>
+        /// <param name="damage">피해랑</param>
+        /// <param name="buffs">적용될 디버프 없으면 null</param>
+        /// <param name="attacker">공격한 오브젝트</param>
         public void Hurt(float damage, List<Buff> buffs, GameObject attacker)
         {
             // 회피 판정
@@ -97,9 +105,22 @@ namespace Pandora.Scripts.Player.Controller
             // 피격 피해 적용
             _playerStat.NowHealth -= damage * (1f - _playerStat.DefencePower);
             CallHealthChangedEvent();
+            
+            // AI 공격 대상 변경
             if (!isOnControl)
+            {
                 ai._target = attacker;
+                ai._currentState = PlayerAI.AIState.MoveToTarget;
+            }
+            
+            // 이펙트 출력
+            var coll = GetComponent<CircleCollider2D>();
+            var position = transform.position + new Vector3(0, coll.radius, 0);
+            var damageEffect = Instantiate(GameManager.Instance.damageEffect, position, Quaternion.identity, transform);
+            damageEffect.GetComponent<FadeTextEffect>()
+                .Init(damage.ToString(), Color.red, 1f, 0.5f, 0.05f, Vector3.up);
 
+            
             if (_playerStat.NowHealth <= 0)
             {
                 Die();

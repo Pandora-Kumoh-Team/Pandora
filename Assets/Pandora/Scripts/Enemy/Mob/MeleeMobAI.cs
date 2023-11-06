@@ -99,12 +99,12 @@ public class MeleeMobAI : MonoBehaviour
             if (direction.x < 0)
             {
                 transform.parent.GetComponent<SpriteRenderer>().flipX = true;
-                GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition = new Vector3(-attackRangePos.x, attackRangePos.y, 0);
+                transform.parent.Find("AttackRange").transform.localPosition = new Vector3(-attackRangePos.x, attackRangePos.y, 0);
             }
             else
             {
                 transform.parent.GetComponent<SpriteRenderer>().flipX = false;
-                GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition = new Vector3(attackRangePos.x, attackRangePos.y, 0);
+                transform.parent.Find("AttackRange").transform.localPosition = new Vector3(attackRangePos.x, attackRangePos.y, 0);
             }
 
             //공격 사정거리밖이면 범위 내의 플레이어를 추적
@@ -121,7 +121,7 @@ public class MeleeMobAI : MonoBehaviour
                 transform.parent.GetComponent<Animator>().SetTrigger("Attack");
                 transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
                 timer = 0;
-                GameObject.Find(parentName).transform.Find("AttackRange").gameObject.SetActive(true);
+                transform.parent.Find("AttackRange").gameObject.SetActive(true);
             }
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pandora.Scripts.Player.Controller;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
@@ -26,6 +27,8 @@ public class NormalMobAI : MonoBehaviour
 
     //Status
     public float speed = 1.0f; //임시
+    public float attack = 1.0f; // 임시
+    private float attackCool = 0.3f;
 
     private void Start()
     {
@@ -72,6 +75,9 @@ public class NormalMobAI : MonoBehaviour
 
         patternMoveTime += Time.deltaTime;
         chaseMoveTime += Time.deltaTime;
+        
+        if(attackCool > 0)
+            attackCool -= Time.deltaTime;
 
     }
 
@@ -91,6 +97,13 @@ public class NormalMobAI : MonoBehaviour
             isConduct = true;
         else
             isConduct = false;
+        
+        // 임시 공격
+        if(distance < 0.6f && attackCool <= 0 && collision.gameObject.CompareTag("Player"))
+        {
+            target.GetComponent<PlayerController>().Hurt(attack, null, gameObject);
+            attackCool = 0.3f;
+        }
 
         if (target == collision.gameObject)
         {
