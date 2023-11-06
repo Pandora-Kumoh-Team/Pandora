@@ -43,8 +43,8 @@ namespace Pandora.Scripts.Enemy
         // Update is called once per frame
         void Update()
         {
-            target = GameObject.FindGameObjectWithTag("Player"); //Player °è¼Ó ÃßÀû
-            rb.velocity = Vector3.zero; //¹Ð¸² ¹æÁö
+            target = GameObject.FindGameObjectWithTag("Player"); //Player ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            rb.velocity = Vector3.zero; //ï¿½Ð¸ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         public void Hit(float damage, List<Buff> buff)
         {
@@ -54,17 +54,17 @@ namespace Pandora.Scripts.Enemy
             var effectPosition = transform.position + new Vector3(1.5f, 1f, 0);
             var damageEffect = Instantiate(GameManager.Instance.damageEffect, effectPosition, Quaternion.identity, transform);
             damageEffect.GetComponent<FadeTextEffect>()
-                .Init(damage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);//DamageEffect »ý¼º
+                .Init(damage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);//DamageEffect ï¿½ï¿½ï¿½ï¿½
 
-            //ÇÇÇØ °è»ê
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             _enemyStatus.NowHealth -= damage - (damage * _enemyStatus.DefencePower/100);
             CallHealthChangeEvetnt();
 
-            if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && isKnife == false) //Ã¼·ÂÀÌ 60%ÀÏ ¶§
+            if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && isKnife == false) //Ã¼ï¿½ï¿½ï¿½ï¿½ 60%ï¿½ï¿½ ï¿½ï¿½
             {
                 StartCoroutine(KnifeThrow());
             }
-            //hp 0¿¡ µµ´Þ ½Ã
+            //hp 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             if (_enemyStatus.NowHealth <= 0)
             {
                 StartCoroutine(Death());
@@ -72,23 +72,24 @@ namespace Pandora.Scripts.Enemy
         }
         private void OnDisable()
         {
-            // Ãâ·ÂµÈ ÀÌÆåÆ® Á¦°Å
+            // ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
             foreach (Transform child in transform)
             {
                 if (child.gameObject.GetComponent<FadeTextEffect>() != null)
                     Destroy(child.gameObject);
             }
         }
-        public void Attack() //¾Ö´Ï¸ÞÀÌ¼Ç °ø°Ý ³¡³¯ ½ÃÁ¡¿¡ Å¸°Ý µ¥¹ÌÁö ¼³Á¤
+        public void Attack() //ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         {
-            target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage+_enemyStatus.AttackPower, null); //TODO µ¥¹ÌÁö´Â µé¾î°¨ -> But »¡°£»ö Ä³¸¯ÅÍ¸¸ µé¾î°¨.
+            Debug.Log("ï¿½âº» ï¿½ï¿½ï¿½ï¿½");
+            target.GetComponent<PlayerController>().Hurt(_enemyStatus.AttackPower, null, gameObject); //TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¨ -> But ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½î°¨.
         }
         private void CallHealthChangeEvetnt()
         {
             var param = new BossHealthChangedParam(_enemyStatus.NowHealth, _enemyStatus.MaxHealth);
             EventManager.Instance.TriggerEvent(PandoraEventType.BossHealthChanged, param);
         }
-        IEnumerator Death() //TODO Á×À» ¶§ ¸ØÃç¼­ Á×¾î¾ßÇÔ.
+        IEnumerator Death() //TODO ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ç¼­ ï¿½×¾ï¿½ï¿½ï¿½ï¿½.
         {
             anim.SetTrigger("Death");
             yield return new WaitForSeconds(1.2f);
@@ -101,11 +102,11 @@ namespace Pandora.Scripts.Enemy
             {
                 yield return new WaitForSeconds(delay);
                 anim.SetTrigger("Defense");
-                _enemyStatus.DefencePower += 2f; //¹æ¾î ¸ðµå È°¼ºÈ­ ½Ã °è¼ÓÇØ¼­ ¹æ¾îÀ² Áõ°¡
+                _enemyStatus.DefencePower += 2f; //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 Debug.Log("Defense: "+_enemyStatus.DefencePower.ToString());
             }
         }
-        IEnumerator KnifeThrow() //Ä®À» ´øÁö´Â ÆÐÅÏ
+        IEnumerator KnifeThrow() //Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         {
             GameObject obj = transform.Find("KnifeGenerator").gameObject;
             float delay = 5f;
@@ -113,7 +114,7 @@ namespace Pandora.Scripts.Enemy
             while (true)
             {
                 yield return new WaitForSeconds(delay);
-                //Ä® »ý¼º ¹× ´øÁö±â
+                //Ä® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 obj.GetComponent<KnifeGenerator>().Fire("left");
                 obj.GetComponent<KnifeGenerator>().Fire("right");
                 obj.GetComponent<KnifeGenerator>().Fire("up");
