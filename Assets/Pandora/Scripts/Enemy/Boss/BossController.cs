@@ -74,7 +74,7 @@ namespace Pandora.Scripts.Enemy
         public void Attack() //애니메이션 공격 끝날 시점에 타격 데미지 설정
         {
             Debug.Log("기본 공격");
-            target.GetComponent<PlayerController>().Hurt(_enemyStatus.AttackPower, null); //TODO 데미지는 들어감 -> But 빨간색 캐릭터만 들어감.
+            target.GetComponent<PlayerController>().Hurt(_enemyStatus.AttackPower, null, gameObject); //TODO 데미지는 들어감 -> But 빨간색 캐릭터만 들어감.
         }
         private void CallHealthChangeEvetnt()
         {
