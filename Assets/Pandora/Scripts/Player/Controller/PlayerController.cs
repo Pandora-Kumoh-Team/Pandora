@@ -36,6 +36,7 @@ namespace Pandora.Scripts.Player.Controller
     
         // 태그 관련
         public bool isOnControl;
+        public bool isDead;
         public bool onControlInit = true;
         
         private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
@@ -154,9 +155,35 @@ namespace Pandora.Scripts.Player.Controller
 
         public void Die()
         {
-            // TODO : Die
+            isDead = true;
+            GetComponent<SpriteRenderer>().color = new Color(0.1f,0.1f,0.1f);
+            var go = gameObject;
+            go.layer = LayerMask.NameToLayer("DeadPlayer");
+            go.tag = "Untagged";
+            if(isOnControl)
+            {
+                isOnControl = false;
+                ai.enabled = !isOnControl;
+                var otherController =
+                    PlayerManager.Instance.GetOtherPlayer(gameObject).GetComponent<PlayerController>();
+                if(otherController.isDead)
+                {
+                    GameManager.Instance.GameOver();
+                    return;
+                }
+                otherController.isOnControl = true;
+                otherController.ai.enabled = !otherController.isOnControl;
+            }
         }
-    
+        
+        public void Rebirth()
+        {
+            isDead = false;
+            GetComponent<SpriteRenderer>().color = Color.white;
+            var go = gameObject;
+            go.layer = LayerMask.NameToLayer("Player");
+            go.tag = "Player";
+        }
 
         #endregion
 
@@ -295,6 +322,8 @@ namespace Pandora.Scripts.Player.Controller
         
         public void OnTag(InputValue value)
         {
+            var otherController = PlayerManager.Instance.GetOtherPlayer(gameObject).GetComponent<PlayerController>();
+            if (otherController.isDead || isDead) return;
             isOnControl = !isOnControl;
             ai.enabled = !isOnControl;
         }

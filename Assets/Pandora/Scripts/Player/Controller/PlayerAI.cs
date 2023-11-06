@@ -60,6 +60,18 @@ namespace Pandora.Scripts.Player.Controller
 
         private void Update()
         {
+            // 비조작 자연회복
+            _playerController._playerStat.NowHealth += _playerController._playerStat.NonControlHpRecovery * Time.deltaTime;
+            _playerController.CallHealthChangedEvent();
+            if (_playerController.isDead)
+            {
+                if(_playerController._playerStat.NowHealth > _playerController._playerStat.MaxHealth * 0.3f)
+                    _playerController.Rebirth();
+                else
+                    return;
+            }
+                
+            
             // 조작 플레이어와 멀리 떨어지면 조작 플레이어에게 이동
             var otherPlayer = PlayerManager.Instance.GetOtherPlayer(gameObject);
             var distanceToOtherPlayer = Vector2.Distance(transform.position, otherPlayer.transform.position);
@@ -87,9 +99,6 @@ namespace Pandora.Scripts.Player.Controller
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
-            _playerController._playerStat.NowHealth += _playerController._playerStat.NonControlHpRecovery * Time.deltaTime;
-            _playerController.CallHealthChangedEvent();
         }
 
         protected void Idle()
