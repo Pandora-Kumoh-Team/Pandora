@@ -28,7 +28,7 @@ namespace Pandora.Scripts.Enemy
         public EnemyStatus _enemyStatus;
         private void Awake()
         {
-            _enemyStatus = new EnemyStatus(this.gameObject.name);
+            _enemyStatus = new EnemyStatus("1StageBoss");
         }
 
         void Start()
@@ -53,11 +53,12 @@ namespace Pandora.Scripts.Enemy
             //damage effect
             var effectPosition = transform.position + new Vector3(1.5f, 1f, 0);
             var damageEffect = Instantiate(GameManager.Instance.damageEffect, effectPosition, Quaternion.identity, transform);
+            var reduceDamage = damage - (damage * _enemyStatus.DefencePower / 100);
             damageEffect.GetComponent<FadeTextEffect>()
-                .Init(damage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);//DamageEffect ����
+                .Init(reduceDamage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);//DamageEffect ����
 
             //���� ���
-            _enemyStatus.NowHealth -= damage - (damage * _enemyStatus.DefencePower/100);
+            _enemyStatus.NowHealth -= reduceDamage;
             CallHealthChangeEvetnt();
 
             if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && isKnife == false) //ü���� 60%�� ��
