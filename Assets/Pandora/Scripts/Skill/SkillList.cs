@@ -1,26 +1,20 @@
-using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class SkillManager : MonoBehaviour
+public class SkillList
 {
     private readonly int skillNum = 100;
-    private readonly int maxOwnNum = 20;
-
+    public Skill[] skillList;
     public Sprite[] skillIcons;
-    public Skill[] skillList; 
 
-    public Skill[] playerSkill;
-
-    private void Awake()
+    public SkillList()
     {
         skillList = new Skill[skillNum];
+        skillIcons = new Sprite[skillNum];
         Generate();
-        playerSkill = new Skill[maxOwnNum];
     }
-    
+
     private void Generate()
     {
         // [Skill Code]
@@ -29,9 +23,9 @@ public class SkillManager : MonoBehaviour
         // id, icon, name, level, grade, isActive, func
 
         #region passive
-        skillList[0] = new Skill(000, skillIcons[0], "공격력 강화","normal", false, "공격력이 10% 증가한다.");
-        skillList[1] = new Skill(001, skillIcons[1], "체력 강화","normal", false, "체력이 10% 증가한다.");
-        skillList[2] = new Skill(002, skillIcons[2], "이동속도 강화","normal", false, "이동속도가 5% 증가한다.");
+        skillList[0] = new Skill(000, skillIcons[0], "공격력 강화", "normal", false, "공격력이 10% 증가한다.");
+        skillList[1] = new Skill(001, skillIcons[1], "체력 강화", "normal", false, "체력이 10% 증가한다.");
+        skillList[2] = new Skill(002, skillIcons[2], "이동속도 강화", "normal", false, "이동속도가 5% 증가한다.");
         skillList[3] = new Skill(003, skillIcons[3], "방어력 강화", "normal", false, "방어력이 5% 증가한다.");
         skillList[4] = new Skill(004, skillIcons[4], "공격속도 강화", "normal", false, "공격속도가 15% 증가한다.");
         skillList[5] = new Skill(005, skillIcons[5], "치명타 확률 강화", "normal", false, "치명타 확률이 10% 증가한다.");
@@ -43,13 +37,13 @@ public class SkillManager : MonoBehaviour
         skillList[11] = new Skill(011, skillIcons[11], "잔상", "normal", false, "근거리 공격이 공격력의 20%만큼 추가 타격을 입힌다.");
 
         skillList[12] = new Skill(012, skillIcons[12], "공격력 강화", "rare", false, "공격력이 20% 증가한다.");
-        skillList[13] = new Skill(013, skillIcons[13], "체력 강화", "rare",false, "체력이 20% 증가한다.");
+        skillList[13] = new Skill(013, skillIcons[13], "체력 강화", "rare", false, "체력이 20% 증가한다.");
         skillList[14] = new Skill(014, skillIcons[14], "이동속도 강화", "rare", false, "이동속도가 10% 증가한다.");
         skillList[15] = new Skill(015, skillIcons[15], "방어력 강화", "rare", false, "방어력이 10% 증가한다.");
         skillList[16] = new Skill(016, skillIcons[16], "공격속도 강화", "rare", false, "공격속도가 30% 증가한다.");
-        skillList[17] = new Skill(017, skillIcons[17], "치명타 확률 강화","rare", false, "치명타 확률이 30% 증가한다.");
+        skillList[17] = new Skill(017, skillIcons[17], "치명타 확률 강화", "rare", false, "치명타 확률이 30% 증가한다.");
 
-        skillList[18] = new Skill(018, skillIcons[18], "공격력 강화","unique", false, "공격력이 40% 증가한다.");
+        skillList[18] = new Skill(018, skillIcons[18], "공격력 강화", "unique", false, "공격력이 40% 증가한다.");
         skillList[19] = new Skill(019, skillIcons[19], "체력 강화", "unique", false, "체력이 40% 증가한다.");
         skillList[20] = new Skill(020, skillIcons[20], "이동속도 강화", "unique", false, "이동속도가 20% 증가한다.");
         skillList[21] = new Skill(021, skillIcons[21], "방어력 강화", "unique", false, "방어력이 20% 증가한다.");
@@ -70,9 +64,8 @@ public class SkillManager : MonoBehaviour
 
     }
 
-
-    public Skill GetSkill(int index)
+    public bool GetisActive(int index)
     {
-        return skillList[index];
+        return skillList[index]._isActive;
     }
 }
