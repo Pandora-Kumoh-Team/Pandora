@@ -95,6 +95,7 @@ namespace Pandora.Scripts.Enemy
             anim.SetTrigger("Death");
             yield return new WaitForSeconds(1.2f);
             Destroy(this.gameObject);
+            GameManager.Instance.GameClear();
         }
         IEnumerator GetBuffMode()
         {
