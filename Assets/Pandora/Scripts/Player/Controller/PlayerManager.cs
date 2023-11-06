@@ -39,5 +39,10 @@ namespace Pandora.Scripts.Player.Controller
             }
             throw new Exception("PlayerManager: GetOtherPlayer: GameObject is not a player");
         }
+
+        public GameObject[] GetPlayers()
+        {
+            return new[] {_firstPlayer, _secondPlayer};
+        }
     }
 }

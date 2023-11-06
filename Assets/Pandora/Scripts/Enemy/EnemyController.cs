@@ -33,12 +33,6 @@ namespace Pandora.Scripts.Enemy
                 _enemyStatus = new EnemyStatus(this.gameObject.name);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-            rb.velocity = Vector3.zero; // 밀림 방지
-        }
-
 
         public void Hit(float damage, List<Buff> buff)
         {

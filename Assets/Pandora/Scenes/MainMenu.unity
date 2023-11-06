@@ -310,8 +310,9 @@ GameObject:
   - component: {fileID: 214623258}
   - component: {fileID: 214623260}
   - component: {fileID: 214623259}
+  - component: {fileID: 214623261}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,6 +380,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &214623261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214623257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd3fe5d16df4bb69e5d9e024c231b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &321032944
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +448,7 @@ GameObject:
   - component: {fileID: 444616175}
   - component: {fileID: 444616174}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BGImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6390,7 +6403,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6679512160752614687}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 214623261}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.MainMenuController, Assembly-CSharp
+        m_MethodName: Credit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2354191722112024049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6434,7 +6459,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6679512160880077848}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 214623261}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.MainMenuController, Assembly-CSharp
+        m_MethodName: GameExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2354191722169101705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6478,7 +6515,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6679512160818936928}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 214623261}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.MainMenuController, Assembly-CSharp
+        m_MethodName: StageStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &6679512159993127968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6512,7 +6561,7 @@ GameObject:
   - component: {fileID: 6679512159993127968}
   - component: {fileID: 2354191721203393186}
   m_Layer: 5
-  m_Name: Continue
+  m_Name: Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
