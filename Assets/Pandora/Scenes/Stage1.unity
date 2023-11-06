@@ -128,6 +128,17 @@ TilemapCollider2D:
   m_CorrespondingSourceObject: {fileID: 6453068377371073006, guid: 736d100021ca46c46b96084cf34a8f88, type: 3}
   m_PrefabInstance: {fileID: 864854984}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &505932791 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 581559147531974773, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
+  m_PrefabInstance: {fileID: 1842946467}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68931d034a64b79873d27da1218d319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &585851845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -710,6 +721,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3915028360800939507, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5379629349065609456, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -733,6 +748,34 @@ PrefabInstance:
     - target: {fileID: 7874274551343722014, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622271307746149058, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622271307746149058, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622271307746149058, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 505932791}
+    - target: {fileID: 8622271307746149058, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622271307746149058, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622271307746149058, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622271307746149058, guid: 1adc7d2107738d3488e9e6f5646a0064, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
