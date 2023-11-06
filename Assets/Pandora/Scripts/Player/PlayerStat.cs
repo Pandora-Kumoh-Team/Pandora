@@ -93,7 +93,7 @@ namespace Pandora.Scripts.Player
         private float _baseDamage = 10;
         private float _attackPower = 1;
         private float _defencePower = 0;
-        private float _speed = 3;
+        private float _speed = 4;
         private float _attackRange = 1;
         private float _attackSpeed = 1;
         private float _criticalChance = 0;

@@ -67,8 +67,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36e5f6729ac4970a2fd3f7ac0ea1283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentState: 0
   _target: {fileID: 0}
   maxOtherPlayerDistance: 5
+  idleWalkSpeed: 0.25
 --- !u!212 &5592853203191405790
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -130,7 +132,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 964942453664939683}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3894cf13e21a68d439dbff1d6a3a3b3b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

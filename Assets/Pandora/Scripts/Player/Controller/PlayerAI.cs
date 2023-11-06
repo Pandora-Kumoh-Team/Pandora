@@ -13,15 +13,21 @@ namespace Pandora.Scripts.Player.Controller
         private Rigidbody2D _rigidbody2D;
         private Animator _animator;
 
-        public AIState _currentState;
-        public GameObject _target;
-        private Vector2 _movePoint;
-        private float _minTargetDistance;
-        private bool isTargetPlayer;
         
-        private float idleWaitTime;
+        public AIState _currentState;
+        
+        public GameObject _target;
+        private float _minTargetDistance;
+        
+        private Vector2 _moveDirection;
+        private Vector2 _movePoint;
+
+        private float idleWalkTimer;
+        private float idleWaitTimer;
+        private bool isIdleWait;
         
         public float maxOtherPlayerDistance = 10f;
+        public float idleWalkSpeed = 0.25f;
 
         public enum AIState
         {
@@ -36,10 +42,17 @@ namespace Pandora.Scripts.Player.Controller
         {
             _playerController = GetComponent<PlayerController>();
             EventManager.Instance.AddListener(PandoraEventType.PlayerAttackEnemy, this);
-            _currentState = AIState.Idle;
-            _movePoint = transform.position;
         }
-        
+
+        private void OnEnable()
+        {
+            if(_target != null)
+                _currentState = AIState.MoveToTarget;
+            else
+                _currentState = AIState.Idle;
+            _moveDirection = Vector2.zero;
+        }
+
         private void OnDestroy()
         {
             EventManager.Instance.RemoveListener(PandoraEventType.PlayerAttackEnemy, this);
@@ -50,10 +63,9 @@ namespace Pandora.Scripts.Player.Controller
             // 조작 플레이어와 멀리 떨어지면 조작 플레이어에게 이동
             var otherPlayer = PlayerManager.Instance.GetOtherPlayer(gameObject);
             var distanceToOtherPlayer = Vector2.Distance(transform.position, otherPlayer.transform.position);
-            if (distanceToOtherPlayer > maxOtherPlayerDistance)
+            if (distanceToOtherPlayer > maxOtherPlayerDistance && _currentState == AIState.Idle)
             {
                 _currentState = AIState.MoveToOtherPlayer;
-                _movePoint = otherPlayer.transform.position;
             }
             switch (_currentState)
             {
@@ -82,28 +94,40 @@ namespace Pandora.Scripts.Player.Controller
 
         protected void Idle()
         {
-            // 상하좌우중 랜덤으로 이동 포인트 설정
-            if(((Vector2)transform.position - _movePoint).magnitude >= 0.05f)
+            // idle wait
+            if (isIdleWait)
             {
-                _playerController.moveDir = (_movePoint - (Vector2)transform.position).normalized;
-                idleWaitTime = Random.Range(0, 3f);
-            }
-            else
-            {
-                _playerController.moveDir = Vector2.zero;
-                if (idleWaitTime > 0)
-                    idleWaitTime -= Time.deltaTime;
+                if(idleWaitTimer > 0)
+                    idleWaitTimer -= Time.deltaTime;
                 else
                 {
+                    isIdleWait = false;
+                    idleWalkTimer = Random.Range(0.5f, 1f);
                     var random = Random.Range(0, 4);
-                    _movePoint = random switch
+                    _moveDirection = random switch
                     {
-                        0 => new Vector2(transform.position.x + 0.3f, transform.position.y),
-                        1 => new Vector2(transform.position.x - 0.3f, transform.position.y),
-                        2 => new Vector2(transform.position.x, transform.position.y + 0.3f),
-                        3 => new Vector2(transform.position.x, transform.position.y - 0.3f),
-                        _ => _movePoint
+                        0 => Vector2.up,
+                        1 => Vector2.down,
+                        2 => Vector2.left,
+                        3 => Vector2.right,
+                        _ => _moveDirection
                     };
+                    _moveDirection *= idleWalkSpeed;
+                }
+            }
+            // idle walk
+            else
+            {
+                if (idleWalkTimer > 0)
+                {
+                    _playerController.moveDir = _moveDirection;
+                    idleWalkTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    _playerController.moveDir = Vector2.zero;
+                    idleWaitTimer = Random.Range(1f, 2f);
+                    isIdleWait = true;
                 }
             }
         }
@@ -115,24 +139,24 @@ namespace Pandora.Scripts.Player.Controller
                 _currentState = AIState.MoveToOtherPlayer;
                 return;
             }
-            
+            if (_target.activeSelf == false)
+            {
+                _currentState = AIState.Idle;
+                _target = null;
+                return;
+            }
             _playerController.attackDir = (_target.transform.position - transform.position).normalized;
             if(_playerController.CanAttack()) _playerController.Attack();
             
-            // 공격 사거리만큼 유지하며 접근
-            //var distance = Vector2.Distance(transform.position, _target.transform.position);
-            // 레이케스트로 측정하는 방식
+            // 공격 사거리만큼 유지하며 접근 레이케스트로 측정하는 방식
             float distance;
-            if(!isTargetPlayer)
-            {
-                var hit = Physics2D.Raycast(transform.position, _target.transform.position - transform.position, 100f,
-                    LayerMask.GetMask("Enemy"));
+            var hit = Physics2D.Raycast(transform.position, _target.transform.position - transform.position, 100f,
+                LayerMask.GetMask("Enemy"));
+            if(hit.collider != null)
                 distance = hit.distance;
-            }
             else
-            {
                 distance = Vector2.Distance(transform.position, _target.transform.position);
-            }
+            // 접근
             if (distance > _minTargetDistance)
             {
                 _playerController.moveDir = (_target.transform.position - transform.position).normalized;
@@ -142,23 +166,18 @@ namespace Pandora.Scripts.Player.Controller
             {
                 _playerController.moveDir = (transform.position - _target.transform.position).normalized;
             }
+            // 중간 값에선 정지
             else
             {
-                _playerController.moveDir = Vector2.zero;
+                // _playerController.moveDir = Vector2.zero;
             }
         }
         
         private void MoveToOtherPlayer()
         {
-            if (_target == null)
-            {
-                _target = PlayerManager.Instance.GetOtherPlayer(gameObject);
-                isTargetPlayer = true;
-                _minTargetDistance = 3f;
-            }
-            
+            _target = PlayerManager.Instance.GetOtherPlayer(gameObject);
             var distance= Vector2.Distance(transform.position, _target.transform.position);
-            if (distance > _minTargetDistance)
+            if (distance > maxOtherPlayerDistance * 0.5f)
             {
                 _playerController.moveDir = (_target.transform.position - transform.position).normalized;
             }
@@ -198,7 +217,6 @@ namespace Pandora.Scripts.Player.Controller
             {
                 _target = (GameObject)param;
                 _currentState = AIState.MoveToTarget;
-                isTargetPlayer = false;
                 _minTargetDistance = _playerController._playerStat.AttackRange;
             }
         }

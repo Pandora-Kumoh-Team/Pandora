@@ -36,7 +36,7 @@ Transform:
   - {fileID: 5328278513498863573}
   - {fileID: 6972318156898557714}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7182970935709562891
 SpriteRenderer:
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 6972318156898557714}
   - component: {fileID: 8736376408855452608}
   - component: {fileID: 4206772058688359979}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 5328278513498863573}
   - component: {fileID: 3782915292538842359}
   - component: {fileID: 1590944123079783141}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}

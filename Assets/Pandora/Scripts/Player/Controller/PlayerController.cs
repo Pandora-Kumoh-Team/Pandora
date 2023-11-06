@@ -35,7 +35,7 @@ namespace Pandora.Scripts.Player.Controller
         private bool isAttackKeyPressed;
     
         // 태그 관련
-        private bool isOnControl;
+        public bool isOnControl;
         public bool onControlInit = true;
         
         private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
