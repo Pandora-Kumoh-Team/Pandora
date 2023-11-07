@@ -71,7 +71,21 @@ public class EnemyStatus
     public float NowHealth
     {
         get => _nowHealth + _buffs.Sum(buff => buff.NowHealthChange);
-        set => _nowHealth = value > MaxHealth ? MaxHealth : value;
+        set
+        {
+            if(value > MaxHealth)
+            {
+                _nowHealth = MaxHealth;
+            }
+            else if (value < 0)
+            {
+                _nowHealth = 0;
+            }
+            else
+            {
+                _nowHealth = value;
+            }
+        }
     }
 
     public float BaseDamage

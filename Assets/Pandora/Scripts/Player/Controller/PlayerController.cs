@@ -116,7 +116,7 @@ namespace Pandora.Scripts.Player.Controller
             
             // 이펙트 출력
             var coll = GetComponent<CircleCollider2D>();
-            var position = transform.position + new Vector3(0, coll.radius, 0);
+            var position = transform.position + new Vector3(0, coll.radius * 2, 0);
             var damageEffect = Instantiate(GameManager.Instance.damageEffect, position, Quaternion.identity, transform);
             damageEffect.GetComponent<FadeTextEffect>()
                 .Init(damage.ToString(), Color.red, 1f, 0.5f, 0.05f, Vector3.up);
