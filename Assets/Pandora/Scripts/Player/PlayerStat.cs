@@ -16,7 +16,7 @@ namespace Pandora.Scripts.Player
         public float NowHealth
         {
             get => _nowHealth + _buffs.Sum(buff => buff.NowHealthChange);
-            set => _nowHealth = value;
+            set => _nowHealth = value > MaxHealth ? MaxHealth : value;
         }
         
         public float BaseDamage
