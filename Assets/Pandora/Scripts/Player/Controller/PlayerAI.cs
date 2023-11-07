@@ -61,10 +61,10 @@ namespace Pandora.Scripts.Player.Controller
         private void Update()
         {
             // 비조작 자연회복
-            _playerController._playerStat.NowHealth += _playerController._playerStat.NonControlHpRecovery * Time.deltaTime;
-            _playerController.CallHealthChangedEvent();
             if (_playerController.isDead)
             {
+                _playerController._playerStat.NowHealth += _playerController._playerStat.NonControlHpRecovery * Time.deltaTime;
+                _playerController.CallHealthChangedEvent();
                 if(_playerController._playerStat.NowHealth > _playerController._playerStat.MaxHealth * 0.3f)
                     _playerController.Rebirth();
                 else

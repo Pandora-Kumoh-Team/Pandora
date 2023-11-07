@@ -99,7 +99,7 @@ namespace Pandora.Scripts.Player
         private float _criticalChance = 0;
         private float _criticalDamageTimes = 2;
         private float _dodgeChance = 0;
-        private float _nonControlHpRecovery = 1;
+        private float _nonControlHpRecovery = 5;
         private List<Buff> _buffs = new List<Buff>();
         private List<Buff> _attackBuffs = new List<Buff>();
 
