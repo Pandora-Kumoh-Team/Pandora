@@ -157,6 +157,7 @@ namespace Pandora.Scripts.Player.Controller
         public void Die()
         {
             isDead = true;
+            moveDir = Vector2.zero;
             GetComponent<SpriteRenderer>().color = new Color(0.1f,0.1f,0.1f);
             var go = gameObject;
             go.layer = LayerMask.NameToLayer("DeadPlayer");
