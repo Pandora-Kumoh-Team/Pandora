@@ -16,6 +16,13 @@ namespace Pandora.Scripts.UI
             Time.timeScale = isMenuActive ? 1 : 0;
         }
         
+        public void OnPause(bool isPaused)
+        {
+            var pausePanel = transform.Find("PauseMenu").gameObject;
+            pausePanel.SetActive(isPaused);
+            Time.timeScale = isPaused ? 0 : 1;
+        }
+        
         public void ReStart()
         {
             Time.timeScale = 1;
