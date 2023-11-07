@@ -8,6 +8,7 @@ namespace Pandora.Scripts.UI
 {
     public class InGameCanvasManager : MonoBehaviour
     {
+        public GameObject mob;
         public void OnPause()
         {
             var pausePanel = transform.Find("PauseMenu").gameObject;
@@ -43,6 +44,18 @@ namespace Pandora.Scripts.UI
             players[1].transform.position = bossPos;
             players[0].GetComponent<PlayerController>()._playerStat.AttackPower *= 6;
             players[1].GetComponent<PlayerController>()._playerStat.AttackPower *= 1;
+        }
+        // TODO : 중간 시연용 이후 삭제해야함
+        public void SummonManyMob()
+        {
+            // 몹 10마리 플레이어 근처 원형으로 소환
+            var players = PlayerManager.Instance.GetPlayers();
+            var playerPos = players[0].transform.position;
+            for (int i = 0; i < 10; i++)
+            {
+                var pos = playerPos + new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+                Instantiate(mob, pos, Quaternion.identity);
+            }
         }
     }
 }
