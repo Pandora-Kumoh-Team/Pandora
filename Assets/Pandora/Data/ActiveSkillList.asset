@@ -13,9 +13,4 @@ MonoBehaviour:
   m_Name: ActiveSkillList
   m_EditorClassIdentifier: 
   skillList:
-  - _id: 0
-    _icon: {fileID: 0}
-    _name: 
-    _grade: 0
-    _isActive: 0
-    _func: 
+  - {fileID: 0}

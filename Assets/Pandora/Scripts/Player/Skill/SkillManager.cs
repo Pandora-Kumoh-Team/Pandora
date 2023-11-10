@@ -1,44 +1,63 @@
-using Pandora.Scripts.Player;
-using Pandora.Scripts;
-using Pandora.Scripts.System;
-using System.CodeDom.Compiler;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
-using System;
-using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.Player.Skill.Data;
+using UnityEngine;
 
-public class SkillManager : MonoBehaviour
+namespace Pandora.Scripts.Player.Skill
 {
-    //���� ��ų ����
-    //��ųid == skillList�ε���
-    //true�Ͻ� ��ų ȹ��
-    public List<bool> ownSkillList;
-    private readonly int skillNum = 100;
-    private SkillList skillList;
-
-    private void Start()
+    public class SkillManager : MonoBehaviour
     {
-    }
+        // Singleton class
+        public static SkillManager Instance { get; private set; }
 
-    private void Awake()
-    {
-        ownSkillList = new List<bool>();
-        skillList = ScriptableObject.CreateInstance<SkillList>();
-    }
+        public SkillList passiveSkillList;
+        public SkillList activeSkillList;
 
-    public void ObtainSkill(int index)
-    {
-        ownSkillList[index] = true;
-        if (skillList.skillList[index]._type == SkillData.SkillType.Passive)
+        private void Awake()
         {
-
+            // singleton
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
+            
+            if (passiveSkillList == null || activeSkillList == null)
+            {
+                Debug.LogError("스킬매니저에 스킬 리스트 등록 안됨");
+            }
         }
-        else
+        
+        public PassiveSkill GetRandomPassiveSkill(SkillList nowPassiveSkillList)
         {
-
+            // get random skill from passive skill list except now skill list
+            var skillList = new List<Skill>();
+            foreach (var skill in passiveSkillList.skillList)
+            {
+                if (!nowPassiveSkillList.skillList.Contains(skill))
+                {
+                    skillList.Add(skill);
+                }
+            }
+            return (PassiveSkill)skillList[Random.Range(0, skillList.Count)];
+        }
+        
+        public ActiveSkill GetRandomActiveSkill(SkillList nowActiveSkillList)
+        {
+            // get random skill from active skill list except now skill list
+            var skillList = new List<Skill>();
+            foreach (var skill in activeSkillList.skillList)
+            {
+                if (!nowActiveSkillList.skillList.Contains(skill))
+                {
+                    skillList.Add(skill);
+                }
+            }
+            return (ActiveSkill)skillList[Random.Range(0, skillList.Count)];
         }
     }
 }
