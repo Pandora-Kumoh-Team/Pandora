@@ -102,6 +102,7 @@ namespace Pandora.Scripts.Player
         private float _nonControlHpRecovery = 5;
         private List<Buff> _buffs = new List<Buff>();
         private List<Buff> _attackBuffs = new List<Buff>();
+        private List<Skill.Skill> _passiveSkills = new List<Skill.Skill>();
 
         public void AddBuff(Buff buff)
         {
@@ -132,6 +133,21 @@ namespace Pandora.Scripts.Player
         public List<Buff> GetAttackBuffs()
         {
             return _attackBuffs;
+        }
+        
+        public void AddPassiveSkill(Skill.Skill skill)
+        {
+            _passiveSkills.Add(skill);
+        }
+        
+        public void RemovePassiveSkill(Skill.Skill skill)
+        {
+            _passiveSkills.Remove(skill);
+        }
+        
+        public List<Skill.Skill> GetPassiveSkills()
+        {
+            return _passiveSkills;
         }
     }
 }

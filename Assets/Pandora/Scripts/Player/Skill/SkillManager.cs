@@ -7,47 +7,38 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using Pandora.Scripts.Player.Skill;
+using Pandora.Scripts.Player.Skill.Data;
 
 public class SkillManager : MonoBehaviour
 {
-    //¾òÀº ½ºÅ³ °ü¸®
-    //½ºÅ³id == skillListÀÎµ¦½º
-    //trueÀÏ½Ã ½ºÅ³ È¹µæ
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½
+    //ï¿½ï¿½Å³id == skillListï¿½Îµï¿½ï¿½ï¿½
+    //trueï¿½Ï½ï¿½ ï¿½ï¿½Å³ È¹ï¿½ï¿½
     public List<bool> ownSkillList;
     private readonly int skillNum = 100;
     private SkillList skillList;
 
     private void Start()
     {
-        StartCoroutine(TestCoroutine()); //TEST
     }
+
     private void Awake()
     {
         ownSkillList = new List<bool>();
-        skillList = new SkillList();
+        skillList = ScriptableObject.CreateInstance<SkillList>();
     }
 
     public void ObtainSkill(int index)
     {
         ownSkillList[index] = true;
-        if (skillList.GetisActive(index))
+        if (skillList.skillList[index]._type == SkillData.SkillType.Passive)
         {
-            //Active
+
         }
         else
         {
-            GameManager.Instance.passiveSkillManager.Apply(index);
-        }
-    }
 
-
-    
-    public IEnumerator TestCoroutine() // TEST
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(5f);
-            GameManager.Instance.passiveSkillManager.Apply(0);
         }
     }
 }
