@@ -24,7 +24,7 @@ namespace Pandora.Scripts.Player
         private void Update()
         {
             // set camera position to the middle of the two players
-            if(playerController1.isOnControl)
+            if(playerController1.onControl)
                 transform.position = (player1.position * controlFocusRate + player2.position * (1 - controlFocusRate));
             else
                 transform.position = (player2.position * controlFocusRate + player1.position * (1 - controlFocusRate));

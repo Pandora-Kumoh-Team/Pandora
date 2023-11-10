@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Pandora.Scripts.Effect;
+using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
 using Pandora.Scripts.System.Event;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Pandora.Scripts.Player.Controller
     public class PlayerController : MonoBehaviour
     {
         // Components
-        private Rigidbody2D rb;
+        public Rigidbody2D rb;
         private Animator anim;
         private PlayerAI ai;
     
@@ -28,6 +29,7 @@ namespace Pandora.Scripts.Player.Controller
         // Variables
         // 이동 관련
         public Vector2 moveDir;
+        public bool canMoving;
 
         // 공격 관련
         public Vector2 attackDir;
@@ -35,9 +37,18 @@ namespace Pandora.Scripts.Player.Controller
         private bool isAttackKeyPressed;
     
         // 태그 관련
-        public bool isOnControl;
-        public bool isDead;
+        public bool onControl;
         public bool onControlInit = true;
+        
+        public bool isDead;
+        
+        // 스킬 관련
+        public Skill.ActiveSkill skill1;
+        public float skill1CoolTime;
+        public Skill.ActiveSkill skill2;
+        public float skill2CoolTime;
+        public Skill.ActiveSkill skill3;
+        public float skill3CoolTime;
         
         private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
@@ -49,7 +60,8 @@ namespace Pandora.Scripts.Player.Controller
             anim = GetComponent<Animator>();
             ai = GetComponent<PlayerAI>();
             
-            isOnControl = onControlInit;
+            onControl = onControlInit;
+            canMoving = true;
             ai.enabled = !onControlInit;
             anim.SetInteger(CachedMoveDir, -1);
             _playerStat = new PlayerStat();
@@ -61,24 +73,33 @@ namespace Pandora.Scripts.Player.Controller
             CallHealthChangedEvent();
         }
 
-        void Update()
+        private void Update()
         {
             // 이동
-            rb.velocity = moveDir * _playerStat.Speed;
-            if(moveDir.magnitude < 0.1f)
+            if(canMoving && moveDir.magnitude > 0.1f)
             {
-                anim.SetInteger(CachedMoveDir, -1);
+                rb.velocity = moveDir * _playerStat.Speed;
+                SetMoveAnimation(moveDir);
             }
             else
             {
-                SetMoveAnimation(moveDir);
+                rb.velocity = Vector2.zero;
+                anim.SetInteger(CachedMoveDir, -1);
             }
+            
+            // 스킬 쿨다운
+            if (skill1CoolTime >= 0)
+                skill1CoolTime -= Time.deltaTime;
+            if (skill2CoolTime >= 0)
+                skill2CoolTime -= Time.deltaTime;
+            if (skill3CoolTime >= 0)
+                skill3CoolTime -= Time.deltaTime;
             
             if(!CanAttack())
             {
                 attackCoolTime -= Time.deltaTime;
             }
-            if(isOnControl && isAttackKeyPressed && CanAttack())
+            if(onControl && isAttackKeyPressed && CanAttack())
             {
                 Attack();
             }
@@ -108,7 +129,7 @@ namespace Pandora.Scripts.Player.Controller
             CallHealthChangedEvent();
             
             // AI 공격 대상 변경
-            if (!isOnControl)
+            if (!onControl)
             {
                 ai._target = attacker;
                 ai._currentState = PlayerAI.AIState.MoveToTarget;
@@ -148,12 +169,6 @@ namespace Pandora.Scripts.Player.Controller
             EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, param);
         }
 
-        private IEnumerator RemoveBuffAfterDuration(Buff buff)
-        {
-            yield return new WaitForSeconds(buff.Duration);
-            _playerStat.RemoveBuff(buff);
-        }
-
         public void Die()
         {
             isDead = true;
@@ -163,10 +178,10 @@ namespace Pandora.Scripts.Player.Controller
             var go = gameObject;
             go.layer = LayerMask.NameToLayer("DeadPlayer");
             go.tag = "Untagged";
-            if(isOnControl)
+            if(onControl)
             {
-                isOnControl = false;
-                ai.enabled = !isOnControl;
+                onControl = false;
+                ai.enabled = !onControl;
                 var otherController =
                     PlayerManager.Instance.GetOtherPlayer(gameObject).GetComponent<PlayerController>();
                 if(otherController.isDead)
@@ -174,8 +189,8 @@ namespace Pandora.Scripts.Player.Controller
                     GameManager.Instance.GameOver();
                     return;
                 }
-                otherController.isOnControl = true;
-                otherController.ai.enabled = !otherController.isOnControl;
+                otherController.onControl = true;
+                otherController.ai.enabled = !otherController.onControl;
             }
         }
         
@@ -195,7 +210,7 @@ namespace Pandora.Scripts.Player.Controller
         // Input System에서 호출
         public void OnAttack(InputValue value)
         {
-            if (!isOnControl) return;
+            if (!onControl) return;
             // press 여부 저장
             attackDir = value.Get<Vector2>();
             if(attackDir.magnitude > 0.5f)
@@ -277,7 +292,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public void OnMove(InputValue value)
         {
-            if (!isOnControl) return;
+            if (!onControl) return;
             moveDir = value.Get<Vector2>();
         }
 
@@ -327,8 +342,68 @@ namespace Pandora.Scripts.Player.Controller
         {
             var otherController = PlayerManager.Instance.GetOtherPlayer(gameObject).GetComponent<PlayerController>();
             if (otherController.isDead || isDead) return;
-            isOnControl = !isOnControl;
-            ai.enabled = !isOnControl;
+            onControl = !onControl;
+            ai.enabled = !onControl;
+        }
+        
+        public void SetSkill1(ActiveSkill skill)
+        {
+            skill1 = skill;
+            skill1._ownerPlayer = gameObject;
+        }
+        
+        public void OnSkill1(InputValue value)
+        {
+            if (!onControl) return;
+            if (skill1 == null) return;
+            if (skill1CoolTime < 0)
+            {
+                skill1CoolTime = skill1._cooldown;
+                skill1.Use();
+                anim.SetTrigger(skill1._name);
+            }
+        }
+        
+        public void SetSkill2(ActiveSkill skill)
+        {
+            skill2 = skill;
+            skill2._ownerPlayer = gameObject;
+        }
+
+        public void OnSkill2(InputValue value)
+        {
+            if (!onControl) return;
+            if (skill2 == null) return;
+            if (skill2CoolTime < 0)
+            {
+                skill2CoolTime = skill2._cooldown;
+                skill2.Use();
+                anim.SetTrigger(skill2._name);
+            }
+        }
+        
+        public void SetSkill3(ActiveSkill skill)
+        {
+            skill3 = skill;
+            skill3._ownerPlayer = gameObject;
+        }
+        
+        public void OnSkill3(InputValue value)
+        {
+            if (!onControl) return;
+            if (skill3 == null) return;
+            if (skill3CoolTime < 0)
+            {
+                skill3CoolTime = skill3._cooldown;
+                skill3.Use();
+                anim.SetTrigger(skill3._name);
+            }
+        }
+
+        private IEnumerator RemoveBuffAfterDuration(Buff buff)
+        {
+            yield return new WaitForSeconds(buff.Duration);
+            _playerStat.RemoveBuff(buff);
         }
     }
 }
