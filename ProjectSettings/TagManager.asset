@@ -57,3 +57,9 @@ TagManager:
   - name: FG
     uniqueID: 404974281
     locked: 0
+  - name: Door
+    uniqueID: 140182397
+    locked: 0
+  - name: Behind
+    uniqueID: 1753969659
+    locked: 0

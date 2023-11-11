@@ -9,14 +9,14 @@ public class Room : MonoBehaviour
     public int X;
     public int Y;
 
-    // Start is called before the first frame update
     void Start()
     {
         if(RoomController.instance == null)
         {
-            Debug.Log("You pressed play in the wrong scene!");
             return;
-        }    
+        }
+
+        RoomController.instance.RegisterRoom(this);
     }
 
     private void OnDrawGizmos()
@@ -25,7 +25,7 @@ public class Room : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, 0));
     }
 
-    public Vector3 GetRoomCentre()
+    public Vector3 GetRoomCenter()
     {
         return new Vector3(X * Width, Y * Height);
     }
