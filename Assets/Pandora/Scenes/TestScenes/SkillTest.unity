@@ -1502,7 +1502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdf32d8b17a458eac6760606dfa0090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActiveSkill: 0
+  isActiveSkill: 1
   getRandomSKill: 1
   getInspectorSkill: 0
   setSkillPrefab: {fileID: 0}

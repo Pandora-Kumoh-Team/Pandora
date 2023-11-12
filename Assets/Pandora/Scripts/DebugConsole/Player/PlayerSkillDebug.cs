@@ -23,8 +23,9 @@ namespace Pandora.Scripts.DebugConsole.Player
             if(getRandomSKill)
             {
                 var playerId = col.gameObject.GetComponent<PlayerController>().playerCharacterId;
+                var skillType = isActiveSkill? Skill.SkillType.Active : Skill.SkillType.Passive;
                 GameManager.Instance.inGameCanvas.GetComponent<InGameCanvasManager>()
-                    .DisplaySkillSelection(Skill.SkillType.Active, playerId);
+                    .DisplaySkillSelection(skillType, playerId);
                 Destroy(gameObject);
             }
             else if(getInspectorSkill)
