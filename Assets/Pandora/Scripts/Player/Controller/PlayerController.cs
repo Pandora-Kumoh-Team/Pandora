@@ -32,7 +32,7 @@ namespace Pandora.Scripts.Player.Controller
         // 이동 관련
         public Vector2 lookDir;
         public Vector2 moveDir;
-        public bool canMoving;
+        public bool canControllMove;
 
         // 공격 관련
         public Vector2 attackDir;
@@ -62,7 +62,7 @@ namespace Pandora.Scripts.Player.Controller
             anim = GetComponent<Animator>();
             ai = GetComponent<PlayerAI>();
             _playerStat = new PlayerStat();
-            canMoving = true;
+            canControllMove = true;
             skillCoolTimes = new float[3];
             activeSkillContainer = transform.Find("Skills").Find("ActiveSkills");
             passiveSkillContainer = transform.Find("Skills").Find("PassiveSkills");
@@ -89,14 +89,18 @@ namespace Pandora.Scripts.Player.Controller
         private void Update()
         {
             // 이동
-            if(canMoving && moveDir.magnitude > 0.5f)
+            if(canControllMove && moveDir.magnitude > 0.5f)
             {
                 rb.velocity = moveDir * _playerStat.Speed;
                 SetMoveAnimation(moveDir);
             }
-            else
+            else if(canControllMove && moveDir.magnitude <= 0.5f)
             {
                 rb.velocity = Vector2.zero;
+                anim.SetInteger(CachedMoveDir, -1);
+            }
+            else
+            {
                 anim.SetInteger(CachedMoveDir, -1);
             }
             
@@ -306,7 +310,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public void OnMove(InputValue value)
         {
-            if (!onControl || !canMoving) return;
+            if (!onControl || !canControllMove) return;
             moveDir = value.Get<Vector2>();
             if(moveDir.magnitude > 0.5f)
                 lookDir = moveDir;
