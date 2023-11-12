@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ec511a53d325c84a984b7175bcc88d4, type: 3}
-  m_Name: PassiveSkillList
+  m_Name: ActiveSkillList
   m_EditorClassIdentifier: 
-  skillList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  skillPrefabList:
+  - {fileID: 6056235560835414755, guid: ae3a793e15271624f9ec2ba667051b7a, type: 3}
+  - {fileID: 8684332657606468478, guid: 01ff9ad3db1fefd47bcc39b8745228df, type: 3}
+  - {fileID: 4853312052038646888, guid: 2dc8eeed2f328284685340959f19122a, type: 3}

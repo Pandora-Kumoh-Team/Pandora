@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Pandora.Scripts.Player.Skill;
 using UnityEngine;
 
 namespace Pandora.Scripts.Player
 {
+    [Serializable]
     public class PlayerStat
     {
         // 최대 체력
@@ -135,11 +138,21 @@ namespace Pandora.Scripts.Player
             return _attackBuffs;
         }
         
+        /// <summary>
+        /// 단순히 playerStat에 추가하는 역활만 수행
+        /// PlayerController.AddPassiveSkill()을 통해 실제 스킬을 추가해야함
+        /// </summary>
+        /// <param name="skill"></param>
         public void AddPassiveSkill(Skill.Skill skill)
         {
             _passiveSkills.Add(skill);
         }
         
+        /// <summary>
+        /// 단순히 playerStat에서 삭제하는 역활만 수행
+        /// PlayerController.RemovePassiveSkill()을 통해 실제 스킬을 삭제해야함
+        /// </summary>
+        /// <param name="skill"></param>
         public void RemovePassiveSkill(Skill.Skill skill)
         {
             _passiveSkills.Remove(skill);

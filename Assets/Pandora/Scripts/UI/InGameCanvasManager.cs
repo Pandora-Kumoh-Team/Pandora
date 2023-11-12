@@ -1,5 +1,7 @@
-﻿using Pandora.Scripts.Enemy;
+﻿using System.Collections.Generic;
+using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
+using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +24,60 @@ namespace Pandora.Scripts.UI
             var pausePanel = transform.Find("PauseMenu").gameObject;
             pausePanel.SetActive(isPaused);
             Time.timeScale = isPaused ? 0 : 1;
+        }
+        
+        public void DisplaySkillSelection()
+        {
+            Debug.Log("Displaying skill selection");
+            var randActive = Random.Range(0,2);
+            var randPlayerNum = Random.Range(0, 2);
+            DisplaySkillSelection((Skill.SkillType)randActive, randPlayerNum);
+        }
+        
+        public void DisplaySkillSelection(Skill.SkillType skillType, int playerNum)
+        {
+            var skillSelection = transform.Find("SkillSelection").gameObject;
+            skillSelection.SetActive(true);
+            Time.timeScale = 0;
+
+            var skillList = skillType == Skill.SkillType.Active
+                ? SkillManager.Instance.GetRandomActiveSkills(playerNum, 3)
+                : SkillManager.Instance.GetRandomPassiveSkills(playerNum, 3);
+            var skillObjectList = new List<GameObject>
+            {
+                skillSelection.transform.Find("SkillWindow").Find("Skill1").gameObject,
+                skillSelection.transform.Find("SkillWindow").Find("Skill2").gameObject,
+                skillSelection.transform.Find("SkillWindow").Find("Skill3").gameObject
+            };
+            for (var i = 0; i < 3; i++)
+            {
+                var skillObject = skillObjectList[i];
+                if(i < skillList.Count)
+                {
+                    var skill = skillList[i];
+                    skillObject.SetActive(true);
+                    skillObject.GetComponent<SkillSelectUi>().Init(skill, playerNum);
+                }
+                else
+                {
+                    skillObject.SetActive(false);
+                }
+            }
+        }
+        
+        public void CloseConfirm()
+        {
+            var closeConfirm = transform.Find("SkillSelection").Find("CloseConfirm").gameObject;
+            closeConfirm.SetActive(true);
+        }
+        
+        public void CancelSkillSelection()
+        {
+            var closeConfirm = transform.Find("SkillSelection").Find("CloseConfirm").gameObject;
+            closeConfirm.SetActive(false);
+            var skillSelection = transform.Find("SkillSelection").gameObject;
+            skillSelection.SetActive(false);
+            Time.timeScale = 1;
         }
         
         public void ReStart()

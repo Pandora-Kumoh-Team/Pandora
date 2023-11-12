@@ -24,14 +24,14 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         private void Start()
         {
-            _duration = 0.5f;
+            duration = 0.5f;
         }
 
         public override void OnUseSkill()
         {
-            _playerController = _ownerPlayer.GetComponent<PlayerController>();
+            _playerController = ownerPlayer.GetComponent<PlayerController>();
             _playerController.canMoving = false;
-            _nowDuration = _duration;
+            _nowDuration = duration;
         }
 
         public override void OnDuringSkill()
