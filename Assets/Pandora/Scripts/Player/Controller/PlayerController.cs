@@ -73,6 +73,11 @@ namespace Pandora.Scripts.Player.Controller
             onControl = onControlInit;
             ai.enabled = !onControlInit;
             anim.SetInteger(CachedMoveDir, -1);
+
+            foreach (var activeSkill in activeSkills)
+            {
+                activeSkill.GetComponent<Skill.Skill>().ownerPlayer = gameObject;
+            }
             
             if(playerCharacterId == -1)
             {
@@ -98,7 +103,7 @@ namespace Pandora.Scripts.Player.Controller
             // 스킬 쿨다운
             for (int i = 0; i < skillCoolTimes.Length; i++)
             {
-                if (skillCoolTimes[i] > 0)
+                if (skillCoolTimes[i] >= 0)
                 {
                     skillCoolTimes[i] -= Time.deltaTime;
                 }
@@ -371,6 +376,7 @@ namespace Pandora.Scripts.Player.Controller
             var skillObject = Instantiate(skill, activeSkillContainer, true);
             activeSkills[skillIndex] = skillObject;
             var skillComponent = skillObject.GetComponent<Skill.Skill>();
+            skillCoolTimes[skillIndex] = skillComponent.coolTime;
             skillComponent.ownerPlayer = gameObject;
         }
 
@@ -381,9 +387,9 @@ namespace Pandora.Scripts.Player.Controller
             if (skillCoolTimes[skillIndex] < 0)
             {
                 var skillComponent = activeSkills[skillIndex].GetComponent<Skill.Skill>();
-                skillCoolTimes[skillIndex] = skillComponent.cooldown;
+                skillCoolTimes[skillIndex] = skillComponent.coolTime;
                 ((ActiveSkill)skillComponent).Use();
-                anim.SetTrigger(activeSkills[skillIndex].name);
+                // anim.SetTrigger(activeSkills[skillIndex].name - "(Clone)");
             }
         }
         public void OnSkill1(InputValue value)
