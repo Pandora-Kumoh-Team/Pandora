@@ -30,6 +30,7 @@ namespace Pandora.Scripts.Player.Controller
     
         // Variables
         // 이동 관련
+        public Vector2 lookDir;
         public Vector2 moveDir;
         public bool canMoving;
 
@@ -45,25 +46,33 @@ namespace Pandora.Scripts.Player.Controller
         public bool isDead;
         
         // 스킬 관련
-        public ActiveSkill[] activeSkills;
+        public GameObject[] activeSkills;
+        public GameObject[] passiveSkills;
         public float[] skillCoolTimes;
+        public Transform activeSkillContainer;
+        public Transform passiveSkillContainer;
         
         private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
         private static readonly int CachedAttackDir = Animator.StringToHash("AttackDir");
 
-        public virtual void Start()
+        private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             ai = GetComponent<PlayerAI>();
-            
-            onControl = onControlInit;
+            _playerStat = new PlayerStat();
             canMoving = true;
+            skillCoolTimes = new float[3];
+            activeSkillContainer = transform.Find("Skills").Find("ActiveSkills");
+            passiveSkillContainer = transform.Find("Skills").Find("PassiveSkills");
+        }
+
+        public virtual void Start()
+        {
+            onControl = onControlInit;
             ai.enabled = !onControlInit;
             anim.SetInteger(CachedMoveDir, -1);
-            _playerStat = new PlayerStat();
-            skillCoolTimes = new float[3];
             
             if(playerCharacterId == -1)
             {
@@ -75,7 +84,7 @@ namespace Pandora.Scripts.Player.Controller
         private void Update()
         {
             // 이동
-            if(canMoving && moveDir.magnitude > 0.1f)
+            if(canMoving && moveDir.magnitude > 0.5f)
             {
                 rb.velocity = moveDir * _playerStat.Speed;
                 SetMoveAnimation(moveDir);
@@ -292,8 +301,10 @@ namespace Pandora.Scripts.Player.Controller
 
         public void OnMove(InputValue value)
         {
-            if (!onControl) return;
+            if (!onControl || !canMoving) return;
             moveDir = value.Get<Vector2>();
+            if(moveDir.magnitude > 0.5f)
+                lookDir = moveDir;
         }
 
         private void SetMoveAnimation(Vector2 moveDirection)
@@ -338,33 +349,29 @@ namespace Pandora.Scripts.Player.Controller
 
         #endregion
         
-        public void OnTag(InputValue value)
-        {
-            var otherController = PlayerManager.Instance.GetOtherPlayer(gameObject).GetComponent<PlayerController>();
-            if (otherController.isDead || isDead) return;
-            onControl = !onControl;
-            ai.enabled = !onControl;
-        }
-
-        #region Skill
+        #region 스킬 관련
         
-        public void AddPassiveSkill(Skill.Skill skill)
+        public void AddPassiveSkill(GameObject skill)
         {
-            _playerStat.AddPassiveSkill(skill);
-            skill.ownerPlayer = gameObject;
-            ((PassiveSkill)skill).OnGetSkill();
+            var skillObject = Instantiate(skill, passiveSkillContainer, true);
+            var skillComponent = skillObject.GetComponent<Skill.Skill>();
+            skillComponent.ownerPlayer = gameObject;
+            ((PassiveSkill)skillComponent).OnGetSkill();
         }
         
-        public void RemovePassiveSkill(Skill.Skill skill)
+        public void RemovePassiveSkill(GameObject skill)
         {
-            _playerStat.RemovePassiveSkill(skill);
-            ((PassiveSkill)skill).OnLoseSkill();
+            var skillComponent = skill.GetComponent<Skill.Skill>();
+            ((PassiveSkill)skillComponent).OnLoseSkill();
         }
 
-        public void SetActiveSkill(ActiveSkill skill, int skillIndex)
+        public void SetActiveSkill(GameObject skill, int skillIndex)
         {
-            activeSkills[skillIndex] = skill;
-            activeSkills[skillIndex].ownerPlayer = gameObject;
+            Destroy(activeSkills[skillIndex]);
+            var skillObject = Instantiate(skill, activeSkillContainer, true);
+            activeSkills[skillIndex] = skillObject;
+            var skillComponent = skillObject.GetComponent<Skill.Skill>();
+            skillComponent.ownerPlayer = gameObject;
         }
 
         private void OnSkill(InputValue value, int skillIndex)
@@ -373,8 +380,9 @@ namespace Pandora.Scripts.Player.Controller
             if (activeSkills == null) return;
             if (skillCoolTimes[skillIndex] < 0)
             {
-                skillCoolTimes[skillIndex] = activeSkills[skillIndex].cooldown;
-                activeSkills[skillIndex].Use();
+                var skillComponent = activeSkills[skillIndex].GetComponent<Skill.Skill>();
+                skillCoolTimes[skillIndex] = skillComponent.cooldown;
+                ((ActiveSkill)skillComponent).Use();
                 anim.SetTrigger(activeSkills[skillIndex].name);
             }
         }
@@ -391,18 +399,30 @@ namespace Pandora.Scripts.Player.Controller
             OnSkill(value, 2);
         }
 
-        public ActiveSkill[] GetActiveSkills()
+        public GameObject[] GetActiveSkills()
         {
             return activeSkills;
+        }
+        
+        public GameObject[] GetPassiveSkills()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
 
+        public void OnTag(InputValue value)
+        {
+            var otherController = PlayerManager.Instance.GetOtherPlayer(gameObject).GetComponent<PlayerController>();
+            if (otherController.isDead || isDead) return;
+            onControl = !onControl;
+            ai.enabled = !onControl;
+        }
+        
         private IEnumerator RemoveBuffAfterDuration(Buff buff)
         {
             yield return new WaitForSeconds(buff.Duration);
             _playerStat.RemoveBuff(buff);
         }
-
     }
 }

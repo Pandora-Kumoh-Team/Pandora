@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Pandora.Scripts.Player.Controller;
 using Pandora.Scripts.Player.Skill.Data;
@@ -33,28 +34,28 @@ namespace Pandora.Scripts.Player.Skill
             }
         }
         
-        public List<Skill> GetRandomPassiveSkills(int playerNum, int count)
+        public List<GameObject> GetRandomPassiveSkills(int playerNum, int count)
         {
             // get random skill from passive skill list except now skill list
-            var nowPassiveSkillList = PlayerManager.Instance.GetPlayer(playerNum).GetComponent<PlayerController>()._playerStat.GetPassiveSkills();
-            return GetRandomSkills(playerNum, count, nowPassiveSkillList);
+            var nowPassiveSkillList = PlayerManager.Instance.GetPlayer(playerNum).GetComponent<PlayerController>().GetPassiveSkills();
+            return GetRandomSkills(count, nowPassiveSkillList, passiveSkillList.skillPrefabList);
         }
         
-        public List<Skill> GetRandomActiveSkills(int playerNum, int count)
+        public List<GameObject> GetRandomActiveSkills(int playerNum, int count)
         {
             // get random skill from passive skill list except now skill list
             var nowActiveSkillList = PlayerManager.Instance.GetPlayer(playerNum).GetComponent<PlayerController>().GetActiveSkills();
-            return GetRandomSkills(playerNum, count, nowActiveSkillList);
+            return GetRandomSkills(count, nowActiveSkillList, activeSkillList.skillPrefabList);
         }
 
-        private List<Skill> GetRandomSkills(int playerNum, int count, IEnumerable<Skill> nowSkillList)
+        private List<GameObject> GetRandomSkills(int count, IEnumerable<GameObject> nowSkillList, IEnumerable<GameObject> skillPrefabList)
         {
-            var result = new List<Skill>();
-            var ableSkillList = new List<Skill>();
+            var result = new List<GameObject>();
+            var ableSkillList = new List<GameObject>();
             // prefab list to skill list
-            foreach (var skill in activeSkillList.skillPrefabList)
+            foreach (var skill in skillPrefabList)
             {
-                ableSkillList.Add(skill.GetComponent<Skill>());
+                ableSkillList.Add(skill);
             }
             // remove now skill
             foreach (var skill in nowSkillList)

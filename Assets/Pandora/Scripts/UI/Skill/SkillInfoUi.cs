@@ -9,7 +9,7 @@ namespace Pandora.Scripts.UI
 {
     public class SkillInfoUi : MonoBehaviour
     {
-        protected Skill Skill;
+        protected GameObject InfoSkill;
         protected int PlayerNum;
         public Image skillIcon;
         public TextMeshProUGUI skillName;
@@ -22,13 +22,14 @@ namespace Pandora.Scripts.UI
             skillDescription = transform.Find("SkillDescription").GetComponent<TextMeshProUGUI>();
         }
 
-        public void Init(Skill skill, int playerNum)
+        public void Init(GameObject skill, int playerNum)
         {
-            Skill = skill;
+            InfoSkill = skill;
             PlayerNum = playerNum;
-            skillIcon.sprite = skill.icon;
-            skillName.text = skill.name;
-            skillDescription.text = skill.description;
+            var skillComponent = InfoSkill.GetComponent<Skill>();
+            skillIcon.sprite = skillComponent.icon;
+            skillName.text = skillComponent.name;
+            skillDescription.text = skillComponent.description;
         }
     }
 }

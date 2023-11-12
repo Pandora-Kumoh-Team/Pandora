@@ -105,7 +105,6 @@ namespace Pandora.Scripts.Player
         private float _nonControlHpRecovery = 5;
         private List<Buff> _buffs = new List<Buff>();
         private List<Buff> _attackBuffs = new List<Buff>();
-        private List<Skill.Skill> _passiveSkills = new List<Skill.Skill>();
 
         public void AddBuff(Buff buff)
         {
@@ -136,31 +135,6 @@ namespace Pandora.Scripts.Player
         public List<Buff> GetAttackBuffs()
         {
             return _attackBuffs;
-        }
-        
-        /// <summary>
-        /// 단순히 playerStat에 추가하는 역활만 수행
-        /// PlayerController.AddPassiveSkill()을 통해 실제 스킬을 추가해야함
-        /// </summary>
-        /// <param name="skill"></param>
-        public void AddPassiveSkill(Skill.Skill skill)
-        {
-            _passiveSkills.Add(skill);
-        }
-        
-        /// <summary>
-        /// 단순히 playerStat에서 삭제하는 역활만 수행
-        /// PlayerController.RemovePassiveSkill()을 통해 실제 스킬을 삭제해야함
-        /// </summary>
-        /// <param name="skill"></param>
-        public void RemovePassiveSkill(Skill.Skill skill)
-        {
-            _passiveSkills.Remove(skill);
-        }
-        
-        public List<Skill.Skill> GetPassiveSkills()
-        {
-            return _passiveSkills;
         }
     }
 }
