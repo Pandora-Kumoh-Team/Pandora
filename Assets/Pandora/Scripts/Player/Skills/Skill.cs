@@ -6,6 +6,7 @@ namespace Pandora.Scripts.Player.Skill
 {
     public abstract class Skill : MonoBehaviour
     {
+        
         public enum SkillGrade
         {
             Normal,
@@ -26,6 +27,8 @@ namespace Pandora.Scripts.Player.Skill
         public SkillGrade grade;
         public SkillType type;
         [TextArea]
+        public string oneLineDescription;
+        [TextArea]
         public string description;
         public float coolTime;
         public float duration;
@@ -44,7 +47,7 @@ namespace Pandora.Scripts.Player.Skill
         }
         protected bool Equals(Skill other)
         {
-            return base.Equals(other) && id == other.id && Equals(icon, other.icon) && name == other.name && grade == other.grade && type == other.type && description == other.description && coolTime.Equals(other.coolTime) && duration.Equals(other.duration) && Equals(ownerPlayer, other.ownerPlayer);
+            return base.Equals(other) && id == other.id;
         }
 
         public override bool Equals(object obj)
@@ -57,18 +60,7 @@ namespace Pandora.Scripts.Player.Skill
 
         public override int GetHashCode()
         {
-            var hashCode = new HashCode();
-            hashCode.Add(base.GetHashCode());
-            hashCode.Add(id);
-            hashCode.Add(icon);
-            hashCode.Add(name);
-            hashCode.Add((int)grade);
-            hashCode.Add((int)type);
-            hashCode.Add(description);
-            hashCode.Add(coolTime);
-            hashCode.Add(duration);
-            hashCode.Add(ownerPlayer);
-            return hashCode.ToHashCode();
+            return HashCode.Combine(base.GetHashCode(), id);
         }
 
     }

@@ -376,6 +376,9 @@ namespace Pandora.Scripts.Player.Controller
 
         public void SetActiveSkill(GameObject skill, int skillIndex)
         {
+            var eventParam =
+                new PlayerSkillChangedParam(skill.GetComponent<Skill.Skill>(), playerCharacterId, skillIndex);
+            EventManager.Instance.TriggerEvent(PandoraEventType.PlayerSkillChanged, eventParam);
             Destroy(activeSkills[skillIndex]);
             var skillObject = Instantiate(skill, activeSkillContainer, true);
             activeSkills[skillIndex] = skillObject;
