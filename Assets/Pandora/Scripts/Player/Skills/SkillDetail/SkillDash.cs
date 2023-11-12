@@ -36,7 +36,6 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         public override void OnDuringSkill()
         {
             _playerController.rb.velocity = _playerController.lookDir * speed;
-            Debug.Log(_playerController.rb.velocity);
         }
 
         public override void OnEndSkill()
