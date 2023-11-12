@@ -28,20 +28,20 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         public override void OnUseSkill()
         {
             _playerController = ownerPlayer.GetComponent<PlayerController>();
-            _playerController.canMoving = false;
+            _playerController.canControllMove = false;
             _playerController._playerStat.DodgeChance += 100;
             _nowDuration = duration;
         }
 
         public override void OnDuringSkill()
         {
-            Debug.Log("Dash");
             _playerController.rb.velocity = _playerController.lookDir * speed;
+            Debug.Log(_playerController.rb.velocity);
         }
 
         public override void OnEndSkill()
         {
-            _playerController.canMoving = true;
+            _playerController.canControllMove = true;
             _playerController._playerStat.DodgeChance -= 100;
         }
     }
