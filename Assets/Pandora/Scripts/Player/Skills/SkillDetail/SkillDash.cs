@@ -9,6 +9,9 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         private PlayerController _playerController;
         private float _nowDuration;
 
+        [Header("수치")]
+        public float speed;
+
         private void Update()
         {
             if(_nowDuration > 0)
@@ -22,14 +25,8 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             }
         }
 
-        private void Start()
-        {
-            duration = 0.5f;
-        }
-
         public override void OnUseSkill()
         {
-            Debug.Log("Dash");
             _playerController = ownerPlayer.GetComponent<PlayerController>();
             _playerController.canMoving = false;
             _playerController._playerStat.DodgeChance += 100;
@@ -38,7 +35,8 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         public override void OnDuringSkill()
         {
-            _playerController.rb.velocity = _playerController.moveDir * 10;
+            Debug.Log("Dash");
+            _playerController.rb.velocity = _playerController.lookDir * speed;
         }
 
         public override void OnEndSkill()
