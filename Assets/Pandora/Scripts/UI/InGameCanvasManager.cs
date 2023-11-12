@@ -26,14 +26,9 @@ namespace Pandora.Scripts.UI
             Time.timeScale = isPaused ? 0 : 1;
         }
         
-        public void DisplaySkillSelection()
-        {
-            Debug.Log("Displaying skill selection");
-            var randActive = Random.Range(0,2);
-            var randPlayerNum = Random.Range(0, 2);
-            DisplaySkillSelection((Skill.SkillType)randActive, randPlayerNum);
-        }
-        
+        /// <summary>
+        /// 스킬 보상 선택 패널을 엽니다.
+        /// </summary>
         public void DisplaySkillSelection(Skill.SkillType skillType, int playerNum)
         {
             var skillSelection = transform.Find("SkillSelection").gameObject;

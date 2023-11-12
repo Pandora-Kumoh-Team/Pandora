@@ -8,7 +8,7 @@ namespace Pandora.Scripts.UI
     {
         private static readonly int IsMelee = Animator.StringToHash("IsMelee");
 
-        public void Init(int playerNum, Skill changeSkill)
+        public void Init(int playerNum, GameObject changeSkill)
         {
             var player = PlayerManager.Instance.GetPlayer(playerNum);
             var playerController = player.GetComponent<PlayerController>();

@@ -12,18 +12,19 @@ namespace Pandora.Scripts.UI
     {
         public void SelectSkill()
         {
-            if(Skill.type == Skill.SkillType.Passive)
+            var skillComponent = InfoSkill.GetComponent<Skill>();
+            if(skillComponent.type == Skill.SkillType.Passive)
             {
-                PlayerManager.Instance.GetPlayer(PlayerNum).GetComponent<PlayerController>().AddPassiveSkill(Skill);
+                PlayerManager.Instance.GetPlayer(PlayerNum).GetComponent<PlayerController>().AddPassiveSkill(InfoSkill);
                 transform.parent.parent.gameObject.SetActive(false);
                 Time.timeScale = 1;
             }
-            else if (Skill.type == Skill.SkillType.Active)
+            else if (skillComponent.type == Skill.SkillType.Active)
             {
                 var activeSkillEquip = GameManager.Instance.inGameCanvas.transform.
                     Find("SkillSelection").Find("ActiveSkillEquip").gameObject;
                 activeSkillEquip.SetActive(true);
-                activeSkillEquip.GetComponent<ActiveSkillEquipUi>().Init(PlayerNum, Skill);
+                activeSkillEquip.GetComponent<ActiveSkillEquipUi>().Init(PlayerNum, InfoSkill);
                 
                 transform.parent.gameObject.SetActive(false);
             }
