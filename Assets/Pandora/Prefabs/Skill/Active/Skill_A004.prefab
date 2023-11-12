@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8588047216109487413}
   - component: {fileID: -2247455561673634423}
   m_Layer: 0
-  m_Name: Skill_A002
+  m_Name: Skill_A004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,20 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1d0524746a47a6b4f3a3588132049d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
-  icon: {fileID: 21300000, guid: 8092a8f83e8726b42a5f2d8eb56da8e4, type: 3}
-  name: "\uACBD\uC9C8\uD654"
+  id: 4
+  icon: {fileID: 21300000, guid: 55d5211acaeede04781046514939147b, type: 3}
+  name: "\uD76C\uC0DD"
   grade: 0
   type: 0
-  description: "1\uCD08\uAC04 \uD53C\uD574\uB97C \uBC29\uC5B4\uD569\uB2C8\uB2E4."
-  coolTime: 10
-  duration: 1
+  description: "\uCCB4\uB825\uC744 \uC18C\uBAA8\uD558\uACE0 \uACF5\uACA9\uB825\uC744
+    \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
+  coolTime: 30
+  duration: 10
   ownerPlayer: {fileID: 0}
   maxHealth: 0
   nowHealth: 0
   baseDamage: 0
-  attackPower: 0
-  defencePower: 100
+  attackPower: 1
+  defencePower: 0
   speed: 0
   attackRange: 0
   attackSpeed: 0
@@ -66,7 +67,7 @@ MonoBehaviour:
   dodgeChance: 0
   nonControlHpRecovery: 0
   maxHealthCost: 0
-  nowHealthCost: 0
+  nowHealthCost: -10
   baseDamageCost: 0
   attackPowerCost: 0
   defencePowerCost: 0

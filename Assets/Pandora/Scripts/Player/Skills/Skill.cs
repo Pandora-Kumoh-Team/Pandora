@@ -27,8 +27,6 @@ namespace Pandora.Scripts.Player.Skill
         public SkillGrade grade;
         public SkillType type;
         [TextArea]
-        public string oneLineDescription;
-        [TextArea]
         public string description;
         public float coolTime;
         public float duration;

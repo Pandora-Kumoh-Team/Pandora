@@ -47,7 +47,7 @@ namespace Pandora.Scripts.Player.Controller
         
         // 스킬 관련
         public GameObject[] activeSkills;
-        public GameObject[] passiveSkills;
+        public List<GameObject> passiveSkills;
         public float[] skillCoolTimes;
         public Transform activeSkillContainer;
         public Transform passiveSkillContainer;
@@ -365,6 +365,7 @@ namespace Pandora.Scripts.Player.Controller
             var skillObject = Instantiate(skill, passiveSkillContainer, true);
             var skillComponent = skillObject.GetComponent<Skill.Skill>();
             skillComponent.ownerPlayer = gameObject;
+            passiveSkills.Add(skill);
             ((PassiveSkill)skillComponent).OnGetSkill();
         }
         
@@ -383,7 +384,6 @@ namespace Pandora.Scripts.Player.Controller
             var skillObject = Instantiate(skill, activeSkillContainer, true);
             activeSkills[skillIndex] = skillObject;
             var skillComponent = skillObject.GetComponent<Skill.Skill>();
-            skillCoolTimes[skillIndex] = skillComponent.coolTime;
             skillComponent.ownerPlayer = gameObject;
         }
 
@@ -419,7 +419,7 @@ namespace Pandora.Scripts.Player.Controller
         
         public GameObject[] GetPassiveSkills()
         {
-            throw new NotImplementedException();
+            return passiveSkills.ToArray();
         }
 
         #endregion
