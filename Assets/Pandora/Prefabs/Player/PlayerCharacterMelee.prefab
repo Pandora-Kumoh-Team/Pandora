@@ -52,12 +52,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c97755614c41fd851cf3104430fdb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   playerCharacterId: -1
   moveDir: {x: 0, y: 0}
+  canMoving: 0
   attackDir: {x: 0, y: 0}
-  isOnControl: 0
-  isDead: 0
+  onControl: 0
   onControlInit: 1
+  isDead: 0
+  activeSkills:
+  - {fileID: 8254501727687908781, guid: 2ad8d3745f811ed43a39c6a54dd8812b, type: 3}
+  - {fileID: 8254501727687908781, guid: 2ad8d3745f811ed43a39c6a54dd8812b, type: 3}
+  - {fileID: 8254501727687908781, guid: 2ad8d3745f811ed43a39c6a54dd8812b, type: 3}
+  skillCoolTimes: []
 --- !u!114 &6612939485274714206
 MonoBehaviour:
   m_ObjectHideFlags: 0

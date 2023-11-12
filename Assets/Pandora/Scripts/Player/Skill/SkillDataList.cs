@@ -7,6 +7,6 @@ namespace Pandora.Scripts.Player.Skill.Data
     [CreateAssetMenu(fileName = "SkillList", menuName = "Scriptable Object Asset/SkillList")]
     public class SkillList : ScriptableObject
     {
-        public List<Skill> skillList;
+        public List<GameObject> skillPrefabList;
     }
 }

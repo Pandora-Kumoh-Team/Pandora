@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Pandora.Scripts.Effect;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
@@ -7,6 +8,7 @@ using Pandora.Scripts.System.Event;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using NotImplementedException = System.NotImplementedException;
 using Random = UnityEngine.Random;
 
 namespace Pandora.Scripts.Player.Controller
@@ -43,12 +45,8 @@ namespace Pandora.Scripts.Player.Controller
         public bool isDead;
         
         // 스킬 관련
-        public Skill.ActiveSkill skill1;
-        public float skill1CoolTime;
-        public Skill.ActiveSkill skill2;
-        public float skill2CoolTime;
-        public Skill.ActiveSkill skill3;
-        public float skill3CoolTime;
+        public ActiveSkill[] activeSkills;
+        public float[] skillCoolTimes;
         
         private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
@@ -65,6 +63,7 @@ namespace Pandora.Scripts.Player.Controller
             ai.enabled = !onControlInit;
             anim.SetInteger(CachedMoveDir, -1);
             _playerStat = new PlayerStat();
+            skillCoolTimes = new float[3];
             
             if(playerCharacterId == -1)
             {
@@ -88,13 +87,14 @@ namespace Pandora.Scripts.Player.Controller
             }
             
             // 스킬 쿨다운
-            if (skill1CoolTime >= 0)
-                skill1CoolTime -= Time.deltaTime;
-            if (skill2CoolTime >= 0)
-                skill2CoolTime -= Time.deltaTime;
-            if (skill3CoolTime >= 0)
-                skill3CoolTime -= Time.deltaTime;
-            
+            for (int i = 0; i < skillCoolTimes.Length; i++)
+            {
+                if (skillCoolTimes[i] > 0)
+                {
+                    skillCoolTimes[i] -= Time.deltaTime;
+                }
+            }
+
             if(!CanAttack())
             {
                 attackCoolTime -= Time.deltaTime;
@@ -345,65 +345,64 @@ namespace Pandora.Scripts.Player.Controller
             onControl = !onControl;
             ai.enabled = !onControl;
         }
+
+        #region Skill
         
-        public void SetSkill1(ActiveSkill skill)
+        public void AddPassiveSkill(Skill.Skill skill)
         {
-            skill1 = skill;
-            skill1._ownerPlayer = gameObject;
+            _playerStat.AddPassiveSkill(skill);
+            skill.ownerPlayer = gameObject;
+            ((PassiveSkill)skill).OnGetSkill();
         }
         
-        public void OnSkill1(InputValue value)
+        public void RemovePassiveSkill(Skill.Skill skill)
         {
-            if (!onControl) return;
-            if (skill1 == null) return;
-            if (skill1CoolTime < 0)
-            {
-                skill1CoolTime = skill1._cooldown;
-                skill1.Use();
-                anim.SetTrigger(skill1._name);
-            }
-        }
-        
-        public void SetSkill2(ActiveSkill skill)
-        {
-            skill2 = skill;
-            skill2._ownerPlayer = gameObject;
+            _playerStat.RemovePassiveSkill(skill);
+            ((PassiveSkill)skill).OnLoseSkill();
         }
 
+        public void SetActiveSkill(ActiveSkill skill, int skillIndex)
+        {
+            activeSkills[skillIndex] = skill;
+            activeSkills[skillIndex].ownerPlayer = gameObject;
+        }
+
+        private void OnSkill(InputValue value, int skillIndex)
+        {
+            if (!onControl) return;
+            if (activeSkills == null) return;
+            if (skillCoolTimes[skillIndex] < 0)
+            {
+                skillCoolTimes[skillIndex] = activeSkills[skillIndex].cooldown;
+                activeSkills[skillIndex].Use();
+                anim.SetTrigger(activeSkills[skillIndex].name);
+            }
+        }
+        public void OnSkill1(InputValue value)
+        {
+            OnSkill(value, 0);
+        }
         public void OnSkill2(InputValue value)
         {
-            if (!onControl) return;
-            if (skill2 == null) return;
-            if (skill2CoolTime < 0)
-            {
-                skill2CoolTime = skill2._cooldown;
-                skill2.Use();
-                anim.SetTrigger(skill2._name);
-            }
+            OnSkill(value, 1);
         }
-        
-        public void SetSkill3(ActiveSkill skill)
-        {
-            skill3 = skill;
-            skill3._ownerPlayer = gameObject;
-        }
-        
         public void OnSkill3(InputValue value)
         {
-            if (!onControl) return;
-            if (skill3 == null) return;
-            if (skill3CoolTime < 0)
-            {
-                skill3CoolTime = skill3._cooldown;
-                skill3.Use();
-                anim.SetTrigger(skill3._name);
-            }
+            OnSkill(value, 2);
         }
+
+        public ActiveSkill[] GetActiveSkills()
+        {
+            return activeSkills;
+        }
+
+        #endregion
 
         private IEnumerator RemoveBuffAfterDuration(Buff buff)
         {
             yield return new WaitForSeconds(buff.Duration);
             _playerStat.RemoveBuff(buff);
         }
+
     }
 }

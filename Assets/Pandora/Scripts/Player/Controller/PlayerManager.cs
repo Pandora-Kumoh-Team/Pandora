@@ -44,5 +44,18 @@ namespace Pandora.Scripts.Player.Controller
         {
             return new[] {_firstPlayer, _secondPlayer};
         }
+
+        public GameObject GetPlayer(int playerNum)
+        {
+            if (playerNum == 0)
+            {
+                return _firstPlayer;
+            }
+            if (playerNum == 1)
+            {
+                return _secondPlayer;
+            }
+            throw new Exception("PlayerManager: GetPlayer: playerNum is not 1 or 2");
+        }
     }
 }
