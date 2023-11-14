@@ -25,6 +25,13 @@ namespace Pandora.Scripts.UI
             pausePanel.SetActive(isPaused);
             Time.timeScale = isPaused ? 0 : 1;
         }
+
+        public void OnPassiveSkillList()
+        {
+            var skillPanel = transform.Find("SkillsList").gameObject;
+            var isSkillPanelActive = skillPanel.activeSelf;
+            skillPanel.SetActive(!isSkillPanelActive);
+        }
         
         /// <summary>
         /// 스킬 보상 선택 패널을 엽니다.
