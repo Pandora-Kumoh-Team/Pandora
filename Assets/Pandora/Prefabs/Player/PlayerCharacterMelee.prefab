@@ -55,9 +55,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   playerCharacterId: -1
+  playerBasicStat:
+    maxHealth: 100
+    nowHealth: 100
+    baseDamage: 10
+    attackPower: 1
+    defencePower: 0
+    speed: 4
+    attackRange: 1
+    attackSpeed: 1
+    criticalChance: 5
+    criticalDamageTimes: 2
+    dodgeChance: 5
+    nonControlHpRecovery: 3
   lookDir: {x: 0, y: 0}
   moveDir: {x: 0, y: 0}
-  canMoving: 0
+  canControllMove: 0
   attackDir: {x: 0, y: 0}
   onControl: 0
   onControlInit: 1

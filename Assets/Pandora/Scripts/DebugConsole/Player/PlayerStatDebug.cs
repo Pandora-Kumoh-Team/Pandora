@@ -32,18 +32,18 @@ namespace Pandora.Scripts.DebugConsole.Player
         private void Update()
         {
             // Update Player Stats
-            player._playerStat.MaxHealth = _maxHealth;
-            player._playerStat.NowHealth = _nowHealth;
-            player._playerStat.BaseDamage = _baseDamage;
-            player._playerStat.AttackPower = _attackPower;
-            player._playerStat.DefencePower = _defencePower;
-            player._playerStat.Speed = _speed;
-            player._playerStat.AttackRange = _attackRange;
+            player.playerCurrentStat.MaxHealth = _maxHealth;
+            player.playerCurrentStat.NowHealth = _nowHealth;
+            player.playerCurrentStat.BaseDamage = _baseDamage;
+            player.playerCurrentStat.AttackPower = _attackPower;
+            player.playerCurrentStat.DefencePower = _defencePower;
+            player.playerCurrentStat.Speed = _speed;
+            player.playerCurrentStat.AttackRange = _attackRange;
             player.AttackRangeChanged(_attackRange);
-            player._playerStat.AttackSpeed = _attackSpeed;
-            player._playerStat.CriticalChance = _criticalChance;
-            player._playerStat.CriticalDamageTimes = _criticalDamageTimes;
-            player._playerStat.DodgeChance = _dodgeChance;
+            player.playerCurrentStat.AttackSpeed = _attackSpeed;
+            player.playerCurrentStat.CriticalChance = _criticalChance;
+            player.playerCurrentStat.CriticalDamageTimes = _criticalDamageTimes;
+            player.playerCurrentStat.DodgeChance = _dodgeChance;
         }
     }
 }

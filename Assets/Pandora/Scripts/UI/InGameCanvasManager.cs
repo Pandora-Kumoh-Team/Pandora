@@ -100,8 +100,8 @@ namespace Pandora.Scripts.UI
             var bossPos = GameObject.FindObjectOfType<FirstBossController>().gameObject.transform.position;
             players[0].transform.position = bossPos;
             players[1].transform.position = bossPos;
-            players[0].GetComponent<PlayerController>()._playerStat.AttackPower *= 6;
-            players[1].GetComponent<PlayerController>()._playerStat.AttackPower *= 1;
+            players[0].GetComponent<PlayerController>().playerCurrentStat.AttackPower *= 6;
+            players[1].GetComponent<PlayerController>().playerCurrentStat.AttackPower *= 1;
         }
         // TODO : 중간 시연용 이후 삭제해야함
         public void SummonManyMob()

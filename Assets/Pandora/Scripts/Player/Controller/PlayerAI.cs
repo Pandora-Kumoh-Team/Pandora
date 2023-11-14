@@ -63,9 +63,9 @@ namespace Pandora.Scripts.Player.Controller
             // 비조작 자연회복
             if (_playerController.isDead)
             {
-                _playerController._playerStat.NowHealth += _playerController._playerStat.NonControlHpRecovery * Time.deltaTime;
+                _playerController.playerCurrentStat.NowHealth += _playerController.playerCurrentStat.NonControlHpRecovery * Time.deltaTime;
                 _playerController.CallHealthChangedEvent();
-                if(_playerController._playerStat.NowHealth > _playerController._playerStat.MaxHealth * 0.3f)
+                if(_playerController.playerCurrentStat.NowHealth > _playerController.playerCurrentStat.MaxHealth * 0.3f)
                     _playerController.Rebirth();
                 else
                     return;
@@ -226,7 +226,7 @@ namespace Pandora.Scripts.Player.Controller
             {
                 _target = (GameObject)param;
                 _currentState = AIState.MoveToTarget;
-                _minTargetDistance = _playerController._playerStat.AttackRange;
+                _minTargetDistance = _playerController.playerCurrentStat.AttackRange;
             }
         }
     }

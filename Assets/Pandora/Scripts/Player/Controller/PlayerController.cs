@@ -26,7 +26,8 @@ namespace Pandora.Scripts.Player.Controller
         public int playerCharacterId = -1;
         
         // Stat
-        public PlayerStat _playerStat;
+        public PlayerCurrentStat playerCurrentStat;
+        public PlayerCurrentStat.PlayerStat playerBasicStat;
     
         // Variables
         // 이동 관련
@@ -61,7 +62,7 @@ namespace Pandora.Scripts.Player.Controller
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             ai = GetComponent<PlayerAI>();
-            _playerStat = new PlayerStat();
+            playerCurrentStat = new PlayerCurrentStat();
             canControllMove = true;
             skillCoolTimes = new float[3];
             activeSkillContainer = transform.Find("Skills").Find("ActiveSkills");
@@ -73,6 +74,8 @@ namespace Pandora.Scripts.Player.Controller
             onControl = onControlInit;
             ai.enabled = !onControlInit;
             anim.SetInteger(CachedMoveDir, -1);
+            // TODO : permanent stat 적용
+            playerCurrentStat.SetStat(playerBasicStat);
 
             foreach (var activeSkill in activeSkills)
             {
@@ -91,7 +94,7 @@ namespace Pandora.Scripts.Player.Controller
             // 이동
             if(canControllMove && moveDir.magnitude > 0.5f)
             {
-                rb.velocity = moveDir * _playerStat.Speed;
+                rb.velocity = moveDir * playerCurrentStat.Speed;
                 SetMoveAnimation(moveDir);
             }
             else if(canControllMove && moveDir.magnitude <= 0.5f)
@@ -136,14 +139,14 @@ namespace Pandora.Scripts.Player.Controller
         {
             // 회피 판정
             var rand = Random.Range(0, 100);
-            if (rand < _playerStat.DodgeChance)
+            if (rand < playerCurrentStat.DodgeChance)
             {
                 Dodge();
                 return;
             }
             
             // 피격 피해 적용
-            _playerStat.NowHealth -= damage * (1f - _playerStat.DefencePower);
+            playerCurrentStat.NowHealth -= damage * (1f - playerCurrentStat.DefencePower);
             CallHealthChangedEvent();
             
             // AI 공격 대상 변경
@@ -162,14 +165,14 @@ namespace Pandora.Scripts.Player.Controller
             var bloodEffect =Instantiate(GameManager.Instance.bloodParticle, position, Quaternion.identity);
             Destroy(bloodEffect, 1f);
             
-            if (_playerStat.NowHealth <= 0)
+            if (playerCurrentStat.NowHealth <= 0)
             {
                 Die();
             }
             
             // 버프 적용
             if (buffs == null) return;
-            _playerStat.AddBuffs(buffs);
+            playerCurrentStat.AddBuffs(buffs);
             foreach (var buff in buffs)
             {
                 StartCoroutine(RemoveBuffAfterDuration(buff));
@@ -183,7 +186,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public void CallHealthChangedEvent()
         {
-            var param = new PlayerHealthChangedParam(_playerStat.NowHealth, _playerStat.MaxHealth, playerCharacterId);
+            var param = new PlayerHealthChangedParam(playerCurrentStat.NowHealth, playerCurrentStat.MaxHealth, playerCharacterId);
             EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, param);
         }
 
@@ -248,19 +251,19 @@ namespace Pandora.Scripts.Player.Controller
 
         public void Attack()
         {
-            attackCoolTime = 1 / _playerStat.AttackSpeed;
+            attackCoolTime = 1 / playerCurrentStat.AttackSpeed;
             
             SetAttackAnimation();
         
             // 크리티컬 여부 판단
             var rand = Random.Range(0, 100);
-            var damage = _playerStat.BaseDamage * _playerStat.AttackPower;
-            if (rand < _playerStat.CriticalChance)
+            var damage = playerCurrentStat.BaseDamage * playerCurrentStat.AttackPower;
+            if (rand < playerCurrentStat.CriticalChance)
             {
-                damage *= _playerStat.CriticalDamageTimes;
+                damage *= playerCurrentStat.CriticalDamageTimes;
             }
         
-            StartCoroutine(AttackCoroutine(damage, _playerStat.GetAttackBuffs()));
+            StartCoroutine(AttackCoroutine(damage, playerCurrentStat.GetAttackBuffs()));
         }
         private void SetAttackAnimation()
         {
@@ -301,7 +304,7 @@ namespace Pandora.Scripts.Player.Controller
         /// <param name="value">변경 후 사거리</param>
         public virtual void AttackRangeChanged(float value)
         {
-            _playerStat.AttackRange = value;
+            playerCurrentStat.AttackRange = value;
         }
 
         #endregion
@@ -435,7 +438,7 @@ namespace Pandora.Scripts.Player.Controller
         private IEnumerator RemoveBuffAfterDuration(Buff buff)
         {
             yield return new WaitForSeconds(buff.Duration);
-            _playerStat.RemoveBuff(buff);
+            playerCurrentStat.RemoveBuff(buff);
         }
     }
 }
