@@ -20,8 +20,8 @@ namespace Pandora.Scripts.Player.Controller
             base.Start();
             // DEBUG : 플레이어 스텟의 사거리를 3배로 설정
             // 후에는 원거리 플레이너캐릭터는 기본 사거리가 3이되도록 해야함
-            _playerStat.AttackRange *= 3;
-            _projectileRange = _playerStat.AttackRange;
+            playerCurrentStat.AttackRange *= 3;
+            _projectileRange = playerCurrentStat.AttackRange;
         }
         public override void AttackRangeChanged(float newRange)
         {

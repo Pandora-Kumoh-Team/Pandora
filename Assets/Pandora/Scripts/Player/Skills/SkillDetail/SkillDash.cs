@@ -29,7 +29,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         {
             _playerController = ownerPlayer.GetComponent<PlayerController>();
             _playerController.canControllMove = false;
-            _playerController._playerStat.DodgeChance += 100;
+            _playerController.playerCurrentStat.DodgeChance += 100;
             _nowDuration = duration;
         }
 
@@ -41,7 +41,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         public override void OnEndSkill()
         {
             _playerController.canControllMove = true;
-            _playerController._playerStat.DodgeChance -= 100;
+            _playerController.playerCurrentStat.DodgeChance -= 100;
         }
     }
 }
