@@ -23,11 +23,11 @@ namespace Pandora.Scripts.Player.Controller
         /// <summary>
         /// 플레이어 캐릭터 고유번호, UI와 연동
         /// </summary>
-        public int playerCharacterId = -1;
+        [FormerlySerializedAs("playerCharacterId")] public int playerNumber = -1;
         
         // Stat
         public PlayerCurrentStat playerCurrentStat;
-        public PlayerCurrentStat.PlayerStat playerBasicStat;
+        public PlayerStat playerBasicStat;
     
         // Variables
         // 이동 관련
@@ -74,18 +74,30 @@ namespace Pandora.Scripts.Player.Controller
             onControl = onControlInit;
             ai.enabled = !onControlInit;
             anim.SetInteger(CachedMoveDir, -1);
-            // TODO : permanent stat 적용
-            playerCurrentStat.SetStat(playerBasicStat);
+            playerCurrentStat.playerStat = playerNumber == 0
+                ? PermanentStatController.Instance.p0PermanentStats
+                : PermanentStatController.Instance.p1PermanentStats;
+            playerCurrentStat.Init();
 
             foreach (var activeSkill in activeSkills)
             {
                 activeSkill.GetComponent<Skill.Skill>().ownerPlayer = gameObject;
             }
             
-            if(playerCharacterId == -1)
+            if(playerNumber == -1)
             {
                 Debug.LogError("Player Character Id is not set");
             }
+            // 한 프레임 뒤에 실행
+            StartCoroutine(Init());
+        }
+        
+        private IEnumerator Init()
+        {
+            yield return null;
+            // TODO : Start() 실행 순서에 따른 버그 해결을 위해 StartTaskQueue를 만들어야 할 것 같음
+            // Start() 실행 문제 때문에 생기는 버그는 아래와 같음
+            // 1. 플레이어가 생성되고 변경된 스텟이 HPUI에 반영되지 않음
             CallHealthChangedEvent();
         }
 
@@ -186,7 +198,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public void CallHealthChangedEvent()
         {
-            var param = new PlayerHealthChangedParam(playerCurrentStat.NowHealth, playerCurrentStat.MaxHealth, playerCharacterId);
+            var param = new PlayerHealthChangedParam(playerCurrentStat.NowHealth, playerCurrentStat.MaxHealth, playerNumber);
             EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, param);
         }
 
@@ -381,7 +393,7 @@ namespace Pandora.Scripts.Player.Controller
         public void SetActiveSkill(GameObject skill, int skillIndex)
         {
             var eventParam =
-                new PlayerSkillChangedParam(skill.GetComponent<Skill.Skill>(), playerCharacterId, skillIndex);
+                new PlayerSkillChangedParam(skill.GetComponent<Skill.Skill>(), playerNumber, skillIndex);
             EventManager.Instance.TriggerEvent(PandoraEventType.PlayerSkillChanged, eventParam);
             Destroy(activeSkills[skillIndex]);
             var skillObject = Instantiate(skill, activeSkillContainer, true);

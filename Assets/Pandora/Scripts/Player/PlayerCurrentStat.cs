@@ -13,20 +13,20 @@ namespace Pandora.Scripts.Player
         // 최대 체력
         public float MaxHealth
         {
-            get => _playerStat.maxHealth + _buffs.Sum(buff => buff.MaxHealthChange);
-            set => _playerStat.maxHealth = value;
+            get => playerStat.maxHealth + _buffs.Sum(buff => buff.MaxHealthChange);
+            set => playerStat.maxHealth = value;
         }
 
         public float NowHealth
         {
-            get => _playerStat.nowHealth + _buffs.Sum(buff => buff.NowHealthChange);
-            set => _playerStat.nowHealth = value > MaxHealth ? MaxHealth : value;
+            get => nowHealth + _buffs.Sum(buff => buff.NowHealthChange);
+            set => nowHealth = value > MaxHealth ? MaxHealth : value;
         }
         
         public float BaseDamage
         {
-            get => _playerStat.baseDamage + _buffs.Sum(buff => buff.BaseDamageChange);
-            set => _playerStat.baseDamage = value;
+            get => playerStat.baseDamage + _buffs.Sum(buff => buff.BaseDamageChange);
+            set => playerStat.baseDamage = value;
         }
         
         /// <summary>
@@ -34,8 +34,8 @@ namespace Pandora.Scripts.Player
         /// </summary>
         public float AttackPower
         {
-            get => _playerStat.attackPower + _buffs.Sum(buff => buff.AttackPowerChange);
-            set => _playerStat.attackPower = value;
+            get => playerStat.attackPower + _buffs.Sum(buff => buff.AttackPowerChange);
+            set => playerStat.attackPower = value;
         }
 
         /// <summary>
@@ -43,32 +43,32 @@ namespace Pandora.Scripts.Player
         /// </summary>
         public float DefencePower
         {
-            get => _playerStat.defencePower + _buffs.Sum(buff => buff.DefencePowerChange);
-            set => _playerStat.defencePower = value;
+            get => playerStat.defencePower + _buffs.Sum(buff => buff.DefencePowerChange);
+            set => playerStat.defencePower = value;
         }
 
         public float Speed
         {
-            get => _playerStat.speed + _buffs.Sum(buff => buff.SpeedChange);
-            set => _playerStat.speed = value;
+            get => playerStat.speed + _buffs.Sum(buff => buff.SpeedChange);
+            set => playerStat.speed = value;
         }
 
         public float AttackRange
         {
-            get => _playerStat.attackRange + _buffs.Sum(buff => buff.AttackRangeChange);
-            set => _playerStat.attackRange = value;
+            get => playerStat.attackRange + _buffs.Sum(buff => buff.AttackRangeChange);
+            set => playerStat.attackRange = value;
         }
 
         public float AttackSpeed
         {
-            get => _playerStat.attackSpeed + _buffs.Sum(buff => buff.AttackSpeedChange);
-            set => _playerStat.attackSpeed = value;
+            get => playerStat.attackSpeed + _buffs.Sum(buff => buff.AttackSpeedChange);
+            set => playerStat.attackSpeed = value;
         }
 
         public float CriticalChance
         {
-            get => _playerStat.criticalChance + _buffs.Sum(buff => buff.CriticalChanceChange);
-            set => _playerStat.criticalChance = value;
+            get => playerStat.criticalChance + _buffs.Sum(buff => buff.CriticalChanceChange);
+            set => playerStat.criticalChance = value;
         }
 
         /// <summary>
@@ -76,78 +76,30 @@ namespace Pandora.Scripts.Player
         /// </summary>
         public float CriticalDamageTimes
         {
-            get => _playerStat.criticalDamageTimes + _buffs.Sum(buff => buff.CriticalDamageChange);
-            set => _playerStat.criticalDamageTimes = value;
+            get => playerStat.criticalDamageTimes + _buffs.Sum(buff => buff.CriticalDamageChange);
+            set => playerStat.criticalDamageTimes = value;
         }
 
         public float DodgeChance
         {
-            get => _playerStat.dodgeChance + _buffs.Sum(buff => buff.DodgeChanceChange);
-            set => _playerStat.dodgeChance = value;
+            get => playerStat.dodgeChance + _buffs.Sum(buff => buff.DodgeChanceChange);
+            set => playerStat.dodgeChance = value;
         }
         
         public float NonControlHpRecovery
         {
-            get => _playerStat.nonControlHpRecovery;
-            set => _playerStat.nonControlHpRecovery = value;
+            get => playerStat.nonControlHpRecovery;
+            set => playerStat.nonControlHpRecovery = value;
         }
 
-        [Serializable]
-        public struct PlayerStat
-        {
-            public float maxHealth;
-            public float nowHealth;
-            public float baseDamage;
-            public float attackPower;
-            public float defencePower;
-            public float speed;
-            public float attackRange;
-            public float attackSpeed;
-            public float criticalChance;
-            public float criticalDamageTimes;
-            public float dodgeChance;
-            public float nonControlHpRecovery;
-        }
-        
-        private PlayerStat _playerStat;
-        private List<Buff> _buffs = new List<Buff>();
-        private List<Buff> _attackBuffs = new List<Buff>();
+        [FormerlySerializedAs("_playerStat")] public PlayerStat playerStat;
+        public float nowHealth;
+        private List<Buff> _buffs = new();
+        private List<Buff> _attackBuffs = new();
 
-        public void SetStat(PlayerStat stat)
+        public void Init()
         {
-            _playerStat = stat;
-        }
-        
-        public void PlusStat(PlayerStat stat)
-        {
-            _playerStat.maxHealth += stat.maxHealth;
-            _playerStat.nowHealth += stat.nowHealth;
-            _playerStat.baseDamage += stat.baseDamage;
-            _playerStat.attackPower += stat.attackPower;
-            _playerStat.defencePower += stat.defencePower;
-            _playerStat.speed += stat.speed;
-            _playerStat.attackRange += stat.attackRange;
-            _playerStat.attackSpeed += stat.attackSpeed;
-            _playerStat.criticalChance += stat.criticalChance;
-            _playerStat.criticalDamageTimes += stat.criticalDamageTimes;
-            _playerStat.dodgeChance += stat.dodgeChance;
-            _playerStat.nonControlHpRecovery += stat.nonControlHpRecovery;
-        }
-
-        public void SubStat(PlayerStat stat)
-        {
-            _playerStat.maxHealth -= stat.maxHealth;
-            _playerStat.nowHealth -= stat.nowHealth;
-            _playerStat.baseDamage -= stat.baseDamage;
-            _playerStat.attackPower -= stat.attackPower;
-            _playerStat.defencePower -= stat.defencePower;
-            _playerStat.speed -= stat.speed;
-            _playerStat.attackRange -= stat.attackRange;
-            _playerStat.attackSpeed -= stat.attackSpeed;
-            _playerStat.criticalChance -= stat.criticalChance;
-            _playerStat.criticalDamageTimes -= stat.criticalDamageTimes;
-            _playerStat.dodgeChance -= stat.dodgeChance;
-            _playerStat.nonControlHpRecovery -= stat.nonControlHpRecovery;
+            nowHealth = playerStat.maxHealth;
         }
         
         public void AddBuff(Buff buff)
@@ -180,5 +132,6 @@ namespace Pandora.Scripts.Player
         {
             return _attackBuffs;
         }
+
     }
 }
