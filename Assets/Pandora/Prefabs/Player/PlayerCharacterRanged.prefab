@@ -94,7 +94,7 @@ MonoBehaviour:
     baseDamage: 9
     attackPower: 1
     defencePower: 0
-    speed: 4
+    speed: 5
     attackRange: 1
     attackSpeed: 1
     criticalChance: 20

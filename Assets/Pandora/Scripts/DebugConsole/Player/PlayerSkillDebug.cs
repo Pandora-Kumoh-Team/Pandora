@@ -22,7 +22,7 @@ namespace Pandora.Scripts.DebugConsole.Player
         {
             if(getRandomSKill)
             {
-                var playerId = col.gameObject.GetComponent<PlayerController>().playerCharacterId;
+                var playerId = col.gameObject.GetComponent<PlayerController>().playerNumber;
                 var skillType = isActiveSkill? Skill.SkillType.Active : Skill.SkillType.Passive;
                 GameManager.Instance.inGameCanvas.GetComponent<InGameCanvasManager>()
                     .DisplaySkillSelection(skillType, playerId);
