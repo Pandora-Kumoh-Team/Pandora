@@ -21,7 +21,8 @@ public class MeleeMobAI : MonoBehaviour
     public float speed = 1.0f; //임시
 
     public float attackRange = 0.5f; //임시
-    Vector3 attackRangePos;
+    private Vector3 attackRangePos;
+    private Vector2 capOffset;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class MeleeMobAI : MonoBehaviour
         waitingTime = 1.0f;
         parentName = transform.parent.name;
         attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
+        capOffset = transform.parent.GetComponent<CapsuleCollider2D>().offset;
     }
 
     private void Update()
@@ -63,10 +65,7 @@ public class MeleeMobAI : MonoBehaviour
                 // rigidbody로 변경
                 transform.parent.GetComponent<Rigidbody2D>().velocity = ranVec * speed;
                 transform.parent.GetComponent<Animator>().SetFloat("Speed", ranVec.magnitude);
-                if (ranVec.x < 0)
-                    transform.parent.GetComponent<SpriteRenderer>().flipX = true;
-                else
-                    transform.parent.GetComponent<SpriteRenderer>().flipX = false;
+                Flip(ranVec);
             }
         }
         randomMoveTime += Time.deltaTime;
@@ -96,16 +95,7 @@ public class MeleeMobAI : MonoBehaviour
             direction.Normalize();
 
             //방향 전환
-            if (direction.x < 0)
-            {
-                transform.parent.GetComponent<SpriteRenderer>().flipX = true;
-                transform.parent.Find("AttackRange").transform.localPosition = new Vector3(-attackRangePos.x, attackRangePos.y, 0);
-            }
-            else
-            {
-                transform.parent.GetComponent<SpriteRenderer>().flipX = false;
-                transform.parent.Find("AttackRange").transform.localPosition = new Vector3(attackRangePos.x, attackRangePos.y, 0);
-            }
+            Flip(direction);
 
             //공격 사정거리밖이면 범위 내의 플레이어를 추적
             if (distance > attackRange)
@@ -118,8 +108,8 @@ public class MeleeMobAI : MonoBehaviour
             else
             {
                 transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                transform.parent.GetComponent<Animator>().SetTrigger("Attack");
                 transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
+                transform.parent.GetComponent<Animator>().SetTrigger("Attack");
                 timer = 0;
                 transform.parent.Find("AttackRange").gameObject.SetActive(true);
             }
@@ -134,6 +124,45 @@ public class MeleeMobAI : MonoBehaviour
             transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
             transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             isConduct = false;
+        }
+    }
+
+    private void Flip(Vector3 direction)
+    {
+        //TODO : 스프라이트 자체가 중앙에서 너무 먼 몹의 경우 플립했을 때 순간이동하는 듯한 현상있음. 플립할때 보정을 해주는 식으로 수정 필요
+        // 보정 값을 몹status에서 가지고 있는 것이 나을 듯
+
+        EnemyStatus enemyStatus = GameObject.Find(parentName).GetComponent<EnemyController>()._enemyStatus;
+
+        if ( enemyStatus.Code >= 103 && enemyStatus.Code <= 106) //기존에 오른쪽보고 있는 금쪽이들
+        {
+            if (direction.x > 0)
+            {
+                transform.parent.GetComponent<SpriteRenderer>().flipX = true;
+                transform.parent.Find("AttackRange").transform.localPosition = new Vector3(-attackRangePos.x, attackRangePos.y, 0);
+                transform.parent.GetComponent<CapsuleCollider2D>().offset = new Vector2(-capOffset.x, capOffset.y);
+            }
+            else
+            {
+                transform.parent.GetComponent<SpriteRenderer>().flipX = false;
+                transform.parent.Find("AttackRange").transform.localPosition = new Vector3(attackRangePos.x, attackRangePos.y, 0);
+                transform.parent.GetComponent<CapsuleCollider2D>().offset = new Vector2(capOffset.x, capOffset.y);
+            }
+        }
+        else
+        {
+            if (direction.x < 0)
+            {
+                transform.parent.GetComponent<SpriteRenderer>().flipX = true;
+                transform.parent.Find("AttackRange").transform.localPosition = new Vector3(-attackRangePos.x, attackRangePos.y, 0);
+                transform.parent.GetComponent<CapsuleCollider2D>().offset = new Vector2(-capOffset.x, capOffset.y);
+            }
+            else
+            {
+                transform.parent.GetComponent<SpriteRenderer>().flipX = false;
+                transform.parent.Find("AttackRange").transform.localPosition = new Vector3(attackRangePos.x, attackRangePos.y, 0);
+                transform.parent.GetComponent<CapsuleCollider2D>().offset = new Vector2(capOffset.x, capOffset.y);
+            }
         }
     }
 }
