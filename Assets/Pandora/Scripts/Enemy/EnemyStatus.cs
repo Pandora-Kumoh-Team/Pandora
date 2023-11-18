@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyStatus
 {
-    private float _code;
+    private int _code;
     private float _maxHealth;
     private float _nowHealth;
     private float _baseDamage;
@@ -26,6 +26,7 @@ public class EnemyStatus
     // 100 : Goblin
     // 101 : Mushroom
     // 102 : Skeleton
+    // 103 : Assassin Cultist
     //
     // [Test]
     // 999 : TestDummy
@@ -52,6 +53,15 @@ public class EnemyStatus
             case "Skeleton":
                 _code = 102; _maxHealth = 100; _nowHealth = 100; _baseDamage = 4; _attackPower = 2; _defencePower = 3; _speed = 1; _attackSpeed = 1;
                 break;
+            case "AssassinCultist":
+                _code = 103; _maxHealth = 30; _nowHealth = 30; _baseDamage = 2; _attackPower = 2; _defencePower = 2; _speed = 2; _attackSpeed = 1;
+                break;
+            case "TwistedCultist":
+                _code = 104; _maxHealth = 30; _nowHealth = 30; _baseDamage = 2; _attackPower = 2; _defencePower = 2; _speed = 2; _attackSpeed = 1;
+                break;
+            case "BigCultist":
+                _code = 105; _maxHealth = 100; _nowHealth = 100; _baseDamage = 2; _attackPower = 2; _defencePower = 5; _speed = 1; _attackSpeed = 1;
+                break;
             case "1StageBoss":
                 _code = 300; _maxHealth = 500; _nowHealth = 500; _baseDamage = 10; _attackPower = 3; _defencePower = 5; _speed = 2; _attackSpeed = 8;
                 break;
@@ -59,6 +69,11 @@ public class EnemyStatus
                 _code = 999; _maxHealth = float.MaxValue; _nowHealth = float.MaxValue; _baseDamage = 0; _attackPower = 0; _defencePower = 0; _speed = 0; _attackSpeed = 0;
                 break;
         }
+    }
+
+    public int Code
+    {
+        get => _code;
     }
 
     // 최대 체력
