@@ -349,9 +349,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 546
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -370,9 +370,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_1
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 546
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -391,9 +391,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_2
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 546
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -412,9 +412,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_3
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 546
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -433,9 +433,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_4
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 546
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -454,9 +454,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_5
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 504
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -475,9 +475,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_6
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 504
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -496,9 +496,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_7
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 504
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -517,9 +517,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_8
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 504
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -538,9 +538,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_9
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 504
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -559,9 +559,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_10
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 462
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -580,9 +580,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_11
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 462
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -601,9 +601,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_12
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 462
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -622,9 +622,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_13
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 462
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -643,9 +643,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_14
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 462
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -664,9 +664,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_15
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 420
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -685,9 +685,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_16
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 420
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -706,9 +706,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_17
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 420
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -727,9 +727,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_18
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 420
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -748,9 +748,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_19
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 420
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -769,9 +769,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_20
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 378
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -790,9 +790,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_21
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 378
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -811,9 +811,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_22
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 378
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -832,9 +832,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_23
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 378
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -853,9 +853,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_24
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 378
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -874,9 +874,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_25
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 336
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -895,9 +895,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_26
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 336
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -916,9 +916,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_27
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 336
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -937,9 +937,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_28
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 336
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -958,9 +958,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_29
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 336
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -979,9 +979,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_30
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 294
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1000,9 +1000,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_31
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 294
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1021,9 +1021,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_32
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 294
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1042,9 +1042,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_33
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 294
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1063,9 +1063,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_34
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 294
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1084,9 +1084,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_35
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 252
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1105,9 +1105,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_36
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 252
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1126,9 +1126,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_37
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 252
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1147,9 +1147,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_38
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 252
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1168,9 +1168,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_39
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 252
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1189,9 +1189,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_40
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 210
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1210,9 +1210,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_41
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 210
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1231,9 +1231,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_42
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 210
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1252,9 +1252,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_43
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 210
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1273,9 +1273,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_44
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 210
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1294,9 +1294,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_45
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 168
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1315,9 +1315,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_46
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 168
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1336,9 +1336,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_47
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 168
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1357,9 +1357,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_48
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 168
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1378,9 +1378,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_49
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 168
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1399,9 +1399,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_50
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 126
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1420,9 +1420,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_51
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 126
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1441,9 +1441,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_52
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 126
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1462,9 +1462,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_53
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 126
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1483,9 +1483,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_54
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 126
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1504,9 +1504,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_55
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 84
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1525,9 +1525,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_56
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 84
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1546,9 +1546,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_57
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 84
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1567,9 +1567,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_58
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 84
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1588,9 +1588,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_59
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 84
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1609,9 +1609,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_60
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 42
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1630,9 +1630,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_61
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 42
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1651,9 +1651,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_62
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 42
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1672,9 +1672,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_63
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 42
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1693,9 +1693,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_64
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 42
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1714,9 +1714,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_65
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 0
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1735,9 +1735,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_66
       rect:
         serializedVersion: 2
-        x: 91
+        x: 121
         y: 0
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1756,9 +1756,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_67
       rect:
         serializedVersion: 2
-        x: 182
+        x: 212
         y: 0
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1777,9 +1777,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_68
       rect:
         serializedVersion: 2
-        x: 273
+        x: 303
         y: 0
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1798,9 +1798,9 @@ TextureImporter:
       name: Twisted_Cultist_Sheet_69
       rect:
         serializedVersion: 2
-        x: 364
+        x: 394
         y: 0
-        width: 91
+        width: 61
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
