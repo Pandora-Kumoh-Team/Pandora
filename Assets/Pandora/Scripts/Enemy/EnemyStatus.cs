@@ -26,8 +26,14 @@ public class EnemyStatus
     // 100 : Goblin
     // 101 : Mushroom
     // 102 : Skeleton
-    // 103 : Assassin Cultist
+    // 103 : Mace Skeleton
+    // 104 : Necromancer 
+    // 105 : King
     //
+    // 150 : Assassin Cultist
+    // 151 : Twisted Cultist
+    // 152 : Big Cultist
+    // 153 : Slime
     // [Test]
     // 999 : TestDummy
     //
@@ -51,16 +57,28 @@ public class EnemyStatus
                 _code = 101; _maxHealth = 40; _nowHealth = 40; _baseDamage = 3; _attackPower = 2; _defencePower = 2; _speed = 1; _attackSpeed = 1;
                 break;
             case "Skeleton":
-                _code = 102; _maxHealth = 100; _nowHealth = 100; _baseDamage = 4; _attackPower = 2; _defencePower = 3; _speed = 1; _attackSpeed = 1;
+                _code = 102; _maxHealth = 100; _nowHealth = 100; _baseDamage = 4; _attackPower = 2; _defencePower = 4; _speed = 1; _attackSpeed = 1;
+                break;
+            case "MaceSkeleton":
+                _code = 103; _maxHealth = 100; _nowHealth = 100; _baseDamage = 4; _attackPower = 2; _defencePower = 4; _speed = 1; _attackSpeed = 1;
+                break;
+            case "Necromancer":
+                _code = 104; _maxHealth = 30; _nowHealth = 30; _baseDamage = 5; _attackPower = 5; _defencePower = 1; _speed = 1; _attackSpeed = 1;
+                break;
+            case "King":
+                _code = 105; _maxHealth = 150; _nowHealth = 150; _baseDamage = 8; _attackPower = 5; _defencePower = 5; _speed = 1; _attackSpeed = 1;
                 break;
             case "AssassinCultist":
-                _code = 103; _maxHealth = 30; _nowHealth = 30; _baseDamage = 2; _attackPower = 2; _defencePower = 2; _speed = 2; _attackSpeed = 1;
+                _code = 150; _maxHealth = 30; _nowHealth = 30; _baseDamage = 4; _attackPower = 2; _defencePower = 2; _speed = 2; _attackSpeed = 1;
                 break;
             case "TwistedCultist":
-                _code = 104; _maxHealth = 30; _nowHealth = 30; _baseDamage = 2; _attackPower = 2; _defencePower = 2; _speed = 2; _attackSpeed = 1;
+                _code = 151; _maxHealth = 40; _nowHealth = 40; _baseDamage = 4; _attackPower = 3; _defencePower = 2; _speed = 1; _attackSpeed = 1;
                 break;
             case "BigCultist":
-                _code = 105; _maxHealth = 100; _nowHealth = 100; _baseDamage = 2; _attackPower = 2; _defencePower = 5; _speed = 1; _attackSpeed = 1;
+                _code = 152; _maxHealth = 100; _nowHealth = 100; _baseDamage = 5; _attackPower = 3; _defencePower = 5; _speed = 0.8f; _attackSpeed = 1;
+                break;
+            case "Slime":
+                _code = 153; _maxHealth = 20; _nowHealth = 20; _baseDamage = 2; _attackPower = 1; _defencePower = 1; _speed = 2; _attackSpeed = 1;
                 break;
             case "1StageBoss":
                 _code = 300; _maxHealth = 500; _nowHealth = 500; _baseDamage = 10; _attackPower = 3; _defencePower = 5; _speed = 2; _attackSpeed = 8;
