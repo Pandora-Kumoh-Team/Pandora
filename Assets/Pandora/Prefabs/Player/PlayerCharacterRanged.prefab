@@ -87,10 +87,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  playerCharacterId: -1
+  playerNumber: -1
+  playerCurrentStat:
+    playerStat:
+      maxHealth: 0
+      baseDamage: 0
+      attackPower: 0
+      defencePower: 0
+      speed: 0
+      attackRange: 0
+      attackSpeed: 0
+      criticalChance: 0
+      criticalDamageTimes: 0
+      dodgeChance: 0
+      nonControlHpRecovery: 0
+    nowHealth: 0
   playerBasicStat:
     maxHealth: 80
-    nowHealth: 80
     baseDamage: 9
     attackPower: 1
     defencePower: 0
@@ -218,7 +231,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
 --- !u!50 &2044358285960598753
@@ -456,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9037657636078642614, guid: bb9475a03daafc746a2a6052dddbed3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.51
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 9037657636078642614, guid: bb9475a03daafc746a2a6052dddbed3b, type: 3}
       propertyPath: m_LocalPosition.z
