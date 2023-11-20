@@ -28,7 +28,7 @@ public class MeleeMobAI : MonoBehaviour
     {
         isConduct = false;
         timer = 0.0f;
-        waitingTime = 1.0f;
+        waitingTime = 2.0f;
         parentName = transform.parent.name;
         attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
         capOffset = transform.parent.GetComponent<CapsuleCollider2D>().offset;
@@ -134,7 +134,7 @@ public class MeleeMobAI : MonoBehaviour
 
         EnemyStatus enemyStatus = GameObject.Find(parentName).GetComponent<EnemyController>()._enemyStatus;
 
-        if ( enemyStatus.Code >= 103 && enemyStatus.Code <= 106) //기존에 오른쪽보고 있는 금쪽이들
+        if ( enemyStatus.Code >= 150 && enemyStatus.Code <= 199) //왼쪽보고 있는 금쪽이들
         {
             if (direction.x > 0)
             {
