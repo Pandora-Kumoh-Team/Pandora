@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Pandora.Scripts.System.Event;
+using Pathfinding;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
@@ -28,6 +29,11 @@ namespace Pandora.Scripts.Player.Controller
         
         public float maxOtherPlayerDistance = 10f;
         public float idleWalkSpeed = 0.25f;
+        
+        private Seeker _seeker;
+        private Path _path;
+        private Vector2 _currentWaypoint;
+        private int _currentPathIndex;
 
         public enum AIState
         {
@@ -41,6 +47,7 @@ namespace Pandora.Scripts.Player.Controller
         private void Start()
         {
             _playerController = GetComponent<PlayerController>();
+            _seeker = GetComponent<Seeker>();
             EventManager.Instance.AddListener(PandoraEventType.PlayerAttackEnemy, this);
         }
 
@@ -185,15 +192,44 @@ namespace Pandora.Scripts.Player.Controller
         private void MoveToOtherPlayer()
         {
             _target = PlayerManager.Instance.GetOtherPlayer(gameObject);
+            if(_currentWaypoint == Vector2.zero)
+                _currentWaypoint = _target.transform.position;
             var distance= Vector2.Distance(transform.position, _target.transform.position);
-            if (distance > maxOtherPlayerDistance * 0.5f)
+            var finalPathDistance = Vector2.Distance(_target.transform.position, _currentWaypoint);
+            // if final path is null or target is too far, find new path
+            if (_path == null || finalPathDistance > maxOtherPlayerDistance)
             {
-                _playerController.moveDir = (_target.transform.position - transform.position).normalized;
+                _seeker.StartPath(transform.position, _target.transform.position, OnPathComplete);
+                _currentWaypoint = _target.transform.position;
             }
-            else
+            else if (_currentPathIndex >= _path.vectorPath.Count)
             {
                 _currentState = AIState.Idle;
                 _playerController.moveDir = Vector2.zero;
+                _path = null;
+            }
+            else if (distance < _minTargetDistance)
+            {
+                _currentState = AIState.Idle;
+                _playerController.moveDir = Vector2.zero;
+                _path = null;
+            }
+            else
+            {
+                _playerController.moveDir = (_path.vectorPath[_currentPathIndex] - transform.position).normalized;
+                if (Vector2.Distance(transform.position, _path.vectorPath[_currentPathIndex]) < 0.1f)
+                {
+                    _currentPathIndex++;
+                }
+            }
+        }
+        
+        private void OnPathComplete(Path p)
+        {
+            if (!p.error)
+            {
+                _path = p;
+                _currentPathIndex = 0;
             }
         }
 
