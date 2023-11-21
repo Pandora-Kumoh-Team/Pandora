@@ -18,7 +18,6 @@ namespace Pandora.Scripts.Player.Controller
         public PlayerAIState _currentState;
         
         public GameObject _target;
-        public float _minTargetDistance;
         
         private Vector2 _moveDirection;
         private Vector2 _movePoint;
@@ -86,7 +85,6 @@ namespace Pandora.Scripts.Player.Controller
             {
                 _target = (GameObject)param;
                 ChangeState(new AttackTargetState());
-                _minTargetDistance = _playerController.playerCurrentStat.AttackRange;
             }
         }
     }

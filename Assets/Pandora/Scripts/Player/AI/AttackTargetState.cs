@@ -10,16 +10,17 @@ namespace Pandora.Scripts.Player.Controller
         private Seeker _seeker;
         private Path _path;
         private int _currentPathIndex;
+        private Vector2 nowWaypoint;
 
         public override void Enter(PlayerAI player)
         {
             _target = player._target;
-            _minTargetDistance = player._minTargetDistance;
             _seeker = player.GetComponent<Seeker>();
         }
 
         public override void Update(PlayerAI player)
         {
+            // 타겟 사라졌을시
             if (_target == null)
             {
                 player.ChangeState(new MoveToOtherPlayerState());
@@ -31,8 +32,6 @@ namespace Pandora.Scripts.Player.Controller
                 _target = null;
                 return;
             }
-            player._playerController.attackDir = (_target.transform.position - player.transform.position).normalized;
-            if(player._playerController.CanAttack()) player._playerController.Attack();
             
             // 공격 사거리만큼 유지하며 접근 레이케스트로 측정하는 방식
             float distance;
@@ -42,7 +41,17 @@ namespace Pandora.Scripts.Player.Controller
                 distance = hit.distance;
             else
                 distance = Vector2.Distance( player.transform.position, _target.transform.position);
-            // 접근
+            
+            // 공격 사거리 이내면 공격
+            _minTargetDistance = player._playerController.playerCurrentStat.AttackRange;
+            if (distance <= _minTargetDistance)
+            {
+                player._playerController.attackDir =
+                    (_target.transform.position - player.transform.position).normalized;
+                if (player._playerController.CanAttack()) player._playerController.Attack();
+            }
+            
+            // 접근 이동
             if (distance > _minTargetDistance)
             {
                 // 적과 나를 잇는 선분에서 적과 최대 사거리만큼 떨어진 지점을 구한다.
@@ -52,7 +61,11 @@ namespace Pandora.Scripts.Player.Controller
                 var attackingPos = targetPos - dir * _minTargetDistance;
                 
                 // Seeker를 통해 이동한다.
-                _seeker.StartPath(myPos, attackingPos, OnPathComplete);
+                if(_path == null || Vector2.Distance(nowWaypoint, targetPos) > 5f)
+                {
+                    _seeker.StartPath(myPos, attackingPos, OnPathComplete);
+                    nowWaypoint = attackingPos;
+                }
                 MoveToTarget(player);
             }
             // 너무 접근시 후퇴
@@ -76,7 +89,16 @@ namespace Pandora.Scripts.Player.Controller
             player._playerController.moveDir = dir;
             if (Vector2.Distance(player.transform.position, _path.vectorPath[_currentPathIndex]) < 0.1f)
             {
+                // 경로 이동 가능 검사
+                var hit = Physics2D.Raycast(player.transform.position, dir, 0.5f, LayerMask.GetMask("Enemy", "Wall"));
+                if (hit.collider != null)
+                {
+                    _path = null;
+                    return;
+                }
                 _currentPathIndex++;
+                if(_currentPathIndex >= _path.vectorPath.Count)
+                    _path = null;
             }
         }
         
