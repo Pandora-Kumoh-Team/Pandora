@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7919502978387446315}
   - component: {fileID: 7846899741329062437}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: KnifeGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b564bf3aaf273469d7c57782009b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knife: {fileID: 8206214165297379765, guid: bbd5619e50fbd544b989b6c128c63b1a, type: 3}
-  knifeSpeed: 5
+  leftKnife: {fileID: 549892561387114862, guid: 38fa5b6a10bf70c45953129592b49956, type: 3}
+  rightKnife: {fileID: 549892561387114862, guid: d56b32ec282be0c409ac72ba8279c2da, type: 3}
+  upKnife: {fileID: 549892561387114862, guid: 798629c183fd29243b426b7798133458, type: 3}
+  downKnife: {fileID: 549892561387114862, guid: 127124af4fd91cb4eaaffe6e70cc29ee, type: 3}
 --- !u!1 &5165326226113171589
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +59,7 @@ GameObject:
   - component: {fileID: 1849850326102851317}
   - component: {fileID: 3913424640795394048}
   - component: {fileID: 8575012230783422314}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: BossAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5064291278611486948}
   - component: {fileID: 1914803920295747372}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +347,7 @@ Transform:
   - {fileID: 256397089939727817}
   - {fileID: 7919502978387446315}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5029334982459094314
 SpriteRenderer:
@@ -385,8 +387,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1361038713
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -136622797, guid: b985a504654b6464b84dbe40b1e03507, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -574,6 +576,18 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1465012148195525504, guid: 15c0c78b679c81045b96117dbc944bf4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465012148195525504, guid: 15c0c78b679c81045b96117dbc944bf4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465012148195525504, guid: 15c0c78b679c81045b96117dbc944bf4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465012148195525504, guid: 15c0c78b679c81045b96117dbc944bf4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -607,7 +621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1465012148195525504, guid: 15c0c78b679c81045b96117dbc944bf4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 1465012148195525504, guid: 15c0c78b679c81045b96117dbc944bf4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

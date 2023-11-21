@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.System
 {
@@ -32,17 +33,37 @@ namespace Pandora.Scripts.System
         // 숫차로 출력되는 데메지 이펙트 프리팹
         // Insistate 후 Init() 호출하여 사용
         public GameObject damageEffect;
+        public GameObject bloodParticle;
         
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             // 캔버스 찾기
-            inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<Canvas>();
+            if(scene.name == "MainMenu")
+            {
+                // TODO
+            }
+            else
+            {
+                inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<Canvas>();
+            }
         }
         
         public static void ExitGame()
         {
             // 게임 종료 전처리가 필요하다면 여기서 처리
             Application.Quit();
+        }
+
+        public void GameOver()
+        {
+            Time.timeScale = 0;
+            inGameCanvas.transform.Find("GameOverPanel").gameObject.SetActive(true);
+        }
+
+        public void GameClear()
+        {
+            Time.timeScale = 0;
+            inGameCanvas.transform.Find("GameClearPanel").gameObject.SetActive(true);
         }
     }
 }
