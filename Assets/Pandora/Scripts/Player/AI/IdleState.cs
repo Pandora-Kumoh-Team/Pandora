@@ -9,7 +9,18 @@ namespace Pandora.Scripts.Player.Controller
         private float idleWaitTimer;
         private float idleWalkTimer;
         private Vector2 _moveDirection;
-        public float idleWalkSpeed;
+        public float idleWalkSpeed = 0.25f;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data">null : need nothing</param>
+        /// <returns></returns>
+        public override PlayerAIState Init(object data)
+        {
+            IsInitialized = true;
+            return this;
+        }
 
         public override void Enter(PlayerAI player)
         {
@@ -64,12 +75,7 @@ namespace Pandora.Scripts.Player.Controller
         public override void CheckTransition(PlayerAI player)
         {
             base.CheckTransition(player);
-            var otherPlayer = PlayerManager.Instance.GetOtherPlayer(player.gameObject);
-            var distanceToOtherPlayer = Vector2.Distance(player.transform.position, otherPlayer.transform.position);
-            if (distanceToOtherPlayer > player.maxOtherPlayerDistance)
-            {
-                player.ChangeState(new MoveToOtherPlayerState());
-            }
+            
         }
     }
 }

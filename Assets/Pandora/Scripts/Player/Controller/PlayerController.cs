@@ -165,7 +165,7 @@ namespace Pandora.Scripts.Player.Controller
             if (!onControl)
             {
                 ai._target = attacker;
-                ai.ChangeState(new AttackTargetState());
+                ai.ChangeState(new AttackTargetState().Init(attacker));
             }
             
             // 이펙트 출력
