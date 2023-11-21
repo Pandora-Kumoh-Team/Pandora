@@ -13,6 +13,18 @@ namespace Pandora.Scripts.Player.Controller
         private Seeker _seeker;
         private int _currentPathIndex;
         private float _minTargetDistance;
+        private bool findingPath;
+
+        /// <summary>
+        /// needs to be called before the state is used
+        /// </summary>
+        /// <param name="data">null : need nothing</param>
+        /// <returns></returns>
+        public override PlayerAIState Init(object data)
+        {
+            IsInitialized = true;
+            return this;
+        }
 
         public override void Enter(PlayerAI player)
         {
@@ -35,13 +47,13 @@ namespace Pandora.Scripts.Player.Controller
             }
             else if (_currentPathIndex >= _path.vectorPath.Count)
             {
-                player.ChangeState(new IdleState());
+                player.ChangeState(new IdleState().Init(null));
                 player._playerController.moveDir = Vector2.zero;
                 _path = null;
             }
             else if (distance < _minTargetDistance)
             {
-                player.ChangeState(new IdleState());
+                player.ChangeState(new IdleState().Init(null));
                 player._playerController.moveDir = Vector2.zero;
                 _path = null;
             }

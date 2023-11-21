@@ -1,16 +1,29 @@
-﻿using Pathfinding;
+﻿using System;
+using Pathfinding;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.Player.Controller
 {
     public class AttackTargetState : PlayerAIState
     {
         private GameObject _target;
-        private float _minTargetDistance;
         private Seeker _seeker;
         private Path _path;
         private int _currentPathIndex;
         private Vector2 nowWaypoint;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data">GameObject : need Target</param>
+        /// <returns></returns>
+        public override PlayerAIState Init(object data)
+        {
+            _target = (GameObject) data;
+            IsInitialized = true;
+            return this;
+        }
 
         public override void Enter(PlayerAI player)
         {
@@ -23,12 +36,12 @@ namespace Pandora.Scripts.Player.Controller
             // 타겟 사라졌을시
             if (_target == null)
             {
-                player.ChangeState(new MoveToOtherPlayerState());
+                player.ChangeState(new MoveToOtherPlayerState().Init(null));
                 return;
             }
             if (_target.activeSelf == false)
             {
-                player.ChangeState(new IdleState());
+                player.ChangeState(new IdleState().Init(null));
                 _target = null;
                 return;
             }
@@ -43,7 +56,7 @@ namespace Pandora.Scripts.Player.Controller
                 distance = Vector2.Distance( player.transform.position, _target.transform.position);
             
             // 공격 사거리 이내면 공격
-            _minTargetDistance = player._playerController.playerCurrentStat.AttackRange;
+            var _minTargetDistance = player._playerController.playerCurrentStat.AttackRange;
             if (distance <= _minTargetDistance)
             {
                 player._playerController.attackDir =
@@ -101,10 +114,7 @@ namespace Pandora.Scripts.Player.Controller
                     _path = null;
             }
         }
-        
-        
-        
-        
+
         private void OnPathComplete(Path p)
         {
             if (!p.error)

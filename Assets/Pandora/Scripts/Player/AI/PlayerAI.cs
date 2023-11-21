@@ -10,34 +10,19 @@ namespace Pandora.Scripts.Player.Controller
 {
     public class PlayerAI : MonoBehaviour, IEventListener
     {
+        // components
         public PlayerController _playerController;
         private Rigidbody2D _rigidbody2D;
         private Animator _animator;
 
-        
         public PlayerAIState _currentState;
-        
         public GameObject _target;
         
-        private Vector2 _moveDirection;
-        private Vector2 _movePoint;
-
-        private float idleWalkTimer;
-        private float idleWaitTimer;
-        private bool isIdleWait;
-        
-        public float maxOtherPlayerDistance = 10f;
-        public float idleWalkSpeed = 0.25f;
-        
-        private Seeker _seeker;
-        private Path _path;
-        private Vector2 _currentWaypoint;
-        private int _currentPathIndex;
+        public float maxOtherPlayerDistance = 5f;
         
         private void Start()
         {
             _playerController = GetComponent<PlayerController>();
-            _seeker = GetComponent<Seeker>();
             EventManager.Instance.AddListener(PandoraEventType.PlayerAttackEnemy, this);
         }
 
@@ -45,9 +30,9 @@ namespace Pandora.Scripts.Player.Controller
         {
             _playerController = GetComponent<PlayerController>();
             if(_target != null)
-                ChangeState(new AttackTargetState());
+                ChangeState(new AttackTargetState().Init(_target));
             else
-                ChangeState(new IdleState());
+                ChangeState(new IdleState().Init(null));
         }
 
         private void OnDestroy()
@@ -62,18 +47,20 @@ namespace Pandora.Scripts.Player.Controller
             _currentState.Update(this);
         }
 
+        /// <summary>
+        /// *** AIState need to Init() before use ***
+        /// </summary>
+        /// <param name="playerAIState"></param>
+        /// <exception cref="Exception"></exception>
         public void ChangeState(PlayerAIState playerAIState)
         {
+            if(!playerAIState.IsInitialized)
+                throw new Exception("PlayerAIState is not initialized");
             _currentState?.Exit(this);
             _currentState = playerAIState;
             playerAIState.Enter(this);
         }
         
-        protected void Dead()
-        {
-            // TODO : 죽음
-        }
-
         private void OnDisable()
         {
             _target = null;
@@ -84,7 +71,7 @@ namespace Pandora.Scripts.Player.Controller
             if(pandoraEventType == PandoraEventType.PlayerAttackEnemy)
             {
                 _target = (GameObject)param;
-                ChangeState(new AttackTargetState());
+                ChangeState(new AttackTargetState().Init(_target));
             }
         }
     }
