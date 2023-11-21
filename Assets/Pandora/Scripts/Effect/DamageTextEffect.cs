@@ -14,8 +14,8 @@ namespace Pandora.Scripts.Effect
                 // 둘 중 하나만 제거해야 하기 때문에 둘 중 생긴지 오래된 것을 제거한다
                 if (fadeTimer > otherDamageEffect.fadeTimer) return;
                 
-                var otherDamage = int.Parse(otherDamageEffect.GetComponent<TextMeshPro>().text);
-                var thisDamage = int.Parse(GetComponent<TextMeshPro>().text);
+                var otherDamage = float.Parse(otherDamageEffect.GetComponent<TextMeshPro>().text);
+                var thisDamage = float.Parse(GetComponent<TextMeshPro>().text);
                 GetComponent<TextMeshPro>().text = (otherDamage + thisDamage).ToString();
                 fadeTimer = 0;
                 Destroy(otherDamageEffect.gameObject);

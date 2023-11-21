@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Pandora/Scenes/TestScenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Pandora/Scenes/MainMenu.unity
+    guid: 49094eb1d9a67044db70b4ca87c64562
+  - enabled: 1
+    path: Assets/Pandora/Scenes/Stage1.unity
+    guid: f6e1b2f993cf8c44f8f1431c53280462
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4f8f98cbfe38a334a9acefa968e38202, type: 2}

@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &744761964555108385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5573195846438796057}
+  - component: {fileID: 1869796490249192667}
+  m_Layer: 0
+  m_Name: PremanentStatController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5573195846438796057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744761964555108385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1218, y: 207.586, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1869796490249192667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744761964555108385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374c0e2f605248d2af8eba51286befcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p0MinStat:
+    maxHealth: 100
+    baseDamage: 10
+    attackPower: 1
+    defencePower: 0
+    speed: 5
+    attackRange: 1
+    attackSpeed: 1
+    criticalChance: 5
+    criticalDamageTimes: 2
+    dodgeChance: 5
+    nonControlHpRecovery: 3
+  p0MaxStat:
+    maxHealth: 150
+    baseDamage: 15
+    attackPower: 1.5
+    defencePower: 0.15
+    speed: 7.5
+    attackRange: 1.5
+    attackSpeed: 1.5
+    criticalChance: 7.5
+    criticalDamageTimes: 3
+    dodgeChance: 7.5
+    nonControlHpRecovery: 5
+  p1MinStat:
+    maxHealth: 80
+    baseDamage: 8
+    attackPower: 1
+    defencePower: 1
+    speed: 5
+    attackRange: 3
+    attackSpeed: 1
+    criticalChance: 20
+    criticalDamageTimes: 2
+    dodgeChance: 10
+    nonControlHpRecovery: 3
+  p1MaxStat:
+    maxHealth: 120
+    baseDamage: 12
+    attackPower: 1.5
+    defencePower: 0.15
+    speed: 7.5
+    attackRange: 4.5
+    attackSpeed: 1.5
+    criticalChance: 30
+    criticalDamageTimes: 3
+    dodgeChance: 15
+    nonControlHpRecovery: 5
+  p0PermanentStats:
+    maxHealth: 0
+    baseDamage: 0
+    attackPower: 0
+    defencePower: 0
+    speed: 0
+    attackRange: 0
+    attackSpeed: 0
+    criticalChance: 0
+    criticalDamageTimes: 0
+    dodgeChance: 0
+    nonControlHpRecovery: 0
+  p1PermanentStats:
+    maxHealth: 0
+    baseDamage: 0
+    attackPower: 0
+    defencePower: 0
+    speed: 0
+    attackRange: 0
+    attackSpeed: 0
+    criticalChance: 0
+    criticalDamageTimes: 0
+    dodgeChance: 0
+    nonControlHpRecovery: 0
+  p0LeftPoints: 1
+  p1LeftPoints: 1
+  p0UsedPoints: 0
+  p1UsedPoints: 0
