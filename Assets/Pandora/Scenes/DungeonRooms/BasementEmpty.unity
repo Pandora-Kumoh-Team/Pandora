@@ -552,10 +552,10 @@ MonoBehaviour:
   Height: 9
   X: 0
   Y: 0
-  leftDoor: {fileID: 0}
-  rightDoor: {fileID: 0}
-  topDoor: {fileID: 0}
-  bottomDoor: {fileID: 0}
+  leftDoor: {fileID: 1032768424}
+  rightDoor: {fileID: 5769184}
+  topDoor: {fileID: 62579131}
+  bottomDoor: {fileID: 816476886}
   doors: []
 --- !u!1 &713558896
 GameObject:
