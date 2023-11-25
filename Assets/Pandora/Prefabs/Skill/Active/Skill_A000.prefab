@@ -45,11 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  icon: {fileID: 21300000, guid: 7b9041ea234d1d145ba6bd32144d2083, type: 3}
+  icon: {fileID: 21300000, guid: 1015512b5bcd9ff4ab9f21a2235164e4, type: 3}
   name: "\uC2A4\uD0AC\uC5C6\uC74C"
   grade: 0
   type: 0
-  oneLineDescription: 
   description: "\uBE44\uC5B4\uC788\uC74C"
   coolTime: 0
   duration: 0

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
-  icon: {fileID: 21300000, guid: 8092a8f83e8726b42a5f2d8eb56da8e4, type: 3}
+  icon: {fileID: 21300000, guid: 617a66654b4047445828865e1b2b1a59, type: 3}
   name: "\uACBD\uC9C8\uD654"
   grade: 0
   type: 0
@@ -53,27 +53,27 @@ MonoBehaviour:
   coolTime: 10
   duration: 1
   ownerPlayer: {fileID: 0}
-  maxHealth: 0
-  nowHealth: 0
-  baseDamage: 0
-  attackPower: 0
-  defencePower: 100
-  speed: 0
-  attackRange: 0
-  attackSpeed: 0
-  criticalChance: 0
-  criticalDamageTimes: 0
-  dodgeChance: 0
-  nonControlHpRecovery: 0
-  maxHealthCost: 0
-  nowHealthCost: 0
-  baseDamageCost: 0
-  attackPowerCost: 0
-  defencePowerCost: 0
-  speedCost: 0
-  attackRangeCost: 0
-  attackSpeedCost: 0
-  criticalChanceCost: 0
-  criticalDamageTimesCost: 0
-  dodgeChanceCost: 0
-  nonControlHpRecoveryCost: 0
+  temporaryStat:
+    maxHealth: 0
+    baseDamage: 0
+    attackPower: 0
+    defencePower: 100
+    speed: 0
+    attackRange: 0
+    attackSpeed: 0
+    criticalChance: 0
+    criticalDamageTimes: 0
+    dodgeChance: 0
+    nonControlHpRecovery: 0
+  costStat:
+    maxHealth: 0
+    baseDamage: 0
+    attackPower: 0
+    defencePower: 0
+    speed: 0
+    attackRange: 0
+    attackSpeed: 0
+    criticalChance: 0
+    criticalDamageTimes: 0
+    dodgeChance: 0
+    nonControlHpRecovery: 0

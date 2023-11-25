@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  icon: {fileID: 21300000, guid: c1e10830e50213e4b83bc791e9846adb, type: 3}
+  icon: {fileID: 21300000, guid: 28833eb632d77bd4c949d16fb767a02d, type: 3}
   name: "\uD68C\uD53C"
   grade: 0
   type: 0
