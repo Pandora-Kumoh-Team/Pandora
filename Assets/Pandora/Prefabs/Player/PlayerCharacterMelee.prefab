@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7515819654774594542}
   - component: {fileID: 5423754412656916691}
   - component: {fileID: 6807539854828870946}
+  - component: {fileID: 9040250135937027082}
   m_Layer: 6
   m_Name: PlayerCharacterMelee
   m_TagString: Player
@@ -108,10 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36e5f6729ac4970a2fd3f7ac0ea1283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentState: 0
+  _playerController: {fileID: 0}
   _target: {fileID: 0}
   maxOtherPlayerDistance: 5
-  idleWalkSpeed: 0.25
 --- !u!212 &5592853203191405790
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -277,6 +277,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9040250135937027082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964942453664939683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 1
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: 1
 --- !u!1 &1862259601518948388
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +513,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.35}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4, y: 4}
     newSize: {x: 6, y: 6}
     adaptiveTilingThreshold: 0.5
