@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5841824316192431807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 840447513682352595}
+  - component: {fileID: 3295188419027719990}
+  m_Layer: 0
+  m_Name: Skill_P028
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &840447513682352595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5841824316192431807}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 43
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3295188419027719990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5841824316192431807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5daad42dcde24c639a4303f90b4366f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 28
+  icon: {fileID: 21300000, guid: 1e006f47498d9bc4da4a55063835a77b, type: 3}
+  name: "\uCE58\uBA85\uD0C0 \uD53C\uD574 \uAC15\uD654"
+  grade: 3
+  type: 1
+  description: "\uCE58\uBA85\uD0C0 \uD53C\uD574\uAC00 \uAE30\uC874 \uCE58\uBA85\uD0C0
+    \uD53C\uD574\uC758 80%\uB9CC\uD07C \uC99D\uAC00\uD55C\uB2E4."
+  coolTime: 0
+  duration: 0
+  ownerPlayer: {fileID: 0}
+  statToChange:
+    maxHealth: 0
+    baseDamage: 0
+    attackPower: 0
+    defencePower: 0
+    speed: 0
+    attackRange: 0
+    attackSpeed: 0
+    criticalChance: 0
+    criticalDamageTimes: 0.8
+    dodgeChance: 0
+    nonControlHpRecovery: 0

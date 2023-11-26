@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7515819654774594542}
   - component: {fileID: 5423754412656916691}
   - component: {fileID: 6807539854828870946}
+  - component: {fileID: 9040250135937027082}
   m_Layer: 6
   m_Name: PlayerCharacterMelee
   m_TagString: Player
@@ -54,10 +55,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  playerCharacterId: -1
+  playerNumber: -1
+  playerCurrentStat:
+    playerStat:
+      maxHealth: 0
+      baseDamage: 0
+      attackPower: 0
+      defencePower: 0
+      speed: 0
+      attackRange: 0
+      attackSpeed: 0
+      criticalChance: 0
+      criticalDamageTimes: 0
+      dodgeChance: 0
+      nonControlHpRecovery: 0
+    nowHealth: 0
   playerBasicStat:
     maxHealth: 100
-    nowHealth: 100
     baseDamage: 10
     attackPower: 1
     defencePower: 0
@@ -95,10 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36e5f6729ac4970a2fd3f7ac0ea1283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentState: 0
+  _playerController: {fileID: 0}
   _target: {fileID: 0}
   maxOtherPlayerDistance: 5
-  idleWalkSpeed: 0.25
 --- !u!212 &5592853203191405790
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -183,7 +196,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
 --- !u!50 &7515819654774594542
@@ -264,6 +277,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9040250135937027082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964942453664939683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 1
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: 1
 --- !u!1 &1862259601518948388
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9037657636078642614, guid: bb9475a03daafc746a2a6052dddbed3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.51
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 9037657636078642614, guid: bb9475a03daafc746a2a6052dddbed3b, type: 3}
       propertyPath: m_LocalPosition.z
