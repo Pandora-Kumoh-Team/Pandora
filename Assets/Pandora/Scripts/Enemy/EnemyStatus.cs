@@ -81,7 +81,13 @@ public class EnemyStatus
                 _code = 153; _maxHealth = 20; _nowHealth = 20; _baseDamage = 2; _attackPower = 1; _defencePower = 1; _speed = 2; _attackSpeed = 1;
                 break;
             case "1StageBoss":
-                _code = 300; _maxHealth = 500; _nowHealth = 500; _baseDamage = 10; _attackPower = 3; _defencePower = 5; _speed = 2; _attackSpeed = 8;
+                _code = 300; _maxHealth = 500; _nowHealth = 500; _baseDamage = 10; _attackPower = 1.5f; _defencePower = 5; _speed = 2; _attackSpeed = 1;
+                break;
+            case "2StageBoss":
+                _code = 301; _maxHealth = 700; _nowHealth = 100; _baseDamage = 10; _attackPower = 2f; _defencePower = 4; _speed = 4; _attackSpeed = 1;
+                break;
+            case "3StageBoss":
+                _code = 302; _maxHealth = 1000; _nowHealth = 1000; _baseDamage = 10; _attackPower = 2f; _defencePower = 6; _speed = 4; _attackSpeed = 1;
                 break;
             case "TestDummy":
                 _code = 999; _maxHealth = float.MaxValue; _nowHealth = float.MaxValue; _baseDamage = 0; _attackPower = 0; _defencePower = 0; _speed = 0; _attackSpeed = 0;

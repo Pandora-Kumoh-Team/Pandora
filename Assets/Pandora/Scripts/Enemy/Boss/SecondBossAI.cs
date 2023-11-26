@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace Pandora.Scripts.Enemy
 {
-    public class BossAI : MonoBehaviour
+    public class SecondBossAI : MonoBehaviour
     {
         // Components
         private Vector3 direction;
@@ -26,7 +26,7 @@ namespace Pandora.Scripts.Enemy
             attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
             myPos = transform.position;
             parentAnimation = transform.parent.GetComponent<Animator>();
-            speed = transform.parent.GetComponent<FirstBossController>()._enemyStatus.Speed; //보스에 설정된 스피드로 설정
+            speed = transform.parent.GetComponent<SecondBossController>()._enemyStatus.Speed; //보스에 설정된 스피드로 설정
         }
 
         private void Update()
@@ -82,9 +82,20 @@ namespace Pandora.Scripts.Enemy
             }
             else //공격 범위 내에 있다면
             {
-                parentAnimation.SetTrigger("Attack");
-                parentAnimation.SetBool("isFollow", false); //Idle 상태
-                timer = 0;
+                int type = Random.Range(0, 2); //랜덤으로 선택함에 따라서 공격이 달라짐
+                switch (type)
+                {
+                    case 0:
+                        parentAnimation.SetTrigger("Attack1");
+                        parentAnimation.SetBool("isFollow", false); //Idle 상태
+                        timer = 0;
+                        break;
+                    case 1:
+                        parentAnimation.SetTrigger("Attack2");
+                        parentAnimation.SetBool("isFollow", false);
+                        timer = 0;
+                        break;
+                }
                 GameObject.Find(parentName).transform.Find("AttackRange").gameObject.SetActive(true);
             }
         }
