@@ -40,6 +40,10 @@ namespace Pandora.Scripts.Player.Controller
         public Vector2 moveDir;
         [HideInInspector]
         public bool canControlMove;
+        public AudioClip[] footstepAudioSource;
+        public float footstepDistance = 0.35f;
+        public float footstepVolume = 0.5f;
+        private float footstepMovedDistance;
 
         // 공격 관련
         [HideInInspector]
@@ -134,6 +138,17 @@ namespace Pandora.Scripts.Player.Controller
             {
                 anim.SetInteger(CachedMoveDir, -1);
             }
+            // 이동 발자국 소리
+            if (canControlMove && moveDir.magnitude > 0.5f)
+            {
+                footstepMovedDistance += moveDir.magnitude * Time.deltaTime;
+                if (footstepMovedDistance >= footstepDistance)
+                {
+                    footstepMovedDistance = 0f;
+                    audioSource.PlayOneShot(footstepAudioSource[Random.Range(0, footstepAudioSource.Length)],
+                        footstepVolume);
+                }
+            }
             
             // 스킬 쿨다운
             for (int i = 0; i < skillCoolTimes.Length; i++)
@@ -144,6 +159,7 @@ namespace Pandora.Scripts.Player.Controller
                 }
             }
 
+            // 공격
             if(!CanAttack())
             {
                 attackCoolTime -= Time.deltaTime;

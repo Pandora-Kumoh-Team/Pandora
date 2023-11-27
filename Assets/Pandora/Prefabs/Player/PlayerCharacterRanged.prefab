@@ -119,6 +119,18 @@ MonoBehaviour:
   lookDir: {x: 0, y: 0}
   moveDir: {x: 0, y: 0}
   canControlMove: 0
+  footstepAudioSource:
+  - {fileID: 8300000, guid: 05a08dd4ee0c046a6b56466d5c9aa9b8, type: 3}
+  - {fileID: 8300000, guid: bc1c11a60c94e439d84d64c56fdd354f, type: 3}
+  - {fileID: 8300000, guid: 64049f336db3d403dabd0425eb159922, type: 3}
+  - {fileID: 8300000, guid: aa9d74433c06a41a9b25cc9175d3f3ae, type: 3}
+  - {fileID: 8300000, guid: f7bff2a24d7d64eb296a8133060bd3e9, type: 3}
+  - {fileID: 8300000, guid: f626dafe2c3e045cd852e86532182f70, type: 3}
+  - {fileID: 8300000, guid: 27f4d8a727d874633b0292b089ec9b7c, type: 3}
+  - {fileID: 8300000, guid: c1eac1c698fc84605adb7e1074fd7d34, type: 3}
+  - {fileID: 8300000, guid: f54a7e8aabfc8436b965149db8156132, type: 3}
+  - {fileID: 8300000, guid: 3a06a27039e144e5c853a93d408fd63a, type: 3}
+  footstepDistance: 0.35
   attackDir: {x: 0, y: 0}
   attackSoundClip1: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
   attackSoundClip2: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
