@@ -16,10 +16,12 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         
         public override void OnUseSkill()
         {
+            transform.localPosition = Vector3.zero;
             var pc = ownerPlayer.GetComponent<PlayerController>();
             pc.playerCurrentStat.playerStat += temporaryStat;
             pc.playerCurrentStat.playerStat += costStat;
             pc.CallHealthChangedEvent();
+            OnEffect();
         }
 
         public override void OnDuringSkill()
@@ -29,9 +31,33 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         public override void OnEndSkill()
         {
+            OffEffect();
             var pc = ownerPlayer.GetComponent<PlayerController>();
             pc.playerCurrentStat.playerStat -= temporaryStat;
             pc.CallHealthChangedEvent();
+        }
+
+
+        public void OnEffect()
+        {
+            switch (id)
+            {
+                case 6: //무적
+                    GameObject Effect = transform.Find("Effect").gameObject;
+                    Effect.transform.localPosition = new Vector3(0,0.7f,0);
+                    Effect.SetActive(true);
+                    break;
+            }
+        }
+        public void OffEffect()
+        {
+            switch (id)
+            {
+                case 6: //무적
+                    GameObject Effect = transform.Find("Effect").gameObject;
+                    Effect.SetActive(false);
+                    break;
+            }
         }
     }
 }
