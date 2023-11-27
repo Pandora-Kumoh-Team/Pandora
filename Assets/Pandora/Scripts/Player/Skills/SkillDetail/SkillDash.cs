@@ -14,10 +14,10 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         private void Update()
         {
-            if(_nowDuration > 0)
+            if (_nowDuration > 0)
             {
                 _nowDuration -= Time.deltaTime;
-                if(_nowDuration <= 0)
+                if (_nowDuration <= 0)
                 {
                     OnEndSkill();
                 }
