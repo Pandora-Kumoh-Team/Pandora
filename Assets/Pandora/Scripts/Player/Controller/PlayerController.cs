@@ -311,6 +311,7 @@ namespace Pandora.Scripts.Player.Controller
             SetAttackAnimation();
 
             var hitParams = new HitParams();
+            hitParams.attacker = gameObject;
             
             // 크리티컬 여부 판단
             var rand = Random.Range(0, 100);
@@ -492,7 +493,7 @@ namespace Pandora.Scripts.Player.Controller
             if(col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 var hitParams = new HitParams();
-
+        
                 // 크리티컬 여부 판단
                 var rand = Random.Range(0, 100);
                 hitParams.damage = playerCurrentStat.BaseDamage * playerCurrentStat.AttackPower;
