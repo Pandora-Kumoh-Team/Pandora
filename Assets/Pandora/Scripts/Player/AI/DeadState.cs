@@ -18,7 +18,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public override void Enter(PlayerAI player)
         {
-            player._playerController.canControllMove = false;
+            player._playerController.canControlMove = false;
         }
 
         public override void Update(PlayerAI player)
@@ -36,7 +36,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public override void Exit(PlayerAI player)
         {
-            player._playerController.canControllMove = true;
+            player._playerController.canControlMove = true;
         }
 
         public override void CheckTransition(PlayerAI player)

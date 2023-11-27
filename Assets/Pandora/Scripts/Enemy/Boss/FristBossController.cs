@@ -43,29 +43,27 @@ namespace Pandora.Scripts.Enemy
         // Update is called once per frame
         void Update()
         {
-            target = GameObject.FindGameObjectWithTag("Player"); //Player ��� ����
-            rb.velocity = Vector3.zero; //�и� ����
+            target = GameObject.FindGameObjectWithTag("Player");
+            rb.velocity = Vector3.zero; 
         }
-        public void Hit(float damage, List<Buff> buff)
+        public void Hit(HitParams hitParams)
         {
+            var damage = hitParams.damage;
             anim.SetTrigger("Hit");
             transform.Find("BossHP").gameObject.SetActive(true);
-            //damage effect
-            var effectPosition = transform.position + new Vector3(1.5f, 1f, 0);
-            var damageEffect = Instantiate(GameManager.Instance.damageEffect, effectPosition, Quaternion.identity, transform);
+            // damage effect
             var reduceDamage = damage - (damage * _enemyStatus.DefencePower / 100);
-            damageEffect.GetComponent<FadeTextEffect>()
-                .Init(reduceDamage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);//DamageEffect ����
+            var relativePos = new Vector3(1.5f, 1f, 0);
+            hitParams.damage = reduceDamage;
+            DamageTextEffectManager.Instance.SpawnDamageTextEffect(relativePos, gameObject, hitParams);
 
-            //���� ���
             _enemyStatus.NowHealth -= reduceDamage;
             CallHealthChangeEvetnt();
 
-            if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && isKnife == false) //ü���� 60%�� ��
+            if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && isKnife == false) 
             {
                 StartCoroutine(KnifeThrow());
             }
-            //hp 0�� ���� ��
             if (_enemyStatus.NowHealth <= 0)
             {
                 StartCoroutine(Death());
@@ -73,29 +71,28 @@ namespace Pandora.Scripts.Enemy
         }
         private void OnDisable()
         {
-            // ��µ� ����Ʈ ����
+
             foreach (Transform child in transform)
             {
                 if (child.gameObject.GetComponent<FadeTextEffect>() != null)
                     Destroy(child.gameObject);
             }
         }
-        public void Attack() //�ִϸ��̼� ���� ���� ������ Ÿ�� ������ ����
+        public void Attack()
         {
-            Debug.Log("�⺻ ����");
-            target.GetComponent<PlayerController>().Hurt(_enemyStatus.AttackPower, null, gameObject); //TODO �������� �� -> But ������ ĳ���͸� ��.
+            target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage, null, gameObject);
         }
         private void CallHealthChangeEvetnt()
         {
             var param = new BossHealthChangedParam(_enemyStatus.NowHealth, _enemyStatus.MaxHealth);
             EventManager.Instance.TriggerEvent(PandoraEventType.BossHealthChanged, param);
         }
-        IEnumerator Death() //TODO ���� �� ���缭 �׾����.
+        IEnumerator Death() 
         {
             anim.SetTrigger("Death");
             yield return new WaitForSeconds(1.2f);
             Destroy(this.gameObject);
-            GameManager.Instance.GameClear();
+            //GameManager.Instance.GameClear();
         }
         IEnumerator GetBuffMode()
         {
@@ -104,11 +101,11 @@ namespace Pandora.Scripts.Enemy
             {
                 yield return new WaitForSeconds(delay);
                 anim.SetTrigger("Defense");
-                _enemyStatus.DefencePower += 2f; //��� ��� Ȱ��ȭ �� ����ؼ� ����� ����
+                _enemyStatus.DefencePower += 2f;
                 Debug.Log("Defense: "+_enemyStatus.DefencePower.ToString());
             }
         }
-        IEnumerator KnifeThrow() //Į�� ������ ����
+        IEnumerator KnifeThrow() 
         {
             GameObject obj = transform.Find("KnifeGenerator").gameObject;
             float delay = 5f;
@@ -116,7 +113,6 @@ namespace Pandora.Scripts.Enemy
             while (true)
             {
                 yield return new WaitForSeconds(delay);
-                //Į ���� �� ������
                 obj.GetComponent<KnifeGenerator>().Fire("left");
                 obj.GetComponent<KnifeGenerator>().Fire("right");
                 obj.GetComponent<KnifeGenerator>().Fire("up");

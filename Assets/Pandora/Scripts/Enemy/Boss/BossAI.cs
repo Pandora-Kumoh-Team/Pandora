@@ -41,13 +41,6 @@ namespace Pandora.Scripts.Enemy
             //플레이어 식별
             if (collision.gameObject.tag.Equals("Player"))
             {
-                /*if(타겟이 블루라면){
-                    target = 설정해주고 -> ObjectName으로 찾아서 설정
-                }
-                else (타겟이 레드라면) {
-                    target = 설정해주고  -> ObjectName으로 찾아서 설정
-                }
-                */
                 target = collision.gameObject;
             }
             //플레이어와의 거리 측정

@@ -19,6 +19,11 @@ namespace Pandora.Scripts.Enemy
 
         //Status
         public EnemyStatus _enemyStatus;
+        
+        public AudioClip[] hitSounds;
+        public float hitSoundVolume = 0.5f;
+        private AudioSource audioSource;
+        
 
         void Start()
         {
@@ -31,19 +36,27 @@ namespace Pandora.Scripts.Enemy
                 _enemyStatus = new EnemyStatus(this.gameObject.name.Replace("(Clone)",""));
             else
                 _enemyStatus = new EnemyStatus(this.gameObject.name);
+
+            audioSource = gameObject.AddComponent<AudioSource>();
+            if (hitSounds.Length == 0)
+            {
+                Debug.LogError(gameObject.name + " : hitSounds is empty");
+            }
         }
 
 
-        public void Hit(float damage, List<Buff> buff)
+        public void Hit(HitParams hitParams)
         {
+            var damage = hitParams.damage;
             anim.SetTrigger(Hit1);
             
             // damage 이펙트 출력
-            var position = transform.position + new Vector3(0, capsuleCollider.size.y / 2, 0);
-            var damageEffect = Instantiate(GameManager.Instance.damageEffect, position, Quaternion.identity, transform);
-            damageEffect.GetComponent<FadeTextEffect>()
-                .Init(damage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);
+            var relativePos = new Vector3(0, capsuleCollider.size.y / 2, 0);
+            DamageTextEffectManager.Instance.SpawnDamageTextEffect(relativePos, gameObject, hitParams);
 
+            // 사운드 출력
+            audioSource.PlayOneShot(hitSounds[UnityEngine.Random.Range(0, hitSounds.Length)], hitSoundVolume);
+            
             //피해 계산
             _enemyStatus.NowHealth -= damage;
 
