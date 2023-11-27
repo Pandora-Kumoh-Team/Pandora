@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Pandora.Scripts.Effect;
+using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
 using Pandora.Scripts.System.Event;
@@ -298,13 +299,16 @@ namespace Pandora.Scripts.Player.Controller
             attackCoolTime = 1 / playerCurrentStat.AttackSpeed;
             
             SetAttackAnimation();
-        
+
+            var hitParams = new HitParams();
+            
             // 크리티컬 여부 판단
             var rand = Random.Range(0, 100);
-            var damage = playerCurrentStat.BaseDamage * playerCurrentStat.AttackPower;
+            hitParams.damage = playerCurrentStat.BaseDamage * playerCurrentStat.AttackPower;
             if (rand < playerCurrentStat.CriticalChance)
             {
-                damage *= playerCurrentStat.CriticalDamageTimes;
+                hitParams.damage *= playerCurrentStat.CriticalDamageTimes;
+                hitParams.isCritical = true;
             }
             
             // 사운드 출력
@@ -312,7 +316,7 @@ namespace Pandora.Scripts.Player.Controller
             var sound = randSound == 0 ? attackSoundClip1 : attackSoundClip2;
             audioSource.PlayOneShot(sound);
         
-            StartCoroutine(AttackCoroutine(damage, playerCurrentStat.GetAttackBuffs()));
+            StartCoroutine(AttackCoroutine(hitParams));
         }
         private void SetAttackAnimation()
         {
@@ -341,7 +345,7 @@ namespace Pandora.Scripts.Player.Controller
         ///  공격 타입별로 하위 클래스에서 정의
         /// </summary>
         /// <returns></returns>
-        protected virtual IEnumerator AttackCoroutine(float damage, List<Buff> buffs)
+        protected virtual IEnumerator AttackCoroutine(HitParams hitParams)
         {
             yield return null;
         }

@@ -14,12 +14,11 @@ namespace Pandora.Scripts.Player
         
         // Variables
         private float _speed;
-        private float _damage = 10f; // 임시 데메지
         private float _lifeTime;
         public float maxDistance;
         private float _movedDistance;
         private Vector2 _beforePosition;
-        private List<Buff> _buffs;
+        private HitParams _hitParams;
 
         public void SetDirection(Vector2 direction, float speed)
         {
@@ -29,15 +28,9 @@ namespace Pandora.Scripts.Player
             _rigidbody2D.velocity = direction.normalized * speed;
         }
         
-        
-        public void SetDamage(float damage)
+        public void SetHitParams(HitParams hitParams)
         {
-            _damage = damage;
-        }
-        
-        public void SetBuffs(List<Buff> buffs)
-        {
-            _buffs = buffs;
+            _hitParams = hitParams;
         }
         
         private void Awake()
@@ -84,7 +77,7 @@ namespace Pandora.Scripts.Player
             var hitAble = col.gameObject.GetComponent<IHitAble>();
             if (hitAble != null)
             {
-                hitAble.Hit(_damage, _buffs);
+                hitAble.Hit(_hitParams);
                 EventManager.Instance.TriggerEvent(PandoraEventType.PlayerAttackEnemy, col.gameObject);
                 StartCoroutine(DestroyAfterParticle());
             }
