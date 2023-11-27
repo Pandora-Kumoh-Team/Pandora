@@ -58,6 +58,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         {
             switch (id)
             {
+                case 3: //희생
                 case 6: //무적
                     GameObject Effect = transform.Find("Effect").gameObject;
                     Effect.SetActive(false);
