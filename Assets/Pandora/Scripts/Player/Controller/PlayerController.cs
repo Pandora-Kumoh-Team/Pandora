@@ -214,7 +214,10 @@ namespace Pandora.Scripts.Player.Controller
             var damageEffect = Instantiate(GameManager.Instance.damageEffect, position, Quaternion.identity, transform);
             damageEffect.GetComponent<FadeTextEffect>()
                 .Init(damage.ToString(), Color.red, 1f, 0.5f, 0.05f, Vector3.up);
-            var bloodEffect =Instantiate(GameManager.Instance.bloodParticle, position, Quaternion.identity);
+            var bloodEffect = Instantiate(GameManager.Instance.bloodParticle, position, Quaternion.identity);
+            // 공격자의 반대 방향으로 피격 이펙트 회전
+            var z = transform.position.x > attacker.transform.position.x ? -45 : 45;
+            bloodEffect.transform.rotation = Quaternion.Euler(0, 0, z);
             Destroy(bloodEffect, 1f);
             
             if (playerCurrentStat.NowHealth <= 0)
