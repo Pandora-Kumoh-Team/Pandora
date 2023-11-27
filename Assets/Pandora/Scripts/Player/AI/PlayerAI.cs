@@ -11,11 +11,13 @@ namespace Pandora.Scripts.Player.Controller
     public class PlayerAI : MonoBehaviour, IEventListener
     {
         // components
+        [HideInInspector]
         public PlayerController _playerController;
         private Rigidbody2D _rigidbody2D;
         private Animator _animator;
 
         public PlayerAIState _currentState;
+        [HideInInspector]
         public GameObject _target;
         
         public float maxOtherPlayerDistance = 5f;
