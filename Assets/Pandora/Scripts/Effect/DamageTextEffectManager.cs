@@ -43,7 +43,7 @@ namespace Pandora.Scripts.Enemy
                 text = "Miss";
                 textColor = Color.gray;
             }
-            damageEffect.GetComponent<DamageTextEffect>().Init(text, textColor, 1f, 0.5f, 0.05f, Vector3.up);
+            damageEffect.GetComponent<DamageTextEffect>().Init(text, textColor, 1f, 0.5f, 0.05f, Vector3.up, hitParams.damage);
         }
     }
 }
