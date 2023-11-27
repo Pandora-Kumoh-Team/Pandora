@@ -1,4 +1,5 @@
 ﻿using Pandora.Scripts.Player.Controller;
+using System.Collections;
 using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
 
@@ -40,10 +41,14 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         public void OnEffect()
         {
+            GameObject Effect = transform.Find("Effect").gameObject;
             switch (id)
             {
+                case 3: //희생
+                    Effect.transform.localPosition = new Vector3(0.1f, 0.3f, 0);
+                    Effect.SetActive(true);
+                    break;
                 case 6: //무적
-                    GameObject Effect = transform.Find("Effect").gameObject;
                     Effect.transform.localPosition = new Vector3(0,0.7f,0);
                     Effect.SetActive(true);
                     break;
@@ -58,6 +63,11 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                     Effect.SetActive(false);
                     break;
             }
+        }
+
+        public IEnumerator WaitForIt()
+        {
+            yield return new WaitForSeconds(10);
         }
     }
 }
