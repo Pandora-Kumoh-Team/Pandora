@@ -34,15 +34,14 @@ namespace Pandora.Scripts.Enemy
         }
 
 
-        public void Hit(float damage, List<Buff> buff)
+        public void Hit(HitParams hitParams)
         {
+            var damage = hitParams.damage;
             anim.SetTrigger(Hit1);
             
             // damage 이펙트 출력
-            var position = transform.position + new Vector3(0, capsuleCollider.size.y / 2, 0);
-            var damageEffect = Instantiate(GameManager.Instance.damageEffect, position, Quaternion.identity, transform);
-            damageEffect.GetComponent<FadeTextEffect>()
-                .Init(damage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);
+            var relativePos = new Vector3(0, capsuleCollider.size.y / 2, 0);
+            DamageTextEffectManager.Instance.SpawnDamageTextEffect(relativePos, gameObject, hitParams);
 
             //피해 계산
             _enemyStatus.NowHealth -= damage;

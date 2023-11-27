@@ -8,20 +8,14 @@ namespace Pandora.Scripts.Player
 {
     public class AttackRange : MonoBehaviour
     {
-        private float _damage = 10f; // 임시 데메지
-        private List<Buff> _buffs = new List<Buff>();
+        private HitParams _hitParams;
         private List<IHitAble> _hitted = new List<IHitAble>();
         
-        public void SetDamage(float damage)
+        public void SetHitParams(HitParams hitParams)
         {
-            _damage = damage;
+            _hitParams = hitParams;
         }
         
-        public void SetBuffs(List<Buff> buffs)
-        {
-            _buffs = buffs;
-        }
-
         private void OnEnable()
         {
             _hitted.Clear();
@@ -33,7 +27,7 @@ namespace Pandora.Scripts.Player
             if (hitAble != null && !_hitted.Contains(hitAble))
             {
                 _hitted.Add(hitAble);
-                hitAble.Hit(_damage, _buffs);
+                hitAble.Hit(_hitParams);
                 EventManager.Instance.TriggerEvent(PandoraEventType.PlayerAttackEnemy, col.gameObject);
             }
         }
