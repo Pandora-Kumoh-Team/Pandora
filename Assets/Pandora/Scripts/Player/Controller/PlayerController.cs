@@ -16,9 +16,11 @@ namespace Pandora.Scripts.Player.Controller
     public class PlayerController : MonoBehaviour
     {
         // Components
+        [HideInInspector]
         public Rigidbody2D rb;
         private Animator anim;
         private PlayerAI ai;
+        private AudioSource audioSource;
     
         /// <summary>
         /// 플레이어 캐릭터 고유번호, UI와 연동
@@ -26,31 +28,44 @@ namespace Pandora.Scripts.Player.Controller
         [FormerlySerializedAs("playerCharacterId")] public int playerNumber = -1;
         
         // Stat
+        [HideInInspector]
         public PlayerCurrentStat playerCurrentStat;
         public PlayerStat playerBasicStat;
     
         // Variables
         // 이동 관련
+        [HideInInspector]
         public Vector2 lookDir;
+        [HideInInspector]
         public Vector2 moveDir;
-        public bool canControllMove;
+        [HideInInspector]
+        public bool canControlMove;
 
         // 공격 관련
+        [HideInInspector]
         public Vector2 attackDir;
         private float attackCoolTime;
         private bool isAttackKeyPressed;
+        public AudioClip attackSoundClip1;
+        public AudioClip attackSoundClip2;
     
         // 태그 관련
+        [HideInInspector]
         public bool onControl;
         public bool onControlInit = true;
         
+        [HideInInspector]
         public bool isDead;
         
         // 스킬 관련
         public GameObject[] activeSkills;
+        [HideInInspector]
         public List<GameObject> passiveSkills;
+        [HideInInspector]
         public float[] skillCoolTimes;
+        [HideInInspector]
         public Transform activeSkillContainer;
+        [HideInInspector]
         public Transform passiveSkillContainer;
         
         private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
@@ -63,10 +78,11 @@ namespace Pandora.Scripts.Player.Controller
             anim = GetComponent<Animator>();
             ai = GetComponent<PlayerAI>();
             playerCurrentStat = new PlayerCurrentStat();
-            canControllMove = true;
+            canControlMove = true;
             skillCoolTimes = new float[3];
             activeSkillContainer = transform.Find("Skills").Find("ActiveSkills");
             passiveSkillContainer = transform.Find("Skills").Find("PassiveSkills");
+            audioSource = GetComponent<AudioSource>();
         }
 
         public virtual void Start()
@@ -104,12 +120,12 @@ namespace Pandora.Scripts.Player.Controller
         private void Update()
         {
             // 이동
-            if(canControllMove && moveDir.magnitude > 0.5f)
+            if(canControlMove && moveDir.magnitude > 0.5f)
             {
                 rb.velocity = moveDir * playerCurrentStat.Speed;
                 SetMoveAnimation(moveDir);
             }
-            else if(canControllMove && moveDir.magnitude <= 0.5f)
+            else if(canControlMove && moveDir.magnitude <= 0.5f)
             {
                 rb.velocity = Vector2.zero;
                 anim.SetInteger(CachedMoveDir, -1);
@@ -274,6 +290,11 @@ namespace Pandora.Scripts.Player.Controller
             {
                 damage *= playerCurrentStat.CriticalDamageTimes;
             }
+            
+            // 사운드 출력
+            var randSound = Random.Range(0, 2);
+            var sound = randSound == 0 ? attackSoundClip1 : attackSoundClip2;
+            audioSource.PlayOneShot(sound);
         
             StartCoroutine(AttackCoroutine(damage, playerCurrentStat.GetAttackBuffs()));
         }
@@ -325,7 +346,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public void OnMove(InputValue value)
         {
-            if (!onControl || !canControllMove) return;
+            if (!onControl || !canControlMove) return;
             moveDir = value.Get<Vector2>();
             if(moveDir.magnitude > 0.5f)
                 lookDir = moveDir;
