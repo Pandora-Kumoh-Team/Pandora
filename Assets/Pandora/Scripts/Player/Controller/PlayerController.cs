@@ -51,8 +51,7 @@ namespace Pandora.Scripts.Player.Controller
         public Vector2 attackDir;
         private float attackCoolTime;
         private bool isAttackKeyPressed;
-        public AudioClip attackSoundClip1;
-        public AudioClip attackSoundClip2;
+        public AudioClip[] attackSounds;
     
         // 태그 관련
         [HideInInspector]
@@ -312,9 +311,8 @@ namespace Pandora.Scripts.Player.Controller
             }
             
             // 사운드 출력
-            var randSound = Random.Range(0, 2);
-            var sound = randSound == 0 ? attackSoundClip1 : attackSoundClip2;
-            audioSource.PlayOneShot(sound);
+            var randSound = Random.Range(0, attackSounds.Length);
+            audioSource.PlayOneShot(attackSounds[randSound]);
         
             StartCoroutine(AttackCoroutine(hitParams));
         }

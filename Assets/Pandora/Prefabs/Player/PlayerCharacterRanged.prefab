@@ -131,9 +131,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f54a7e8aabfc8436b965149db8156132, type: 3}
   - {fileID: 8300000, guid: 3a06a27039e144e5c853a93d408fd63a, type: 3}
   footstepDistance: 0.35
+  footstepVolume: 0.5
   attackDir: {x: 0, y: 0}
-  attackSoundClip1: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-  attackSoundClip2: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 61e73f3e692c640eb9f9c7ee724ac862, type: 3}
   onControl: 0
   onControlInit: 0
   isDead: 0
