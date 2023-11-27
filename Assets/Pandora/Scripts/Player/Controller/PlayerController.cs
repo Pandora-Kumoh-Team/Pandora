@@ -487,23 +487,6 @@ namespace Pandora.Scripts.Player.Controller
             return passiveSkills.ToArray();
         }
 
-        private void OnTriggerEnter2D(Collider2D col) //몸 데미지
-        {
-            if(col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-            {
-                var hitParams = new HitParams();
-
-                // 크리티컬 여부 판단
-                var rand = Random.Range(0, 100);
-                hitParams.damage = playerCurrentStat.BaseDamage * playerCurrentStat.AttackPower;
-                if (rand < playerCurrentStat.CriticalChance)
-                {
-                    hitParams.damage *= playerCurrentStat.CriticalDamageTimes;
-                    hitParams.isCritical = true;
-                }
-                col.GetComponent<EnemyController>().Hit(hitParams);
-            }
-        }
 
         #endregion
 
