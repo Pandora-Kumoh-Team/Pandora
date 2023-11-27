@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -11,16 +13,17 @@ namespace Pandora.Scripts.System
         public static SoundManager Instance;
         
         // Audio Sources
-        public AudioSource mainMusic;
-        public AudioSource mainMusicLoop;
-        public AudioSource ingameMusic;
-        public AudioSource ingameMusicLoop;
+        public AudioSource audioSource;
         
         // Audio Clips
         public AudioClip mainMusicClip;
         public AudioClip mainMusicLoopClip;
         public AudioClip ingameMusicClip;
         public AudioClip ingameMusicLoopClip;
+        public AudioClip ingameAmbienceClip;
+        public float ingameAmbienceVolume = 0.5f;
+
+        private List<Coroutine> musicCoroutine;
 
         public void Awake()
         {
@@ -33,44 +36,60 @@ namespace Pandora.Scripts.System
                 Destroy(this.gameObject);
                 return;
             }
-            
-            DontDestroyOnLoad(this.gameObject);
-        }
-        public void Start()
-        {
-            mainMusic.clip = mainMusicClip;
-            mainMusicLoop.clip = mainMusicLoopClip;
-            ingameMusic.clip = ingameMusicClip;
-            ingameMusicLoop.clip = ingameMusicLoopClip;
-            PlayMainMusic();
-            
+            audioSource = GetComponent<AudioSource>();
+            musicCoroutine = new List<Coroutine>();
             // add onSceneLoad method
             SceneManager.sceneLoaded += OnSceneLoaded;
+            DontDestroyOnLoad(this.gameObject);
         }
         
         public void OnSceneLoaded(Scene arg0, LoadSceneMode loadSceneMode)
         {
+            foreach (var c in musicCoroutine)
+            {
+                StopCoroutine(c);
+            }
             // check if scene is main menu by name
             if (arg0.name == "MainMenu")
             {
-                PlayMainMusic();
+                musicCoroutine.Add(StartCoroutine(PlayMainMusic()));
             }
             else
             {
-                PlayIngameMusic();
+                musicCoroutine.Add(StartCoroutine(PlayIngameMusic()));
+                musicCoroutine.Add(StartCoroutine(PlayAmbientSound()));
             }
         }
         
-        public void PlayMainMusic()
+        public IEnumerator PlayMainMusic()
         {
-            mainMusic.Play();
-            mainMusicLoop.PlayDelayed(mainMusic.clip.length);
+            audioSource.clip = mainMusicClip;
+            audioSource.loop = false;
+            audioSource.Play();
+            yield return new WaitForSeconds(audioSource.clip.length);
+            audioSource.clip = mainMusicLoopClip;
+            audioSource.loop = true;
+            audioSource.Play();
         }
         
-        public void PlayIngameMusic()
+        public IEnumerator PlayIngameMusic()
         {
-            ingameMusic.Play();
-            ingameMusicLoop.PlayDelayed(ingameMusic.clip.length);
+            audioSource.clip = ingameMusicClip;
+            audioSource.loop = false;
+            audioSource.Play();
+            yield return new WaitForSeconds(audioSource.clip.length);
+            audioSource.clip = ingameMusicLoopClip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+        
+        public IEnumerator PlayAmbientSound()
+        {
+            while(true)
+            {
+                audioSource.PlayOneShot(ingameAmbienceClip, ingameAmbienceVolume);
+                yield return new WaitForSeconds(ingameAmbienceClip.length);
+            }
         }
     }
 }
