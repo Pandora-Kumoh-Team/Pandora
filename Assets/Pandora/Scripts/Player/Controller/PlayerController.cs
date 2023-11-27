@@ -71,7 +71,9 @@ namespace Pandora.Scripts.Player.Controller
         public Transform activeSkillContainer;
         [HideInInspector]
         public Transform passiveSkillContainer;
-        
+        [HideInInspector]
+        public bool isTrigger;
+
         private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
         private static readonly int CachedAttackDir = Animator.StringToHash("AttackDir");
@@ -87,6 +89,7 @@ namespace Pandora.Scripts.Player.Controller
             activeSkillContainer = transform.Find("Skills").Find("ActiveSkills");
             passiveSkillContainer = transform.Find("Skills").Find("PassiveSkills");
             audioSource = GetComponent<AudioSource>();
+            isTrigger = false;
         }
 
         public virtual void Start()
@@ -168,6 +171,11 @@ namespace Pandora.Scripts.Player.Controller
             {
                 Attack();
             }
+
+            if (isTrigger)
+                transform.GetComponent<CircleCollider2D>().isTrigger = true;
+            else
+                transform.GetComponent<CircleCollider2D>().isTrigger = false;
         }
     
 
