@@ -52,6 +52,7 @@ namespace Pandora.Scripts.Player.Controller
         private float attackCoolTime;
         private bool isAttackKeyPressed;
         public AudioClip[] attackSounds;
+        public float attackSoundVolume = 0.5f;
     
         // 태그 관련
         [HideInInspector]
@@ -324,7 +325,7 @@ namespace Pandora.Scripts.Player.Controller
             
             // 사운드 출력
             var randSound = Random.Range(0, attackSounds.Length);
-            audioSource.PlayOneShot(attackSounds[randSound]);
+            audioSource.PlayOneShot(attackSounds[randSound], attackSoundVolume);
         
             StartCoroutine(AttackCoroutine(hitParams));
         }
