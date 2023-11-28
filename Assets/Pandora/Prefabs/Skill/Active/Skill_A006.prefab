@@ -157,7 +157,7 @@ MonoBehaviour:
   grade: 3
   type: 0
   description: "5\uCD08\uAC04 \uC5B4\uB5A4 \uD53C\uD574\uB3C4 \uBC1B\uC9C0 \uC54A\uB294
-    \uBB34\uC801 \uC0C1\uD14C\uAC00 \uB429\uB2C8\uB2E4."
+    \uBB34\uC801 \uC0C1\uD14C\uAC00 \uB41C\uB2E4."
   coolTime: 14
   duration: 5
   ownerPlayer: {fileID: 0}
