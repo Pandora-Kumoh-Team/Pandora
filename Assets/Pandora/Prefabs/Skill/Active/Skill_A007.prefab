@@ -158,7 +158,7 @@ MonoBehaviour:
   grade: 0
   type: 0
   description: "\uC0AC\uC6A9 \uC2DC \uBC94\uC704 \uB0B4\uC758 \uC801\uC758 \uC774\uB3D9\uC18D\uB3C4\uB97C
-    40%  \uB454\uD654\uC2DC\uD0B5\uB2C8\uB2E4."
+    40%  \uB454\uD654\uC2DC\uD0A8\uB2E4."
   coolTime: 12
   duration: 6
   ownerPlayer: {fileID: 0}
