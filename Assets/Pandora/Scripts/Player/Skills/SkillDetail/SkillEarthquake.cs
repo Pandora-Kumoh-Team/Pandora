@@ -5,17 +5,19 @@ using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.Player.Skill.SkillDetail
 {
-    public class SkillRush : ActiveSkill
+    public class SkillEarthquake : ActiveSkill
     {
         private PlayerController _playerController;
         private float _nowDuration;
+        private GameObject effect;
 
         [Header("수치")]
-        public float speed;
+        public float damage;
 
         private void Awake()
         {
             transform.localPosition = Vector3.zero;
+            effect = transform.Find("Effect").gameObject;
         }
 
         private void Update()
@@ -34,27 +36,25 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         public override void OnUseSkill()
         {
             _playerController = ownerPlayer.GetComponent<PlayerController>();
+
             transform.GetComponent<CircleCollider2D>().enabled = true;
-            _playerController.isTrigger = true;
-            _playerController.canControlMove = false;
-            _playerController.playerCurrentStat.DodgeChance += 100;
             _nowDuration = duration;
+
+            effect.transform.localPosition = new Vector3(0, 0.7f, 0);
+            effect.SetActive(true);
         }
 
         public override void OnDuringSkill()
         {
-            _playerController.rb.velocity = _playerController.lookDir * speed;
         }
 
         public override void OnEndSkill()
         {
             transform.GetComponent<CircleCollider2D>().enabled = false;
-            _playerController.isTrigger = false;
-            _playerController.canControlMove = true;
-            _playerController.playerCurrentStat.DodgeChance -= 100;
+            effect.SetActive(false);
         }
 
-        private void OnTriggerEnter2D(Collider2D col) //몸 데미지
+        private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
@@ -62,7 +62,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
                 // 크리티컬 여부 판단
                 var rand = Random.Range(0, 100);
-                hitParams.damage = _playerController.playerCurrentStat.BaseDamage * _playerController.playerCurrentStat.AttackPower;
+                hitParams.damage = _playerController.playerCurrentStat.BaseDamage * _playerController.playerCurrentStat.AttackPower * (damage * 0.01f);
                 if (rand < _playerController.playerCurrentStat.CriticalChance)
                 {
                     hitParams.damage *= _playerController.playerCurrentStat.CriticalDamageTimes;
