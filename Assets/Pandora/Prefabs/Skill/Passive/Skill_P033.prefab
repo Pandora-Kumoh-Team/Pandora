@@ -49,7 +49,7 @@ MonoBehaviour:
   name: "\uD68C\uD53C\uC728 \uAC15\uD654"
   grade: 0
   type: 1
-  description: "\uD68C\uD53C \uD655\uB960\uC774 5% \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  description: "\uD68C\uD53C \uD655\uB960\uC774 5% \uC99D\uAC00\uD55C\uB2E4."
   coolTime: 0
   duration: 0
   ownerPlayer: {fileID: 0}
