@@ -100,6 +100,7 @@ MonoBehaviour:
   attackDir: {x: 0, y: 0}
   attackSounds:
   - {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+  attackSoundVolume: 1
   onControl: 0
   onControlInit: 1
   isDead: 0
@@ -111,6 +112,7 @@ MonoBehaviour:
   skillCoolTimes: []
   activeSkillContainer: {fileID: 0}
   passiveSkillContainer: {fileID: 0}
+  isTrigger: 0
 --- !u!114 &6612939485274714206
 MonoBehaviour:
   m_ObjectHideFlags: 0
