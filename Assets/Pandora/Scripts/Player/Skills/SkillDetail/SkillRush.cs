@@ -11,7 +11,6 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         private float _nowDuration;
 
         [Header("¼öÄ¡")]
-        public float damage;
         public float speed;
 
         private void Awake()
