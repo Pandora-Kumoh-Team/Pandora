@@ -1,20 +1,18 @@
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.Player.Skill.SkillDetail
 {
-    public class SkillFreezing : ActiveSkill
+    public class SkillEarthquake : ActiveSkill
     {
         private PlayerController _playerController;
         private float _nowDuration;
         private GameObject effect;
 
-        [Header("둔화속도 (3*기본속도/n)")]
-        public float speedDebuff;
+        [Header("수치")]
+        public float damage;
 
         private void Awake()
         {
@@ -42,11 +40,13 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             transform.GetComponent<CircleCollider2D>().enabled = true;
             _nowDuration = duration;
 
-            effect.transform.localPosition = new Vector3(0, 0, 0);
+            effect.transform.localPosition = new Vector3(0, 0.7f, 0);
             effect.SetActive(true);
         }
 
-        public override void OnDuringSkill() {}
+        public override void OnDuringSkill()
+        {
+        }
 
         public override void OnEndSkill()
         {
@@ -58,17 +58,18 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         {
             if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                col.GetComponent<EnemyController>()._enemyStatus.Speed *= 3f/speedDebuff;
+                var hitParams = new HitParams();
+
+                // 크리티컬 여부 판단
+                var rand = Random.Range(0, 100);
+                hitParams.damage = _playerController.playerCurrentStat.BaseDamage * _playerController.playerCurrentStat.AttackPower * (damage * 0.01f);
+                if (rand < _playerController.playerCurrentStat.CriticalChance)
+                {
+                    hitParams.damage *= _playerController.playerCurrentStat.CriticalDamageTimes;
+                    hitParams.isCritical = true;
+                }
+                col.GetComponent<EnemyController>().Hit(hitParams);
             }
         }
-
-        private void OnTriggerExit2D(Collider2D col)
-        {
-            if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-            {
-                col.GetComponent<EnemyController>()._enemyStatus.Speed *= speedDebuff/3f;
-            }
-        }
-
     }
 }
