@@ -103,6 +103,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f769c2c000acbf640a98c85ea9fae2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitParticle: {fileID: 0}
+  hitSounds:
+  - {fileID: 8300000, guid: 5fece4e07d2279146a0d6ad1a3124fa8, type: 3}
+  - {fileID: 8300000, guid: d29e62818c883244fa61358323d30619, type: 3}
+  - {fileID: 8300000, guid: 1601aadfb0d809c48ab7a37926e5a755, type: 3}
+  hitSoundVolume: 0.5
 --- !u!95 &6183061685123255745
 Animator:
   serializedVersion: 5
