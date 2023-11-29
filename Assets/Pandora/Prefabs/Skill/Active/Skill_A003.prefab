@@ -156,9 +156,9 @@ MonoBehaviour:
   name: "\uD76C\uC0DD"
   grade: 0
   type: 0
-  description: "\uCCB4\uB825\uC744 10 \uC18C\uBAA8\uD558\uACE0 10\uCD08\uAC04 \uACF5\uACA9\uB825\uC744
+  description: "\uCCB4\uB825\uC744 10 \uC18C\uBAA8\uD558\uC5EC 10\uCD08\uAC04 \uACF5\uACA9\uB825\uC744
     10 \uC99D\uAC00\uC2DC\uD0A8\uB2E4."
-  coolTime: 30
+  coolTime: 10
   duration: 10
   ownerPlayer: {fileID: 0}
   temporaryStat:
