@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Pandora/Scenes/DungeonRooms/BasementStart.unity
     guid: 39bb3b3f9d4896e4abf9e166fc54298f
   - enabled: 1
+    path: Assets/Pandora/Scenes/DungeonRooms/BasementShop.unity
+    guid: 604ba1436f417e943975658db0a892ae
+  - enabled: 1
     path: Assets/Pandora/Scenes/DungeonRooms/BasementEmpty.unity
     guid: ad914328849516a41bba10929adb4df6
   - enabled: 1
