@@ -6,7 +6,6 @@ public class DungeonGenerator : MonoBehaviour
 {
     public DungeonGenerationData dungeonGenerationData;
     private List<Vector2Int> dungeonRooms;
-
     private void Start()
     {
         dungeonRooms = DungeonCrawlerController.GenerateDungeon(dungeonGenerationData);
@@ -16,15 +15,15 @@ public class DungeonGenerator : MonoBehaviour
     private void SpawnRooms(IEnumerable<Vector2Int> rooms)
     {
         RoomController.instance.LoadRoom("Start", 0, 0);
-        int shopIndex = UnityEngine.Random.Range(3, 10);
         int roomIndex = 0;
+        int shopNumber = Random.Range(1, 10);
         foreach (Vector2Int roomLocation in rooms)
         {
-            if (roomIndex == shopIndex)
+            if(shopNumber == roomIndex)
             {
                 RoomController.instance.LoadRoom("Shop", roomLocation.x, roomLocation.y);
             }
-            else if (roomLocation == dungeonRooms[dungeonRooms.Count - 1] && !(roomLocation == Vector2Int.zero))
+            else if(roomLocation == dungeonRooms[dungeonRooms.Count - 1] && !(roomLocation == Vector2Int.zero))
             {
                 RoomController.instance.LoadRoom("End", roomLocation.x, roomLocation.y);
             }
