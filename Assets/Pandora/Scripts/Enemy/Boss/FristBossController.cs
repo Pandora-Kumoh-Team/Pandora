@@ -59,7 +59,7 @@ namespace Pandora.Scripts.Enemy
 
             _enemyStatus.NowHealth -= reduceDamage;
             CallHealthChangeEvetnt();
-
+            OnHitAnimationEnd();
             if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && isKnife == false) 
             {
                 StartCoroutine(KnifeThrow());
@@ -77,6 +77,10 @@ namespace Pandora.Scripts.Enemy
                 if (child.gameObject.GetComponent<FadeTextEffect>() != null)
                     Destroy(child.gameObject);
             }
+        }
+        public void OnHitAnimationEnd()
+        {
+            anim.SetBool("isFollow", true);
         }
         public void Attack()
         {
