@@ -32,6 +32,12 @@ namespace Pandora.Scripts.Player.Skill
             {
                 Debug.LogError("스킬매니저에 스킬 리스트 등록 안됨");
             }
+            else
+            {
+                // instantiate ScriptableObject skill list
+                passiveSkillList = Instantiate(passiveSkillList);
+                activeSkillList = Instantiate(activeSkillList);
+            }
         }
         
         public List<GameObject> GetRandomPassiveSkills(int playerNum, int count)
@@ -56,11 +62,6 @@ namespace Pandora.Scripts.Player.Skill
             foreach (var skill in skillPrefabList)
             {
                 ableSkillList.Add(skill);
-            }
-            // remove now skill
-            foreach (var skill in nowSkillList)
-            {
-                ableSkillList.Remove(skill);
             }
             for (var i = 0; i < count; i++)
             {
