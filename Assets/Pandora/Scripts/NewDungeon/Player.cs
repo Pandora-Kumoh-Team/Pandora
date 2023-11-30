@@ -10,6 +10,10 @@ using UnityEngine.InputSystem.Controls;
 
 public class Player : MonoBehaviour
 {
+    // TODO
+    // 기존의 PlayerContoller에 아래 코드 수정하여 추가
+    // 아이템 구입 시 플레이어의 체력, 스킬, 스텟 처리
+
     float h;
     float v;
 
@@ -39,7 +43,7 @@ public class Player : MonoBehaviour
     {
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-        //Project Setting -> Input에 Iteration 추가해서 사용해야함
+        //Project Setting -> Input에 Iteration 추가해서 사용해야함(left shift)
         iDown = Input.GetButtonDown("Iteration");
     }
 
