@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Pandora.Scripts.NewDungeon
@@ -6,19 +7,41 @@ namespace Pandora.Scripts.NewDungeon
     {
         public RectTransform uiGroup;
         public RectTransform text;
-        global::Player enterPlayer;
+        public bool isPlayerOnTrigger;
 
-        public void Enter(global::Player player)
+        private void Update()
         {
-            enterPlayer = player;
-            uiGroup.anchoredPosition = Vector3.zero;
-            text.anchoredPosition = Vector3.down * 1200;
+            // move ui from under screen to above screen
+            if (isPlayerOnTrigger)
+            {
+                if (uiGroup.anchoredPosition.y < 0)
+                {
+                    uiGroup.anchoredPosition += new Vector2(0, 10);
+                }
+            }
+            else
+            {
+                if (uiGroup.anchoredPosition.y > -1200)
+                {
+                    uiGroup.anchoredPosition -= new Vector2(0, 10);
+                }
+            }
         }
 
-        public void Exit()
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            uiGroup.anchoredPosition = Vector3.down * 1200;
-            text.anchoredPosition = Vector3.zero;
+            if (col.CompareTag("Player"))
+            {
+                isPlayerOnTrigger = true;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                isPlayerOnTrigger = false;
+            }
         }
     }
 }
