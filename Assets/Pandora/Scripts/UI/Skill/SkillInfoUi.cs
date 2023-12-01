@@ -29,6 +29,14 @@ namespace Pandora.Scripts.UI
             var skillComponent = InfoSkill.GetComponent<Skill>();
             skillIcon.sprite = skillComponent.icon;
             skillName.text = skillComponent.name;
+            skillName.color = skillComponent.grade switch
+            {
+                Skill.SkillGrade.Normal => new Color(1f, 1f, 1f),
+                Skill.SkillGrade.Rare => new Color(0.4f, 1f, 0.4f),
+                Skill.SkillGrade.Unique => new Color(0.4f, 0.4f, 1f),
+                Skill.SkillGrade.Legendary => new Color(1f, 1f, 0.4f),
+                _ => throw new ArgumentOutOfRangeException()
+            };
             skillDescription.text = skillComponent.description;
         }
     }
