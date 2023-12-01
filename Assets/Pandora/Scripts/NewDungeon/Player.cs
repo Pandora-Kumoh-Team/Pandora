@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Pandora.Scripts.NewDungeon;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
@@ -11,8 +12,8 @@ using UnityEngine.InputSystem.Controls;
 public class Player : MonoBehaviour
 {
     // TODO
-    // ±âÁ¸ÀÇ PlayerContoller¿¡ ¾Æ·¡ ÄÚµå ¼öÁ¤ÇÏ¿© Ãß°¡
-    // ¾ÆÀÌÅÛ ±¸ÀÔ ½Ã ÇÃ·¹ÀÌ¾îÀÇ Ã¼·Â, ½ºÅ³, ½ºÅÝ Ã³¸®
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PlayerContollerï¿½ï¿½ ï¿½Æ·ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ß°ï¿½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½, ï¿½ï¿½Å³, ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 
     float h;
     float v;
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
     {
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-        //Project Setting -> Input¿¡ Iteration Ãß°¡ÇØ¼­ »ç¿ëÇØ¾ßÇÔ(left shift)
+        //Project Setting -> Inputï¿½ï¿½ Iteration ï¿½ß°ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½(left shift)
         iDown = Input.GetButtonDown("Iteration");
     }
 
