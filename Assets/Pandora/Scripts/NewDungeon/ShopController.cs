@@ -1,24 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class ShopController : MonoBehaviour
+namespace Pandora.Scripts.NewDungeon
 {
-    public RectTransform uiGroup;
-    public RectTransform text;
-    Player enterPlayer;
-
-    public void Enter(Player player)
+    public class ShopController : MonoBehaviour
     {
-        enterPlayer = player;
-        uiGroup.anchoredPosition = Vector3.zero;
-        text.anchoredPosition = Vector3.down * 1200;
-    }
+        public RectTransform uiGroup;
+        public RectTransform text;
+        global::Player enterPlayer;
 
-    public void Exit()
-    {
-        uiGroup.anchoredPosition = Vector3.down * 1200;
-        text.anchoredPosition = Vector3.zero;
+        public void Enter(global::Player player)
+        {
+            enterPlayer = player;
+            uiGroup.anchoredPosition = Vector3.zero;
+            text.anchoredPosition = Vector3.down * 1200;
+        }
+
+        public void Exit()
+        {
+            uiGroup.anchoredPosition = Vector3.down * 1200;
+            text.anchoredPosition = Vector3.zero;
+        }
     }
 }

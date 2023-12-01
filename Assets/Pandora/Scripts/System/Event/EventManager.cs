@@ -12,7 +12,9 @@ namespace Pandora.Scripts.System.Event
         PlayerHealthChanged,
         BossHealthChanged,
         PlayerAttackEnemy,
-        PlayerSkillChanged
+        PlayerSkillChanged,
+        
+        MapGenerateComplete,
     }
     
     /// <summary>
@@ -59,7 +61,7 @@ namespace Pandora.Scripts.System.Event
             _eventListeners[pandoraEventType].Remove(listener);
         }
         
-        public void TriggerEvent(PandoraEventType pandoraEventType, object data)
+        public void TriggerEvent(PandoraEventType pandoraEventType, object data = null)
         {
             if (!_eventListeners.ContainsKey(pandoraEventType))
             {
