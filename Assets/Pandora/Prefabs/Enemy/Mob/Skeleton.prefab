@@ -190,6 +190,7 @@ MonoBehaviour:
   hitSounds:
   - {fileID: 8300000, guid: 5d808ad21849a5e4f84ea0ce4f90a30d, type: 3}
   hitSoundVolume: 0.5
+  difficulty: 3
 --- !u!1 &5136314326188862747
 GameObject:
   m_ObjectHideFlags: 0

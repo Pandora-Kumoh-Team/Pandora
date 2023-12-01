@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pandora.Scripts.Player.Controller;
+using UnityEngine;
 
 namespace Pandora.Scripts.NewDungeon.Rooms
 {
@@ -18,8 +19,9 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         {
             if (other.CompareTag("Player"))
             {
+                var pc = other.GetComponent<PlayerController>();
+                if (!pc.onControl) return;
                 _room.OnPlayerEnter(other.gameObject);
-                
             }
         }
     }

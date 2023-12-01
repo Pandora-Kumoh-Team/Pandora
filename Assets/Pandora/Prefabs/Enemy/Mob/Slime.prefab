@@ -189,6 +189,7 @@ MonoBehaviour:
   hitSounds:
   - {fileID: 8300000, guid: e4330542b09c426438bfba88396bef82, type: 3}
   hitSoundVolume: 0.4
+  difficulty: 3
 --- !u!95 &5214159069098656011
 Animator:
   serializedVersion: 5

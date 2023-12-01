@@ -209,7 +209,7 @@ Transform:
   - {fileID: 5202105974368479947}
   - {fileID: 5674656262086133001}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5806257058093524714
 SpriteRenderer:
@@ -362,6 +362,7 @@ MonoBehaviour:
   hitSounds:
   - {fileID: 8300000, guid: 5d808ad21849a5e4f84ea0ce4f90a30d, type: 3}
   hitSoundVolume: 0.5
+  difficulty: 5
 --- !u!1001 &3723448240927367359
 PrefabInstance:
   m_ObjectHideFlags: 0

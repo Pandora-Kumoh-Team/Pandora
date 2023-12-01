@@ -162,6 +162,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                 door.OpenDoor();
             }
             transform.Find("EnterCollider").gameObject.SetActive(false);
+            StageController.Instance.OnRoomClear();
         }
 
         public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)
