@@ -17,6 +17,8 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         {
             if (_isSpawned && _boss == null && !isClear)
             {
+                if(StageController.Instance.currentStage == 2)
+                    GameManager.Instance.GameClear();
                 isClear = true;
                 var playerNum = Random.Range(0, 2);
                 GameManager.Instance.GetActiveSkill(playerNum);
