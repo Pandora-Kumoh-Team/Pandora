@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 5769182}
   - component: {fileID: 5769183}
   - component: {fileID: 5769184}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 27107789}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 35181634}
   - component: {fileID: 35181635}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HPItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,8 +286,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 140182397
+  m_SortingLayer: 6
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: ddf8838d0a06d8d4c9dec9e3bed69260, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 62579129}
   - component: {fileID: 62579130}
   - component: {fileID: 62579131}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TopDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 157988599}
   - component: {fileID: 157988598}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ShopBox3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -639,8 +639,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 140182397
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: 8284690431070618562, guid: 20d6cce5c7ac33b4e97f0f98a09aa347, type: 3}
   m_Color: {r: 0.499288, g: 0.6046372, b: 0.6415094, a: 1}
@@ -949,7 +949,7 @@ GameObject:
   - component: {fileID: 291997448}
   - component: {fileID: 291997450}
   - component: {fileID: 291997449}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1009,8 +1009,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 140182397
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1229,6 +1229,7 @@ Transform:
   - {fileID: 62579129}
   - {fileID: 816476884}
   - {fileID: 1474085564}
+  - {fileID: 1741038019}
   - {fileID: 393703698}
   - {fileID: 78483937}
   m_Father: {fileID: 0}
@@ -1265,7 +1266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 309106896}
   - component: {fileID: 309106895}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ShopBox1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1310,8 +1311,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 140182397
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: 8284690431070618562, guid: 20d6cce5c7ac33b4e97f0f98a09aa347, type: 3}
   m_Color: {r: 0.499288, g: 0.6046372, b: 0.6415094, a: 1}
@@ -1428,7 +1429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 393703698}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1449,7 +1450,6 @@ Transform:
   m_Children:
   - {fileID: 1443079873}
   - {fileID: 27107789}
-  - {fileID: 1741038019}
   m_Father: {fileID: 303300432}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1598,7 +1598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 613583523}
   - component: {fileID: 613583524}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: StatItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1658,8 +1658,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 140182397
+  m_SortingLayer: 6
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300030, guid: ddf8838d0a06d8d4c9dec9e3bed69260, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1973,7 +1973,7 @@ GameObject:
   - component: {fileID: 713558897}
   - component: {fileID: 713558899}
   - component: {fileID: 713558898}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2033,8 +2033,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 140182397
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2229,7 +2229,7 @@ GameObject:
   - component: {fileID: 816476884}
   - component: {fileID: 816476885}
   - component: {fileID: 816476886}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BottomDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2402,7 +2402,7 @@ GameObject:
   - component: {fileID: 1032768422}
   - component: {fileID: 1032768423}
   - component: {fileID: 1032768424}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LeftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2609,7 +2609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1164667610}
   - component: {fileID: 1164667609}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ShopBox2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2654,8 +2654,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 140182397
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: 8284690431070618562, guid: 20d6cce5c7ac33b4e97f0f98a09aa347, type: 3}
   m_Color: {r: 0.499288, g: 0.6046372, b: 0.6415094, a: 1}
@@ -4524,7 +4524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1443079873}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4681,7 +4681,7 @@ GameObject:
   - component: {fileID: 1519856384}
   - component: {fileID: 1519856386}
   - component: {fileID: 1519856385}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TopD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4741,8 +4741,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 140182397
-  m_SortingLayer: 6
+  m_SortingLayerID: 2143849083
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5106,7 +5106,7 @@ GameObject:
   - component: {fileID: 1669006844}
   - component: {fileID: 1669006846}
   - component: {fileID: 1669006845}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LeftD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5166,8 +5166,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 140182397
-  m_SortingLayer: 6
+  m_SortingLayerID: 2143849083
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5274,7 +5274,7 @@ GameObject:
   - component: {fileID: 1669848469}
   - component: {fileID: 1669848471}
   - component: {fileID: 1669848470}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RightD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5334,8 +5334,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 140182397
-  m_SortingLayer: 6
+  m_SortingLayerID: 2143849083
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5442,7 +5442,7 @@ GameObject:
   - component: {fileID: 1708171691}
   - component: {fileID: 1708171693}
   - component: {fileID: 1708171692}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BottomD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5502,8 +5502,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 140182397
-  m_SortingLayer: 6
+  m_SortingLayerID: 2143849083
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5627,11 +5627,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741038018}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -1.54, z: -0.5}
+  m_LocalPosition: {x: 0.011598527, y: -1.1718978, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 393703698}
+  m_Father: {fileID: 303300432}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &1741038020
@@ -10512,7 +10512,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1751284263}
   - component: {fileID: 1751284264}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10561,7 +10561,7 @@ GameObject:
   - component: {fileID: 1751662225}
   - component: {fileID: 1751662227}
   - component: {fileID: 1751662226}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DownWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10621,8 +10621,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 140182397
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -11221,7 +11221,7 @@ GameObject:
   - component: {fileID: 1789824792}
   - component: {fileID: 1789824794}
   - component: {fileID: 1789824793}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TopWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11281,8 +11281,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 140182397
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -11846,7 +11846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1966529916}
   - component: {fileID: 1966529917}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SkillItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11906,8 +11906,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 140182397
+  m_SortingLayer: 6
   m_SortingOrder: 2
   m_Sprite: {fileID: -3058730055189521858, guid: 6549b0afeb0e6d84d8c4f70c48b74d2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
