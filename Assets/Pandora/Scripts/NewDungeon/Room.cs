@@ -27,10 +27,18 @@ public class Room : MonoBehaviour
             doors.Add(d);
             switch(d.doorType)
             {
-                case Door.DoorType.right: rightDoor = d; break;
-                case Door.DoorType.left: leftDoor = d; break;
-                case Door.DoorType.top: topDoor = d; break;
-                case Door.DoorType.bottom: bottomDoor = d; break;
+                case Door.DoorType.right:
+                    rightDoor = d;
+                    break;
+                case Door.DoorType.left:
+                    leftDoor = d;
+                    break;
+                case Door.DoorType.bottom:
+                    bottomDoor = d;
+                    break;
+                case Door.DoorType.top:
+                    topDoor = d;
+                    break;
             }
         }
 
