@@ -12,6 +12,10 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         {
             var pc = ownerPlayer.GetComponent<PlayerController>();
             pc.playerCurrentStat.playerStat += statToChange;
+            if(statToChange.maxHealth > 0)
+                pc.playerCurrentStat.nowHealth += statToChange.maxHealth;
+            else if (pc.playerCurrentStat.nowHealth > pc.playerCurrentStat.playerStat.maxHealth)
+                pc.playerCurrentStat.nowHealth = pc.playerCurrentStat.playerStat.maxHealth;
             pc.CallHealthChangedEvent();
         }
 
@@ -19,6 +23,10 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         {
             var pc = ownerPlayer.GetComponent<PlayerController>();
             pc.playerCurrentStat.playerStat -= statToChange;
+            if(statToChange.maxHealth < 0)
+                pc.playerCurrentStat.nowHealth += statToChange.maxHealth;
+            else if (pc.playerCurrentStat.nowHealth > pc.playerCurrentStat.playerStat.maxHealth)
+                pc.playerCurrentStat.nowHealth = pc.playerCurrentStat.playerStat.maxHealth;
             pc.CallHealthChangedEvent();
         }
     }

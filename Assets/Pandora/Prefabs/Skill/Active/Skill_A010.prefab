@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -366227677
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -662312442, guid: 15b3744a630dc124480b50d7f1d01d4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
@@ -137,7 +137,7 @@ Transform:
   m_Children:
   - {fileID: 3481659173140886974}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3972770669747575828
 MonoBehaviour:
