@@ -1,4 +1,6 @@
 ﻿using Pandora.Scripts.Enemy;
+using Pandora.Scripts.Player.Skill;
+using Pandora.Scripts.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using NotImplementedException = System.NotImplementedException;
@@ -70,6 +72,16 @@ namespace Pandora.Scripts.System
         {
             Time.timeScale = 0;
             inGameCanvas.transform.Find("GameClearPanel").gameObject.SetActive(true);
+        }
+
+        public void GetPassiveSkill(int playerNum)
+        {
+            inGameCanvas.GetComponent<InGameCanvasManager>().DisplaySkillSelection(Skill.SkillType.Passive, playerNum);
+        }
+
+        public void GetActiveSkill(int playerNum)
+        {
+            inGameCanvas.GetComponent<InGameCanvasManager>().DisplaySkillSelection(Skill.SkillType.Active, playerNum);
         }
     }
 }

@@ -37,7 +37,7 @@ Transform:
   - {fileID: 5434991626205897655}
   - {fileID: 4231849954176674882}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7744560395674872020
 SpriteRenderer:
@@ -109,6 +109,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d29e62818c883244fa61358323d30619, type: 3}
   - {fileID: 8300000, guid: 1601aadfb0d809c48ab7a37926e5a755, type: 3}
   hitSoundVolume: 0.5
+  difficulty: 5
 --- !u!95 &6183061685123255745
 Animator:
   serializedVersion: 5
