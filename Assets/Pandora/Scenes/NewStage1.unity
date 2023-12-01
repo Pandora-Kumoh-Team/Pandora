@@ -579,14 +579,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stages:
   - stageNumber: 0
-    difficulty: 10
+    difficulty: 8
     ableEnemies:
     - {fileID: 4967200875541738172, guid: 4fbb926bc51e39e42a7af2fca9baea77, type: 3}
     - {fileID: 883011995497824926, guid: a96ed5ec41f2c7941b6b2303a6d64fd1, type: 3}
     - {fileID: 3343593930727103347, guid: 5d389197b0ad7d541bcdd3d6ccbabe20, type: 3}
     boss: {fileID: 8465872249017615955, guid: 4622e6ee8c7206f4f81fa4c53624b201, type: 3}
   - stageNumber: 1
-    difficulty: 15
+    difficulty: 10
     ableEnemies:
     - {fileID: 4967200875541738172, guid: 4fbb926bc51e39e42a7af2fca9baea77, type: 3}
     - {fileID: 883011995497824926, guid: a96ed5ec41f2c7941b6b2303a6d64fd1, type: 3}
@@ -595,7 +595,7 @@ MonoBehaviour:
     - {fileID: 1590360282728883488, guid: cf71e59ed8361894bac313b7c9bb85fd, type: 3}
     boss: {fileID: 3228007296890552670, guid: c1a63eceb06b81748af39efd9d3a9fb8, type: 3}
   - stageNumber: 2
-    difficulty: 20
+    difficulty: 15
     ableEnemies:
     - {fileID: 683249207572804869, guid: 845b4e5221105034089609499142c2c1, type: 3}
     - {fileID: 8301634288843190310, guid: f46660ae5b0bd2649ade64223df2fb36, type: 3}
