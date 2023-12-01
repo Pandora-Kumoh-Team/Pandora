@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Boss
+  - Shop
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Wall
   - DangerRange
   - DeadPlayer
-  - 
+  - Door
   - 
   - 
   - 
@@ -57,12 +58,12 @@ TagManager:
   - name: FG
     uniqueID: 404974281
     locked: 0
-  - name: Door
+  - name: Wall
     uniqueID: 140182397
     locked: 0
   - name: Behind
     uniqueID: 1753969659
     locked: 0
-  - name: Wall
+  - name: Door
     uniqueID: 2143849083
     locked: 0
