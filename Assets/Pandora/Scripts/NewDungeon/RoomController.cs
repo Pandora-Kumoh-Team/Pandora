@@ -80,6 +80,11 @@ public class RoomController : MonoBehaviour
         {
             yield return null;
         }
+        if (loadRoomQueue.Count == 0)
+        {
+            var graphToScan = AstarPath.active.data.gridGraph;
+            AstarPath.active.Scan(graphToScan);
+        }
     }
 
     public void RegisterRoom(Room room)

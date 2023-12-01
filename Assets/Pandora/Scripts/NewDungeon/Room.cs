@@ -53,19 +53,19 @@ public class Room : MonoBehaviour
             {
                 case Door.DoorType.right: 
                     if(GetRight() == null)
-                        door.gameObject.SetActive(false);
+                        door.DisableDoor();
                     break;
                 case Door.DoorType.left:
                     if (GetLeft() == null)
-                        door.gameObject.SetActive(false);
+                        door.DisableDoor();
                     break;
                 case Door.DoorType.top:
-                if (GetTop() == null)
-                        door.gameObject.SetActive(false);
+                    if (GetTop() == null)
+                        door.DisableDoor();
                     break;
                 case Door.DoorType.bottom:
                     if (GetBottom() == null)
-                        door.gameObject.SetActive(false);
+                        door.DisableDoor();
                     break;
             }
         }
