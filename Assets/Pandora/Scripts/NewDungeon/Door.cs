@@ -10,4 +10,10 @@ public class Door : MonoBehaviour
     }
 
     public DoorType doorType;
+    
+    public void DisableDoor()
+    {
+        transform.Find("Door").gameObject.SetActive(false);
+        transform.Find("Wall").gameObject.SetActive(true);
+    }
 }
