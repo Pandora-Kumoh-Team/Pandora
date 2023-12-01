@@ -20,7 +20,7 @@ namespace Pandora.Scripts.Enemy
         private float AttackPatternDelay = 15f; //다른 공격 패턴 딜레이
         private bool isCharging = false;
         public float chargeSpeed = 3f; // 돌진 속도
-        public float chargeDuration = 1f; // 돌진 지속 시간
+        public float chargeDuration = 0.5f; // 돌진 지속 시간
         public float cooldownTime = 5f; // 돌진 쿨타임
         private bool isCooldown = false;
 
@@ -47,6 +47,7 @@ namespace Pandora.Scripts.Enemy
         public void Hit(HitParams hitParams)
         {
             var damage = hitParams.damage;
+            anim.SetBool("isFollow", false);
             anim.SetTrigger("Hit");
             transform.Find("BossHP").gameObject.SetActive(true);
             //damage effect
@@ -57,6 +58,7 @@ namespace Pandora.Scripts.Enemy
 
             _enemyStatus.NowHealth -= reduceDamage;
             CallHealthChangeEvetnt();
+            
             if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && isCharging == false)
             {
                 StartCoroutine(StartChargingWithCooldown());
@@ -65,6 +67,7 @@ namespace Pandora.Scripts.Enemy
             {
                 StartCoroutine(Death());
             }
+            OnHitAnimationEnd();
         }
         private void OnDisable()
         {
@@ -93,6 +96,10 @@ namespace Pandora.Scripts.Enemy
             yield return new WaitForSeconds(1.5f);
             Destroy(gameObject);
         }
+        public void OnHitAnimationEnd()
+        {
+            anim.SetBool("isFollow", true);
+        }
         IEnumerator WIDE_AREA()//광폭화
         {
             yield return new WaitForSeconds(delay);
@@ -119,7 +126,6 @@ namespace Pandora.Scripts.Enemy
             }
 
         }
-
         void StartCharge()
         {
             isCharging = true;
@@ -135,12 +141,12 @@ namespace Pandora.Scripts.Enemy
                 anim.SetBool("isFollow", false);
                 anim.SetTrigger("Rush");
                 // 돌진 방향으로 이동
-                transform.Translate((target.transform.position - gameObject.transform.position).normalized * chargeSpeed * Time.deltaTime);                
+                transform.Translate((target.transform.position - gameObject.transform.position).normalized * chargeSpeed * Time.deltaTime);
                 yield return null; // 다음 프레임까지 대기
             }
 
             // 돌진 종료
-            isCharging = false; 
+            isCharging = false;
             anim.SetBool("isFollow", true);
         }
     }
