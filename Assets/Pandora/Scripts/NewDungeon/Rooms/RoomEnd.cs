@@ -20,6 +20,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                 isClear = true;
                 var playerNum = Random.Range(0, 2);
                 GameManager.Instance.GetActiveSkill(playerNum);
+                transform.Find("NextFloor").gameObject.SetActive(true);
             }
         }
 

@@ -3,6 +3,7 @@ using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Pandora.Scripts.NewDungeon
@@ -24,7 +25,7 @@ namespace Pandora.Scripts.NewDungeon
         
         public StageInfo[] stages;
         public int currentStage;
-        [HideInInspector] public StageInfo currentStageInfo;
+        public StageInfo currentStageInfo;
 
         private void Awake()
         {
@@ -32,6 +33,7 @@ namespace Pandora.Scripts.NewDungeon
             if (Instance == null)
             {
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -39,8 +41,15 @@ namespace Pandora.Scripts.NewDungeon
             }
             
             currentStageInfo = stages[currentStage];
+            // add scene load event
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
-        
+
+        private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+        {
+            currentStageInfo = stages[currentStage];
+        }
+
         public GameObject GetRandomMob(int leftDifficulty)
         {
             var possibleMobs = Array.FindAll(currentStageInfo.ableEnemies, x => x.GetComponent<EnemyController>().difficulty <= leftDifficulty);

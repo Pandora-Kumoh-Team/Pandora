@@ -161,7 +161,6 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             {
                 door.OpenDoor();
             }
-            transform.Find("EnterCollider").gameObject.SetActive(false);
             StageController.Instance.OnRoomClear();
         }
 
