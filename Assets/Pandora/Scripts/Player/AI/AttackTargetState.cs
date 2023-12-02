@@ -65,31 +65,97 @@ namespace Pandora.Scripts.Player.Controller
             }
             
             // 접근 이동
-            if (distance > _minTargetDistance)
+            // 적과 나를 잇는 선분에서 적과 최대 사거리만큼 떨어진 지점을 구한다.
+            var targetPos = _target.transform.position;
+            var myPos = player.transform.position;
+            var attackingPos = GetSafePosition(targetPos, player);
+            
+            // Seeker를 통해 이동한다.
+            if(Vector2.Distance(attackingPos, myPos) > 1f)
             {
-                // 적과 나를 잇는 선분에서 적과 최대 사거리만큼 떨어진 지점을 구한다.
-                var targetPos = _target.transform.position;
-                var myPos = player.transform.position;
-                var dir = (targetPos - myPos).normalized;
-                var attackingPos = targetPos - dir * _minTargetDistance;
-                
-                // Seeker를 통해 이동한다.
-                if(_path == null || Vector2.Distance(nowWaypoint, targetPos) > 5f)
+                if (_path == null || Vector2.Distance(nowWaypoint, targetPos) > 5f)
                 {
                     _seeker.StartPath(myPos, attackingPos, OnPathComplete);
                     nowWaypoint = attackingPos;
                 }
-                MoveToTarget(player);
             }
-            // 너무 접근시 후퇴
-            else if (distance < _minTargetDistance * 0.6f)
-            {
-                player._playerController.moveDir = (player.transform.position - _target.transform.position).normalized;
-            }
-            // 중간 값에선 정지
             else
             {
                 player._playerController.moveDir = Vector2.zero;
+            }
+            MoveToTarget(player);
+            
+            
+            var safePoint = GetSafePosition(_target.transform.position, player);
+            Debug.DrawLine(safePoint + Vector2.up * 0.5f, safePoint - Vector2.up * 0.5f, Color.red);
+            Debug.DrawLine(safePoint + Vector2.left * 0.5f, safePoint - Vector2.left * 0.5f, Color.red);
+            DrawCircle(player.transform.position, 5f, Color.green);
+        }
+        
+        // Debug Draw Circle
+        private void DrawCircle(Vector2 center, float radius, Color color)
+        {
+            var theta = 0f;
+            var x = radius * Mathf.Cos(theta);
+            var y = radius * Mathf.Sin(theta);
+            var pos = center + new Vector2(x, y);
+            var newPos = Vector2.zero;
+            for (var i = 0; i < 30; i++)
+            {
+                theta += (2 * Mathf.PI * 10) / 360;
+                x = radius * Mathf.Cos(theta);
+                y = radius * Mathf.Sin(theta);
+                newPos = center + new Vector2(x, y);
+                Debug.DrawLine(pos, newPos, color);
+                pos = newPos;
+            }
+        }
+        
+        private Vector2 GetSafePosition(Vector3 targetPos, PlayerAI player)
+        {
+            var attackRange = player._playerController.playerCurrentStat.AttackRange;
+            var myPos = player.transform.position;
+            const float findDangerRange = 5f;
+            // 근처에 있는 위험요소를 감지한다.
+            var dangerRange =
+                Physics2D.OverlapCircleAll(myPos, findDangerRange, LayerMask.GetMask("DangerRange", "Enemy"));
+            
+            // 원 안에 위험요소가 없으면 현재 위치와 가장 가까운 원 안의 위치를 반환한다.
+            if (dangerRange.Length == 0)
+            {
+                var dir = (targetPos - myPos).normalized;
+                return targetPos - dir * attackRange;
+            }
+            // 원 안에 위험요소가 있으면 모든 위험요소로 부터 가장 먼거리에 있는 원 안의 점을 반환한다.
+            else
+            {
+                // 원 테두리의 방향의 점을 배열에 넣는다
+                const int pointsCount = 32;
+                var points = new Vector3[pointsCount];
+                for (var i = 0; i < pointsCount; i++)
+                {
+                    var rad = i * Mathf.PI / pointsCount * 2;
+                    points[i] = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * attackRange + targetPos;
+                }
+                // 각 점들의 각 위험요소와의 거리의 합을 구한다.
+                var sumDistances = new float[pointsCount];
+                for (var i = 0; i < pointsCount; i++)
+                {
+                    var sum = 0f;
+                    foreach (var danger in dangerRange)
+                    {
+                        sum += Vector2.Distance(points[i], danger.transform.position);
+                    }
+                    // 현재 위치와 목표 위치와의 거리를 뺀다.
+                    sumDistances[i] = sum - Vector2.Distance(points[i], player.transform.position);
+                }
+                // 가장 거리가 먼 점을 반환한다.
+                var maxIndex = 0;
+                for (var i = 1; i < pointsCount; i++)
+                {
+                    if (sumDistances[maxIndex] < sumDistances[i]) maxIndex = i;
+                }
+                return points[maxIndex];
             }
         }
         
