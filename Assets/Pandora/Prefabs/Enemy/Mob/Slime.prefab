@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 4401755154034256571}
   - component: {fileID: 7978438745152959731}
   - component: {fileID: 3047929123085203311}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FootStepParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
