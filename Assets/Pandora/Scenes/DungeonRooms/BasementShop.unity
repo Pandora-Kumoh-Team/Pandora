@@ -2951,7 +2951,7 @@ GameObject:
   - component: {fileID: 1741038020}
   - component: {fileID: 1741038023}
   - component: {fileID: 1741038024}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Zone
   m_TagString: Shop
   m_Icon: {fileID: 0}

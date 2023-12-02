@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 1546740479}
   - component: {fileID: 1546740478}
   - component: {fileID: 1546740480}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: NextFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

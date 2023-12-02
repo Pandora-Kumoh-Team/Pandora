@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7113225063081898031}
   - component: {fileID: 8725059300555373500}
   - component: {fileID: 376573727410595023}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4581307996325357245}
   - component: {fileID: 2522881697763922289}
   - component: {fileID: 1305011736470752626}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: BossHPBarSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 2566870864991961772}
   - component: {fileID: 5308508246540600695}
   - component: {fileID: 7781619791572357633}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: CircleAttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 7230372690600915285}
   - component: {fileID: 5200553811589703470}
   - component: {fileID: 1161432976178810668}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: FillImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 6845952413674989148}
   - component: {fileID: 7007392175457866087}
   - component: {fileID: 4655467884206102523}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: BossAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4470714825240659036}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 1551952768920313729}
   - component: {fileID: 6021716443584794042}
   - component: {fileID: 3348312647435225860}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: BossHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +564,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4095173891644967713}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -651,7 +651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1667724608807307691}
   - component: {fileID: 7183807676142640125}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -756,7 +756,7 @@ Transform:
   - {fileID: 3336260229113701415}
   - {fileID: 2566870864991961772}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1952009940747763438
 SpriteRenderer:
@@ -972,7 +972,7 @@ GameObject:
   - component: {fileID: 4365034056121661065}
   - component: {fileID: 4061267206784712298}
   - component: {fileID: 8057003016987566979}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
