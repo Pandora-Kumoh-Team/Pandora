@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Pathfinding;
 using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
@@ -50,14 +52,14 @@ namespace Pandora.Scripts.Player.Controller
             float distance;
             var hit = Physics2D.Raycast( player.transform.position, _target.transform.position - player.transform.position, 100f,
                 LayerMask.GetMask("Enemy"));
-            if(hit.collider != null)
+            if (hit.collider != null)
                 distance = hit.distance;
             else
-                distance = Vector2.Distance( player.transform.position, _target.transform.position);
+                distance = _target.GetComponent<Collider2D>().Distance(player.GetComponent<Collider2D>()).distance;
             
             // 공격 사거리 이내면 공격
             var _minTargetDistance = player._playerController.playerCurrentStat.AttackRange;
-            if (distance <= _minTargetDistance)
+            if (distance <= _minTargetDistance + 1f)
             {
                 player._playerController.attackDir =
                     (_target.transform.position - player.transform.position).normalized;
@@ -117,11 +119,26 @@ namespace Pandora.Scripts.Player.Controller
             var myPos = player.transform.position;
             const float findDangerRange = 5f;
             // 근처에 있는 위험요소를 감지한다.
-            var dangerRange =
+            var dangerColliders =
                 Physics2D.OverlapCircleAll(myPos, findDangerRange, LayerMask.GetMask("DangerRange", "Enemy"));
+            var targetCollider = _target.GetComponent<Collider2D>();
+            
+            // 위험요소를 가까운 순으로 3개만 고른다.
+            var dangerList = dangerColliders.ToList().OrderBy(x => Vector2.Distance(x.transform.position, myPos)).ToList();
+            if (dangerList.Count > 3)
+                dangerColliders = dangerList.GetRange(0, 3).ToArray();
+            
+            
+            // 위험요소 위치에 십자가를 그린다.
+            foreach (var danger in dangerColliders)
+            {
+                var dangerPos = danger.transform.position;
+                Debug.DrawLine(dangerPos + Vector3.up * 0.5f, dangerPos - Vector3.up * 0.2f, Color.red);
+                Debug.DrawLine(dangerPos + Vector3.left * 0.5f, dangerPos - Vector3.left * 0.2f, Color.red);
+            }
             
             // 원 안에 위험요소가 없으면 현재 위치와 가장 가까운 원 안의 위치를 반환한다.
-            if (dangerRange.Length == 0)
+            if (dangerColliders.Length == 0)
             {
                 var dir = (targetPos - myPos).normalized;
                 return targetPos - dir * attackRange;
@@ -131,34 +148,63 @@ namespace Pandora.Scripts.Player.Controller
             {
                 // 원 테두리의 방향의 점을 배열에 넣는다
                 const int pointsCount = 32;
-                var points = new Vector3[pointsCount];
-                for (var i = 0; i < pointsCount; i++)
+                const int pointsAtOneWay = 2;
+                var points = new Vector3[pointsCount * pointsAtOneWay];
+                for (var i = 0; i < pointsCount; i += pointsAtOneWay)
                 {
                     var rad = i * Mathf.PI / pointsCount * 2;
-                    points[i] = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * attackRange + targetPos;
+                    for(var j = 0; j < pointsAtOneWay; j++)
+                    {
+                        points[i + j] = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * attackRange * (1 - (float)j / pointsAtOneWay) + targetPos;
+                    }
+                    // collider 크기를 고려하여 거리를 더 먼곳으로 설정한다.
+                    var closestPoint = targetCollider.ClosestPoint(points[i]);
+                    var distance = Vector2.Distance(closestPoint, targetPos);
+                    var addVector = (points[i] - targetPos).normalized * distance;
+                    for (int j = 0; j < pointsAtOneWay; j++)
+                    {
+                        points[i + j] += addVector;
+                    }
                 }
-                // 각 점들의 각 위험요소와의 거리의 합을 구한다.
-                var sumDistances = new float[pointsCount];
-                for (var i = 0; i < pointsCount; i++)
+                
+                // TODO : 도달할 수 없는 점을 제거한다
+                
+                // Debug Draw points
+                foreach (var point in points)
+                {
+                    Debug.DrawLine(point + Vector3.up * 0.1f, point - Vector3.up * 0.1f, Color.green);
+                    Debug.DrawLine(point + Vector3.left * 0.1f, point - Vector3.left * 0.1f, Color.green);
+                }
+                // 각 점들의 각 위험요소와의 거리를 위험도로 반환하여 합을 구한다.
+                var sumDangerAmount = new float[pointsCount * pointsAtOneWay];
+                for (var i = 0; i < pointsCount * pointsAtOneWay; i++)
                 {
                     var sum = 0f;
-                    foreach (var danger in dangerRange)
+                    foreach (var danger in dangerColliders)
                     {
-                        sum += Vector2.Distance(points[i], danger.transform.position);
+                        var closestPoint = danger.ClosestPoint(points[i]);
+                        sum += 10 / Vector2.Distance(closestPoint, danger.transform.position);
                     }
                     // 현재 위치와 목표 위치와의 거리를 뺀다.
-                    sumDistances[i] = sum - Vector2.Distance(points[i], player.transform.position);
+                    var distance = Vector2.Distance(points[i], player.transform.position);
+                    sumDangerAmount[i] = sum;
                 }
-                // 가장 거리가 먼 점을 반환한다.
-                var maxIndex = 0;
-                for (var i = 1; i < pointsCount; i++)
+                // 점들을 위험도가 낮은 순으로 정렬한다.
+                var sortedPoints = points.ToList().OrderBy(x => sumDangerAmount[Array.IndexOf(points, x)]).ToList();
+                var nearestPoint = sortedPoints[0];
+                var nearestPointDistance = Vector2.Distance(nearestPoint, player.transform.position);
+                for (var i = 0; i < sortedPoints.Count / 4; i++)
                 {
-                    if (sumDistances[maxIndex] < sumDistances[i]) maxIndex = i;
+                    var distance = Vector2.Distance(sortedPoints[i], player.transform.position);
+                    if (distance > nearestPointDistance)
+                        break;
+                    nearestPoint = sortedPoints[i];
+                    nearestPointDistance = distance;
                 }
-                return points[maxIndex];
+                return nearestPoint;
             }
         }
-        
+
         // 경로 존재시 이동
         private void MoveToTarget(PlayerAI player)
         {
