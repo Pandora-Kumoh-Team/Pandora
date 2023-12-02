@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2497060502520129570}
   - component: {fileID: 1266207913369286602}
   - component: {fileID: 4734284233731415661}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,3 +270,4 @@ MonoBehaviour:
   hitSounds:
   - {fileID: 8300000, guid: 095839120139d6946916d50a54ad177b, type: 3}
   hitSoundVolume: 0.3
+  difficulty: 1

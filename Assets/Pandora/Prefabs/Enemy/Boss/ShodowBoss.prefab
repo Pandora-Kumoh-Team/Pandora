@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 6845952413674989148}
   - component: {fileID: 7007392175457866087}
   - component: {fileID: 4655467884206102523}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: BossAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
