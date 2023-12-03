@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Pandora.Scripts.Player.Controller;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -95,6 +96,7 @@ namespace Pandora.Scripts.System
             OnMasterVolumeChanged(_saveDataStruct.masterVolume);
             OnMusicVolumeChanged(_saveDataStruct.musicVolume);
             OnSfxVolumeChanged(_saveDataStruct.sfxVolume);
+            PlayerManager.Instance.SetPlayerInput(inputActionAsset);
         }
         
         public void SaveKeyBindings()
