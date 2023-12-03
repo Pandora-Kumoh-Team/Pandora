@@ -243,21 +243,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2138955389050957893, guid: 7c8d9fbdb3bd8594b80164775b181369, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5295153776812862598, guid: 7c8d9fbdb3bd8594b80164775b181369, type: 3}
       propertyPath: m_Name
       value: ShadowBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308508246540600695, guid: 7c8d9fbdb3bd8594b80164775b181369, type: 3}
-      propertyPath: m_Size.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308508246540600695, guid: 7c8d9fbdb3bd8594b80164775b181369, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7169211773879359319, guid: 7c8d9fbdb3bd8594b80164775b181369, type: 3}
       propertyPath: m_RootOrder
