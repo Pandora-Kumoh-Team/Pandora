@@ -12,6 +12,9 @@ namespace Pandora.Scripts.System
         // Singleton
         public static SoundManager Instance;
         
+        public AudioMixer audioMixer;
+        
+        [Header("Background Music")]
         // Audio Sources
         public AudioSource audioSource;
         
@@ -90,6 +93,11 @@ namespace Pandora.Scripts.System
                 audioSource.PlayOneShot(ingameAmbienceClip, ingameAmbienceVolume);
                 yield return new WaitForSeconds(ingameAmbienceClip.length);
             }
+        }
+        
+        public void SetAudioGroupVolume(string parameterName, float volume)
+        {
+            audioMixer.SetFloat(parameterName, volume);
         }
     }
 }
