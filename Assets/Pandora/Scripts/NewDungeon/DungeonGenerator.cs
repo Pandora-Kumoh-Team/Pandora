@@ -1,24 +1,39 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DungeonGenerator : MonoBehaviour
+namespace Pandora.Scripts.NewDungeon
 {
-    public DungeonGenerationData dungeonGenerationData;
-    private List<Vector2Int> dungeonRooms;
-
-    private void Start()
+    public class DungeonGenerator : MonoBehaviour
     {
-        dungeonRooms = DungeonCrawlerController.GenerateDungeon(dungeonGenerationData);
-        SpawnRooms(dungeonRooms);
-    }
-
-    private void SpawnRooms(IEnumerable<Vector2Int> rooms)
-    {
-        RoomController.instance.LoadRoom("Start", 0, 0);
-        foreach(Vector2Int roomLocation in rooms)
+        public DungeonGenerationData dungeonGenerationData;
+        private List<Vector2Int> dungeonRoomPositions;
+        private void Start()
         {
-            RoomController.instance.LoadRoom("Empty", roomLocation.x, roomLocation.y);
+            dungeonRoomPositions = RoomPositionsGenerator.GenerateRoomPositions(dungeonGenerationData);
+            SpawnRooms(dungeonRoomPositions);
+        }
+
+        private void SpawnRooms(IEnumerable<Vector2Int> roomPositions)
+        {
+            RoomController.Instance.EnqueueRoomToGeneration("Start", 0, 0);
+            int roomIndex = 0;
+            int shopIndex = Random.Range(1, 10);
+            foreach (var roomPosition in roomPositions)
+            {
+                if(shopIndex == roomIndex)
+                {
+                    RoomController.Instance.EnqueueRoomToGeneration("Shop", roomPosition.x, roomPosition.y);
+                }
+                else if(roomPosition == dungeonRoomPositions[^1] && roomPosition != Vector2Int.zero)
+                {
+                    RoomController.Instance.EnqueueRoomToGeneration("End", roomPosition.x, roomPosition.y);
+                }
+                else
+                {
+                    RoomController.Instance.EnqueueRoomToGeneration("Empty", roomPosition.x, roomPosition.y);
+                }
+                roomIndex++;
+            }
         }
     }
 }

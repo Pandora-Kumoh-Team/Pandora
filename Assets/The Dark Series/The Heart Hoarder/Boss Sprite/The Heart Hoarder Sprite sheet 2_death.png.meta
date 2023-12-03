@@ -1,0 +1,360 @@
+fileFormatVersion: 2
+guid: a56c8dcaa031299439090bcd7b012561
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 20
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_death_0
+      rect:
+        serializedVersion: 2
+        x: 2014
+        y: 0
+        width: 84
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3265906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b85c96a729dfdf74fb188821c83d4ca0
+      internalID: -1156621566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_death_1
+      rect:
+        serializedVersion: 2
+        x: 1793
+        y: 0
+        width: 84
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3265906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ba368a70608c1e48abdcf86a88cb777
+      internalID: -54517025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_death_2
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 0
+        width: 84
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3265906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1d0b94b33c9f074482e7edfd7e50fa8
+      internalID: 1423707158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_death_3
+      rect:
+        serializedVersion: 2
+        x: 1348
+        y: 0
+        width: 84
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3265906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baa3c5d917ed6ed409558430968aa3d2
+      internalID: -1256576969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_death_4
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 0
+        width: 84
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3265906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d220540ffb086c64ebc5c87e9bda8b01
+      internalID: 236591609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_death_5
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 0
+        width: 84
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3265906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4892f463d28b3404a932a630bfb652d0
+      internalID: 1129880872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_death_6
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 0
+        width: 84
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3265906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f991e17e08f9ac4baeed3041a102c41
+      internalID: 1052141438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_death_7
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 0
+        width: 84
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3265906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cf79a287e8d0274ba9509bf177d5264
+      internalID: 341393028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_death_8
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 0
+        width: 84
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3265906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba77d43a3a77e6f4e8527dfdc9783db9
+      internalID: -1636637450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_death_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 84
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3265906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28d6f68284bd9b245b6f18c1949a32b0
+      internalID: -286644902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      The Heart Hoarder Sprite sheet 2_death_0: -1156621566
+      The Heart Hoarder Sprite sheet 2_death_1: -54517025
+      The Heart Hoarder Sprite sheet 2_death_2: 1423707158
+      The Heart Hoarder Sprite sheet 2_death_3: -1256576969
+      The Heart Hoarder Sprite sheet 2_death_4: 236591609
+      The Heart Hoarder Sprite sheet 2_death_5: 1129880872
+      The Heart Hoarder Sprite sheet 2_death_6: 1052141438
+      The Heart Hoarder Sprite sheet 2_death_7: 341393028
+      The Heart Hoarder Sprite sheet 2_death_8: -1636637450
+      The Heart Hoarder Sprite sheet 2_death_9: -286644902
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

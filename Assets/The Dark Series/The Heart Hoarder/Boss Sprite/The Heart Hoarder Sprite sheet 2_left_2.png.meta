@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,10 +126,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_0
       rect:
         serializedVersion: 2
-        x: 7175
-        y: 625
-        width: 77
-        height: 70
+        x: 3322
+        y: 496
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6eafc9a0ce2f5934e99db10fe8880a56
-      internalID: 1693318778
+      spriteID: 94e8cdfa1b29d604f922233797ff78b6
+      internalID: 1562438358
       vertices: []
       indices: 
       edges: []
@@ -147,10 +147,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_1
       rect:
         serializedVersion: 2
-        x: 7399
-        y: 625
-        width: 76
-        height: 66
+        x: 3096
+        y: 495
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52ae660c16895ee4c99949ea013a258d
-      internalID: 1679570172
+      spriteID: f5294b7ae6ddb164c84e0e64bcbe8c50
+      internalID: -1801283238
       vertices: []
       indices: 
       edges: []
@@ -168,10 +168,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_2
       rect:
         serializedVersion: 2
-        x: 7621
-        y: 625
-        width: 76
-        height: 66
+        x: 2872
+        y: 496
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14e8d9309ccbd264c95679cbbabd82f6
-      internalID: 1514813987
+      spriteID: 984e9306b8f5d0b41bf66b273d3d32e9
+      internalID: 458970680
       vertices: []
       indices: 
       edges: []
@@ -189,10 +189,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_3
       rect:
         serializedVersion: 2
-        x: 7842
-        y: 625
-        width: 78
-        height: 66
+        x: 2651
+        y: 496
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37686cb7728df4b42b856bf6e4827298
-      internalID: -780733356
+      spriteID: 732b1cde12b57d34582c8958b6ecc6bb
+      internalID: -180783536
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_4
       rect:
         serializedVersion: 2
-        x: 7175
-        y: 505
-        width: 77
-        height: 70
+        x: 2428
+        y: 496
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02a0ee0d7661aa5458f0131dad381181
-      internalID: -1157102756
+      spriteID: e786042f5fb95b54390ba1729e13d034
+      internalID: -807013379
       vertices: []
       indices: 
       edges: []
@@ -231,10 +231,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_5
       rect:
         serializedVersion: 2
-        x: 7401
-        y: 505
-        width: 74
-        height: 69
+        x: 2205
+        y: 495
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,8 +242,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 608a9b850e2c7274d985d5fbfef3ba2d
-      internalID: 1782538144
+      spriteID: f61bfeab563f233468906628733abf15
+      internalID: 1784886367
       vertices: []
       indices: 
       edges: []
@@ -252,10 +252,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_6
       rect:
         serializedVersion: 2
-        x: 7620
-        y: 505
-        width: 77
-        height: 69
+        x: 1984
+        y: 495
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,8 +263,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7f63c73866448241abc8c2affa020c0
-      internalID: -670733635
+      spriteID: 141acab41bf3ea344aab8dbd1a7655b9
+      internalID: 500253801
       vertices: []
       indices: 
       edges: []
@@ -273,10 +273,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_7
       rect:
         serializedVersion: 2
-        x: 7842
-        y: 505
-        width: 78
-        height: 69
+        x: 1761
+        y: 494
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,8 +284,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6506bb29d44a0b40b948c9b6da308dc
-      internalID: 1227385281
+      spriteID: 0b954d83119a4d34bba8e88217560eda
+      internalID: -702473681
       vertices: []
       indices: 
       edges: []
@@ -294,10 +294,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_8
       rect:
         serializedVersion: 2
-        x: 6539
-        y: 407
-        width: 34
-        height: 58
+        x: 1539
+        y: 495
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,8 +305,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64fd549da2a1b0b479c34b0f004222a8
-      internalID: -1700621977
+      spriteID: d2a2a3bf64687874f99100261f262d69
+      internalID: 1132898141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_9
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 496
+        width: 96
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 233a650fbec87c540baa07d31e7b6351
+      internalID: 2094816600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_10
+      rect:
+        serializedVersion: 2
+        x: 1096
+        y: 496
+        width: 96
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34bae889897974d49b79367d2c9b36bd
+      internalID: -2034550528
       vertices: []
       indices: 
       edges: []
@@ -315,10 +357,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_11
       rect:
         serializedVersion: 2
-        x: 6983
-        y: 396
-        width: 27
-        height: 65
+        x: 874
+        y: 496
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,8 +368,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8048965cd9c2e645a14341c93e8e800
-      internalID: 1623240226
+      spriteID: 76693bfe13b39e24b892cc707fcc5d4b
+      internalID: 2136879490
       vertices: []
       indices: 
       edges: []
@@ -336,10 +378,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_12
       rect:
         serializedVersion: 2
-        x: 7198
-        y: 388
-        width: 38
-        height: 70
+        x: 651
+        y: 496
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,8 +389,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf78d5beda2830247a66319b87f5d7ed
-      internalID: -1159335791
+      spriteID: 2875ede35328d91429ed7d774a45ed75
+      internalID: -630474727
       vertices: []
       indices: 
       edges: []
@@ -357,10 +399,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_13
       rect:
         serializedVersion: 2
-        x: 7420
-        y: 384
-        width: 35
-        height: 73
+        x: 429
+        y: 496
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,8 +410,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 393a61ccf8f827d46ab728363dd70033
-      internalID: -499156107
+      spriteID: 90c46898f6fcae64183178917ae7a4f5
+      internalID: 770112784
       vertices: []
       indices: 
       edges: []
@@ -378,10 +420,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_14
       rect:
         serializedVersion: 2
-        x: 7639
-        y: 384
-        width: 39
-        height: 72
+        x: 207
+        y: 495
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,8 +431,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc8099cf19b9de84eafd57a859ab6933
-      internalID: 1296034702
+      spriteID: 883362923045f3a42b763f475dab746b
+      internalID: -424580500
       vertices: []
       indices: 
       edges: []
@@ -399,10 +441,31 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_15
       rect:
         serializedVersion: 2
-        x: 7842
-        y: 388
+        x: 0
+        y: 498
         width: 78
-        height: 66
+        height: 68
+      alignment: 9
+      pivot: {x: 0.44965264, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04e6773db4837cf46ad8953c611dd712
+      internalID: -1392907261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_16
+      rect:
+        serializedVersion: 2
+        x: 3315
+        y: 371
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -410,8 +473,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd29d66ff99f7154b953d83797764a13
-      internalID: -463283674
+      spriteID: cb18618960d38344ba1a8dc6cf9db2e7
+      internalID: 124655081
       vertices: []
       indices: 
       edges: []
@@ -420,10 +483,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_17
       rect:
         serializedVersion: 2
-        x: 6755
-        y: 403
-        width: 33
-        height: 65
+        x: 3093
+        y: 369
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,8 +494,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee09970bb3a58764b8979867e9afbd95
-      internalID: 2110580164
+      spriteID: 5bcdf64afbf3a8f468cb583bf4a37b7e
+      internalID: -1564039105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_18
+      rect:
+        serializedVersion: 2
+        x: 2870
+        y: 369
+        width: 100
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dff8b84668ba72459cb1a85580c86ae
+      internalID: 204511911
       vertices: []
       indices: 
       edges: []
@@ -441,10 +525,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_19
       rect:
         serializedVersion: 2
-        x: 6066
-        y: 271
-        width: 78
-        height: 66
+        x: 2648
+        y: 371
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,8 +536,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc7c9988bdc19b64baf2bc46a12e6f58
-      internalID: -341824713
+      spriteID: 60ee0184e6c38014b950b7872b1516ac
+      internalID: -1275894323
       vertices: []
       indices: 
       edges: []
@@ -462,10 +546,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_20
       rect:
         serializedVersion: 2
-        x: 6289
-        y: 271
-        width: 78
-        height: 66
+        x: 3315
+        y: 252
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,8 +557,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c187da68ae931d498a50c13fcae99dd
-      internalID: -765645953
+      spriteID: c423e997988f6ba4783480be7895c511
+      internalID: 1633495001
       vertices: []
       indices: 
       edges: []
@@ -483,10 +567,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_21
       rect:
         serializedVersion: 2
-        x: 6511
-        y: 271
-        width: 78
-        height: 66
+        x: 3091
+        y: 254
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -494,8 +578,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3befa69b3be0c1f4983a4770676ac0b5
-      internalID: 1474083151
+      spriteID: feb35b6cd735a5046bf6bc7753ca7269
+      internalID: -522034939
       vertices: []
       indices: 
       edges: []
@@ -504,10 +588,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_22
       rect:
         serializedVersion: 2
-        x: 6734
-        y: 271
-        width: 77
-        height: 66
+        x: 2870
+        y: 252
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -515,8 +599,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12c2c786d80bed345b4f0cbf46fe4303
-      internalID: 1501984117
+      spriteID: c0f0e133ca9319742ab6e971c81ffa12
+      internalID: 1751744294
       vertices: []
       indices: 
       edges: []
@@ -525,10 +609,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_23
       rect:
         serializedVersion: 2
-        x: 6954
-        y: 271
-        width: 78
-        height: 66
+        x: 2648
+        y: 254
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -536,8 +620,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af5fe3bea70666644be06f8a8f749ad5
-      internalID: 529912340
+      spriteID: ab9c2c8345de2254bbf4dcb19bfeb741
+      internalID: 644436840
       vertices: []
       indices: 
       edges: []
@@ -546,10 +630,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_24
       rect:
         serializedVersion: 2
-        x: 7175
-        y: 271
-        width: 77
-        height: 66
+        x: 3315
+        y: 135
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -557,8 +641,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 104e121386f2bda47ac4453cb9711598
-      internalID: 185402197
+      spriteID: b4ff523bb43326e4eb208f04490ec038
+      internalID: -1039655274
       vertices: []
       indices: 
       edges: []
@@ -567,10 +651,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_25
       rect:
         serializedVersion: 2
-        x: 7397
-        y: 271
-        width: 78
-        height: 66
+        x: 3092
+        y: 133
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -578,8 +662,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18c9ed23d9726a64db70cfd67f933d1e
-      internalID: -1011829378
+      spriteID: db12115bdf1a4384eb49f0b0f7faadf2
+      internalID: -443264419
       vertices: []
       indices: 
       edges: []
@@ -588,10 +672,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_26
       rect:
         serializedVersion: 2
-        x: 7619
-        y: 271
-        width: 78
-        height: 66
+        x: 2870
+        y: 135
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -599,8 +683,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4db17e383b3d9f84591a83f3607a0cdb
-      internalID: 1596186752
+      spriteID: 67161ef276372a14782241526d2b3169
+      internalID: -606909172
       vertices: []
       indices: 
       edges: []
@@ -609,10 +693,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_27
       rect:
         serializedVersion: 2
-        x: 7842
-        y: 271
-        width: 78
-        height: 66
+        x: 2652
+        y: 133
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -620,302 +704,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1853fc62b3169c43bf180f5a8182cd2
-      internalID: -1542106691
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_29
-      rect:
-        serializedVersion: 2
-        x: 5399
-        y: 147
-        width: 78
-        height: 69
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c2cf060f4e4c3e748aca4f9ef23fc2f9
-      internalID: -1199189697
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_30
-      rect:
-        serializedVersion: 2
-        x: 5621
-        y: 150
-        width: 78
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eb360a9559736d24d8f21b5cb3b11e75
-      internalID: -1882603543
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_31
-      rect:
-        serializedVersion: 2
-        x: 5844
-        y: 150
-        width: 78
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 854f6035637cde241b410a281ce80c41
-      internalID: -1807545382
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_32
-      rect:
-        serializedVersion: 2
-        x: 6066
-        y: 150
-        width: 78
-        height: 58
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 979673cd40a308941aa6c129dd884ca8
-      internalID: 315311937
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_33
-      rect:
-        serializedVersion: 2
-        x: 6289
-        y: 146
-        width: 77
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 91ea127e1d44cdb47bdfa19cfb4543e0
-      internalID: 2059420456
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_34
-      rect:
-        serializedVersion: 2
-        x: 6511
-        y: 146
-        width: 78
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b28dab1f4afb67428ab7db8fd8fe5e8
-      internalID: 1904552063
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_35
-      rect:
-        serializedVersion: 2
-        x: 6734
-        y: 146
-        width: 75
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1b494af307a828c4a8dc8aeedcbea322
-      internalID: -300052982
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_36
-      rect:
-        serializedVersion: 2
-        x: 6956
-        y: 146
-        width: 74
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98542d6e190305d44898a10a72d3e640
-      internalID: -2039866633
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_38
-      rect:
-        serializedVersion: 2
-        x: 7186
-        y: 146
-        width: 62
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7b6288be9eabfe5458f6b985c6275ac8
-      internalID: 928303071
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_40
-      rect:
-        serializedVersion: 2
-        x: 7409
-        y: 146
-        width: 54
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2550e0ce016a6db43a5e1bdf486e8996
-      internalID: -2007887591
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_42
-      rect:
-        serializedVersion: 2
-        x: 7519
-        y: 146
-        width: 249
-        height: 47
-      alignment: 9
-      pivot: {x: 0.55208725, y: 0.48745596}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e20ec5a8a86d3104ab7a64f56f865046
-      internalID: 1905815912
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_44
-      rect:
-        serializedVersion: 2
-        x: 7768
-        y: 146
-        width: 223
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65663a8ae0741f84da6ed39ef994a19e
-      internalID: -177522042
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_46
-      rect:
-        serializedVersion: 2
-        x: 7623
-        y: 29
-        width: 70
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 55745962531de4f47a9c2eb35f2836cc
-      internalID: -1669621022
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: The Heart Hoarder Sprite sheet 2_left_2_47
-      rect:
-        serializedVersion: 2
-        x: 7846
-        y: 29
-        width: 70
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fddcfdc2359d8064bb1da409220d193c
-      internalID: 788426589
+      spriteID: 516c1f208fadd5545b7e4f47ffa495f6
+      internalID: 43305759
       vertices: []
       indices: 
       edges: []
@@ -924,10 +714,10 @@ TextureImporter:
       name: The Heart Hoarder Sprite sheet 2_left_2_28
       rect:
         serializedVersion: 2
-        x: 5177
-        y: 146
-        width: 78
-        height: 69
+        x: 3311
+        y: 12
+        width: 100
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -935,8 +725,176 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4babdd783686c7b409f52d4e9ab42b1b
-      internalID: 1014906918
+      spriteID: 92d7e054659e2aa4280f6f41613e6312
+      internalID: 1520935223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_29
+      rect:
+        serializedVersion: 2
+        x: 3094
+        y: 10
+        width: 100
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc003577bd96aec4e8e2f0d5f6c0b780
+      internalID: -1869335205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_30
+      rect:
+        serializedVersion: 2
+        x: 2871
+        y: 13
+        width: 100
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 283c93b5c48ff9e4bb78e283d6fadade
+      internalID: -2022789172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_31
+      rect:
+        serializedVersion: 2
+        x: 2648
+        y: 15
+        width: 100
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02e87fd4259833d41add2dbda3d02d10
+      internalID: -1815908011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_32
+      rect:
+        serializedVersion: 2
+        x: 2427
+        y: 14
+        width: 100
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a095fcbb17cbe0458ae73758e15c005
+      internalID: 290873545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_33
+      rect:
+        serializedVersion: 2
+        x: 2204
+        y: 14
+        width: 100
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0810bfc47eebf084c9623a135bf774e4
+      internalID: 433163726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_34
+      rect:
+        serializedVersion: 2
+        x: 1983
+        y: 12
+        width: 100
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5a909cf5a61bf347bf52397c8447594
+      internalID: -654324845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_35
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 14
+        width: 100
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b08af4001069a5459e271625ede6ef2
+      internalID: 694449282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Heart Hoarder Sprite sheet 2_left_2_36
+      rect:
+        serializedVersion: 2
+        x: 1538
+        y: 16
+        width: 100
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 347dfcf063859d643930a081d8ae441e
+      internalID: -1581434949
       vertices: []
       indices: 
       edges: []
@@ -952,54 +910,43 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      The Heart Hoarder Sprite sheet 2_left_2_0: 1693318778
-      The Heart Hoarder Sprite sheet 2_left_2_1: 1679570172
-      The Heart Hoarder Sprite sheet 2_left_2_10: -1590436316
-      The Heart Hoarder Sprite sheet 2_left_2_11: 1623240226
-      The Heart Hoarder Sprite sheet 2_left_2_12: -1159335791
-      The Heart Hoarder Sprite sheet 2_left_2_13: -499156107
-      The Heart Hoarder Sprite sheet 2_left_2_14: 1296034702
-      The Heart Hoarder Sprite sheet 2_left_2_15: -463283674
-      The Heart Hoarder Sprite sheet 2_left_2_16: -1819527680
-      The Heart Hoarder Sprite sheet 2_left_2_17: 2110580164
-      The Heart Hoarder Sprite sheet 2_left_2_18: 806556907
-      The Heart Hoarder Sprite sheet 2_left_2_19: -341824713
-      The Heart Hoarder Sprite sheet 2_left_2_2: 1514813987
-      The Heart Hoarder Sprite sheet 2_left_2_20: -765645953
-      The Heart Hoarder Sprite sheet 2_left_2_21: 1474083151
-      The Heart Hoarder Sprite sheet 2_left_2_22: 1501984117
-      The Heart Hoarder Sprite sheet 2_left_2_23: 529912340
-      The Heart Hoarder Sprite sheet 2_left_2_24: 185402197
-      The Heart Hoarder Sprite sheet 2_left_2_25: -1011829378
-      The Heart Hoarder Sprite sheet 2_left_2_26: 1596186752
-      The Heart Hoarder Sprite sheet 2_left_2_27: -1542106691
-      The Heart Hoarder Sprite sheet 2_left_2_28: 1014906918
-      The Heart Hoarder Sprite sheet 2_left_2_29: -1199189697
-      The Heart Hoarder Sprite sheet 2_left_2_3: -780733356
-      The Heart Hoarder Sprite sheet 2_left_2_30: -1882603543
-      The Heart Hoarder Sprite sheet 2_left_2_31: -1807545382
-      The Heart Hoarder Sprite sheet 2_left_2_32: 315311937
-      The Heart Hoarder Sprite sheet 2_left_2_33: 2059420456
-      The Heart Hoarder Sprite sheet 2_left_2_34: 1904552063
-      The Heart Hoarder Sprite sheet 2_left_2_35: -300052982
-      The Heart Hoarder Sprite sheet 2_left_2_36: -2039866633
-      The Heart Hoarder Sprite sheet 2_left_2_37: -585978735
-      The Heart Hoarder Sprite sheet 2_left_2_38: 928303071
-      The Heart Hoarder Sprite sheet 2_left_2_39: -1907628212
-      The Heart Hoarder Sprite sheet 2_left_2_4: -1157102756
-      The Heart Hoarder Sprite sheet 2_left_2_40: -2007887591
-      The Heart Hoarder Sprite sheet 2_left_2_41: 503069886
-      The Heart Hoarder Sprite sheet 2_left_2_42: 1905815912
-      The Heart Hoarder Sprite sheet 2_left_2_43: -1929037941
-      The Heart Hoarder Sprite sheet 2_left_2_44: -177522042
-      The Heart Hoarder Sprite sheet 2_left_2_45: -38255706
-      The Heart Hoarder Sprite sheet 2_left_2_46: -1669621022
-      The Heart Hoarder Sprite sheet 2_left_2_47: 788426589
-      The Heart Hoarder Sprite sheet 2_left_2_5: 1782538144
-      The Heart Hoarder Sprite sheet 2_left_2_6: -670733635
-      The Heart Hoarder Sprite sheet 2_left_2_7: 1227385281
-      The Heart Hoarder Sprite sheet 2_left_2_8: -1700621977
-      The Heart Hoarder Sprite sheet 2_left_2_9: -21005298
+      The Heart Hoarder Sprite sheet 2_left_2_0: 1562438358
+      The Heart Hoarder Sprite sheet 2_left_2_1: -1801283238
+      The Heart Hoarder Sprite sheet 2_left_2_10: -2034550528
+      The Heart Hoarder Sprite sheet 2_left_2_11: 2136879490
+      The Heart Hoarder Sprite sheet 2_left_2_12: -630474727
+      The Heart Hoarder Sprite sheet 2_left_2_13: 770112784
+      The Heart Hoarder Sprite sheet 2_left_2_14: -424580500
+      The Heart Hoarder Sprite sheet 2_left_2_15: -1392907261
+      The Heart Hoarder Sprite sheet 2_left_2_16: 124655081
+      The Heart Hoarder Sprite sheet 2_left_2_17: -1564039105
+      The Heart Hoarder Sprite sheet 2_left_2_18: 204511911
+      The Heart Hoarder Sprite sheet 2_left_2_19: -1275894323
+      The Heart Hoarder Sprite sheet 2_left_2_2: 458970680
+      The Heart Hoarder Sprite sheet 2_left_2_20: 1633495001
+      The Heart Hoarder Sprite sheet 2_left_2_21: -522034939
+      The Heart Hoarder Sprite sheet 2_left_2_22: 1751744294
+      The Heart Hoarder Sprite sheet 2_left_2_23: 644436840
+      The Heart Hoarder Sprite sheet 2_left_2_24: -1039655274
+      The Heart Hoarder Sprite sheet 2_left_2_25: -443264419
+      The Heart Hoarder Sprite sheet 2_left_2_26: -606909172
+      The Heart Hoarder Sprite sheet 2_left_2_27: 43305759
+      The Heart Hoarder Sprite sheet 2_left_2_28: 1520935223
+      The Heart Hoarder Sprite sheet 2_left_2_29: -1869335205
+      The Heart Hoarder Sprite sheet 2_left_2_3: -180783536
+      The Heart Hoarder Sprite sheet 2_left_2_30: -2022789172
+      The Heart Hoarder Sprite sheet 2_left_2_31: -1815908011
+      The Heart Hoarder Sprite sheet 2_left_2_32: 290873545
+      The Heart Hoarder Sprite sheet 2_left_2_33: 433163726
+      The Heart Hoarder Sprite sheet 2_left_2_34: -654324845
+      The Heart Hoarder Sprite sheet 2_left_2_35: 694449282
+      The Heart Hoarder Sprite sheet 2_left_2_36: -1581434949
+      The Heart Hoarder Sprite sheet 2_left_2_4: -807013379
+      The Heart Hoarder Sprite sheet 2_left_2_5: 1784886367
+      The Heart Hoarder Sprite sheet 2_left_2_6: 500253801
+      The Heart Hoarder Sprite sheet 2_left_2_7: -702473681
+      The Heart Hoarder Sprite sheet 2_left_2_8: 1132898141
+      The Heart Hoarder Sprite sheet 2_left_2_9: 2094816600
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

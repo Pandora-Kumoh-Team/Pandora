@@ -50,7 +50,7 @@ MonoBehaviour:
   grade: 0
   type: 0
   description: "\uD55C \uBC29\uD5A5\uC73C\uB85C \uC774\uB3D9\uD558\uBA70 \uACF5\uACA9\uC744
-    \uD68C\uD53C\uD569\uB2C8\uB2E4."
+    \uD68C\uD53C\uD55C\uB2E4."
   coolTime: 1
   duration: 0.1
   ownerPlayer: {fileID: 0}

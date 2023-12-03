@@ -50,7 +50,7 @@ MonoBehaviour:
   grade: 3
   type: 1
   description: "\uACF5\uACA9\uC18D\uB3C4\uAC00 \uAE30\uBCF8 \uACF5\uACA9\uC18D\uB3C4\uC758
-    100%\uB9CC\uD07C \uC99D\uAC00\uD55C\uB2E4.."
+    100%\uB9CC\uD07C \uC99D\uAC00\uD55C\uB2E4."
   coolTime: 0
   duration: 0
   ownerPlayer: {fileID: 0}

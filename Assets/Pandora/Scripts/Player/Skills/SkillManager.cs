@@ -13,6 +13,10 @@ namespace Pandora.Scripts.Player.Skill
 
         public SkillList passiveSkillList;
         public SkillList activeSkillList;
+        private SkillList p0passiveSkillList;
+        private SkillList p0activeSkillList;
+        private SkillList p1passiveSkillList;
+        private SkillList p1activeSkillList;
 
         private void Awake()
         {
@@ -32,35 +36,32 @@ namespace Pandora.Scripts.Player.Skill
             {
                 Debug.LogError("스킬매니저에 스킬 리스트 등록 안됨");
             }
+            else
+            {
+                // instantiate ScriptableObject skill list
+                p0passiveSkillList = Instantiate(passiveSkillList);
+                p0activeSkillList = Instantiate(activeSkillList);
+                p1passiveSkillList = Instantiate(passiveSkillList);
+                p1activeSkillList = Instantiate(activeSkillList);
+            }
         }
         
-        public List<GameObject> GetRandomPassiveSkills(int playerNum, int count)
+        public List<GameObject> GetRandomSkills(int playerNum, Skill.SkillType type, int count)
         {
             // get random skill from passive skill list except now skill list
-            var nowPassiveSkillList = PlayerManager.Instance.GetPlayer(playerNum).GetComponent<PlayerController>().GetPassiveSkills();
-            return GetRandomSkills(count, nowPassiveSkillList, passiveSkillList.skillPrefabList);
-        }
-        
-        public List<GameObject> GetRandomActiveSkills(int playerNum, int count)
-        {
-            // get random skill from passive skill list except now skill list
-            var nowActiveSkillList = PlayerManager.Instance.GetPlayer(playerNum).GetComponent<PlayerController>().GetActiveSkills();
-            return GetRandomSkills(count, nowActiveSkillList, activeSkillList.skillPrefabList);
-        }
-
-        private List<GameObject> GetRandomSkills(int count, IEnumerable<GameObject> nowSkillList, IEnumerable<GameObject> skillPrefabList)
-        {
+            var skillObjectList = playerNum switch
+            {
+                0 when type == Skill.SkillType.Active => p0activeSkillList.skillPrefabList,
+                0 when type == Skill.SkillType.Passive => p0passiveSkillList.skillPrefabList,
+                1 when type == Skill.SkillType.Active => p1activeSkillList.skillPrefabList,
+                _ => p1passiveSkillList.skillPrefabList
+            };
             var result = new List<GameObject>();
             var ableSkillList = new List<GameObject>();
             // prefab list to skill list
-            foreach (var skill in skillPrefabList)
+            foreach (var skill in skillObjectList)
             {
                 ableSkillList.Add(skill);
-            }
-            // remove now skill
-            foreach (var skill in nowSkillList)
-            {
-                ableSkillList.Remove(skill);
             }
             for (var i = 0; i < count; i++)
             {
@@ -70,6 +71,18 @@ namespace Pandora.Scripts.Player.Skill
                 ableSkillList.RemoveAt(randomIndex);
             }
             return result;
+        }
+
+        public void RemoveSkillAtList(int playerNum, Skill.SkillType type, GameObject skillObject)
+        {
+            if(playerNum == 0 && type == Skill.SkillType.Active)
+                p0activeSkillList.skillPrefabList.Remove(skillObject);
+            else if (playerNum == 0 && type == Skill.SkillType.Passive)
+                p0passiveSkillList.skillPrefabList.Remove(skillObject);
+            else if (playerNum == 1 && type == Skill.SkillType.Active)
+                p1activeSkillList.skillPrefabList.Remove(skillObject);
+            else if (playerNum == 1 && type == Skill.SkillType.Passive)
+                p1passiveSkillList.skillPrefabList.Remove(skillObject);
         }
     }
 }

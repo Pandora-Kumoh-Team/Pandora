@@ -429,6 +429,7 @@ namespace Pandora.Scripts.Player.Controller
         
         public void AddPassiveSkill(GameObject skill)
         {
+            SkillManager.Instance.RemoveSkillAtList(playerNumber, Skill.Skill.SkillType.Passive, skill);
             var skillObject = Instantiate(skill, passiveSkillContainer, true);
             var skillComponent = skillObject.GetComponent<Skill.Skill>();
             skillComponent.ownerPlayer = gameObject;
@@ -444,6 +445,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public void SetActiveSkill(GameObject skill, int skillIndex)
         {
+            SkillManager.Instance.RemoveSkillAtList(playerNumber, Skill.Skill.SkillType.Active, skill);
             var eventParam =
                 new PlayerSkillChangedParam(skill.GetComponent<Skill.Skill>(), playerNumber, skillIndex);
             EventManager.Instance.TriggerEvent(PandoraEventType.PlayerSkillChanged, eventParam);

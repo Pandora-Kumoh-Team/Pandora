@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8038980351296589704}
   - component: {fileID: 4171684903996284669}
   - component: {fileID: 6115476184773612376}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,6 +189,7 @@ MonoBehaviour:
   hitSounds:
   - {fileID: 8300000, guid: e4330542b09c426438bfba88396bef82, type: 3}
   hitSoundVolume: 0.4
+  difficulty: 3
 --- !u!95 &5214159069098656011
 Animator:
   serializedVersion: 5
@@ -374,7 +375,7 @@ GameObject:
   - component: {fileID: 4401755154034256571}
   - component: {fileID: 7978438745152959731}
   - component: {fileID: 3047929123085203311}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FootStepParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

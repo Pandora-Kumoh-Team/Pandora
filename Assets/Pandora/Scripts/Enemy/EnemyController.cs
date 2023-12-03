@@ -25,7 +25,8 @@ namespace Pandora.Scripts.Enemy
         public AudioClip[] hitSounds;
         public float hitSoundVolume = 0.5f;
         private AudioSource audioSource;
-        
+        public int difficulty = 1;
+
 
         void Start()
         {

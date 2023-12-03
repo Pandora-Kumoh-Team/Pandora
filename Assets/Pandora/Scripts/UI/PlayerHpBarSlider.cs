@@ -35,8 +35,8 @@ namespace Pandora.Scripts.UI
             if (pandoraEventType != PandoraEventType.PlayerHealthChanged || param == null) return;
             var paramData = (PlayerHealthChangedParam) param;
             if (paramData.PlayerCharacterId != playerId) return;
-            _slider.value = paramData.CurrentHealth;
             _slider.maxValue = paramData.MaxHealth;
+            _slider.value = paramData.CurrentHealth;
         }
     }
 }

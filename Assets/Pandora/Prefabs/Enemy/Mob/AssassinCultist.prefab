@@ -37,7 +37,7 @@ Transform:
   - {fileID: 2213662359030937603}
   - {fileID: 5746201025181712057}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1517828431256120121
 SpriteRenderer:
@@ -191,6 +191,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0215b717565d1cd46bf2292c15dbb048, type: 3}
   - {fileID: 8300000, guid: 115aef4023a776e41a3323af42886073, type: 3}
   hitSoundVolume: 0.3
+  difficulty: 3
 --- !u!1 &4185897825304123505
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +203,7 @@ GameObject:
   - component: {fileID: 3737950817294217011}
   - component: {fileID: 4783421129973761633}
   - component: {fileID: 7986160555363373513}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
