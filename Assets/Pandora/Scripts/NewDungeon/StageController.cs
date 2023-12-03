@@ -1,14 +1,16 @@
 ﻿using System;
 using Pandora.Scripts.Enemy;
+using Pandora.Scripts.Player.Controller;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
+using Pandora.Scripts.System.Event;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Pandora.Scripts.NewDungeon
 {
-    public class StageController : MonoBehaviour
+    public class StageController : MonoBehaviour, IEventListener
     {
         [Serializable]
         public struct StageInfo
@@ -43,6 +45,13 @@ namespace Pandora.Scripts.NewDungeon
             currentStageInfo = stages[currentStage];
             // add scene load event
             SceneManager.sceneLoaded += OnSceneLoaded;
+            EventManager.Instance.AddListener(PandoraEventType.MapGenerateComplete, this);
+        }
+        
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            EventManager.Instance.RemoveListener(PandoraEventType.MapGenerateComplete, this);
         }
 
         private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -64,6 +73,14 @@ namespace Pandora.Scripts.NewDungeon
         {
             var randomPlayer = Random.Range(0, 2);
             GameManager.Instance.GetPassiveSkill(randomPlayer);
+        }
+
+        public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)
+        {
+            if(pandoraEventType == PandoraEventType.MapGenerateComplete)
+            {
+                PlayerManager.Instance.ActivePlayers();
+            }
         }
     }
 }
