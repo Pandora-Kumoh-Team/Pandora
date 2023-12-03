@@ -9,7 +9,22 @@ EditorBuildSettings:
     path: Assets/Pandora/Scenes/MainMenu.unity
     guid: 49094eb1d9a67044db70b4ca87c64562
   - enabled: 1
-    path: Assets/Pandora/Scenes/Stage1.unity
-    guid: f6e1b2f993cf8c44f8f1431c53280462
+    path: Assets/Pandora/Scenes/DungeonRooms/BasementStart.unity
+    guid: 39bb3b3f9d4896e4abf9e166fc54298f
+  - enabled: 1
+    path: Assets/Pandora/Scenes/DungeonRooms/BasementShop.unity
+    guid: 604ba1436f417e943975658db0a892ae
+  - enabled: 1
+    path: Assets/Pandora/Scenes/DungeonRooms/BasementEmpty.unity
+    guid: ad914328849516a41bba10929adb4df6
+  - enabled: 1
+    path: Assets/Pandora/Scenes/NewStage1.unity
+    guid: 13462267edb0da747a85262dc623955b
+  - enabled: 0
+    path: Assets/Pandora/Scenes/DungeonRooms/BasementMain.unity
+    guid: 07d636d6a306f88408c586bf81606fcb
+  - enabled: 1
+    path: Assets/Pandora/Scenes/DungeonRooms/BasementEnd.unity
+    guid: d2ab8b32ae60f30439b474de101d1497
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4f8f98cbfe38a334a9acefa968e38202, type: 2}

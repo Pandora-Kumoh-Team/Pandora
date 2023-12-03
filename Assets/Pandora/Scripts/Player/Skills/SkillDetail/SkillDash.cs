@@ -14,10 +14,10 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         private void Update()
         {
-            if(_nowDuration > 0)
+            if (_nowDuration > 0)
             {
                 _nowDuration -= Time.deltaTime;
-                if(_nowDuration <= 0)
+                if (_nowDuration <= 0)
                 {
                     OnEndSkill();
                 }
@@ -28,7 +28,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         public override void OnUseSkill()
         {
             _playerController = ownerPlayer.GetComponent<PlayerController>();
-            _playerController.canControllMove = false;
+            _playerController.canControlMove = false;
             _playerController.playerCurrentStat.DodgeChance += 100;
             _nowDuration = duration;
         }
@@ -40,7 +40,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         public override void OnEndSkill()
         {
-            _playerController.canControllMove = true;
+            _playerController.canControlMove = true;
             _playerController.playerCurrentStat.DodgeChance -= 100;
         }
     }

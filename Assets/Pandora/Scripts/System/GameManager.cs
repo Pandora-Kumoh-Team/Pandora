@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Pandora.Scripts.Enemy;
+using Pandora.Scripts.Player.Skill;
+using Pandora.Scripts.UI;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using NotImplementedException = System.NotImplementedException;
 
@@ -37,7 +40,6 @@ namespace Pandora.Scripts.System
         
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            // 캔버스 찾기
             if(scene.name == "MainMenu")
             {
                 // TODO
@@ -45,6 +47,12 @@ namespace Pandora.Scripts.System
             else
             {
                 inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<Canvas>();
+                if (FindObjectOfType<DamageTextEffectManager>() == null)
+                {
+                    var damageTextEffectManager = new GameObject("DamageTextEffectManager");
+                    damageTextEffectManager.AddComponent<DamageTextEffectManager>();
+                    DamageTextEffectManager.Instance.damageEffectPrefab = damageEffect;
+                }
             }
         }
         
@@ -64,6 +72,16 @@ namespace Pandora.Scripts.System
         {
             Time.timeScale = 0;
             inGameCanvas.transform.Find("GameClearPanel").gameObject.SetActive(true);
+        }
+
+        public void GetPassiveSkill(int playerNum)
+        {
+            inGameCanvas.GetComponent<InGameCanvasManager>().DisplaySkillSelection(Skill.SkillType.Passive, playerNum);
+        }
+
+        public void GetActiveSkill(int playerNum)
+        {
+            inGameCanvas.GetComponent<InGameCanvasManager>().DisplaySkillSelection(Skill.SkillType.Active, playerNum);
         }
     }
 }

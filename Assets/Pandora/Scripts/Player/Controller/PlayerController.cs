@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Pandora.Scripts.Effect;
+using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
 using Pandora.Scripts.System.Event;
@@ -16,9 +17,11 @@ namespace Pandora.Scripts.Player.Controller
     public class PlayerController : MonoBehaviour
     {
         // Components
+        [HideInInspector]
         public Rigidbody2D rb;
         private Animator anim;
         private PlayerAI ai;
+        private AudioSource audioSource;
     
         /// <summary>
         /// 플레이어 캐릭터 고유번호, UI와 연동
@@ -26,33 +29,52 @@ namespace Pandora.Scripts.Player.Controller
         [FormerlySerializedAs("playerCharacterId")] public int playerNumber = -1;
         
         // Stat
+        [HideInInspector]
         public PlayerCurrentStat playerCurrentStat;
         public PlayerStat playerBasicStat;
     
         // Variables
         // 이동 관련
+        [HideInInspector]
         public Vector2 lookDir;
+        [HideInInspector]
         public Vector2 moveDir;
-        public bool canControllMove;
+        [HideInInspector]
+        public bool canControlMove;
+        public AudioClip[] footstepAudioSource;
+        public float footstepDistance = 0.35f;
+        public float footstepVolume = 0.5f;
+        private float footstepMovedDistance;
 
         // 공격 관련
+        [HideInInspector]
         public Vector2 attackDir;
         private float attackCoolTime;
         private bool isAttackKeyPressed;
+        public AudioClip[] attackSounds;
+        public float attackSoundVolume = 0.5f;
     
         // 태그 관련
+        [HideInInspector]
         public bool onControl;
         public bool onControlInit = true;
         
+        [HideInInspector]
         public bool isDead;
         
         // 스킬 관련
         public GameObject[] activeSkills;
+        [HideInInspector]
         public List<GameObject> passiveSkills;
+        [HideInInspector]
         public float[] skillCoolTimes;
+        [HideInInspector]
         public Transform activeSkillContainer;
+        [HideInInspector]
         public Transform passiveSkillContainer;
-        
+        [HideInInspector]
+        public bool isTrigger;
+
         private static readonly int CachedMoveDir = Animator.StringToHash("WalkDir");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
         private static readonly int CachedAttackDir = Animator.StringToHash("AttackDir");
@@ -63,10 +85,12 @@ namespace Pandora.Scripts.Player.Controller
             anim = GetComponent<Animator>();
             ai = GetComponent<PlayerAI>();
             playerCurrentStat = new PlayerCurrentStat();
-            canControllMove = true;
+            canControlMove = true;
             skillCoolTimes = new float[3];
             activeSkillContainer = transform.Find("Skills").Find("ActiveSkills");
             passiveSkillContainer = transform.Find("Skills").Find("PassiveSkills");
+            audioSource = GetComponent<AudioSource>();
+            isTrigger = false;
         }
 
         public virtual void Start()
@@ -104,12 +128,12 @@ namespace Pandora.Scripts.Player.Controller
         private void Update()
         {
             // 이동
-            if(canControllMove && moveDir.magnitude > 0.5f)
+            if(canControlMove && moveDir.magnitude > 0.5f)
             {
                 rb.velocity = moveDir * playerCurrentStat.Speed;
                 SetMoveAnimation(moveDir);
             }
-            else if(canControllMove && moveDir.magnitude <= 0.5f)
+            else if(canControlMove && moveDir.magnitude <= 0.5f)
             {
                 rb.velocity = Vector2.zero;
                 anim.SetInteger(CachedMoveDir, -1);
@@ -117,6 +141,17 @@ namespace Pandora.Scripts.Player.Controller
             else
             {
                 anim.SetInteger(CachedMoveDir, -1);
+            }
+            // 이동 발자국 소리
+            if (canControlMove && moveDir.magnitude > 0.5f)
+            {
+                footstepMovedDistance += moveDir.magnitude * Time.deltaTime;
+                if (footstepMovedDistance >= footstepDistance)
+                {
+                    footstepMovedDistance = 0f;
+                    audioSource.PlayOneShot(footstepAudioSource[Random.Range(0, footstepAudioSource.Length)],
+                        footstepVolume);
+                }
             }
             
             // 스킬 쿨다운
@@ -128,6 +163,7 @@ namespace Pandora.Scripts.Player.Controller
                 }
             }
 
+            // 공격
             if(!CanAttack())
             {
                 attackCoolTime -= Time.deltaTime;
@@ -136,6 +172,11 @@ namespace Pandora.Scripts.Player.Controller
             {
                 Attack();
             }
+
+            if (isTrigger)
+                transform.GetComponent<CircleCollider2D>().isTrigger = true;
+            else
+                transform.GetComponent<CircleCollider2D>().isTrigger = false;
         }
     
 
@@ -174,7 +215,10 @@ namespace Pandora.Scripts.Player.Controller
             var damageEffect = Instantiate(GameManager.Instance.damageEffect, position, Quaternion.identity, transform);
             damageEffect.GetComponent<FadeTextEffect>()
                 .Init(damage.ToString(), Color.red, 1f, 0.5f, 0.05f, Vector3.up);
-            var bloodEffect =Instantiate(GameManager.Instance.bloodParticle, position, Quaternion.identity);
+            var bloodEffect = Instantiate(GameManager.Instance.bloodParticle, position, Quaternion.identity);
+            // 공격자의 반대 방향으로 피격 이펙트 회전
+            var z = transform.position.x > attacker.transform.position.x ? -45 : 45;
+            bloodEffect.transform.rotation = Quaternion.Euler(0, 0, z);
             Destroy(bloodEffect, 1f);
             
             if (playerCurrentStat.NowHealth <= 0)
@@ -266,16 +310,24 @@ namespace Pandora.Scripts.Player.Controller
             attackCoolTime = 1 / playerCurrentStat.AttackSpeed;
             
             SetAttackAnimation();
-        
+
+            var hitParams = new HitParams();
+            hitParams.attacker = gameObject;
+            
             // 크리티컬 여부 판단
             var rand = Random.Range(0, 100);
-            var damage = playerCurrentStat.BaseDamage * playerCurrentStat.AttackPower;
+            hitParams.damage = playerCurrentStat.BaseDamage * playerCurrentStat.AttackPower;
             if (rand < playerCurrentStat.CriticalChance)
             {
-                damage *= playerCurrentStat.CriticalDamageTimes;
+                hitParams.damage *= playerCurrentStat.CriticalDamageTimes;
+                hitParams.isCritical = true;
             }
+            
+            // 사운드 출력
+            var randSound = Random.Range(0, attackSounds.Length);
+            audioSource.PlayOneShot(attackSounds[randSound], attackSoundVolume);
         
-            StartCoroutine(AttackCoroutine(damage, playerCurrentStat.GetAttackBuffs()));
+            StartCoroutine(AttackCoroutine(hitParams));
         }
         private void SetAttackAnimation()
         {
@@ -304,7 +356,7 @@ namespace Pandora.Scripts.Player.Controller
         ///  공격 타입별로 하위 클래스에서 정의
         /// </summary>
         /// <returns></returns>
-        protected virtual IEnumerator AttackCoroutine(float damage, List<Buff> buffs)
+        protected virtual IEnumerator AttackCoroutine(HitParams hitParams)
         {
             yield return null;
         }
@@ -325,7 +377,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public void OnMove(InputValue value)
         {
-            if (!onControl || !canControllMove) return;
+            if (!onControl || !canControlMove) return;
             moveDir = value.Get<Vector2>();
             if(moveDir.magnitude > 0.5f)
                 lookDir = moveDir;
@@ -377,6 +429,7 @@ namespace Pandora.Scripts.Player.Controller
         
         public void AddPassiveSkill(GameObject skill)
         {
+            SkillManager.Instance.RemoveSkillAtList(playerNumber, Skill.Skill.SkillType.Passive, skill);
             var skillObject = Instantiate(skill, passiveSkillContainer, true);
             var skillComponent = skillObject.GetComponent<Skill.Skill>();
             skillComponent.ownerPlayer = gameObject;
@@ -392,6 +445,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public void SetActiveSkill(GameObject skill, int skillIndex)
         {
+            SkillManager.Instance.RemoveSkillAtList(playerNumber, Skill.Skill.SkillType.Active, skill);
             var eventParam =
                 new PlayerSkillChangedParam(skill.GetComponent<Skill.Skill>(), playerNumber, skillIndex);
             EventManager.Instance.TriggerEvent(PandoraEventType.PlayerSkillChanged, eventParam);

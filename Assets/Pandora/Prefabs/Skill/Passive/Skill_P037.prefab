@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4894945678868742479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5440539600937251489}
+  - component: {fileID: 3307096745580916885}
+  m_Layer: 0
+  m_Name: Skill_P037
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5440539600937251489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894945678868742479}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3307096745580916885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894945678868742479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c665a27ff7c6804993f89265669299a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 37
+  icon: {fileID: 21300000, guid: 93807fa38240e5647b96e2d204a5fa3e, type: 3}
+  name: "\uAD11\uC804\uC0AC"
+  grade: 1
+  type: 1
+  description: "\uCCB4\uB825\uC774 30%\uC774\uD558\uC77C \uB54C \uACF5\uACA9\uB825\uC774
+    10 \uC99D\uAC00\uD55C\uB2E4."
+  coolTime: 0
+  duration: 0
+  ownerPlayer: {fileID: 0}
+  statToChange:
+    maxHealth: 0
+    baseDamage: 10
+    attackPower: 0
+    defencePower: 0
+    speed: 0
+    attackRange: 0
+    attackSpeed: 0
+    criticalChance: 0
+    criticalDamageTimes: 0
+    dodgeChance: 0
+    nonControlHpRecovery: 0
