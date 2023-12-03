@@ -68,8 +68,8 @@ namespace Pandora.Scripts.Player.Controller
 
         public void SetPlayerInput(InputActionAsset inputActionAsset)
         {
-            // _zeroPlayer.GetComponent<PlayerInput>().actions = inputActionAsset;
-            // _firstPlayer.GetComponent<PlayerInput>().actions = inputActionAsset;
+            _zeroPlayer.GetComponent<PlayerInput>().actions = inputActionAsset;
+            _firstPlayer.GetComponent<PlayerInput>().actions = inputActionAsset;
         }
     }
 }
