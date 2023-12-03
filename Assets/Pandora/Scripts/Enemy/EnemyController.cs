@@ -40,7 +40,7 @@ namespace Pandora.Scripts.Enemy
             else
                 _enemyStatus = new EnemyStatus(this.gameObject.name);
 
-            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource = gameObject.GetComponent<AudioSource>();
             if (hitSounds.Length == 0)
             {
                 Debug.LogError(gameObject.name + " : hitSounds is empty");

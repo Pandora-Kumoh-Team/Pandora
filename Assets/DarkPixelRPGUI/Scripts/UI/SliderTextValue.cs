@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 namespace DarkPixelRPGUI.Scripts.UI
 {
-    [ExecuteInEditMode]
     public class SliderTextValue : MonoBehaviour, IEventListener
     {
         [SerializeField] private Slider slider;

@@ -105,6 +105,10 @@ PrefabInstance:
       value: PlayerCharacterMelee
       objectReference: {fileID: 0}
     - target: {fileID: 1149615170628072552, guid: bf65d22b308305a45ad4d674ae71c4a7, type: 3}
+      propertyPath: playerNumber
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149615170628072552, guid: bf65d22b308305a45ad4d674ae71c4a7, type: 3}
       propertyPath: playerCharacterId
       value: 0
       objectReference: {fileID: 0}
@@ -170,6 +174,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2928363155854076521}
     m_Modifications:
+    - target: {fileID: 24760694479350143, guid: 440e18f566a8a2d448fd808b9f2ec229, type: 3}
+      propertyPath: playerNumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 24760694479350143, guid: 440e18f566a8a2d448fd808b9f2ec229, type: 3}
       propertyPath: playerCharacterId
       value: 1
