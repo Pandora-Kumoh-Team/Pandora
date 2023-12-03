@@ -84,8 +84,8 @@ public class ShadowBossAI : MonoBehaviour
         }
         else //공격 범위 내에 있다면
         {
-            parentAnimation.SetTrigger("Attack");
             parentAnimation.SetBool("isFollow", false); //Idle 상태
+            parentAnimation.SetTrigger("Attack");
             timer = 0;
             GameObject.Find(parentName).transform.Find("AttackRange").gameObject.SetActive(true);
         }
