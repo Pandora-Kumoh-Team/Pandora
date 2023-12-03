@@ -110,7 +110,7 @@ namespace Pandora.Scripts.System
             if (File.Exists(_keyBindingPath))
             {
                 var json = File.ReadAllText(_keyBindingPath);
-                inputActionAsset.LoadBindingOverridesFromJson(json);
+                // inputActionAsset.LoadBindingOverridesFromJson(json);
             }
         }
         
