@@ -21,42 +21,46 @@ public class KnifeGenerator : MonoBehaviour
     public void Fire(string type)
     {
        if(type.Equals("left"))
-        {
-            GameObject newKnife = Instantiate(leftKnife, transform.parent.transform.position, Quaternion.identity);
-            Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
+       {
+           GameObject newKnife = Instantiate(leftKnife, transform.parent.transform.position, Quaternion.identity);
+           Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
+           newKnife.GetComponent<Knife>().boss = transform.parent.gameObject;
 
-            if (newKnife != null && rb != null)
-            {
-                rb.velocity = Vector2.left * knifeSpeed;
-            }
-        }else if(type.Equals("right"))
-        {
-            GameObject newKnife = Instantiate(rightKnife, transform.parent.transform.position, Quaternion.identity);
-            Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
+           if (newKnife != null && rb != null)
+           {
+               rb.velocity = Vector2.left * knifeSpeed;
+           }
+       }else if(type.Equals("right"))
+       {
+           GameObject newKnife = Instantiate(rightKnife, transform.parent.transform.position, Quaternion.identity);
+           Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
+           newKnife.GetComponent<Knife>().boss = transform.parent.gameObject;
 
-            if (newKnife != null && rb != null)
-            {
-                rb.velocity = Vector2.right * knifeSpeed;
-            }
-        }else if(type.Equals("up"))
-        {
-            GameObject newKnife = Instantiate(upKnife, transform.parent.transform.position, Quaternion.identity);
-            Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
+           if (newKnife != null && rb != null)
+           {
+               rb.velocity = Vector2.right * knifeSpeed;
+           }
+       }else if(type.Equals("up"))
+       {
+           GameObject newKnife = Instantiate(upKnife, transform.parent.transform.position, Quaternion.identity);
+           Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
+           newKnife.GetComponent<Knife>().boss = transform.parent.gameObject;
 
-            if (newKnife != null && rb != null)
-            {
-                rb.velocity = Vector2.up * knifeSpeed;
-            }
-        }else if(type.Equals("down"))
-        {
-            GameObject newKnife = Instantiate(downKnife, transform.parent.transform.position, Quaternion.identity);
-            Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
+           if (newKnife != null && rb != null)
+           {
+               rb.velocity = Vector2.up * knifeSpeed;
+           }
+       }else if(type.Equals("down"))
+       {
+           GameObject newKnife = Instantiate(downKnife, transform.parent.transform.position, Quaternion.identity);
+           Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
+           newKnife.GetComponent<Knife>().boss = transform.parent.gameObject;
 
-            if (newKnife != null && rb != null)
-            {
-                rb.velocity = Vector2.down * knifeSpeed;
-            }
-        }
+           if (newKnife != null && rb != null)
+           {
+               rb.velocity = Vector2.down * knifeSpeed;
+           }
+       }
     }
     
 }

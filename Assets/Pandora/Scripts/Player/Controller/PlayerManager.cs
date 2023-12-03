@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Pandora.Scripts.Player.Controller
 {
@@ -17,6 +18,7 @@ namespace Pandora.Scripts.Player.Controller
             if (Instance == null)
             {
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -56,6 +58,18 @@ namespace Pandora.Scripts.Player.Controller
                 return _firstPlayer;
             }
             throw new Exception("PlayerManager: GetPlayer: playerNum is not 1 or 2");
+        }
+
+        public void ActivePlayers()
+        {
+            _zeroPlayer.SetActive(true);
+            _firstPlayer.SetActive(true);
+        }
+
+        public void SetPlayerInput(InputActionAsset inputActionAsset)
+        {
+            _zeroPlayer.GetComponent<PlayerInput>().actions = inputActionAsset;
+            _firstPlayer.GetComponent<PlayerInput>().actions = inputActionAsset;
         }
     }
 }

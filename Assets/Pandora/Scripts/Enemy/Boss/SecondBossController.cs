@@ -44,17 +44,17 @@ namespace Pandora.Scripts.Enemy
             target = GameObject.FindGameObjectWithTag("Player"); //플레이어 찾기
             rb.velocity = Vector3.zero; //밀림 방지
         }
-        public void Hit(float damage, List<Buff> buff)
+        public void Hit(HitParams hitParams)
         {
+            var damage = hitParams.damage;
             anim.SetBool("isFollow", false);
             anim.SetTrigger("Hit");
             transform.Find("BossHP").gameObject.SetActive(true);
             //damage effect
-            var effectPosition = transform.position + new Vector3(1.5f, 1f, 0);
-            var damageEffect = Instantiate(GameManager.Instance.damageEffect, effectPosition, Quaternion.identity, transform);
             var reduceDamage = damage - (damage * _enemyStatus.DefencePower / 100);
-            damageEffect.GetComponent<FadeTextEffect>()
-                .Init(reduceDamage.ToString(), Color.white, 1f, 0.5f, 0.05f, Vector3.up);
+            var relativePos = new Vector3(1.5f, 1f, 0);
+            hitParams.damage = reduceDamage;
+            DamageTextEffectManager.Instance.SpawnDamageTextEffect(relativePos, gameObject, hitParams);
 
             _enemyStatus.NowHealth -= reduceDamage;
             CallHealthChangeEvetnt();

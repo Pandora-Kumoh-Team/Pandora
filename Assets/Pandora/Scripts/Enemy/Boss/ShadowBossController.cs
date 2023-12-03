@@ -42,8 +42,9 @@ public class ShadowBossController : MonoBehaviour,IHitAble
         target = GameObject.FindGameObjectWithTag("Player");
         rb.velocity = Vector3.zero;
     }
-    public void Hit(float damage, List<Buff> buff)
+    public void Hit(HitParams hitParams)
     {
+        var damage = hitParams.damage;
         anim.SetTrigger("Hit");
         transform.Find("BossHP").gameObject.SetActive(true);
         //damage effect

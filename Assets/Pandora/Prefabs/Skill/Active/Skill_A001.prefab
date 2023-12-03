@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6056235560835414755}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 574, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,12 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  icon: {fileID: 21300000, guid: c1e10830e50213e4b83bc791e9846adb, type: 3}
+  icon: {fileID: 21300000, guid: 28833eb632d77bd4c949d16fb767a02d, type: 3}
   name: "\uD68C\uD53C"
   grade: 0
   type: 0
   description: "\uD55C \uBC29\uD5A5\uC73C\uB85C \uC774\uB3D9\uD558\uBA70 \uACF5\uACA9\uC744
-    \uD68C\uD53C\uD569\uB2C8\uB2E4."
+    \uD68C\uD53C\uD55C\uB2E4."
   coolTime: 1
   duration: 0.1
   ownerPlayer: {fileID: 0}

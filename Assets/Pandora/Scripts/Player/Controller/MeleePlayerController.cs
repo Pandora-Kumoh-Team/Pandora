@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Pandora.Scripts.Enemy;
 using UnityEngine;
 
 namespace Pandora.Scripts.Player.Controller
@@ -21,10 +22,9 @@ namespace Pandora.Scripts.Player.Controller
         }
         
         // 공격 코루틴
-        protected override IEnumerator AttackCoroutine(float damage, List<Buff> buffs)
+        protected override IEnumerator AttackCoroutine(HitParams hitParams)
         {
-            _attackRange.GetComponent<AttackRange>().SetDamage(damage);
-            _attackRange.GetComponent<AttackRange>().SetBuffs(buffs);
+            _attackRange.GetComponent<AttackRange>().SetHitParams(hitParams);
             
             // 공격 방향 수정
             var zAngle = Mathf.Atan2(attackDir.y, attackDir.x) * Mathf.Rad2Deg;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Pandora.Scripts.Enemy;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -20,7 +21,6 @@ namespace Pandora.Scripts.Player.Controller
             base.Start();
             // DEBUG : 플레이어 스텟의 사거리를 3배로 설정
             // 후에는 원거리 플레이너캐릭터는 기본 사거리가 3이되도록 해야함
-            playerCurrentStat.AttackRange *= 3;
             _projectileRange = playerCurrentStat.AttackRange;
         }
         public override void AttackRangeChanged(float newRange)
@@ -37,7 +37,7 @@ namespace Pandora.Scripts.Player.Controller
         }
         
         // 공격 코루틴
-        protected override IEnumerator AttackCoroutine(float damage, List<Buff> buffs)
+        protected override IEnumerator AttackCoroutine(HitParams hitParams)
         {
             // 투사체 생성
             GameObject projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity);
@@ -46,8 +46,7 @@ namespace Pandora.Scripts.Player.Controller
             var pj = projectileInstance.GetComponent<Projectile>();
             pj.maxDistance = _projectileRange * AttackRangeMagnitude;
             pj.SetDirection(attackDir, projectileSpeed);
-            pj.SetDamage(damage);
-            pj.SetBuffs(buffs);
+            pj.SetHitParams(hitParams);
         }
     }
 }
