@@ -19,7 +19,7 @@ namespace Pandora.Scripts.System
 
         public void SaveKeyBindings()
         {
-            var json = inputActionAsset.ToJson();
+            var json = inputActionAsset.SaveBindingOverridesAsJson();
             File.WriteAllText(_keyBindingPath, json);
         }
         
@@ -28,7 +28,7 @@ namespace Pandora.Scripts.System
             if (File.Exists(_keyBindingPath))
             {
                 var json = File.ReadAllText(_keyBindingPath);
-                inputActionAsset.LoadFromJson(json);
+                inputActionAsset.LoadBindingOverridesFromJson(json);
             }
         }
     }
