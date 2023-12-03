@@ -194,7 +194,7 @@ MonoBehaviour:
   type: 0
   description: "\uC8FC\uBCC0 \uC801\uC5D0\uAC8C \uC9C0\uC18D\uC801\uC73C\uB85C 20%\uC758
     \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
-  coolTime: 0
+  coolTime: 20
   duration: 9
   ownerPlayer: {fileID: 0}
   damage: 20
