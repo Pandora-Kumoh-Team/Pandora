@@ -9,7 +9,7 @@ namespace Pandora.Scripts.UI
         {
             // TODO : 플레이어 영구 스텟 반영하여 destroy로 생성
             // 현재는 stage1 씬에 플레이어 오브젝트가 추가되어 있음
-            SceneManager.LoadScene("BasementMain");
+            SceneManager.LoadScene("NewStage1");
         }
 
         public void Credit()

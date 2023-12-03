@@ -26,12 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4657801487385445835}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 574, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8118818091549169257
 MonoBehaviour:
@@ -52,10 +52,9 @@ MonoBehaviour:
   type: 0
   description: "\uD55C \uBC29\uD5A5\uC73C\uB85C \uC774\uB3D9\uD558\uBA70 \uBD80\uB52A\uD788\uB294
     \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
-  coolTime: 2.5
+  coolTime: 2
   duration: 0.25
   ownerPlayer: {fileID: 0}
-  damage: 1
   speed: 20
 --- !u!58 &8494614762398783613
 CircleCollider2D:

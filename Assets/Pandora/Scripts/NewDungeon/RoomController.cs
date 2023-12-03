@@ -1,117 +1,118 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Pandora.Scripts.NewDungeon.Rooms;
+using Pandora.Scripts.System.Event;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RoomInfo
+namespace Pandora.Scripts.NewDungeon
 {
-    public string name;
-    public int X;
-    public int Y;
-
-}
-
-public class RoomController : MonoBehaviour
-{
-    public static RoomController instance;
-    string currentWorldName = "Basement";
-    RoomInfo currentLoadRoomData;
-    Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
-    public List<Room> loadedRooms = new List<Room>();
-    bool isLoadingRoom = false;
-
-    void Awake()
+    public class RoomInfo
     {
-        instance = this;
+        public string name;
+        public int X;
+        public int Y;
     }
 
-    void Start()
+    public class RoomController : MonoBehaviour
     {
-        //LoadRoom("Start", 0, 0);
-        //LoadRoom("Empty", 1, 0);
-        //LoadRoom("Empty", -1, 0);
-        //LoadRoom("Empty", 0, 1);
-        //LoadRoom("Empty", 0, -1);
-    }
+        public static RoomController Instance;
+        private const string CurrentWorldName = "Basement";
+        private RoomInfo _currentLoadRoomData;
+        private Queue<RoomInfo> _loadRoomQueue = new Queue<RoomInfo>();
+        public List<Room> loadedRooms = new List<Room>();
+        private bool _isLoadingRoom = false;
+        private int _notLoadedRoomCount = 0;
 
-    void Update()
-    {
-        UpdateRoomQueue();
-    }
-
-    void UpdateRoomQueue()
-    {
-        if(isLoadingRoom)
+        void Awake()
         {
-            return;
+            Instance = this;
         }
 
-        if(loadRoomQueue.Count == 0)
+        void Update()
         {
-            return;
+            if(_isLoadingRoom)
+            {
+                return;
+            }
+
+            if(_loadRoomQueue.Count == 0)
+            {
+                return;
+            }
+
+            _currentLoadRoomData = _loadRoomQueue.Dequeue();
+            _isLoadingRoom = true;
+
+            LoadRoomScene(_currentLoadRoomData);
         }
 
-        currentLoadRoomData = loadRoomQueue.Dequeue();
-        isLoadingRoom = true;
-
-        StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
-    }
-
-    public void LoadRoom(string name, int x, int y)
-    {
-        if(DoesRoomExist(x, y))
+        public void EnqueueRoomToGeneration(string name, int x, int y)
         {
-            return;
+            if(DoesRoomExist(x, y))
+            {
+                return;
+            }
+
+            var newRoomData = new RoomInfo
+            {
+                name = name,
+                X = x,
+                Y = y
+            };
+
+            _loadRoomQueue.Enqueue(newRoomData);
         }
 
-        RoomInfo newRoomData = new RoomInfo();
-        newRoomData.name = name;
-        newRoomData.X = x;
-        newRoomData.Y = y;
-
-        loadRoomQueue.Enqueue(newRoomData);
-    }
-
-    IEnumerator LoadRoomRoutine(RoomInfo info)
-    {
-        string roomName = currentWorldName + info.name;
-        AsyncOperation loadRoom = SceneManager.LoadSceneAsync(roomName, LoadSceneMode.Additive);
-        while(loadRoom.isDone == false)
+        private void LoadRoomScene(RoomInfo info)
         {
-            yield return null;
+            string roomName = CurrentWorldName + info.name;
+            SceneManager.LoadSceneAsync(roomName, LoadSceneMode.Additive);
+            _notLoadedRoomCount++;
         }
-    }
 
-    public void RegisterRoom(Room room)
-    {
-        if(!DoesRoomExist(currentLoadRoomData.X, currentLoadRoomData.Y))
+        public void RegisterRoom(Room room)
         {
-            room.transform.position = new Vector3(currentLoadRoomData.X * room.Width, currentLoadRoomData.Y * room.Height, 0);
+            if(!DoesRoomExist(_currentLoadRoomData.X, _currentLoadRoomData.Y))
+            {
+                room.transform.position = new Vector3(_currentLoadRoomData.X * room.Width, _currentLoadRoomData.Y * room.Height, 0);
 
-            room.X = currentLoadRoomData.X;
-            room.Y = currentLoadRoomData.Y;
-            room.name = currentWorldName + "-" + currentLoadRoomData.name + " " + room.X + ", " + room.Y;
-            room.transform.parent = transform;
+                room.X = _currentLoadRoomData.X;
+                room.Y = _currentLoadRoomData.Y;
+                room.name = CurrentWorldName + "-" + _currentLoadRoomData.name + " " + room.X + ", " + room.Y;
+                room.transform.parent = transform;
 
-            isLoadingRoom = false;
+                _isLoadingRoom = false;
 
-            loadedRooms.Add(room);
-            room.RemoveUnconnectedDoors();
+                loadedRooms.Add(room);
+            }
+            else
+            {
+                Destroy(room.gameObject);
+                _isLoadingRoom = false;
+            }
+            _notLoadedRoomCount--;
+            if (_notLoadedRoomCount == 0 && _loadRoomQueue.Count == 0)
+            {
+                var graphToScan = AstarPath.active.data.gridGraph;
+                AstarPath.active.Scan(graphToScan);
+                foreach (var loadedRoom in loadedRooms)
+                {
+                    loadedRoom.RemoveUnconnectedDoors();
+                }
+                EventManager.Instance.TriggerEvent(PandoraEventType.MapGenerateComplete);
+            }
         }
-        else
+
+        public bool DoesRoomExist(int x, int y)
         {
-            Destroy(room.gameObject);
-            isLoadingRoom = false;
+            return loadedRooms.Find(item => item.X == x && item.Y == y) != null;
         }
-    }
 
-    public bool DoesRoomExist(int x, int y)
-    {
-        return loadedRooms.Find(item => item.X == x && item.Y == y) != null;
-    }
-
-    public Room FindRoom(int x, int y)
-    {
-        return loadedRooms.Find(item => item.X == x && item.Y == y);
+        public Room FindRoom(int x, int y)
+        {
+            return loadedRooms.Find(item => item.X == x && item.Y == y);
+        }
     }
 }

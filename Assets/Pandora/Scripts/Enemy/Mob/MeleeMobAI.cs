@@ -18,7 +18,8 @@ public class MeleeMobAI : MonoBehaviour
     private string parentName;
 
     //Status
-    public float speed = 1.0f; //임시
+    [HideInInspector]
+    public float speed;
 
     public float attackRange = 0.5f; //임시
     private Vector3 attackRangePos;
@@ -32,6 +33,7 @@ public class MeleeMobAI : MonoBehaviour
         parentName = transform.parent.name;
         attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
         capOffset = transform.parent.GetComponent<CapsuleCollider2D>().offset;
+        speed = transform.parent.gameObject.transform.GetComponent<EnemyController>()._enemyStatus.Speed;
     }
 
     private void Update()
@@ -73,6 +75,7 @@ public class MeleeMobAI : MonoBehaviour
         if (randomMoveTime >= 6)
             randomMoveTime = 0;
 
+        speed = transform.parent.gameObject.transform.GetComponent<EnemyController>()._enemyStatus.Speed;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -129,9 +132,6 @@ public class MeleeMobAI : MonoBehaviour
 
     private void Flip(Vector3 direction)
     {
-        //TODO : 스프라이트 자체가 중앙에서 너무 먼 몹의 경우 플립했을 때 순간이동하는 듯한 현상있음. 플립할때 보정을 해주는 식으로 수정 필요
-        // 보정 값을 몹status에서 가지고 있는 것이 나을 듯
-
         EnemyStatus enemyStatus = GameObject.Find(parentName).GetComponent<EnemyController>()._enemyStatus;
 
         if ( enemyStatus.Code >= 150 && enemyStatus.Code <= 199) //왼쪽보고 있는 금쪽이들

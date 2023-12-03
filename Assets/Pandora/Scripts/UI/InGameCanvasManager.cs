@@ -42,9 +42,7 @@ namespace Pandora.Scripts.UI
             skillSelection.SetActive(true);
             Time.timeScale = 0;
 
-            var skillList = skillType == Skill.SkillType.Active
-                ? SkillManager.Instance.GetRandomActiveSkills(playerNum, 3)
-                : SkillManager.Instance.GetRandomPassiveSkills(playerNum, 3);
+            var skillList = SkillManager.Instance.GetRandomSkills(playerNum, skillType, 3);
             var skillObjectList = new List<GameObject>
             {
                 skillSelection.transform.Find("SkillWindow").Find("Skill1").gameObject,
