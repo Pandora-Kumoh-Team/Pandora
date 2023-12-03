@@ -15,7 +15,11 @@ public class ShadowBossController : MonoBehaviour,IHitAble
     public Animator anim;
     private PolygonCollider2D polygonCollider;
     private GameObject target;
-    private float teleport_delay = 15f;
+    private float teleportDelay = 15f;
+    private float sideAttackDelay = 5f;
+    private float airAttackDelay = 10f;
+    private bool onSideAttack = false;
+    private bool onAirAttack = false;
 
     //Status
     public EnemyStatus _enemyStatus;
@@ -51,9 +55,15 @@ public class ShadowBossController : MonoBehaviour,IHitAble
 
         _enemyStatus.NowHealth -= reduceDamage;
         CallHealthChangeEvetnt();
-        if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6)
+        if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && onSideAttack == false) //최대 체력의 60%
         {
-           
+            Debug.LogWarning("사이드 어택");
+            StartCoroutine(SideAttack());
+        }
+        if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.3 && onAirAttack == false) // 최대 체력의 30%
+        {
+            Debug.LogWarning("공중 공격");
+            StartCoroutine(AirAttack());
         }
         if (_enemyStatus.NowHealth <= 0)
         {
@@ -91,7 +101,7 @@ public class ShadowBossController : MonoBehaviour,IHitAble
     }
     IEnumerator Teleport()
     {
-        yield return new WaitForSeconds(teleport_delay); //초기 시작 시 쿨타임 설정
+        yield return new WaitForSeconds(teleportDelay); //초기 시작 시 쿨타임 설정
         Vector3 newPos = transform.position;
         float x = 0;
         float y = 0;
@@ -116,7 +126,7 @@ public class ShadowBossController : MonoBehaviour,IHitAble
                     break;
             }
             StartCoroutine(TeleportandAttackPattern(newPos));
-            yield return new WaitForSeconds(teleport_delay);
+            yield return new WaitForSeconds(teleportDelay);
         }
     }
     IEnumerator TeleportandAttackPattern(Vector3 newPos)
@@ -126,17 +136,67 @@ public class ShadowBossController : MonoBehaviour,IHitAble
         transform.position = newPos; //위치 변환
         anim.SetTrigger("TeleportEnd");//텔포 종료 애니메이션
         CircleAttack();
-        yield return new WaitForSeconds(1f);//active되고 탐지하도록
-        gameObject.transform.Find("CircleAttackRange").gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
     }
     public void CircleAttack()
     {
-        gameObject.transform.Find("CircleAttackRange").gameObject.SetActive(true);
         anim.SetTrigger("CircleAttack");
         anim.SetTrigger("Idle");
+    }
+    public void OnCirlceAttackRange()
+    {
+        transform.Find("CircleAttackRange").gameObject.SetActive(true);
+    }
+    public void OffCirlceAttackRange()
+    {
+        transform.Find("CircleAttackRange").gameObject.SetActive(false);
     }
     public void CircleAttackCollisionEvent()
     {
         target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage * _enemyStatus.AttackPower, null, gameObject);
+    }
+    public void SideAttackCollisionEvent()
+    {
+        target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage * _enemyStatus.AttackPower, null, gameObject);
+    }
+    IEnumerator SideAttack()
+    {
+        onSideAttack = true;
+        yield return new WaitForSeconds(3f);
+        while (true)
+        {
+            yield return new WaitForSeconds(sideAttackDelay);
+            anim.SetTrigger("SideAttack");
+        }
+    }
+    public void OnSideAttackRange()
+    {
+        transform.Find("SideAttackRange").gameObject.SetActive(true);
+    }
+    public void OffSideAttackRange()
+    {
+        transform.Find("SideAttackRange").gameObject.SetActive(false);
+    }
+    public void OnAirAttack()
+    {
+        transform.Find("AirAttackRange").gameObject.SetActive(true);
+    }
+    public void OffAirAttack()
+    {
+        transform.Find("AirAttackRange").gameObject.SetActive(false);
+    }
+    public void AirAttackCollisionEvent()
+    {
+        target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage * _enemyStatus.AttackPower + 5f, null, gameObject);
+    }
+    IEnumerator AirAttack()
+    {
+        onAirAttack = true;
+        yield return new WaitForSeconds(3f);
+        while(true)
+        {
+            yield return new WaitForSeconds(airAttackDelay);
+            anim.SetTrigger("AirAttack");
+        }
     }
 }
