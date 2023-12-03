@@ -27,7 +27,7 @@ namespace DarkPixelRPGUI.Scripts.UI
 
         private void OnDestroy()
         {
-            EventManager.Instance.RemoveListener(PandoraEventType.PlayerHealthChanged, this);
+            //EventManager.Instance.RemoveListener(PandoraEventType.PlayerHealthChanged, this);
             if (slider)
             {
                 slider.onValueChanged.RemoveListener(UpdateText);
