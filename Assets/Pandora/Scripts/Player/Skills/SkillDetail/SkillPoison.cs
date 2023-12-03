@@ -1,17 +1,23 @@
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
+using System.Collections;
 using UnityEngine;
 
 namespace Pandora.Scripts.Player.Skill.SkillDetail
 {
-    public class SkillFreezing : ActiveSkill
+    public class SkillPoison : ActiveSkill
     {
         private PlayerController _playerController;
         private float _nowDuration;
         private GameObject effect;
+        private float timer;
 
-        [Header("둔화속도 (3*기본속도/n)")]
-        public float speedDebuff;
+        [Header("피해량 n%")]
+        public float damage;
+
+        [Header("피해 주기")]
+        public float delay;
+
 
         private void Awake()
         {
@@ -19,8 +25,15 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             effect = transform.Find("Effect").gameObject;
         }
 
+        private void Start()
+        {
+            StartCoroutine(SkillDelay());
+        }
+
         private void Update()
         {
+            timer += Time.deltaTime;
+
             if (_nowDuration > 0)
             {
                 _nowDuration -= Time.deltaTime;
@@ -30,13 +43,17 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                 }
                 OnDuringSkill();
             }
+
+            if(timer >= delay)
+            {
+                transform.GetComponent<CircleCollider2D>().enabled = true;
+                timer = 0;
+            }
         }
 
         public override void OnUseSkill()
         {
             _playerController = ownerPlayer.GetComponent<PlayerController>();
-
-            transform.GetComponent<CircleCollider2D>().enabled = true;
             _nowDuration = duration;
 
             effect.transform.localPosition = new Vector3(0, 0, 0);
@@ -55,17 +72,26 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         {
             if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                col.GetComponent<EnemyController>()._enemyStatus.Speed *= 3f/speedDebuff;
+                var hitParams = new HitParams();
+
+                var rand = Random.Range(0, 100);
+                hitParams.damage = _playerController.playerCurrentStat.BaseDamage * _playerController.playerCurrentStat.AttackPower * (damage * 0.01f);
+                if (rand < _playerController.playerCurrentStat.CriticalChance)
+                {
+                    hitParams.damage *= _playerController.playerCurrentStat.CriticalDamageTimes;
+                    hitParams.isCritical = true;
+                }
+                col.GetComponent<EnemyController>().Hit(hitParams);
             }
         }
 
-        private void OnTriggerExit2D(Collider2D col)
+        private IEnumerator SkillDelay()
         {
-            if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            while(true)
             {
-                col.GetComponent<EnemyController>()._enemyStatus.Speed *= speedDebuff/3f;
+                transform.GetComponent<CircleCollider2D>().enabled = false;
+                yield return new WaitForSeconds(0.1f);
             }
         }
-
     }
 }
