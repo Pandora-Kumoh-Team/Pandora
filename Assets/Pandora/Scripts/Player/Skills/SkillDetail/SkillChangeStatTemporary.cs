@@ -17,6 +17,13 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         [Header("스킬 발동 종료시 회수되지 않는 효과")]
         public PlayerStat costStat;
 
+        GameObject effect;
+
+        private void Awake()
+        {
+            effect = transform.Find("Effect").gameObject;
+        }
+
         private void Update()
         {
             if (_nowDuration > 0)
@@ -57,36 +64,26 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         public void OnEffect()
         {
-            GameObject Effect = transform.Find("Effect").gameObject;
             switch (id)
             {
                 case 3: //희생
-                    Effect.transform.localPosition = new Vector3(0.1f, 0.3f, 0);
-                    Effect.SetActive(true);
+                    effect.transform.localPosition = new Vector3(0.1f, 0.3f, 0);
                     break;
                 case 6: //무적
-                    Effect.transform.localPosition = new Vector3(0,0.7f,0);
-                    Effect.SetActive(true);
+                    effect.transform.localPosition = new Vector3(0,0.7f,0);
                     break;
+                case 2: //경질화
+                case 4: //속사
                 case 9: //집중
                 case 10: //각성
-                    Effect.transform.localPosition = new Vector3(0, 0, 0);
-                    Effect.SetActive(true);
+                    effect.transform.localPosition = new Vector3(0, 0, 0);
                     break;
             }
+            effect.SetActive(true);
         }
         public void OffEffect()
         {
-            switch (id)
-            {
-                case 3: //희생
-                case 6: //무적
-                case 9: //집중
-                case 10://각성
-                    GameObject Effect = transform.Find("Effect").gameObject;
-                    Effect.SetActive(false);
-                    break;
-            }
+            effect.SetActive(false);
         }
     }
 }
