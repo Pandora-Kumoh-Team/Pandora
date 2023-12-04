@@ -14,7 +14,7 @@ namespace Pandora.Scripts.Effect
         {
             base.Init(text, color, speed, fadeTime, moveTime, moveDirection);
             // 소숫점 반올림
-            _damage = (float)Math.Round(param.damage, 0);
+            _damage = param.damage;
             _isCritical = param.isCritical;
         }
 
@@ -25,7 +25,7 @@ namespace Pandora.Scripts.Effect
             {
                 // 둘 중 하나만 제거해야 하기 때문에 둘 중 생긴지 오래된 것을 제거한다
                 if (fadeTimer > otherDamageEffect.fadeTimer) return;
-                GetComponent<TextMeshPro>().text = otherDamageEffect._damage + _damage + (_isCritical ? "!" : "");
+                GetComponent<TextMeshPro>().text = Math.Round(otherDamageEffect._damage + _damage) + (_isCritical ? "!" : "");
                 fadeTimer = 0;
                 Destroy(otherDamageEffect.gameObject);
             }
