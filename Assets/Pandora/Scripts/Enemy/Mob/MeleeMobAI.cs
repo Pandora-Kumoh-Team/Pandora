@@ -1,9 +1,11 @@
+using System;
 using Pandora.Scripts.Enemy;
 using System.Collections;
 using System.Collections.Generic;
 using Pandora.Scripts.DebugConsole.Player;
 using Pandora.Scripts.Player;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MeleeMobAI : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class MeleeMobAI : MonoBehaviour
     private GameObject parent;
     private GameObject dangerRange;
     private SpriteRenderer spriteRenderer;
-    private Collider2D collider;
+    private CapsuleCollider2D collider;
     
     private float randomMoveTime;
     private bool isConduct;
@@ -48,7 +50,7 @@ public class MeleeMobAI : MonoBehaviour
         enemyController = parent.GetComponent<EnemyController>();
         animator = parent.GetComponent<Animator>();
         spriteRenderer = parent.GetComponent<SpriteRenderer>();
-        collider = parent.GetComponent<Collider2D>();
+        collider = parent.GetComponent<CapsuleCollider2D>();
         rb = parent.GetComponent<Rigidbody2D>();
         dangerRange = parent.transform.Find("AttackRange").gameObject;
         attackRangePos =dangerRange.transform.localPosition;
@@ -128,6 +130,27 @@ public class MeleeMobAI : MonoBehaviour
             nowTargetDistance = rightPosDistance;
             targetPos = targetRightPos;
             target = collision.gameObject;
+        }
+        
+        // 타겟과 어느정도 공격범위내에 있다면
+        var x = dangerRange.GetComponent<BoxCollider2D>().size.x;
+        var y = dangerRange.GetComponent<BoxCollider2D>().size.y;
+        var maxDistance = Mathf.Sqrt(x * x + y * y);
+        if(nowTargetDistance <= maxDistance)
+        {
+            // targetPos가 벽 너머에 있거나 콜라이더 크기때문에 접근 불가하다면 강제 공격 
+            var raycastHit = Physics2D.Raycast(collider.bounds.center, targetPos - (Vector2)myPos, 3f,
+                LayerMask.GetMask("Wall", "Player"));
+            if (raycastHit.collider != null)
+            {
+                if (raycastHit.distance <
+                    Math.Sqrt(collider.size.x * collider.size.x + collider.size.y * collider.size.y) / 2)
+                {
+                    if (canAttack)
+                        StartCoroutine(Attack());
+                    return;
+                }
+            }
         }
         
         //플레이어와의 거리 측정
