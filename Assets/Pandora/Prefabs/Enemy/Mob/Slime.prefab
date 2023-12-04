@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  attackRange: 0.8
+  attackOffset: {x: -0.75, y: 0.2}
   attackBeforeDelay: 0.16666667
   attackingTime: 0.083333336
   attackAfterDelay: 0.16
