@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Pandora.Scripts.NewDungeon.Rooms;
 using Pathfinding;
 using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
@@ -14,6 +15,7 @@ namespace Pandora.Scripts.Player.Controller
         private Path _path;
         private int _currentPathIndex;
         private Vector2 nowWaypoint;
+        private Collider2D _roomCollider;
 
         /// <summary>
         /// 
@@ -31,6 +33,7 @@ namespace Pandora.Scripts.Player.Controller
         {
             _target = player._target;
             _seeker = player.GetComponent<Seeker>();
+            _roomCollider = player._roomCollider;
         }
 
         public override void UpdateState(PlayerAI player)
@@ -167,17 +170,31 @@ namespace Pandora.Scripts.Player.Controller
                     }
                 }
                 
-                // TODO : 도달할 수 없는 점을 제거한다
-                
-                // Debug Draw points
-                foreach (var point in points)
+                // 전투중인 방 안에 없는 점을 제거한다
+                var pointsList = points.ToList();
+                foreach (var point in pointsList)
                 {
-                    Debug.DrawLine(point + Vector3.up * 0.1f, point - Vector3.up * 0.1f, Color.green);
-                    Debug.DrawLine(point + Vector3.left * 0.1f, point - Vector3.left * 0.1f, Color.green);
+                    // 디버그 십자가 그리기 만약 _roomCollider 안에 있으면 초록색 아니면 빨간색
+                    var color = _roomCollider.OverlapPoint(point) ? Color.green : Color.red;
+                    Debug.DrawLine(point + Vector3.up * 0.2f, point - Vector3.up * 0.2f, color);
+                    Debug.DrawLine(point + Vector3.left * 0.2f, point - Vector3.left * 0.2f, color);
                 }
+                pointsList.RemoveAll(x => !_roomCollider.OverlapPoint(x));
+                points = pointsList.ToArray();
+                if(points.Length == 0)
+                {
+                    return myPos;
+                }
+                // _roomCollider box 를 그린다
+                var box = _roomCollider.bounds;
+                Debug.DrawLine(new Vector3(box.min.x, box.min.y), new Vector3(box.min.x, box.max.y), Color.blue);
+                Debug.DrawLine(new Vector3(box.min.x, box.max.y), new Vector3(box.max.x, box.max.y), Color.blue);
+                Debug.DrawLine(new Vector3(box.max.x, box.max.y), new Vector3(box.max.x, box.min.y), Color.blue);
+                Debug.DrawLine(new Vector3(box.max.x, box.min.y), new Vector3(box.min.x, box.min.y), Color.blue);
+                
                 // 각 점들의 각 위험요소와의 거리를 위험도로 반환하여 합을 구한다.
-                var sumDangerAmount = new float[pointsCount * pointsAtOneWay];
-                for (var i = 0; i < pointsCount * pointsAtOneWay; i++)
+                var sumDangerAmount = new float[points.Length];
+                for (var i = 0; i < points.Length; i++)
                 {
                     var sum = 0f;
                     foreach (var danger in dangerColliders)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Pandora.Scripts.System.Event;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.NewDungeon.Rooms
 {
@@ -138,8 +139,8 @@ namespace Pandora.Scripts.NewDungeon.Rooms
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, 0));
+            // Gizmos.color = Color.red;
+            // Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, 0));
         }
 
         public Vector3 GetRoomCenter()
@@ -149,11 +150,18 @@ namespace Pandora.Scripts.NewDungeon.Rooms
 
         public virtual void OnPlayerEnter(GameObject playerObject)
         {
+            Debug.Log("Player entered room : " + name);
             var brain = Camera.main.GetComponent<CinemachineBrain>();
             var vcam = brain.ActiveVirtualCamera as CinemachineVirtualCamera;
             var confinder = vcam.GetComponent<CinemachineConfiner2D>();
             confinder.m_BoundingShape2D = transform.Find("EnterCollider").GetComponent<CompositeCollider2D>();
         }
+        
+        public virtual void OnPlayerExit(GameObject playerObject)
+        {
+            // Nothing
+        }
+        
         public virtual void OnClearRoom()
         {
             isClear = true;
@@ -205,7 +213,6 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         {
             var graphToScan = AstarPath.active.data.gridGraph;
             foreach (var progress in AstarPath.active.ScanAsync(graphToScan)) {
-                Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
                 yield return null;
             }
         }

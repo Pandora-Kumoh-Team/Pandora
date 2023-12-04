@@ -21,7 +21,8 @@ namespace Pandora.Scripts.Player.Controller
         public GameObject _target;
         
         public float maxOtherPlayerDistance = 5f;
-        
+        public Collider2D _roomCollider;
+
         private void Start()
         {
             _playerController = GetComponent<PlayerController>();
