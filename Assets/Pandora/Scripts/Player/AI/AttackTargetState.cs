@@ -92,9 +92,9 @@ namespace Pandora.Scripts.Player.Controller
             
             
             var safePoint = GetSafePosition(_target.transform.position, player);
-            Debug.DrawLine(safePoint + Vector2.up * 0.5f, safePoint - Vector2.up * 0.5f, Color.red);
-            Debug.DrawLine(safePoint + Vector2.left * 0.5f, safePoint - Vector2.left * 0.5f, Color.red);
-            DrawCircle(player.transform.position, 5f, Color.green);
+            // Debug.DrawLine(safePoint + Vector2.up * 0.5f, safePoint - Vector2.up * 0.5f, Color.blue);
+            // Debug.DrawLine(safePoint + Vector2.left * 0.5f, safePoint - Vector2.left * 0.5f, Color.blue);
+            // DrawCircle(player.transform.position, 5f, Color.green);
         }
         
         // Debug Draw Circle
@@ -136,8 +136,8 @@ namespace Pandora.Scripts.Player.Controller
             foreach (var danger in dangerColliders)
             {
                 var dangerPos = danger.transform.position;
-                Debug.DrawLine(dangerPos + Vector3.up * 0.5f, dangerPos - Vector3.up * 0.2f, Color.red);
-                Debug.DrawLine(dangerPos + Vector3.left * 0.5f, dangerPos - Vector3.left * 0.2f, Color.red);
+                // Debug.DrawLine(dangerPos + Vector3.up * 0.5f, dangerPos - Vector3.up * 0.2f, Color.red);
+                // Debug.DrawLine(dangerPos + Vector3.left * 0.5f, dangerPos - Vector3.left * 0.2f, Color.red);
             }
             
             // 원 안에 위험요소가 없으면 현재 위치와 가장 가까운 원 안의 위치를 반환한다.
@@ -172,15 +172,18 @@ namespace Pandora.Scripts.Player.Controller
                 
                 // 전투중인 방 안에 없는 점을 제거한다
                 var pointsList = points.ToList();
-                foreach (var point in pointsList)
+                if (_roomCollider != null)
                 {
-                    // 디버그 십자가 그리기 만약 _roomCollider 안에 있으면 초록색 아니면 빨간색
-                    var color = _roomCollider.OverlapPoint(point) ? Color.green : Color.red;
-                    Debug.DrawLine(point + Vector3.up * 0.2f, point - Vector3.up * 0.2f, color);
-                    Debug.DrawLine(point + Vector3.left * 0.2f, point - Vector3.left * 0.2f, color);
+                    foreach (var point in pointsList)
+                    {
+                        // 디버그 십자가 그리기 만약 _roomCollider 안에 있으면 초록색 아니면 빨간색
+                        // var color = _roomCollider.OverlapPoint(point) ? Color.green : Color.red;
+                        // Debug.DrawLine(point + Vector3.up * 0.2f, point - Vector3.up * 0.2f, color);
+                        // Debug.DrawLine(point + Vector3.left * 0.2f, point - Vector3.left * 0.2f, color);
+                    }
+                    pointsList.RemoveAll(x => !_roomCollider.OverlapPoint(x));
+                    points = pointsList.ToArray();
                 }
-                pointsList.RemoveAll(x => !_roomCollider.OverlapPoint(x));
-                points = pointsList.ToArray();
                 if(points.Length == 0)
                 {
                     return myPos;

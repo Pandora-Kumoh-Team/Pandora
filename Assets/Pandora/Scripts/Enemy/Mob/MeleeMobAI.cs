@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class MeleeMobAI : MonoBehaviour
 {
-    private float timer;
-    private float waitingTime;
     private float randomMoveTime;
     private bool isConduct;
     private float ranDir1;
     private float ranDir2;
 
     // Components
-    private Vector3 direction;
+    private Vector2 direction;
     private GameObject target;
+    private Vector2 targetPos;
+    private float nowTargetDistance;
     private string parentName;
 
     //Status
@@ -25,29 +25,29 @@ public class MeleeMobAI : MonoBehaviour
     private Vector3 attackRangePos;
     private Vector2 capOffset;
 
+    private bool isAttacking;
+    public float attackBeforeDelay = 0.3f;
+    public float attackingTime = 0.2f;
+    public float attackAfterDelay = 0.3f;
+    private bool canAttack = true;
+
     private void Start()
     {
         isConduct = false;
-        timer = 0.0f;
-        waitingTime = 2.0f;
         parentName = transform.parent.name;
         attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
         capOffset = transform.parent.GetComponent<CapsuleCollider2D>().offset;
         speed = transform.parent.gameObject.transform.GetComponent<EnemyController>()._enemyStatus.Speed;
+        nowTargetDistance = float.MaxValue;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > 0.5)
-            transform.parent.transform.Find("AttackRange").gameObject.SetActive(false);
-
         //피격 시 경직 시간 초기화
         if(transform.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Hit"))
         {
             transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
             transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            timer = 0.8f;
         }
 
         if (!isConduct) //어떠한 행동도 하고 있지 않을때
@@ -80,43 +80,88 @@ public class MeleeMobAI : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        float distance = 0.0f;
-
         //플레이어 식별
-        if (collision.gameObject.tag == "Player" && target == null)
-            target = collision.gameObject;
+        if (!collision.gameObject.CompareTag("Player")) return;
+        if (target == null) target = collision.gameObject;
+        if (isAttacking)
+        {
+            transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            return;
+        }
 
+        // 타겟 좌우 점 찾기
+        var nowTargetPos = (Vector2)collision.transform.position;
+        var targetLeftPos = nowTargetPos + new Vector2(-attackRange * 0.9f, 0);
+        var targetRightPos = nowTargetPos + new Vector2(attackRange * 0.9f, 0);
+        
+        // 좌우 점 과의 거리 계산
+        var myPos = transform.parent.position;
+        var leftPosDistance = Vector2.Distance(myPos, targetLeftPos);
+        var rightPosDistance = Vector2.Distance(myPos, targetRightPos);
+        
+        nowTargetDistance = Vector2.Distance(myPos, target.transform.position);
+        
+        // 좌우 점 중 가까운 점을 타겟으로 설정
+        if (leftPosDistance < nowTargetDistance)
+        {
+            nowTargetDistance = leftPosDistance;
+            targetPos = targetLeftPos;
+            target = collision.gameObject;
+        }
+        if (rightPosDistance < nowTargetDistance)
+        {
+            nowTargetDistance = rightPosDistance;
+            targetPos = targetRightPos;
+            target = collision.gameObject;
+        }
+        
         //플레이어와의 거리 측정
-        if (target != null)
-            distance = Vector2.Distance(transform.parent.position, target.transform.position);
+        var distance = Vector2.Distance(myPos, targetPos);
 
         //대기시간이 아닐 경우
-        if (timer > waitingTime && target == collision.gameObject)
+        if (!isAttacking && target == collision.gameObject)
         {
             isConduct = true;
-            direction = target.transform.position - transform.parent.position;
+            direction = targetPos - (Vector2)transform.parent.position;
             direction.Normalize();
 
             //방향 전환
-            Flip(direction);
+            var lookDir = target.transform.position - myPos;
+            Flip(lookDir);
 
             //공격 사정거리밖이면 범위 내의 플레이어를 추적
-            if (distance > attackRange)
+            if (distance > 0.1f)
             {
                 // transform.parent.position += direction * speed * Time.deltaTime;
                 transform.parent.GetComponent<Rigidbody2D>().velocity = direction * speed;
                 transform.parent.GetComponent<Animator>().SetFloat("Speed", direction.magnitude);
             }
-            //공격 사정거리에 들어왔을 경우 공격
-            else
+            //공격 사정거리에 들어왔을 경우
+            else if(canAttack)
             {
-                transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
-                transform.parent.GetComponent<Animator>().SetTrigger("Attack");
-                timer = 0;
-                transform.parent.Find("AttackRange").gameObject.SetActive(true);
+                StartCoroutine(Attack());
             }
         }
+    }
+
+    private IEnumerator Attack()
+    {
+        isAttacking = true;
+        canAttack = false;
+        // get AttackAnimation speed
+        transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        transform.parent.GetComponent<Animator>().SetTrigger("Attack");
+        transform.parent.GetComponent<Animator>().SetBool("IsAttacking", true);
+        yield return new WaitForSeconds(attackBeforeDelay);
+        transform.parent.Find("AttackRange").gameObject.SetActive(true);
+        yield return new WaitForSeconds(attackingTime);
+        transform.parent.Find("AttackRange").gameObject.SetActive(false);
+        yield return new WaitForSeconds(attackAfterDelay);
+        transform.parent.GetComponent<Animator>().SetBool("IsAttacking", false);
+        transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
+        isAttacking = false;
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
