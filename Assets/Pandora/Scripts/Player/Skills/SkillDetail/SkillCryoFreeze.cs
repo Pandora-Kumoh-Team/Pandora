@@ -1,7 +1,6 @@
 using Pandora.Scripts.Player.Controller;
 using System.Collections;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.Player.Skill.SkillDetail
 {
