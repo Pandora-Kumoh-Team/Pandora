@@ -30,7 +30,7 @@ public class MeleeMobAI : MonoBehaviour
     [HideInInspector]
     public float speed;
 
-    public float attackRange = 0.5f; //임시
+    public Vector2 attackOffset; //임시
     private Vector3 attackRangePos;
     private Vector2 capOffset;
 
@@ -106,8 +106,8 @@ public class MeleeMobAI : MonoBehaviour
 
         // 타겟 좌우 점 찾기
         var nowTargetPos = (Vector2)collision.transform.position;
-        var targetLeftPos = nowTargetPos + new Vector2(-attackRange * 0.9f, 0);
-        var targetRightPos = nowTargetPos + new Vector2(attackRange * 0.9f, 0);
+        var targetLeftPos = nowTargetPos + attackOffset;
+        var targetRightPos = nowTargetPos + new Vector2(attackOffset.x * -1, attackOffset.y);
         
         // 좌우 점 과의 거리 계산
         var myPos = transform.parent.position;
@@ -168,7 +168,6 @@ public class MeleeMobAI : MonoBehaviour
         animator.SetTrigger("Attack");
         animator.SetBool("IsAttacking", true);
         yield return new WaitForSeconds(attackBeforeDelay);
-        Debug.Log("공격");
         dangerRange.SetActive(true);
         yield return new WaitForSeconds(attackingTime);
         dangerRange.SetActive(false);
