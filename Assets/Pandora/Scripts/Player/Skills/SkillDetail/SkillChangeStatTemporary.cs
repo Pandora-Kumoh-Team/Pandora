@@ -1,5 +1,6 @@
 ﻿using Pandora.Scripts.Player.Controller;
 using System.Collections;
+using Pandora.Scripts.System.Event;
 using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
 
@@ -50,6 +51,12 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             pc.playerCurrentStat.playerStat += costStat;
             _nowDuration = duration;
             pc.CallHealthChangedEvent();
+            if(temporaryStat.attackRange + costStat.attackRange != 0)
+            {
+                var param = new PlayerAttackRangeChangedParam(temporaryStat.attackRange + costStat.attackRange,
+                    pc.playerNumber);
+                EventManager.Instance.TriggerEvent(PandoraEventType.PlayerAttackRangeChanged, param);
+            }
             OnEffect();
         }
 
@@ -63,6 +70,8 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             OffEffect();
             var pc = ownerPlayer.GetComponent<PlayerController>();
             pc.playerCurrentStat.playerStat -= temporaryStat;
+            var param = new PlayerAttackRangeChangedParam(temporaryStat.attackRange, pc.playerNumber);
+            EventManager.Instance.TriggerEvent(PandoraEventType.PlayerAttackRangeChanged, param);
             pc.CallHealthChangedEvent();
         }
 
