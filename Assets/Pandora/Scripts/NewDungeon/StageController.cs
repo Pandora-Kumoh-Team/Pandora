@@ -71,8 +71,6 @@ namespace Pandora.Scripts.NewDungeon
 
         public void OnRoomClear()
         {
-            var randomPlayer = Random.Range(0, 2);
-            GameManager.Instance.GetPassiveSkill(randomPlayer);
         }
 
         public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)
