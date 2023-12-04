@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 namespace Pandora.Scripts.NewDungeon.Rooms
@@ -11,6 +12,12 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             
             isClear = true;
             // open doors
+            OpenAllDoors();
+        }
+
+        protected override void OnMapGenerateComplete()
+        {
+            base.OnMapGenerateComplete();
             OpenAllDoors();
         }
     }

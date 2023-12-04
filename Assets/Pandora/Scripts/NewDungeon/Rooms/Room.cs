@@ -20,7 +20,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
 
         protected bool isClear = false;
 
-        private void Awake()
+        private  void Awake()
         {
             EventManager.Instance.AddListener(PandoraEventType.MapGenerateComplete, this);
         
@@ -154,7 +154,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             var confinder = vcam.GetComponent<CinemachineConfiner2D>();
             confinder.m_BoundingShape2D = transform.Find("EnterCollider").GetComponent<CompositeCollider2D>();
         }
-        public void OnClearRoom()
+        public virtual void OnClearRoom()
         {
             isClear = true;
             OpenAllDoors();
@@ -174,7 +174,13 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                 if (GetBottom() != null)
                     doors.Add(GetBottom().topDoor);
                 transform.Find("EnterCollider").gameObject.SetActive(true);
+                OnMapGenerateComplete();
             }
+        }
+        
+        protected virtual void OnMapGenerateComplete()
+        {
+            // Nothing
         }
         
         public void OpenAllDoors()

@@ -17,12 +17,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         {
             if (_isSpawned && _boss == null && !isClear)
             {
-                if(StageController.Instance.currentStage == 2)
-                    GameManager.Instance.GameClear();
-                isClear = true;
-                var playerNum = Random.Range(0, 2);
-                GameManager.Instance.GetActiveSkill(playerNum);
-                transform.Find("NextFloor").gameObject.SetActive(true);
+                OnClearRoom();
             }
         }
 
@@ -45,6 +40,24 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                 var enemyPrefab = StageController.Instance.currentStageInfo.boss;
                 _boss = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             }
+        }
+
+        public override void OnClearRoom()
+        {
+            base.OnClearRoom();
+            // 마지막 스테이지 일시
+            if(StageController.Instance.currentStage == 2)
+            {
+                GameManager.Instance.GameClear();
+                return;
+            }
+            // 액티브 스킬 보상
+            var playerNum = Random.Range(0, 2);
+            GameManager.Instance.GetActiveSkill(playerNum);
+            
+            transform.Find("NextFloor").gameObject.SetActive(true);
+            
+            OpenAllDoors();
         }
     }
 }
