@@ -156,7 +156,7 @@ MonoBehaviour:
   name: "\uAC01\uC131"
   grade: 2
   type: 0
-  description: "10\uCD08 \uAC04 \uBAA8\uB4E0 \uB2A5\uB825\uCE58\uAC00 \uC0C1\uC2B9\uD569\uB2C8\uB2E4. "
+  description: "10\uCD08 \uAC04 \uBAA8\uB4E0 \uB2A5\uB825\uCE58\uAC00 \uC0C1\uC2B9\uD55C\uB2E4."
   coolTime: 20
   duration: 10
   ownerPlayer: {fileID: 0}
