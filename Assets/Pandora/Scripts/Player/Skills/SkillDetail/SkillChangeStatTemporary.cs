@@ -76,6 +76,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                 case 4: //속사
                 case 9: //집중
                 case 10: //각성
+                case 12: //신속
                     effect.transform.localPosition = new Vector3(0, 0, 0);
                     break;
             }
