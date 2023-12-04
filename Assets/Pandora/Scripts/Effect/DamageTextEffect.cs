@@ -1,4 +1,5 @@
 ﻿using System;
+using Pandora.Scripts.Enemy;
 using TMPro;
 using UnityEngine;
 
@@ -7,11 +8,14 @@ namespace Pandora.Scripts.Effect
     public class DamageTextEffect : FadeTextEffect
     {
         private float _damage;
+        private bool _isCritical;
         
-        public void Init(string text, Color color, float speed, float fadeTime, float moveTime, Vector3 moveDirection, float damage)
+        public void Init(string text, Color color, float speed, float fadeTime, float moveTime, Vector3 moveDirection, HitParams param)
         {
             base.Init(text, color, speed, fadeTime, moveTime, moveDirection);
-            _damage = damage;
+            // 소숫점 반올림
+            _damage = (float)Math.Round(param.damage, 0);
+            _isCritical = param.isCritical;
         }
 
         private void OnTriggerStay2D(Collider2D other)
@@ -21,9 +25,7 @@ namespace Pandora.Scripts.Effect
             {
                 // 둘 중 하나만 제거해야 하기 때문에 둘 중 생긴지 오래된 것을 제거한다
                 if (fadeTimer > otherDamageEffect.fadeTimer) return;
-                
-                // 크리티컬 텍스트 뒤에 붙는 느낌표를 제거한다
-                GetComponent<TextMeshPro>().text = (otherDamageEffect._damage + _damage).ToString();
+                GetComponent<TextMeshPro>().text = otherDamageEffect._damage + _damage + (_isCritical ? "!" : "");
                 fadeTimer = 0;
                 Destroy(otherDamageEffect.gameObject);
             }
