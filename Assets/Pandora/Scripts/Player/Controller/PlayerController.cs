@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace Pandora.Scripts.Player.Controller
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IEventListener
     {
         // Components
         [HideInInspector]
@@ -91,6 +91,12 @@ namespace Pandora.Scripts.Player.Controller
             passiveSkillContainer = transform.Find("Skills").Find("PassiveSkills");
             audioSource = GetComponent<AudioSource>();
             isTrigger = false;
+            EventManager.Instance.AddListener(PandoraEventType.PlayerAttackRangeChanged, this);
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.Instance.RemoveListener(PandoraEventType.PlayerAttackRangeChanged, this);
         }
 
         public virtual void Start()
@@ -505,6 +511,17 @@ namespace Pandora.Scripts.Player.Controller
         {
             yield return new WaitForSeconds(buff.Duration);
             playerCurrentStat.RemoveBuff(buff);
+        }
+
+        public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)
+        {
+            if(pandoraEventType == PandoraEventType.PlayerAttackRangeChanged)
+            {
+                if (param == null) return;
+                var attackRangeChangedParam = (PlayerAttackRangeChangedParam)param;
+                if(attackRangeChangedParam.PlayerNumber != playerNumber) return;
+                AttackRangeChanged(attackRangeChangedParam.AttackRange);
+            }
         }
     }
 }
