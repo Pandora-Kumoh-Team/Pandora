@@ -18,8 +18,22 @@ namespace Pandora.Scripts.DebugConsole.Player
         public bool getInspectorSkill = false;
         public GameObject setSkillPrefab;
         
+        private bool IsPlayerNear()
+        {
+            var players = PlayerManager.Instance.GetPlayers();
+            foreach (var player in players)
+            {
+                if(Vector2.Distance(transform.position, player.transform.position) < 1.5f)
+                    return true;
+            }
+            return false;
+        }
+        
         private void OnCollisionEnter2D(Collision2D col)
         {
+            if (!col.gameObject.CompareTag("Player")) return;
+            if (!col.gameObject.GetComponent<PlayerController>().onControl) return;
+            
             if(getRandomSKill)
             {
                 var playerId = col.gameObject.GetComponent<PlayerController>().playerNumber;

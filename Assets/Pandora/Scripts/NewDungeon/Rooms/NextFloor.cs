@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 namespace Pandora.Scripts.NewDungeon.Rooms
 {
-    public class NextFloor : MonoBehaviour
+    public class NextFloor : OnEnableNearPlayerCheckObject
     {
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.CompareTag("Player"))
+            if (col.CompareTag("Player") && !IsPlayerStillNearAfterEnable)
             {
                 StageController.Instance.currentStage++;
                 

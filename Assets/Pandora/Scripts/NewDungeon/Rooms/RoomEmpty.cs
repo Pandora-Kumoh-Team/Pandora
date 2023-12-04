@@ -19,7 +19,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             {
                 foreach (var enemy in _enemies)
                 {
-                    if(enemy.activeSelf == true)
+                    if(enemy.activeSelf)
                         return;
                 }
                 OnClearRoom();
@@ -64,6 +64,12 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             var isUp = Random.Range(0, 2) == 0 ? -0.8f : 0.8f;
             isUp += Random.Range(-0.1f, 0.1f);
             return transform.position + new Vector3(isLeft * Width / 2, isUp * Height / 2, 0);
+        }
+
+        public override void OnClearRoom()
+        {
+            base.OnClearRoom();
+            transform.Find("SkillGiver").gameObject.SetActive(true);
         }
     }
 }

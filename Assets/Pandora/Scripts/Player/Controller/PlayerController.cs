@@ -91,6 +91,12 @@ namespace Pandora.Scripts.Player.Controller
             passiveSkillContainer = transform.Find("Skills").Find("PassiveSkills");
             audioSource = GetComponent<AudioSource>();
             isTrigger = false;
+            StartCoroutine(LateAwake());
+        }
+
+        private IEnumerator LateAwake()
+        {
+            yield return null;
             EventManager.Instance.AddListener(PandoraEventType.PlayerAttackRangeChanged, this);
         }
 

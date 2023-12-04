@@ -1,4 +1,5 @@
 using System;
+using Pandora.Scripts.Player.Controller;
 using UnityEngine;
 
 namespace Pandora.Scripts.NewDungeon
@@ -28,20 +29,17 @@ namespace Pandora.Scripts.NewDungeon
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
+        private void OnTriggerStay2D(Collider2D col)
         {
             if (col.CompareTag("Player"))
             {
-                isPlayerOnTrigger = true;
+                if (col.GetComponent<PlayerController>().onControl)
+                {
+                    isPlayerOnTrigger = true;
+                    return;
+                }
             }
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                isPlayerOnTrigger = false;
-            }
+            isPlayerOnTrigger = false;
         }
     }
 }

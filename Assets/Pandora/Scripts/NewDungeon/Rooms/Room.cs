@@ -166,7 +166,6 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         {
             isClear = true;
             OpenAllDoors();
-            StageController.Instance.OnRoomClear();
         }
 
         public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)

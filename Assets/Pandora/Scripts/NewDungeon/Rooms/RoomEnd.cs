@@ -52,8 +52,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                 return;
             }
             // 액티브 스킬 보상
-            var playerNum = Random.Range(0, 2);
-            GameManager.Instance.GetActiveSkill(playerNum);
+            transform.Find("SkillGiver").gameObject.SetActive(true);
             
             transform.Find("NextFloor").gameObject.SetActive(true);
             
