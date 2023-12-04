@@ -115,8 +115,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1413325432631158155}
-  - component: {fileID: 8851551759410816553}
   - component: {fileID: 2369698291380190872}
+  - component: {fileID: 8851551759410816553}
   m_Layer: 8
   m_Name: Skill_A011
   m_TagString: Untagged
@@ -140,6 +140,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2369698291380190872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414161605372396708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45bfd58874f3be4b8905ddc7b3af37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 11
+  icon: {fileID: 21300000, guid: 177fbe3e2e17e4d4da6d3ba6eb0445bd, type: 3}
+  name: "\uC911\uB3C5"
+  grade: 0
+  type: 0
+  description: "\uC8FC\uBCC0 \uC801\uC5D0\uAC8C \uC9C0\uC18D\uC801\uC73C\uB85C 20%\uC758
+    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
+  coolTime: 20
+  duration: 9
+  ownerPlayer: {fileID: 0}
+  damage: 20
+  delay: 1
 --- !u!58 &8851551759410816553
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -175,27 +199,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.8
---- !u!114 &2369698291380190872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7414161605372396708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45bfd58874f3be4b8905ddc7b3af37d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 11
-  icon: {fileID: 21300000, guid: 177fbe3e2e17e4d4da6d3ba6eb0445bd, type: 3}
-  name: "\uC911\uB3C5"
-  grade: 0
-  type: 0
-  description: "\uC8FC\uBCC0 \uC801\uC5D0\uAC8C \uC9C0\uC18D\uC801\uC73C\uB85C 20%\uC758
-    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
-  coolTime: 20
-  duration: 9
-  ownerPlayer: {fileID: 0}
-  damage: 20
-  delay: 1
