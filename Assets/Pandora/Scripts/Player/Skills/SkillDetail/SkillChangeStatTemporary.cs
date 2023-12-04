@@ -41,6 +41,11 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         {
             transform.localPosition = Vector3.zero;
             var pc = ownerPlayer.GetComponent<PlayerController>();
+            if(pc.playerNumber == 0) // 근접일시 공격 사거리 효과 감소
+            {
+                temporaryStat.attackRange /= 3;
+                costStat.attackRange /= 3;
+            }
             pc.playerCurrentStat.playerStat += temporaryStat;
             pc.playerCurrentStat.playerStat += costStat;
             _nowDuration = duration;
@@ -77,6 +82,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                 case 9: //집중
                 case 10: //각성
                 case 12: //신속
+                case 13: //무기의 달인
                     effect.transform.localPosition = new Vector3(0, 0, 0);
                     break;
             }
