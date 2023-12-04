@@ -38,8 +38,16 @@ namespace Pandora.Scripts.UI
 
         public void Update()
         {
-            _cooldownImage.fillAmount = _playerController.skillCoolTimes[skillIndex] /
-                                        _playerController.activeSkills[skillIndex].GetComponent<Skill>().coolTime;
+            // index out check
+            try
+            {
+                _cooldownImage.fillAmount = _playerController.skillCoolTimes[skillIndex] /
+                                            _playerController.activeSkills[skillIndex].GetComponent<Skill>().coolTime;
+            }
+            catch (Exception e)
+            {
+                // ignored
+            }
         }
 
         public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)

@@ -157,10 +157,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         public void OnClearRoom()
         {
             isClear = true;
-            foreach(Door door in doors)
-            {
-                door.OpenDoor();
-            }
+            OpenAllDoors();
             StageController.Instance.OnRoomClear();
         }
 
@@ -177,6 +174,33 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                 if (GetBottom() != null)
                     doors.Add(GetBottom().topDoor);
                 transform.Find("EnterCollider").gameObject.SetActive(true);
+            }
+        }
+        
+        public void OpenAllDoors()
+        {
+            foreach(Door door in doors)
+            {
+                door.OpenDoor();
+            }
+            StartCoroutine(ScanAsync());
+        }
+        
+        public void CloseAllDoors()
+        {
+            foreach(Door door in doors)
+            {
+                door.CloseDoor();
+            }
+            StartCoroutine(ScanAsync());
+        }
+        
+        private IEnumerator ScanAsync()
+        {
+            var graphToScan = AstarPath.active.data.gridGraph;
+            foreach (var progress in AstarPath.active.ScanAsync(graphToScan)) {
+                Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
+                yield return null;
             }
         }
     }

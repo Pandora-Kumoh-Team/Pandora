@@ -39,10 +39,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                 PlayerManager.Instance.GetOtherPlayer(playerObject).transform.position = playerObject.transform.position;
             
                 // close all doors
-                foreach(Door door in doors)
-                {
-                    door.CloseDoor();
-                }
+                CloseAllDoors();
                 
                 // spawn enemies
                 GameObject enemyPrefab;

@@ -11,11 +11,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             
             isClear = true;
             // open doors
-            foreach (var door in doors)
-            {
-                door.OpenDoor();
-            }
-            
+            OpenAllDoors();
         }
     }
 }
