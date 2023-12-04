@@ -4,6 +4,7 @@ using Cinemachine;
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Pandora.Scripts.NewDungeon.Rooms
 {
@@ -21,7 +22,6 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                     if(enemy.activeSelf == true)
                         return;
                 }
-                isClear = true;
                 OnClearRoom();
             }
         }
@@ -59,8 +59,10 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         private Vector3 GetRandomSpawnPoint()
         {
             // get 4 corners of the room
-            var isLeft = UnityEngine.Random.Range(0, 2) == 0 ? -0.8f : 0.8f;
-            var isUp = UnityEngine.Random.Range(0, 2) == 0 ? -0.8f : 0.8f;
+            var isLeft = Random.Range(0, 2) == 0 ? -0.8f : 0.8f;
+            isLeft += Random.Range(-0.1f, 0.1f);
+            var isUp = Random.Range(0, 2) == 0 ? -0.8f : 0.8f;
+            isUp += Random.Range(-0.1f, 0.1f);
             return transform.position + new Vector3(isLeft * Width / 2, isUp * Height / 2, 0);
         }
     }
