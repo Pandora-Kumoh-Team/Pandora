@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class MeleeMobAI : MonoBehaviour
 {
-    private float timer;
-    private float waitingTime;
     private float randomMoveTime;
     private bool isConduct;
     private float ranDir1;
@@ -27,11 +25,15 @@ public class MeleeMobAI : MonoBehaviour
     private Vector3 attackRangePos;
     private Vector2 capOffset;
 
+    private bool isAttacking;
+    public float attackBeforeDelay = 0.3f;
+    public float attackingTime = 0.2f;
+    public float attackAfterDelay = 0.3f;
+    private bool canAttack = true;
+
     private void Start()
     {
         isConduct = false;
-        timer = 0.0f;
-        waitingTime = 2.0f;
         parentName = transform.parent.name;
         attackRangePos = GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition;
         capOffset = transform.parent.GetComponent<CapsuleCollider2D>().offset;
@@ -41,16 +43,11 @@ public class MeleeMobAI : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > 0.5)
-            transform.parent.transform.Find("AttackRange").gameObject.SetActive(false);
-
         //피격 시 경직 시간 초기화
         if(transform.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Hit"))
         {
             transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
             transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            timer = 0.8f;
         }
 
         if (!isConduct) //어떠한 행동도 하고 있지 않을때
@@ -86,17 +83,16 @@ public class MeleeMobAI : MonoBehaviour
         //플레이어 식별
         if (!collision.gameObject.CompareTag("Player")) return;
         if (target == null) target = collision.gameObject;
+        if (isAttacking)
+        {
+            transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            return;
+        }
 
         // 타겟 좌우 점 찾기
         var nowTargetPos = (Vector2)collision.transform.position;
         var targetLeftPos = nowTargetPos + new Vector2(-attackRange * 0.9f, 0);
         var targetRightPos = nowTargetPos + new Vector2(attackRange * 0.9f, 0);
-        
-        // 타겟 좌우 점 디버그 십자가 표시
-        Debug.DrawLine(targetLeftPos + Vector2.up * 0.5f, targetLeftPos - Vector2.up * 0.5f, Color.red);
-        Debug.DrawLine(targetLeftPos + Vector2.left * 0.5f, targetLeftPos - Vector2.left * 0.5f, Color.red);
-        Debug.DrawLine(targetRightPos + Vector2.up * 0.5f, targetRightPos - Vector2.up * 0.5f, Color.red);
-        Debug.DrawLine(targetRightPos + Vector2.left * 0.5f, targetRightPos - Vector2.left * 0.5f, Color.red);
         
         // 좌우 점 과의 거리 계산
         var myPos = transform.parent.position;
@@ -123,7 +119,7 @@ public class MeleeMobAI : MonoBehaviour
         var distance = Vector2.Distance(myPos, targetPos);
 
         //대기시간이 아닐 경우
-        if (timer > waitingTime && target == collision.gameObject)
+        if (!isAttacking && target == collision.gameObject)
         {
             isConduct = true;
             direction = targetPos - (Vector2)transform.parent.position;
@@ -140,16 +136,32 @@ public class MeleeMobAI : MonoBehaviour
                 transform.parent.GetComponent<Rigidbody2D>().velocity = direction * speed;
                 transform.parent.GetComponent<Animator>().SetFloat("Speed", direction.magnitude);
             }
-            //공격 사정거리에 들어왔을 경우 공격
-            else
+            //공격 사정거리에 들어왔을 경우
+            else if(canAttack)
             {
-                transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
-                transform.parent.GetComponent<Animator>().SetTrigger("Attack");
-                timer = 0;
-                transform.parent.Find("AttackRange").gameObject.SetActive(true);
+                StartCoroutine(Attack());
             }
         }
+    }
+
+    private IEnumerator Attack()
+    {
+        isAttacking = true;
+        canAttack = false;
+        // get AttackAnimation speed
+        transform.parent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        transform.parent.GetComponent<Animator>().SetTrigger("Attack");
+        transform.parent.GetComponent<Animator>().SetBool("IsAttacking", true);
+        yield return new WaitForSeconds(attackBeforeDelay);
+        transform.parent.Find("AttackRange").gameObject.SetActive(true);
+        yield return new WaitForSeconds(attackingTime);
+        transform.parent.Find("AttackRange").gameObject.SetActive(false);
+        yield return new WaitForSeconds(attackAfterDelay);
+        transform.parent.GetComponent<Animator>().SetBool("IsAttacking", false);
+        transform.parent.GetComponent<Animator>().SetFloat("Speed", 0);
+        isAttacking = false;
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

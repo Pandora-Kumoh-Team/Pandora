@@ -460,6 +460,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   attackRange: 1.5
+  attackBeforeDelay: 0.5
+  attackingTime: 0.16666667
+  attackAfterDelay: 0
 --- !u!1001 &7947604609783044954
 PrefabInstance:
   m_ObjectHideFlags: 0

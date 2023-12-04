@@ -172,6 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   attackRange: 1.4
+  attackBeforeDelay: 0.25
+  attackingTime: 0.33333334
+  attackAfterDelay: 0.25
 --- !u!1 &8301634288843190310
 GameObject:
   m_ObjectHideFlags: 0
