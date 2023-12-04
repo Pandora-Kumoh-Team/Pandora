@@ -22,12 +22,12 @@ namespace Pandora.Scripts.Player.Controller
             return this;
         }
 
-        public override void Enter(PlayerAI player)
+        public override void EnterState(PlayerAI player)
         {
             player._playerController.moveDir = Vector2.zero;
         }
 
-        public override void Update(PlayerAI player)
+        public override void UpdateState(PlayerAI player)
         {
             // idle wait
             if (isIdleWait)
@@ -67,7 +67,7 @@ namespace Pandora.Scripts.Player.Controller
             }
         }
 
-        public override void Exit(PlayerAI player)
+        public override void ExitState(PlayerAI player)
         {
             player._playerController.moveDir = Vector2.zero;
         }

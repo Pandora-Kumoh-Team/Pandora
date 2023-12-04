@@ -46,7 +46,7 @@ namespace Pandora.Scripts.Player.Controller
         {
             // 비조작 자연회복
             _currentState.CheckTransition(this);
-            _currentState.Update(this);
+            _currentState.UpdateState(this);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace Pandora.Scripts.Player.Controller
         {
             if(!playerAIState.IsInitialized)
                 throw new Exception("PlayerAIState is not initialized");
-            _currentState?.Exit(this);
+            _currentState?.ExitState(this);
             _currentState = playerAIState;
-            playerAIState.Enter(this);
+            playerAIState.EnterState(this);
         }
         
         private void OnDisable()

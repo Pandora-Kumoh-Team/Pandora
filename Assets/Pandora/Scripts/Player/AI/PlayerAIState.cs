@@ -7,9 +7,9 @@ namespace Pandora.Scripts.Player.Controller
         public bool IsInitialized = false;
         
         public abstract PlayerAIState Init(object data);
-        public abstract void Enter(PlayerAI player);
-        public abstract void Update(PlayerAI player);
-        public abstract void Exit(PlayerAI player);
+        public abstract void EnterState(PlayerAI player);
+        public abstract void UpdateState(PlayerAI player);
+        public abstract void ExitState(PlayerAI player);
 
         public virtual void CheckTransition(PlayerAI player)
         {
