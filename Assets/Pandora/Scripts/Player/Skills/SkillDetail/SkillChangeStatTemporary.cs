@@ -42,7 +42,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         {
             transform.localPosition = Vector3.zero;
             var pc = ownerPlayer.GetComponent<PlayerController>();
-            if(pc.playerNumber == 0) // 근접일시 공격 사거리 효과 감소
+            if(pc.playerNumber == 0 && id == 13) // 스킬 무기의 달인 근접일시 공격 사거리 효과 감소
             {
                 temporaryStat.attackRange /= 3;
                 costStat.attackRange /= 3;
