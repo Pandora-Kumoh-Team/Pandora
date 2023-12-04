@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.2
-  attackRange: 0.7
+  attackOffset: {x: 0.75, y: 0.1}
   attackBeforeDelay: 0.1666667
   attackingTime: 0.1666667
   attackAfterDelay: 0.25
@@ -391,7 +391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2213662359030937603
 Transform:
   m_ObjectHideFlags: 0
