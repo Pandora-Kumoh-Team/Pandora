@@ -27,13 +27,13 @@ namespace Pandora.Scripts.Player.Controller
             return this;
         }
 
-        public override void Enter(PlayerAI player)
+        public override void EnterState(PlayerAI player)
         {
             _target = player._target;
             _seeker = player.GetComponent<Seeker>();
         }
 
-        public override void Update(PlayerAI player)
+        public override void UpdateState(PlayerAI player)
         {
             // 타겟 사라졌을시
             if (_target == null)
@@ -236,7 +236,7 @@ namespace Pandora.Scripts.Player.Controller
             }
         }
 
-        public override void Exit(PlayerAI player)
+        public override void ExitState(PlayerAI player)
         {
         }
 

@@ -26,13 +26,13 @@ namespace Pandora.Scripts.Player.Controller
             return this;
         }
 
-        public override void Enter(PlayerAI player)
+        public override void EnterState(PlayerAI player)
         {
             _seeker = player.GetComponent<Seeker>();
             maxOtherPlayerDistance = player.maxOtherPlayerDistance;
         }
 
-        public override void Update(PlayerAI player)
+        public override void UpdateState(PlayerAI player)
         {
             _target = PlayerManager.Instance.GetOtherPlayer(player.gameObject);
             if(_currentWaypoint == Vector2.zero)
@@ -76,7 +76,7 @@ namespace Pandora.Scripts.Player.Controller
             }
         }
 
-        public override void Exit(PlayerAI player)
+        public override void ExitState(PlayerAI player)
         {
             
         }

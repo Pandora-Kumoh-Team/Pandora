@@ -23,7 +23,7 @@ namespace Pandora.Scripts.Player.Controller
             return this;
         }
 
-        public override void Enter(PlayerAI player)
+        public override void EnterState(PlayerAI player)
         {
             _seeker = player.GetComponent<Seeker>();
             _seeker.pathCallback += OnPathComplete;
@@ -39,7 +39,7 @@ namespace Pandora.Scripts.Player.Controller
             }
         }
 
-        public override void Update(PlayerAI player)
+        public override void UpdateState(PlayerAI player)
         {
             if (_path == null)
             {
@@ -60,7 +60,7 @@ namespace Pandora.Scripts.Player.Controller
             }
         }
 
-        public override void Exit(PlayerAI player)
+        public override void ExitState(PlayerAI player)
         {
             _path = null;
             _seeker.pathCallback -= OnPathComplete;
