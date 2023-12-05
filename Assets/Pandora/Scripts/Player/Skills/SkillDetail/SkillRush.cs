@@ -1,7 +1,6 @@
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.Player.Skill.SkillDetail
 {
@@ -68,7 +67,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                     hitParams.damage *= _playerController.playerCurrentStat.CriticalDamageTimes;
                     hitParams.isCritical = true;
                 }
-                col.GetComponent<EnemyController>().Hit(hitParams);
+                col.GetComponent<IHitAble>().Hit(hitParams);
             }
         }
 
