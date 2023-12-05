@@ -18,6 +18,7 @@ namespace Pandora.Scripts.Player.Skills
         private void Awake()
         {
             _particleSystem = GetComponent<ParticleSystem>();
+            DistanceToPlayer = 2f;
         }
 
         protected override void OnEnableNearPlayer()

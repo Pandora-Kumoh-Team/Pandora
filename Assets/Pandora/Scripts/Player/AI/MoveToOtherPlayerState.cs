@@ -39,7 +39,7 @@ namespace Pandora.Scripts.Player.Controller
                 _currentWaypoint = _target.transform.position;
             var distance= Vector2.Distance(player.transform.position, _target.transform.position);
             // 거리가 멀면 바로 텔레포트
-            if (distance > maxOtherPlayerDistance * 3)
+            if (distance > maxOtherPlayerDistance * 2.5f)
             {
                 player.transform.position = _target.transform.position;
                 _currentWaypoint = _target.transform.position;

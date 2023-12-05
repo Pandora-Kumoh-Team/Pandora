@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace Pandora.Scripts.Player.Controller
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IEventListener
     {
         // Components
         [HideInInspector]
@@ -91,6 +91,19 @@ namespace Pandora.Scripts.Player.Controller
             passiveSkillContainer = transform.Find("Skills").Find("PassiveSkills");
             audioSource = GetComponent<AudioSource>();
             isTrigger = false;
+            
+            StartCoroutine(LateAwake());
+        }
+
+        private IEnumerator LateAwake()
+        {
+            yield return null;
+            EventManager.Instance.AddListener(PandoraEventType.MapGenerateComplete, this);
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.Instance.RemoveListener(PandoraEventType.MapGenerateComplete, this);
         }
 
         public virtual void Start()
@@ -199,9 +212,7 @@ namespace Pandora.Scripts.Player.Controller
             }
             
             // 피격 피해 적용
-            Debug.Log(playerNumber + "의 피격 전 HP : " + playerCurrentStat.NowHealth + " 피해량 : " + damage + " 방어률" +  playerCurrentStat.DefencePower);
             playerCurrentStat.NowHealth -= damage * (1f - playerCurrentStat.DefencePower);
-            Debug.Log(playerNumber + "의 피격 후 HP : " + playerCurrentStat.NowHealth + " 피해량 : " + damage + " 방어률" + playerCurrentStat.DefencePower);
             CallHealthChangedEvent();
             
             // AI 공격 대상 변경
@@ -499,6 +510,11 @@ namespace Pandora.Scripts.Player.Controller
         {
             var otherController = PlayerManager.Instance.GetOtherPlayer(gameObject).GetComponent<PlayerController>();
             if (otherController.isDead || isDead) return;
+            if(!onControl)
+            {
+                attackDir = Vector2.zero;
+                isAttackKeyPressed = false;
+            }
             onControl = !onControl;
             ai.enabled = !onControl;
         }
@@ -507,6 +523,18 @@ namespace Pandora.Scripts.Player.Controller
         {
             yield return new WaitForSeconds(buff.Duration);
             playerCurrentStat.RemoveBuff(buff);
+        }
+
+        public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)
+        {
+            if (pandoraEventType == PandoraEventType.MapGenerateComplete)
+            {
+                attackDir = Vector2.zero;
+                moveDir = Vector2.zero;
+                var healthParam = new PlayerHealthChangedParam(playerCurrentStat.NowHealth, playerCurrentStat.MaxHealth,
+                    playerNumber);
+                EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, healthParam);
+            }
         }
     }
 }
