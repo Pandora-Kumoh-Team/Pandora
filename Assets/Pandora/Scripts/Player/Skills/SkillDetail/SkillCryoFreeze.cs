@@ -54,5 +54,11 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             _playerController.canControlMove = true;
             _playerController.playerCurrentStat.DodgeChance -= 100;
         }
+
+        private void OnDisable()
+        {
+            if (_nowDuration > 0)
+                OnEndSkill();
+        }
     }
 }

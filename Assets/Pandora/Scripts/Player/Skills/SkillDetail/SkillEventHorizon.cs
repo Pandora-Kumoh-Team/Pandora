@@ -93,5 +93,11 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                 col.transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }
+
+        private void OnDisable()
+        {
+            if (_nowDuration > 0)
+                OnEndSkill();
+        }
     }
 }
