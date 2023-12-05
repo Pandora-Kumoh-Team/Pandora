@@ -56,6 +56,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 col.GetComponent<EnemyController>()._enemyStatus.Speed *= 3f/speedDebuff;
+                col.GetComponent<SpriteRenderer>().color = new Color( 0f, 1f, 1f);
             }
         }
 
@@ -64,6 +65,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 col.GetComponent<EnemyController>()._enemyStatus.Speed *= speedDebuff/3f;
+                col.GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
 
