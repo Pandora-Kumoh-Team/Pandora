@@ -75,5 +75,11 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                 col.GetComponent<EnemyController>().Hit(hitParams);
             }
         }
+
+        private void OnDisable()
+        {
+            if (_nowDuration > 0)
+                OnEndSkill();
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Pandora.Scripts.DebugConsole;
 using Pandora.Scripts.Enemy;
+using Pandora.Scripts.NewDungeon.Rooms;
 using Pandora.Scripts.Player.Controller;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
@@ -123,12 +125,12 @@ namespace Pandora.Scripts.UI
         // TODO : 중간 시연용 이후 삭제해야함
         public void GoToBoss()
         {
-            var players = PlayerManager.Instance.GetPlayers();
-            var bossPos = GameObject.FindObjectOfType<FirstBossController>().gameObject.transform.position;
-            players[0].transform.position = bossPos;
-            players[1].transform.position = bossPos;
-            players[0].GetComponent<PlayerController>().playerCurrentStat.AttackPower *= 6;
-            players[1].GetComponent<PlayerController>().playerCurrentStat.AttackPower *= 1;
+            var go = FindObjectOfType<DebugGoToBossPos>();
+            var ps = PlayerManager.Instance.GetPlayers();
+            foreach (var p in ps)
+            {
+                p.transform.position = go.transform.position;
+            }
         }
         // TODO : 중간 시연용 이후 삭제해야함
         public void SummonManyMob()
