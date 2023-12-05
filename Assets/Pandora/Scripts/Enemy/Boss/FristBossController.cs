@@ -43,6 +43,7 @@ namespace Pandora.Scripts.Enemy
             polygonCollider = GetComponent<PolygonCollider2D>();
             isKnife = false;
             StartCoroutine(GetBuffMode());
+            StartCoroutine(KnifeThrow());
         }
 
         // Update is called once per frame
@@ -54,7 +55,6 @@ namespace Pandora.Scripts.Enemy
         public void Hit(HitParams hitParams)
         {
             var damage = hitParams.damage;
-            anim.SetTrigger("Hit");
             transform.Find("BossHP").gameObject.SetActive(true);
             // damage effect
             var reduceDamage = damage - (damage * _enemyStatus.DefencePower / 100);
@@ -64,11 +64,6 @@ namespace Pandora.Scripts.Enemy
 
             _enemyStatus.NowHealth -= reduceDamage;
             CallHealthChangeEvetnt();
-            OnHitAnimationEnd();
-            if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && isKnife == false) 
-            {
-                StartCoroutine(KnifeThrow());
-            }
             if (_enemyStatus.NowHealth <= 0)
             {
                 StartCoroutine(Death());
@@ -88,10 +83,6 @@ namespace Pandora.Scripts.Enemy
             {
                 Destroy(knife);
             }
-        }
-        public void OnHitAnimationEnd()
-        {
-            anim.SetBool("isFollow", true);
         }
         public void Attack()
         {
@@ -127,7 +118,7 @@ namespace Pandora.Scripts.Enemy
         IEnumerator KnifeThrow() 
         {
             GameObject obj = transform.Find("KnifeGenerator").gameObject;
-            float delay = 5f;
+            float delay = 10f;
             isKnife = true;
             while (true)
             {

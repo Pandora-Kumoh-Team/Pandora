@@ -21,7 +21,7 @@ namespace Pandora.Scripts.Enemy
         private bool isCharging = false;
         public float chargeSpeed = 3f; // 돌진 속도
         public float chargeDuration = 0.5f; // 돌진 지속 시간
-        public float cooldownTime = 5f; // 돌진 쿨타임
+        public float cooldownTime = 10f; // 돌진 쿨타임
         private bool isCooldown = false;
         public bool canAttack = false;
 
@@ -37,6 +37,7 @@ namespace Pandora.Scripts.Enemy
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             polygonCollider = GetComponent<PolygonCollider2D>();
+            StartCoroutine(StartChargingWithCooldown());
         }
 
         // Update is called once per frame
@@ -60,15 +61,10 @@ namespace Pandora.Scripts.Enemy
             _enemyStatus.NowHealth -= reduceDamage;
             CallHealthChangeEvetnt();
 
-            if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && isCharging == false)
-            {
-                StartCoroutine(StartChargingWithCooldown());
-            }
             if (_enemyStatus.NowHealth <= 0)
             {
                 StartCoroutine(Death());
             }
-            OnHitAnimationEnd();
         }
         private void OnDisable()
         {
