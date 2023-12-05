@@ -11,6 +11,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         private float _nowDuration;
         private GameObject effect;
         private float currentAngle;
+        private Vector2 currentPos;
         private float timer;
 
         [Header("데미지 (n%)")]
@@ -43,6 +44,9 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                 currentAngle += rotationSpeed;
                 transform.rotation = Quaternion.Euler(0, 0, currentAngle);
 
+                //currentPos = currentPos + 각 방향에 맞는 값 더하기
+                //transform.position = currentPos;
+
                 _nowDuration -= Time.deltaTime;
                 if (_nowDuration <= 0)
                 {
@@ -54,11 +58,11 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         public override void OnUseSkill()
         {
+            currentPos = transform.position;
             currentAngle = 0;
             _nowDuration = duration;
             _playerController = ownerPlayer.GetComponent<PlayerController>();
             transform.localPosition = Vector3.zero;
-            transform.GetComponent<CircleCollider2D>().enabled = true;
 
             effect.transform.localPosition = new Vector3(0, 0, 0);
             effect.SetActive(true);

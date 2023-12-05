@@ -10,7 +10,6 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         private PlayerController _playerController;
         private float _nowDuration;
         private GameObject effect;
-        private bool isActivate;
         private Vector2 currentPos;
 
         [Header("데미지 n%")]
@@ -24,33 +23,29 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         private void Awake()
         {
             effect = transform.Find("Effect").gameObject;
-            isActivate = false;
             currentPos = transform.position;
         }
 
         private void Start()
         {
-            StartCoroutine(SkillDelay());
+            //StartCoroutine(SkillDelay());
         }
 
         private void Update()
         {
-            timer += Time.deltaTime;
-
-            if (isActivate)
-            {
-                transform.position = currentPos;
-                effect.transform.localPosition = new Vector3(0,2.6f,0);
-
-                if(timer >= delay)
-                {
-                    transform.GetComponent<BoxCollider2D>().enabled = true;
-                    timer = 0;
-                }
-            }
-
             if (_nowDuration > 0)
             {
+                timer += Time.deltaTime;
+
+                transform.position = currentPos;
+                effect.transform.localPosition = new Vector3(0, 2.6f, 0);
+
+                if (timer >= delay)
+                {
+                    StartCoroutine(ColDelayCoroutine());
+                    timer = 0;
+                }
+
                 _nowDuration -= Time.deltaTime;
                 if (_nowDuration <= 0)
                 {
@@ -65,10 +60,8 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             _playerController = ownerPlayer.GetComponent<PlayerController>();
             _nowDuration = duration;
             transform.localPosition = new Vector3(0, 0f, 0);
-            isActivate = true;
             currentPos = transform.position;
 
-            transform.GetComponent<BoxCollider2D>().enabled = true;
             effect.SetActive(true);
         }
 
@@ -76,7 +69,6 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         public override void OnEndSkill()
         {
-            isActivate = false;
             transform.GetComponent<BoxCollider2D>().enabled = false;
             effect.SetActive(false);
         }
@@ -85,7 +77,6 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         {
             if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                Debug.Log("피격 판정");
                 var hitParams = new HitParams();
 
                 var rand = Random.Range(0, 100);
@@ -106,6 +97,13 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                 transform.GetComponent<BoxCollider2D>().enabled = false;
                 yield return new WaitForSeconds(0.5f);
             }
+        }
+
+        private IEnumerator ColDelayCoroutine()
+        {
+            transform.GetComponent<BoxCollider2D>().enabled = true;
+            yield return new WaitForSeconds(0.1f);
+            transform.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
