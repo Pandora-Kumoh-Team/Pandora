@@ -18,6 +18,7 @@ namespace Pandora.Scripts.UI
             {
                 PlayerManager.Instance.GetPlayer(PlayerNum).GetComponent<PlayerController>().AddPassiveSkill(InfoSkill);
                 ingameCanvas.RemoveUIElement(transform.parent.parent.gameObject);
+                ingameCanvas.cantPopUpByPauseElement.Remove(transform.parent.parent.gameObject);
             }
             else if (skillComponent.type == Skill.SkillType.Active)
             {
@@ -25,8 +26,6 @@ namespace Pandora.Scripts.UI
                     Find("SkillSelection").Find("ActiveSkillEquip").gameObject;
                 ingameCanvas.PushUIElement(activeSkillEquip);
                 activeSkillEquip.GetComponent<ActiveSkillEquipUi>().Init(PlayerNum, InfoSkill);
-                
-                transform.parent.gameObject.SetActive(false);
             }
             else
                 throw new NotImplementedException("This SkillType Selecting not implemented");
