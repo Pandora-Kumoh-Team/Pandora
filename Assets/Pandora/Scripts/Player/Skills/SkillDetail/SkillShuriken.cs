@@ -2,7 +2,6 @@ using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Pandora.Scripts.Player.Skill.SkillDetail
 {
@@ -99,7 +98,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                     hitParams.damage *= _playerController.playerCurrentStat.CriticalDamageTimes;
                     hitParams.isCritical = true;
                 }
-                col.GetComponent<EnemyController>().Hit(hitParams);
+                col.GetComponent<IHitAble>().Hit(hitParams);
             }
         }
 
