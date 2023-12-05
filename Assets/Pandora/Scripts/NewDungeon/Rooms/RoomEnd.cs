@@ -29,16 +29,17 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             
             if(!isClear)
             {
-                _isSpawned = true;
                 // move other player to this room
                 PlayerManager.Instance.GetOtherPlayer(playerObject).transform.position = playerObject.transform.position;
-            
-                // close all doors
-                CloseAllDoors();
                 
                 // spawn enemies
                 var enemyPrefab = StageController.Instance.currentStageInfo.boss;
                 _boss = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+
+                // close all doors
+                CloseAllDoors();
+
+                _isSpawned = true;
             }
         }
 
