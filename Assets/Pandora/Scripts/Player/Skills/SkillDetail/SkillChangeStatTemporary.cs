@@ -27,6 +27,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         private void Update()
         {
+            Debug.Log(_nowDuration);
             if (_nowDuration > 0)
             {
                 _nowDuration -= Time.deltaTime;
@@ -47,6 +48,8 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                 temporaryStat.attackRange /= 3;
                 costStat.attackRange /= 3;
             }
+            if (id == 3) // 스킬 희생 체력 소모
+                pc.playerCurrentStat.nowHealth -= 10;
             pc.playerCurrentStat.playerStat += temporaryStat;
             pc.playerCurrentStat.playerStat += costStat;
             _nowDuration = duration;
@@ -100,6 +103,12 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         public void OffEffect()
         {
             effect.SetActive(false);
+        }
+
+        private void OnDisable()
+        {
+            if(_nowDuration >0)
+                OnEndSkill();
         }
     }
 }
