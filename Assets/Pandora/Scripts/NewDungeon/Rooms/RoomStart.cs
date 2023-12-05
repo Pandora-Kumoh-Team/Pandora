@@ -18,7 +18,6 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         protected override void OnMapGenerateComplete()
         {
             base.OnMapGenerateComplete();
-            OpenAllDoors();
         }
     }
 }

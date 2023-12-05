@@ -20,9 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Pandora/Scenes/NewStage1.unity
     guid: 13462267edb0da747a85262dc623955b
-  - enabled: 0
-    path: Assets/Pandora/Scenes/DungeonRooms/BasementMain.unity
-    guid: 07d636d6a306f88408c586bf81606fcb
   - enabled: 1
     path: Assets/Pandora/Scenes/DungeonRooms/BasementEnd.unity
     guid: d2ab8b32ae60f30439b474de101d1497

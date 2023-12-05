@@ -55,8 +55,6 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             transform.Find("SkillGiver").gameObject.SetActive(true);
             
             transform.Find("NextFloor").gameObject.SetActive(true);
-            
-            OpenAllDoors();
         }
     }
 }
