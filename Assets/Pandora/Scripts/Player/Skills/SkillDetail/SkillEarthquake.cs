@@ -1,3 +1,4 @@
+using Cinemachine;
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         private PlayerController _playerController;
         private float _nowDuration;
         private GameObject effect;
+        private CinemachineImpulseSource _impulseSource;
 
         [Header("¼öÄ¡")]
         public float damage;
@@ -18,6 +20,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         {
             transform.localPosition = Vector3.zero;
             effect = transform.Find("Effect").gameObject;
+            _impulseSource =GetComponent<CinemachineImpulseSource>();
         }
 
         private void Update()
@@ -38,6 +41,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             _playerController = ownerPlayer.GetComponent<PlayerController>();
 
             transform.GetComponent<CircleCollider2D>().enabled = true;
+            _impulseSource.GenerateImpulse();
             _nowDuration = duration;
 
             effect.transform.localPosition = new Vector3(0, 0.7f, 0);

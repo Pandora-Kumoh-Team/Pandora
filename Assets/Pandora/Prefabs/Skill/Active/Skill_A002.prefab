@@ -156,7 +156,7 @@ MonoBehaviour:
   name: "\uACBD\uC9C8\uD654"
   grade: 0
   type: 0
-  description: "1\uCD08\uAC04 \uD53C\uD574\uB97C \uBC29\uC5B4\uD55C\uB2E4."
+  description: "1\uCD08\uAC04 \uD53C\uD574\uB97C \uBB34\uC2DC\uD55C\uB2E4."
   coolTime: 8
   duration: 1
   ownerPlayer: {fileID: 0}
@@ -164,13 +164,13 @@ MonoBehaviour:
     maxHealth: 0
     baseDamage: 0
     attackPower: 0
-    defencePower: 100
+    defencePower: 0
     speed: 0
     attackRange: 0
     attackSpeed: 0
     criticalChance: 0
     criticalDamageTimes: 0
-    dodgeChance: 0
+    dodgeChance: 100
     nonControlHpRecovery: 0
   costStat:
     maxHealth: 0

@@ -115,8 +115,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8380880875517466498}
-  - component: {fileID: 2363436004431400306}
   - component: {fileID: 1927673703669525694}
+  - component: {fileID: 2363436004431400306}
   m_Layer: 8
   m_Name: Skill_A017
   m_TagString: Untagged
@@ -140,6 +140,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1927673703669525694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5754155148348144766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d853a691a99985468718cc178e0ea16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 17
+  icon: {fileID: 21300000, guid: 2a08146a1b262494fb8e8ba66073bbb1, type: 3}
+  name: "\uC810\uD654"
+  grade: 2
+  type: 0
+  description: "\uD604\uC7AC \uC704\uCE58\uC5D0 10\uCD08\uAC04 50%\uC758 \uC9C0\uC18D
+    \uD53C\uD574\uB97C \uC8FC\uB294 \uD654\uC5FC\uC744 \uC18C\uD658\uD55C\uB2E4."
+  coolTime: 20
+  duration: 10
+  ownerPlayer: {fileID: 0}
+  damage: 50
+  delay: 1
 --- !u!61 &2363436004431400306
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -185,27 +209,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2, y: 3}
   m_EdgeRadius: 0
---- !u!114 &1927673703669525694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5754155148348144766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d853a691a99985468718cc178e0ea16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 17
-  icon: {fileID: 21300000, guid: 2a08146a1b262494fb8e8ba66073bbb1, type: 3}
-  name: "\uC810\uD654"
-  grade: 2
-  type: 0
-  description: "\uD604\uC7AC \uC704\uCE58\uC5D0 10\uCD08\uAC04 50%\uC758 \uC9C0\uC18D
-    \uD53C\uD574\uB97C \uC8FC\uB294 \uD654\uC5FC\uC744 \uC18C\uD658\uD55C\uB2E4."
-  coolTime: 20
-  duration: 10
-  ownerPlayer: {fileID: 0}
-  damage: 50
-  delay: 1
