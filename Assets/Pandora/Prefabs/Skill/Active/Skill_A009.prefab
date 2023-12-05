@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 9
-  icon: {fileID: 21300000, guid: a218edae4e493b749a2db714f2618676, type: 3}
+  icon: {fileID: 21300000, guid: f71053e9446063c4ba8f0d66f0bacd74, type: 3}
   name: "\uC9D1\uC911"
   grade: 1
   type: 0
