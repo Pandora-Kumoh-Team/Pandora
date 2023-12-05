@@ -25,11 +25,6 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             currentPos = transform.position;
         }
 
-        private void Start()
-        {
-            //StartCoroutine(SkillDelay());
-        }
-
         private void Update()
         {
             timer += Time.deltaTime;
@@ -60,8 +55,6 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
             transform.GetComponent<CircleCollider2D>().enabled = true;
             effect.SetActive(true);
-
-            //_playerController = ownerPlayer.GetComponent<PlayerController>();
         }
 
         public override void OnDuringSkill() { }
