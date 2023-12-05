@@ -13,8 +13,10 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         private bool isActivate;
         private Vector2 currentPos;
 
-        [Header("²ø¾î´ç±â´Â ¼Óµµ")]
+        [Header("ëŒì–´ë‹¹ê¸°ëŠ” ì†ë„")]
         public float speed;
+
+        private float timer;
 
         private void Awake()
         {

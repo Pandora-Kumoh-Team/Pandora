@@ -10,19 +10,19 @@ namespace Pandora.Scripts.NewDungeon.Rooms
     {
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.CompareTag("Player") && !IsPlayerStillNearAfterEnable)
-            {
-                StageController.Instance.currentStage++;
+            if (!col.CompareTag("Player")) return;
+            if (!col.gameObject.GetComponent<PlayerController>().onControl) return;
+            if (IsPlayerStillNearAfterEnable) return;
+            StageController.Instance.currentStage++;
                 
-                DontDestroyOnLoad(PlayerManager.Instance);
-                var players = PlayerManager.Instance.GetPlayers();
-                foreach (var player in players)
-                {
-                    player.transform.position = new Vector3(0, 0, 0);
-                }
-                // reload this scene again
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            DontDestroyOnLoad(PlayerManager.Instance);
+            var players = PlayerManager.Instance.GetPlayers();
+            foreach (var player in players)
+            {
+                player.transform.position = new Vector3(0, 0, 0);
             }
+            // reload this scene again
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

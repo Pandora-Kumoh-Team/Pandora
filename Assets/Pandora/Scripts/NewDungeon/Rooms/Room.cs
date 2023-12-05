@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Pandora.Scripts.System.Event;
+using Pathfinding;
 using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
 
@@ -20,6 +21,8 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         public List<Door> doors = new List<Door>();
 
         protected bool isClear = false;
+        
+        private Coroutine _scanCoroutine;
 
         private  void Awake()
         {
@@ -30,6 +33,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
 
         private IEnumerator LateAwake()
         {
+            yield return null;
             yield return null;
         
             Door[] ds = GetComponentsInChildren<Door>();
@@ -150,7 +154,6 @@ namespace Pandora.Scripts.NewDungeon.Rooms
 
         public virtual void OnPlayerEnter(GameObject playerObject)
         {
-            Debug.Log("Player entered room : " + name);
             var brain = Camera.main.GetComponent<CinemachineBrain>();
             var vcam = brain.ActiveVirtualCamera as CinemachineVirtualCamera;
             var confinder = vcam.GetComponent<CinemachineConfiner2D>();
@@ -196,7 +199,9 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             {
                 door.OpenDoor();
             }
-            StartCoroutine(ScanAsync());
+            if(_scanCoroutine != null)
+                StopCoroutine(_scanCoroutine);
+            _scanCoroutine = StartCoroutine(ScanAsync());
         }
         
         public void CloseAllDoors()
@@ -205,7 +210,9 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             {
                 door.CloseDoor();
             }
-            StartCoroutine(ScanAsync());
+            if(_scanCoroutine != null)
+                StopCoroutine(_scanCoroutine);
+            _scanCoroutine = StartCoroutine(ScanAsync());
         }
         
         private IEnumerator ScanAsync()
