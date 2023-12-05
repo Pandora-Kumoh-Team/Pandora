@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class KnifeGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject leftKnife; // ³ªÀÌÇÁ ¿ÀºêÁ§Æ®
+    [SerializeField] private GameObject leftKnife; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     [SerializeField] private GameObject rightKnife;
     [SerializeField] private GameObject upKnife;
     [SerializeField] private GameObject downKnife;
@@ -25,6 +25,7 @@ public class KnifeGenerator : MonoBehaviour
            GameObject newKnife = Instantiate(leftKnife, transform.parent.transform.position, Quaternion.identity);
            Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
            newKnife.GetComponent<Knife>().boss = transform.parent.gameObject;
+           transform.parent.GetComponent<FirstBossController>().knifes.Add(newKnife);
 
            if (newKnife != null && rb != null)
            {
@@ -35,6 +36,7 @@ public class KnifeGenerator : MonoBehaviour
            GameObject newKnife = Instantiate(rightKnife, transform.parent.transform.position, Quaternion.identity);
            Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
            newKnife.GetComponent<Knife>().boss = transform.parent.gameObject;
+           transform.parent.GetComponent<FirstBossController>().knifes.Add(newKnife);
 
            if (newKnife != null && rb != null)
            {
@@ -45,6 +47,7 @@ public class KnifeGenerator : MonoBehaviour
            GameObject newKnife = Instantiate(upKnife, transform.parent.transform.position, Quaternion.identity);
            Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
            newKnife.GetComponent<Knife>().boss = transform.parent.gameObject;
+           transform.parent.GetComponent<FirstBossController>().knifes.Add(newKnife);
 
            if (newKnife != null && rb != null)
            {
@@ -55,6 +58,7 @@ public class KnifeGenerator : MonoBehaviour
            GameObject newKnife = Instantiate(downKnife, transform.parent.transform.position, Quaternion.identity);
            Rigidbody2D rb = newKnife.GetComponent<Rigidbody2D>();
            newKnife.GetComponent<Knife>().boss = transform.parent.gameObject;
+           transform.parent.GetComponent<FirstBossController>().knifes.Add(newKnife);
 
            if (newKnife != null && rb != null)
            {
