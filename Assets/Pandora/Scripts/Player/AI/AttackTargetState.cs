@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Pandora.Scripts.NewDungeon.Rooms;
 using Pathfinding;
 using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
@@ -14,11 +15,12 @@ namespace Pandora.Scripts.Player.Controller
         private Path _path;
         private int _currentPathIndex;
         private Vector2 nowWaypoint;
+        private Collider2D _roomCollider;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="data">GameObject : need Target</param>
+        /// <param name="data">GameObject : need Target, if null find enemy in 3 distance</param>
         /// <returns></returns>
         public override PlayerAIState Init(object data)
         {
@@ -27,25 +29,26 @@ namespace Pandora.Scripts.Player.Controller
             return this;
         }
 
-        public override void Enter(PlayerAI player)
+        public override void EnterState(PlayerAI player)
         {
             _target = player._target;
             _seeker = player.GetComponent<Seeker>();
+            _roomCollider = player._roomCollider;
         }
 
-        public override void Update(PlayerAI player)
+        public override void UpdateState(PlayerAI player)
         {
             // 타겟 사라졌을시
-            if (_target == null)
+            if (_target == null || _target.activeSelf == false)
             {
-                player.ChangeState(new MoveToOtherPlayerState().Init(null));
-                return;
-            }
-            if (_target.activeSelf == false)
-            {
-                player.ChangeState(new IdleState().Init(null));
-                _target = null;
-                return;
+                // 3f 이내의 타켓을 찾는다
+                _target = FindTarget(player);
+                if (_target == null)
+                {
+                    // 타겟이 없으면 Idle 상태로 전환
+                    player.ChangeState(new IdleState().Init(null));
+                    return;
+                }
             }
             
             // 공격 사거리만큼 유지하며 접근 레이케스트로 측정하는 방식
@@ -89,11 +92,32 @@ namespace Pandora.Scripts.Player.Controller
             
             
             var safePoint = GetSafePosition(_target.transform.position, player);
-            Debug.DrawLine(safePoint + Vector2.up * 0.5f, safePoint - Vector2.up * 0.5f, Color.red);
-            Debug.DrawLine(safePoint + Vector2.left * 0.5f, safePoint - Vector2.left * 0.5f, Color.red);
-            DrawCircle(player.transform.position, 5f, Color.green);
+            // Debug.DrawLine(safePoint + Vector2.up * 0.5f, safePoint - Vector2.up * 0.5f, Color.blue);
+            // Debug.DrawLine(safePoint + Vector2.left * 0.5f, safePoint - Vector2.left * 0.5f, Color.blue);
+            // DrawCircle(player.transform.position, 5f, Color.green);
         }
-        
+
+        private GameObject FindTarget(PlayerAI player)
+        {
+            // 3f 이내의 타겟을 찾는다
+            Collider2D[] results = new Collider2D[5];
+            var size = Physics2D.OverlapCircleNonAlloc(player.transform.position, 3f, results, LayerMask.GetMask("Enemy"));
+            if (size == 0) return null;
+            var target = results[0].gameObject;
+            var minDistance = Vector2.Distance(player.transform.position, target.transform.position);
+            for (int i = 1; i < size; i++)
+            {
+                var distance = Vector2.Distance(player.transform.position, results[i].transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    target = results[i].gameObject;
+                }
+            }
+            
+            return target;
+        }
+
         // Debug Draw Circle
         private void DrawCircle(Vector2 center, float radius, Color color)
         {
@@ -133,8 +157,8 @@ namespace Pandora.Scripts.Player.Controller
             foreach (var danger in dangerColliders)
             {
                 var dangerPos = danger.transform.position;
-                Debug.DrawLine(dangerPos + Vector3.up * 0.5f, dangerPos - Vector3.up * 0.2f, Color.red);
-                Debug.DrawLine(dangerPos + Vector3.left * 0.5f, dangerPos - Vector3.left * 0.2f, Color.red);
+                // Debug.DrawLine(dangerPos + Vector3.up * 0.5f, dangerPos - Vector3.up * 0.2f, Color.red);
+                // Debug.DrawLine(dangerPos + Vector3.left * 0.5f, dangerPos - Vector3.left * 0.2f, Color.red);
             }
             
             // 원 안에 위험요소가 없으면 현재 위치와 가장 가까운 원 안의 위치를 반환한다.
@@ -167,17 +191,34 @@ namespace Pandora.Scripts.Player.Controller
                     }
                 }
                 
-                // TODO : 도달할 수 없는 점을 제거한다
-                
-                // Debug Draw points
-                foreach (var point in points)
+                // 전투중인 방 안에 없는 점을 제거한다
+                var pointsList = points.ToList();
+                if (_roomCollider != null)
                 {
-                    Debug.DrawLine(point + Vector3.up * 0.1f, point - Vector3.up * 0.1f, Color.green);
-                    Debug.DrawLine(point + Vector3.left * 0.1f, point - Vector3.left * 0.1f, Color.green);
+                    foreach (var point in pointsList)
+                    {
+                        // 디버그 십자가 그리기 만약 _roomCollider 안에 있으면 초록색 아니면 빨간색
+                        // var color = _roomCollider.OverlapPoint(point) ? Color.green : Color.red;
+                        // Debug.DrawLine(point + Vector3.up * 0.2f, point - Vector3.up * 0.2f, color);
+                        // Debug.DrawLine(point + Vector3.left * 0.2f, point - Vector3.left * 0.2f, color);
+                    }
+                    pointsList.RemoveAll(x => !_roomCollider.OverlapPoint(x));
+                    points = pointsList.ToArray();
                 }
+                if(points.Length == 0)
+                {
+                    return myPos;
+                }
+                // _roomCollider box 를 그린다
+                var box = _roomCollider.bounds;
+                Debug.DrawLine(new Vector3(box.min.x, box.min.y), new Vector3(box.min.x, box.max.y), Color.blue);
+                Debug.DrawLine(new Vector3(box.min.x, box.max.y), new Vector3(box.max.x, box.max.y), Color.blue);
+                Debug.DrawLine(new Vector3(box.max.x, box.max.y), new Vector3(box.max.x, box.min.y), Color.blue);
+                Debug.DrawLine(new Vector3(box.max.x, box.min.y), new Vector3(box.min.x, box.min.y), Color.blue);
+                
                 // 각 점들의 각 위험요소와의 거리를 위험도로 반환하여 합을 구한다.
-                var sumDangerAmount = new float[pointsCount * pointsAtOneWay];
-                for (var i = 0; i < pointsCount * pointsAtOneWay; i++)
+                var sumDangerAmount = new float[points.Length];
+                for (var i = 0; i < points.Length; i++)
                 {
                     var sum = 0f;
                     foreach (var danger in dangerColliders)
@@ -236,7 +277,7 @@ namespace Pandora.Scripts.Player.Controller
             }
         }
 
-        public override void Exit(PlayerAI player)
+        public override void ExitState(PlayerAI player)
         {
         }
 

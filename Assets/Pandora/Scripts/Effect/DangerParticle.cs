@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Pandora.Scripts.Effect
 {
     [RequireComponent(typeof(ParticleSystem))]
-    public class DamageTriggerParticle : MonoBehaviour
+    public class DangerParticle : MonoBehaviour
     {
         private ParticleSystem _particleSystem;
 

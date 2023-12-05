@@ -179,6 +179,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8045495071701123382, guid: fec8e14c3dcdecc4a9f86e774a98f743, type: 3}
+      propertyPath: isActiveSkill
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8240403440665182154, guid: fec8e14c3dcdecc4a9f86e774a98f743, type: 3}
+      propertyPath: isActiveSkill
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9127078670599326289, guid: fec8e14c3dcdecc4a9f86e774a98f743, type: 3}
       propertyPath: m_Name
       value: Room

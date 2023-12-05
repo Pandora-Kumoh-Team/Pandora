@@ -10,9 +10,10 @@ namespace Pandora.Scripts.System.Event
     public enum PandoraEventType
     {
         PlayerHealthChanged,
-        BossHealthChanged,
         PlayerAttackEnemy,
         PlayerSkillChanged,
+        
+        BossHealthChanged,
         
         MapGenerateComplete,
     }

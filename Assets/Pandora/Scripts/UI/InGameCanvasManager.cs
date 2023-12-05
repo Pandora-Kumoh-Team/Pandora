@@ -1,16 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
+using Pandora.Scripts.System.Event;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.UI
 {
-    public class InGameCanvasManager : MonoBehaviour
+    public class InGameCanvasManager : MonoBehaviour, IEventListener
     {
         public GameObject mob;
+
+        private void Awake()
+        {
+            transform.Find("LoadingScreen").gameObject.SetActive(true);
+            StartCoroutine(LateAwake());
+        }
+
+        private IEnumerator LateAwake()
+        {
+            yield return null;
+            EventManager.Instance.AddListener(PandoraEventType.MapGenerateComplete, this);
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.Instance.RemoveListener(PandoraEventType.MapGenerateComplete, this);
+        }
+
+        public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)
+        {
+            if (pandoraEventType == PandoraEventType.MapGenerateComplete)
+            {
+                transform.Find("LoadingScreen").gameObject.SetActive(false);
+            }
+        }
+        
         public void OnPause()
         {
             var pausePanel = transform.Find("PauseMenu").gameObject;

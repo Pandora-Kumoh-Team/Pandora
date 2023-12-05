@@ -21,7 +21,9 @@ namespace Pandora.Scripts.Player.Controller
         public GameObject _target;
         
         public float maxOtherPlayerDistance = 5f;
-        
+        public Collider2D _roomCollider;
+        public string nowState;
+
         private void Start()
         {
             _playerController = GetComponent<PlayerController>();
@@ -46,11 +48,12 @@ namespace Pandora.Scripts.Player.Controller
         {
             // 비조작 자연회복
             _currentState.CheckTransition(this);
-            _currentState.Update(this);
+            _currentState.UpdateState(this);
         }
 
         /// <summary>
         /// *** AIState need to Init() before use ***
+        /// ex) ChangeState(new IdleState().Init());
         /// </summary>
         /// <param name="playerAIState"></param>
         /// <exception cref="Exception"></exception>
@@ -58,9 +61,10 @@ namespace Pandora.Scripts.Player.Controller
         {
             if(!playerAIState.IsInitialized)
                 throw new Exception("PlayerAIState is not initialized");
-            _currentState?.Exit(this);
+            _currentState?.ExitState(this);
             _currentState = playerAIState;
-            playerAIState.Enter(this);
+            playerAIState.EnterState(this);
+            nowState = playerAIState.GetType().Name;
         }
         
         private void OnDisable()

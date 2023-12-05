@@ -1,9 +1,6 @@
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.Player.Skill.SkillDetail
 {

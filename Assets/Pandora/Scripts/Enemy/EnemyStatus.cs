@@ -81,13 +81,13 @@ public class EnemyStatus
                 _code = 153; _maxHealth = 20; _nowHealth = 20; _baseDamage = 2; _attackPower = 1; _defencePower = 1; _speed = 2; _attackSpeed = 1;
                 break;
             case "1StageBoss":
-                _code = 300; _maxHealth = 500; _nowHealth = 500; _baseDamage = 10; _attackPower = 1.5f; _defencePower = 5; _speed = 2; _attackSpeed = 1;
+                _code = 300; _maxHealth = 500; _nowHealth = 500; _baseDamage = 10; _attackPower = 1.5f; _defencePower = 5; _speed = 2; _attackSpeed = 3;
                 break;
             case "2StageBoss":
                 _code = 301; _maxHealth = 700; _nowHealth = 700; _baseDamage = 10; _attackPower = 2f; _defencePower = 4; _speed = 4; _attackSpeed = 1;
                 break;
             case "3StageBoss":
-                _code = 302; _maxHealth = 1000; _nowHealth = 300; _baseDamage = 10; _attackPower = 2f; _defencePower = 6; _speed = 4; _attackSpeed = 1;
+                _code = 302; _maxHealth = 1000; _nowHealth = 1000; _baseDamage = 10; _attackPower = 2f; _defencePower = 6; _speed = 4; _attackSpeed = 1;
                 break;
             case "TestDummy":
                 _code = 999; _maxHealth = float.MaxValue; _nowHealth = float.MaxValue; _baseDamage = 0; _attackPower = 0; _defencePower = 0; _speed = 0; _attackSpeed = 0;
@@ -100,7 +100,7 @@ public class EnemyStatus
         get => _code;
     }
 
-    // ÃÖ´ë Ã¼·Â
+    // ï¿½Ö´ï¿½ Ã¼ï¿½ï¿½
     public float MaxHealth
     {
         get => _maxHealth + _buffs.Sum(buff => buff.MaxHealthChange);
@@ -134,7 +134,7 @@ public class EnemyStatus
     }
 
     /// <summary>
-    /// °ø°Ý·Â ±âº»µ¥¸ÞÁö¿¡ °öÀû¿ë µÊ (1.0f = 100%)
+    /// ï¿½ï¿½ï¿½Ý·ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ (1.0f = 100%)
     /// </summary>
     public float AttackPower
     {
@@ -143,7 +143,7 @@ public class EnemyStatus
     }
 
     /// <summary>
-    /// ¹æ¾îÀ² (0~1) ex)0.5 = 50%ÇÇÇØ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ (0~1) ex)0.5 = 50%ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public float DefencePower
     {
