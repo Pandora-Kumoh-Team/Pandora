@@ -32,7 +32,7 @@ namespace Pandora.Scripts.DebugConsole.Player
         private void OnCollisionEnter2D(Collision2D col)
         {
             if (!col.gameObject.CompareTag("Player")) return;
-            if (!col.gameObject.GetComponent<PlayerController>().onControl) return;
+            if (!col.gameObject.GetComponent<PlayerController>().isControlByPlayer) return;
             
             if(getRandomSKill)
             {

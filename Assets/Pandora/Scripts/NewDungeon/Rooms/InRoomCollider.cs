@@ -27,7 +27,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                 if (_players.Contains(pc)) return;
                 _players.Add(pc);
                 pc.GetComponent<PlayerAI>()._roomCollider = _collider;
-                if (pc.onControl)
+                if (pc.isControlByPlayer)
                     _room.OnPlayerEnter(other.gameObject);
             }
         }
@@ -39,7 +39,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                 var pc = other.GetComponent<PlayerController>();
                 if (!_players.Contains(pc)) return;
                 _players.Remove(pc);
-                if (pc.onControl)
+                if (pc.isControlByPlayer)
                     _room.OnPlayerExit(other.gameObject);
                 if (pc.GetComponent<PlayerAI>()._roomCollider == _collider)
                     pc.GetComponent<PlayerAI>()._roomCollider = null;

@@ -36,7 +36,7 @@ namespace Pandora.Scripts.Player.Skills
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (!col.gameObject.CompareTag("Player")) return;
-            if (!col.gameObject.GetComponent<PlayerController>().onControl) return;
+            if (!col.gameObject.GetComponent<PlayerController>().isControlByPlayer) return;
             if (IsPlayerStillNearAfterEnable) return;
         
             var skillType = isActiveSkill? SkillType.Active : SkillType.Passive;

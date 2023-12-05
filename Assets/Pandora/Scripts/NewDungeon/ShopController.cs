@@ -33,7 +33,7 @@ namespace Pandora.Scripts.NewDungeon
         {
             if (col.CompareTag("Player"))
             {
-                if (col.GetComponent<PlayerController>().onControl)
+                if (col.GetComponent<PlayerController>().isControlByPlayer)
                 {
                     isPlayerOnTrigger = true;
                     return;

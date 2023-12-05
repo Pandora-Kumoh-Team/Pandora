@@ -20,7 +20,7 @@ namespace Pandora.Scripts.Player.Controller
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="data">GameObject : need Target</param>
+        /// <param name="data">GameObject : need Target, if null find enemy in 3 distance</param>
         /// <returns></returns>
         public override PlayerAIState Init(object data)
         {
@@ -39,16 +39,16 @@ namespace Pandora.Scripts.Player.Controller
         public override void UpdateState(PlayerAI player)
         {
             // 타겟 사라졌을시
-            if (_target == null)
+            if (_target == null || _target.activeSelf == false)
             {
-                player.ChangeState(new MoveToOtherPlayerState().Init(null));
-                return;
-            }
-            if (_target.activeSelf == false)
-            {
-                player.ChangeState(new IdleState().Init(null));
-                _target = null;
-                return;
+                // 3f 이내의 타켓을 찾는다
+                _target = FindTarget(player);
+                if (_target == null)
+                {
+                    // 타겟이 없으면 Idle 상태로 전환
+                    player.ChangeState(new IdleState().Init(null));
+                    return;
+                }
             }
             
             // 공격 사거리만큼 유지하며 접근 레이케스트로 측정하는 방식
@@ -96,7 +96,28 @@ namespace Pandora.Scripts.Player.Controller
             // Debug.DrawLine(safePoint + Vector2.left * 0.5f, safePoint - Vector2.left * 0.5f, Color.blue);
             // DrawCircle(player.transform.position, 5f, Color.green);
         }
-        
+
+        private GameObject FindTarget(PlayerAI player)
+        {
+            // 3f 이내의 타겟을 찾는다
+            Collider2D[] results = new Collider2D[5];
+            var size = Physics2D.OverlapCircleNonAlloc(player.transform.position, 3f, results, LayerMask.GetMask("Enemy"));
+            if (size == 0) return null;
+            var target = results[0].gameObject;
+            var minDistance = Vector2.Distance(player.transform.position, target.transform.position);
+            for (int i = 1; i < size; i++)
+            {
+                var distance = Vector2.Distance(player.transform.position, results[i].transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    target = results[i].gameObject;
+                }
+            }
+            
+            return target;
+        }
+
         // Debug Draw Circle
         private void DrawCircle(Vector2 center, float radius, Color color)
         {

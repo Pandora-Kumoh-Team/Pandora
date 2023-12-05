@@ -45,7 +45,7 @@ namespace Pandora.Scripts.NewDungeon
             var players = PlayerManager.Instance.GetPlayers();
             foreach (var player in players)
             {
-                if (!player.GetComponent<PlayerController>().onControl) continue;
+                if (!player.GetComponent<PlayerController>().isControlByPlayer) continue;
                 if (Vector2.Distance(transform.position, player.transform.position) < DistanceToPlayer)
                     return true;
             }
