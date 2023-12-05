@@ -67,5 +67,10 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             }
         }
 
+        private void OnDisable()
+        {
+            if (_nowDuration > 0)
+                OnEndSkill();
+        }
     }
 }
