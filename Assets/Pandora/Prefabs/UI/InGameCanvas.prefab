@@ -453,6 +453,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 581559147531974773}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+        m_MethodName: RemoveUIElement
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8566983276997155153}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &232830427476980577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,7 +1998,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5878088165441548464}
+      - m_Target: {fileID: 2502801717277455369}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -1996,15 +2008,15 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 3324366335379246656}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 581559147531974773}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+        m_MethodName: PushUIElement
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 2502801717277455369}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2659,7 +2671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2369856828683510033
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4157,6 +4169,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 581559147531974773}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+        m_MethodName: RemoveUIElement
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8566983276997155153}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2141218187750268644
 GameObject:
   m_ObjectHideFlags: 0
@@ -4631,6 +4655,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 581559147531974773}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+        m_MethodName: RemoveUIElement
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7414219593265547851}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2458751944388665048
 GameObject:
   m_ObjectHideFlags: 0
@@ -4992,13 +5028,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 280173175484993471}
   - {fileID: 5897977632234932649}
   - {fileID: 2085313272282133250}
-  - {fileID: 280173175484993471}
+  - {fileID: 2159699729729624845}
   - {fileID: 255021510340995869}
   - {fileID: 1170348848476338724}
   - {fileID: 3292024932993541935}
-  - {fileID: 2159699729729624845}
   - {fileID: 2369856828683510033}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -5097,6 +5133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mob: {fileID: 0}
+  displayedUIElementStack: []
+  cantPopUpByPauseElement: []
 --- !u!1 &2853056547957736653
 GameObject:
   m_ObjectHideFlags: 0
@@ -19616,9 +19654,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1394813896091921451}
     m_Modifications:
+    - target: {fileID: 134736805782368620, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134736805782368620, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 455696750659220050, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 455696750659220050, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1412278765133210732, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
       propertyPath: m_Name
       value: Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233879400763678245, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2399130811746162990, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
       propertyPath: m_Pivot.x
@@ -19704,13 +19762,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5420952159317369024, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420952159317369024, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 5878088165441548464}
     - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 581559147531974773}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: RemoveUIElement
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 2502801717277455369}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214578341477519779, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214578341477519779, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19722,9 +19832,9 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2399130811746162990, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
   m_PrefabInstance: {fileID: 4448405915264854572}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3324366335379246656 stripped
+--- !u!1 &2502801717277455369 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1412278765133210732, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2233879400763678245, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
   m_PrefabInstance: {fileID: 4448405915264854572}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5307265375613406830
