@@ -12,12 +12,12 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             
             isClear = true;
             // open doors
-            OpenAllDoors();
         }
 
         protected override void OnMapGenerateComplete()
         {
             base.OnMapGenerateComplete();
+            OpenAllDoors();
         }
     }
 }

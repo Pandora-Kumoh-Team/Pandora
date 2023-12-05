@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace Pandora.Scripts.Player.Controller
 {
-    public class PlayerController : MonoBehaviour, IEventListener
+    public class PlayerController : MonoBehaviour
     {
         // Components
         [HideInInspector]
@@ -91,18 +91,6 @@ namespace Pandora.Scripts.Player.Controller
             passiveSkillContainer = transform.Find("Skills").Find("PassiveSkills");
             audioSource = GetComponent<AudioSource>();
             isTrigger = false;
-            StartCoroutine(LateAwake());
-        }
-
-        private IEnumerator LateAwake()
-        {
-            yield return null;
-            EventManager.Instance.AddListener(PandoraEventType.PlayerAttackRangeChanged, this);
-        }
-
-        private void OnDestroy()
-        {
-            EventManager.Instance.RemoveListener(PandoraEventType.PlayerAttackRangeChanged, this);
         }
 
         public virtual void Start()
@@ -211,7 +199,9 @@ namespace Pandora.Scripts.Player.Controller
             }
             
             // 피격 피해 적용
+            Debug.Log(playerNumber + "의 피격 전 HP : " + playerCurrentStat.NowHealth + " 피해량 : " + damage + " 방어률" +  playerCurrentStat.DefencePower);
             playerCurrentStat.NowHealth -= damage * (1f - playerCurrentStat.DefencePower);
+            Debug.Log(playerNumber + "의 피격 후 HP : " + playerCurrentStat.NowHealth + " 피해량 : " + damage + " 방어률" + playerCurrentStat.DefencePower);
             CallHealthChangedEvent();
             
             // AI 공격 대상 변경
@@ -377,7 +367,7 @@ namespace Pandora.Scripts.Player.Controller
         /// 공격 타입별 사거리 변화 처리
         /// 첫 부분에 base.AttackRangeChanged()를 호출해야 함
         /// </summary>
-        /// <param name="value">변경 후 사거리</param>
+        /// <param name="value">변경 후 사거리 (ex) 1.5시 기본값보다 사거리 50프로 증가)</param>
         public virtual void AttackRangeChanged(float value)
         {
             playerCurrentStat.AttackRange = value;
@@ -517,17 +507,6 @@ namespace Pandora.Scripts.Player.Controller
         {
             yield return new WaitForSeconds(buff.Duration);
             playerCurrentStat.RemoveBuff(buff);
-        }
-
-        public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)
-        {
-            if(pandoraEventType == PandoraEventType.PlayerAttackRangeChanged)
-            {
-                if (param == null) return;
-                var attackRangeChangedParam = (PlayerAttackRangeChangedParam)param;
-                if(attackRangeChangedParam.PlayerNumber != playerNumber) return;
-                AttackRangeChanged(attackRangeChangedParam.AttackRange);
-            }
         }
     }
 }

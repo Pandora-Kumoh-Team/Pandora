@@ -13,20 +13,20 @@ namespace Pandora.Scripts.NewDungeon
         private void Update()
         {
             // move ui from under screen to above screen
-            if (isPlayerOnTrigger)
-            {
-                if (uiGroup.anchoredPosition.y < 0)
-                {
-                    uiGroup.anchoredPosition += new Vector2(0, 10);
-                }
-            }
-            else
-            {
-                if (uiGroup.anchoredPosition.y > -1200)
-                {
-                    uiGroup.anchoredPosition -= new Vector2(0, 10);
-                }
-            }
+            // if (isPlayerOnTrigger)
+            // {
+            //     if (uiGroup.anchoredPosition.y < 0)
+            //     {
+            //         uiGroup.anchoredPosition += new Vector2(0, 10);
+            //     }
+            // }
+            // else
+            // {
+            //     if (uiGroup.anchoredPosition.y > -1200)
+            //     {
+            //         uiGroup.anchoredPosition -= new Vector2(0, 10);
+            //     }
+            // }
         }
 
         private void OnTriggerStay2D(Collider2D col)

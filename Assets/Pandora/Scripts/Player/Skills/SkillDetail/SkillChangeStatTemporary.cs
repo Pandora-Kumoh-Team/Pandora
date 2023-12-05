@@ -53,9 +53,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             pc.CallHealthChangedEvent();
             if(temporaryStat.attackRange + costStat.attackRange != 0)
             {
-                var param = new PlayerAttackRangeChangedParam(temporaryStat.attackRange + costStat.attackRange,
-                    pc.playerNumber);
-                EventManager.Instance.TriggerEvent(PandoraEventType.PlayerAttackRangeChanged, param);
+                pc.AttackRangeChanged(pc.playerCurrentStat.playerStat.attackRange);
             }
             OnEffect();
         }
@@ -70,8 +68,10 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             OffEffect();
             var pc = ownerPlayer.GetComponent<PlayerController>();
             pc.playerCurrentStat.playerStat -= temporaryStat;
-            var param = new PlayerAttackRangeChangedParam(temporaryStat.attackRange, pc.playerNumber);
-            EventManager.Instance.TriggerEvent(PandoraEventType.PlayerAttackRangeChanged, param);
+            if(temporaryStat.attackRange != 0)
+            {
+                pc.AttackRangeChanged(pc.playerCurrentStat.playerStat.attackRange);
+            }
             pc.CallHealthChangedEvent();
         }
 
