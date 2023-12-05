@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Pandora.Scripts.DebugConsole;
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.NewDungeon.Rooms;
+using Pandora.Scripts.Player;
 using Pandora.Scripts.Player.Controller;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
@@ -142,6 +143,31 @@ namespace Pandora.Scripts.UI
             {
                 var pos = playerPos + new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
                 Instantiate(mob, pos, Quaternion.identity);
+            }
+        }
+        // TODO : 최종 시연용
+        public void PlayerStronger()
+        {
+            var players = PlayerManager.Instance.GetPlayers();
+            for (var i = 0; i < players.Length; i++)
+            {
+                var player = players[i];
+                var playerStatus = player.GetComponent<PlayerController>().playerCurrentStat;
+                var pcs = playerStatus.playerStat;
+                pcs.maxHealth += 10;
+                pcs.baseDamage += 1;
+                pcs.attackPower *= 0.1f;
+                pcs.defencePower *= 0.1f;
+                pcs.speed += 1;
+                pcs.attackRange *= 1.1f;
+                pcs.attackSpeed += 0.1f;
+                pcs.criticalChance *= 0.1f;
+                pcs.criticalDamageTimes += 0.1f;
+                pcs.dodgeChance *= 1.1f;
+                pcs.nonControlHpRecovery += 1;
+                playerStatus.NowHealth = pcs.maxHealth;
+                var param = new PlayerHealthChangedParam(pcs.maxHealth, pcs.maxHealth, i);
+                EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, param);
             }
         }
         

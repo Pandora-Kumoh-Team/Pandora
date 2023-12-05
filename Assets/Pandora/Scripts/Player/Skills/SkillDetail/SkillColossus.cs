@@ -2,7 +2,6 @@ using Cinemachine.Utility;
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
 using System.Collections;
-using TreeEditor;
 using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
 
@@ -16,7 +15,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         private GameObject effect2;
         private Vector2 currentPos;
 
-        [Header("¼öÄ¡")]
+        [Header("ï¿½ï¿½Ä¡")]
         public float damage;
 
         private void Awake()
