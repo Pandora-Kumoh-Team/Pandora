@@ -3,19 +3,25 @@ using Pandora.Scripts.Player.Controller;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System.Event;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Pandora.Scripts.UI
+namespace Pandora.Scripts.UI.SkillUI
 {
-    public class SkillCooldownUi : MonoBehaviour, IEventListener
+    public partial class SkillCooldownUi : MonoBehaviour, IEventListener, IPointerEnterHandler, IPointerExitHandler
     {
         public int playerNumber;
         public int skillIndex;
         
         private PlayerController _playerController;
         private GameObject _skillObject;
+        private Skill _skill;
         private Image _cooldownImage;
         private Image skillIcon;
+        
+        [SerializeField] private SkillTooltipWindow skillTooltipWindow;
+        [SerializeField] private RectTransform rectTransform;
+
 
         public void Awake()
         {
@@ -27,7 +33,8 @@ namespace Pandora.Scripts.UI
         {
             _playerController = PlayerManager.Instance.GetPlayer(playerNumber).GetComponent<PlayerController>();
             _skillObject = _playerController.activeSkills[skillIndex];
-            skillIcon.sprite = _skillObject.GetComponent<Skill>().icon;
+            _skill = _skillObject.GetComponent<Skill>();
+            skillIcon.sprite = _skill.icon;
             EventManager.Instance.AddListener(PandoraEventType.PlayerSkillChanged, this);
         }
         
@@ -56,7 +63,18 @@ namespace Pandora.Scripts.UI
             var playerSkillChangedParam = (PlayerSkillChangedParam)param;
             if(playerSkillChangedParam.playerNumber != playerNumber) return;
             if(playerSkillChangedParam.skillIndex != skillIndex) return;
-            skillIcon.sprite = playerSkillChangedParam.Skill.icon;
+            _skill = playerSkillChangedParam.Skill;
+            skillIcon.sprite = _skill.icon;
+        }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            skillTooltipWindow.ShowTooltip(_skill.name, _skill.description,
+                SkillManager.SKillGradeToColor(_skill.grade), rectTransform.position.x);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            skillTooltipWindow.HideTooltip();
         }
     }
 }

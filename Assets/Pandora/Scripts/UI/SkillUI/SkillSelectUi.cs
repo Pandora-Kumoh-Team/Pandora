@@ -2,11 +2,8 @@
 using Pandora.Scripts.Player.Controller;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 
-namespace Pandora.Scripts.UI
+namespace Pandora.Scripts.UI.SkillUI
 {
     public class SkillSelectUi : SkillInfoUi
     {
