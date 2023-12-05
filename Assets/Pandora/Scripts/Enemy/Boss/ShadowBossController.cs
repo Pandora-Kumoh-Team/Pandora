@@ -15,9 +15,9 @@ public class ShadowBossController : MonoBehaviour,IHitAble
     public Animator anim;
     private PolygonCollider2D polygonCollider;
     private GameObject target;
-    private float teleportDelay = 15f;
-    private float sideAttackDelay = 5f;
-    private float airAttackDelay = 10f;
+    private float teleportDelay = 10f;
+    private float sideAttackDelay = 15f;
+    private float airAttackDelay = 25f;
     private bool onSideAttack = false;
     private bool onAirAttack = false;
 
@@ -34,6 +34,8 @@ public class ShadowBossController : MonoBehaviour,IHitAble
         anim = GetComponent<Animator>();
         polygonCollider = GetComponent<PolygonCollider2D>();
         StartCoroutine(Teleport());
+        StartCoroutine(SideAttack());
+        StartCoroutine(AirAttack());
     }
 
     // Update is called once per frame
@@ -45,7 +47,6 @@ public class ShadowBossController : MonoBehaviour,IHitAble
     public void Hit(HitParams hitParams)
     {
         var damage = hitParams.damage;
-        anim.SetTrigger("Hit");
         transform.Find("BossHP").gameObject.SetActive(true);
         //damage effect
         var effectPosition = transform.position + new Vector3(1.5f, 1f, 0);
@@ -56,16 +57,6 @@ public class ShadowBossController : MonoBehaviour,IHitAble
 
         _enemyStatus.NowHealth -= reduceDamage;
         CallHealthChangeEvetnt();
-        if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && onSideAttack == false) //최대 체력의 60%
-        {
-            Debug.LogWarning("사이드 어택");
-            StartCoroutine(SideAttack());
-        }
-        if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.3 && onAirAttack == false) // 최대 체력의 30%
-        {
-            Debug.LogWarning("공중 공격");
-            StartCoroutine(AirAttack());
-        }
         if (_enemyStatus.NowHealth <= 0)
         {
             StartCoroutine(Death());
@@ -114,8 +105,8 @@ public class ShadowBossController : MonoBehaviour,IHitAble
             switch(type)
             {
                 case 0:
-                     x = Random.Range(-10, 10);
-                     y = Random.Range(-10, 10);
+                     x = Random.Range(-3, 3);
+                     y = Random.Range(-3, 3);
                      newPos = new Vector3(target.transform.position.x + x, target.transform.position.y + y, 0); //플레이어 기준 랜덤하게
                     Debug.Log("랜덤 위치 선택");
                     break;
