@@ -136,13 +136,15 @@ MonoBehaviour:
   grade: 2
   type: 0
   description: "\uAC70\uB300\uD55C \uD45C\uCC3D\uC744 \uB358\uC838 4\uCD08\uAC04
-    \uC801\uC5D0\uAC8C 20%\uC758 \uC9C0\uC18D \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
+    \uC801\uC5D0\uAC8C 30%\uC758 \uC9C0\uC18D \uD53C\uD574\uB97C \uC785\uD78C\uB2E4.
+    \uC81C\uC790\uB9AC\uC5D0\uC11C \uC0AC\uC6A9 \uC2DC \uD45C\uCC3D\uC740 \uD50C\uB808\uC774\uC5B4
+    \uC8FC\uBCC0\uC744 \uB3C8\uB2E4."
   coolTime: 0
   duration: 5
   ownerPlayer: {fileID: 0}
-  damage: 20
-  rotationSpeed: 30
-  delay: 0.2
+  damage: 30
+  rotationSpeed: 15
+  delay: 0.3
 --- !u!58 &3165848094178376522
 CircleCollider2D:
   m_ObjectHideFlags: 0
