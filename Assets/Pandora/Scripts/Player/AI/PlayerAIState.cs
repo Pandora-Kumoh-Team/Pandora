@@ -20,8 +20,7 @@ namespace Pandora.Scripts.Player.Controller
             }
             var otherPlayer = PlayerManager.Instance.GetOtherPlayer(player.gameObject);
             var distanceToOtherPlayer = Vector2.Distance(player.transform.position, otherPlayer.transform.position);
-            if (distanceToOtherPlayer > player.maxOtherPlayerDistance && player._currentState is IdleState 
-                || distanceToOtherPlayer > player.maxOtherPlayerDistance * 2 && player._currentState is not MoveToOtherPlayerState)
+            if (distanceToOtherPlayer > player.maxOtherPlayerDistance && player._currentState is IdleState)
             {
                 player.ChangeState(new MoveToOtherPlayerState().Init(null));
             }
