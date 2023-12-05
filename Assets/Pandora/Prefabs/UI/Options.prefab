@@ -1849,7 +1849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2399130811746162990
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2766,7 +2766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3514336350567133934
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6982,7 +6982,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5877947709246208681}
         m_TargetAssemblyTypeName: Pandora.Scripts.System.SettingManager, Assembly-CSharp
-        m_MethodName: OnEffectsVolumeChanged
+        m_MethodName: OnSfxVolumeChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12183,7 +12183,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1412278765133210732}
+      - m_Target: {fileID: 2233879400763678245}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -12736,7 +12736,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1412278765133210732}
+      - m_Target: {fileID: 2233879400763678245}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6

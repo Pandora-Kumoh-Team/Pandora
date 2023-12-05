@@ -1,11 +1,8 @@
-﻿using System;
-using Pandora.Scripts.Player.Controller;
-using Pandora.Scripts.Player.Skill;
-using TMPro;
+﻿using Pandora.Scripts.Player.Controller;
+using Pandora.Scripts.System;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Pandora.Scripts.UI
+namespace Pandora.Scripts.UI.SkillUI
 {
     public class SkillReplaceUi : SkillInfoUi
     {
@@ -17,7 +14,10 @@ namespace Pandora.Scripts.UI
         {
             PlayerManager.Instance.GetPlayer(PlayerNum).GetComponent<PlayerController>()
                 .SetActiveSkill(changeSkill, skillIndex);
-            Time.timeScale = 1;
+            var ingameCanvas = GameManager.Instance.inGameCanvas.GetComponent<InGameCanvasManager>();
+            ingameCanvas.RemoveUIElement(transform.parent.gameObject);
+            ingameCanvas.RemoveUIElement(transform.parent.parent.gameObject);
+            ingameCanvas.cantPopUpByPauseElement.Remove(transform.parent.parent.gameObject);
         }
 
         public void Init(GameObject infoSkill, int playerNum, GameObject changeSkill)

@@ -17,16 +17,16 @@ namespace Pandora.Scripts.NewDungeon
         {
             RoomController.Instance.EnqueueRoomToGeneration("Start", 0, 0);
             int roomIndex = 0;
-            int shopIndex = Random.Range(1, 10);
+            int shopIndex = Random.Range(1, dungeonGenerationData.iterationMax - 1);
             foreach (var roomPosition in roomPositions)
             {
-                if(shopIndex == roomIndex)
-                {
-                    RoomController.Instance.EnqueueRoomToGeneration("Shop", roomPosition.x, roomPosition.y);
-                }
-                else if(roomPosition == dungeonRoomPositions[^1] && roomPosition != Vector2Int.zero)
+                if(roomPosition == dungeonRoomPositions[^1] && roomPosition != Vector2Int.zero)
                 {
                     RoomController.Instance.EnqueueRoomToGeneration("End", roomPosition.x, roomPosition.y);
+                }
+                else if (shopIndex == roomIndex)
+                {
+                    RoomController.Instance.EnqueueRoomToGeneration("Shop", roomPosition.x, roomPosition.y);
                 }
                 else
                 {

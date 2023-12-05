@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using Pandora.Scripts.DebugConsole;
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.NewDungeon.Rooms;
+using Pandora.Scripts.Player;
 using Pandora.Scripts.Player.Controller;
 using Pandora.Scripts.Player.Skill;
 using Pandora.Scripts.System;
 using Pandora.Scripts.System.Event;
+using Pandora.Scripts.UI.SkillUI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.UI
@@ -16,6 +19,8 @@ namespace Pandora.Scripts.UI
     public class InGameCanvasManager : MonoBehaviour, IEventListener
     {
         public GameObject mob;
+        public List<GameObject> displayedUIElementStack;
+        public List<GameObject> cantPopUpByPauseElement;
 
         private void Awake()
         {
@@ -45,23 +50,20 @@ namespace Pandora.Scripts.UI
         public void OnPause()
         {
             var pausePanel = transform.Find("PauseMenu").gameObject;
-            var isMenuActive = pausePanel.activeSelf;
-            pausePanel.SetActive(!isMenuActive);
-            Time.timeScale = isMenuActive ? 1 : 0;
-        }
-        
-        public void OnPause(bool isPaused)
-        {
-            var pausePanel = transform.Find("PauseMenu").gameObject;
-            pausePanel.SetActive(isPaused);
-            Time.timeScale = isPaused ? 0 : 1;
+            displayedUIElementStack ??= new List<GameObject>();
+            if (displayedUIElementStack.Count == 0)
+                PushUIElement(pausePanel);
+            else if (!cantPopUpByPauseElement.Contains(displayedUIElementStack[^1]))
+                PopUIElement();
         }
 
         public void OnPassiveSkillList()
         {
             var skillPanel = transform.Find("SkillsList").gameObject;
-            var isSkillPanelActive = skillPanel.activeSelf;
-            skillPanel.SetActive(!isSkillPanelActive);
+            if(displayedUIElementStack.Contains(skillPanel))
+                RemoveUIElement(skillPanel);
+            else
+                PushUIElement(skillPanel);
         }
         
         /// <summary>
@@ -70,8 +72,8 @@ namespace Pandora.Scripts.UI
         public void DisplaySkillSelection(Skill.SkillType skillType, int playerNum)
         {
             var skillSelection = transform.Find("SkillSelection").gameObject;
-            skillSelection.SetActive(true);
-            Time.timeScale = 0;
+            PushUIElement(skillSelection);
+            cantPopUpByPauseElement.Add(skillSelection);
 
             var skillList = SkillManager.Instance.GetRandomSkills(playerNum, skillType, 3);
             var skillObjectList = new List<GameObject>
@@ -99,21 +101,20 @@ namespace Pandora.Scripts.UI
         public void CloseConfirm()
         {
             var closeConfirm = transform.Find("SkillSelection").Find("CloseConfirm").gameObject;
-            closeConfirm.SetActive(true);
+            PushUIElement(closeConfirm);
         }
         
         public void CancelSkillSelection()
         {
             var closeConfirm = transform.Find("SkillSelection").Find("CloseConfirm").gameObject;
-            closeConfirm.SetActive(false);
+            RemoveUIElement(closeConfirm);
             var skillSelection = transform.Find("SkillSelection").gameObject;
-            skillSelection.SetActive(false);
-            Time.timeScale = 1;
+            RemoveUIElement(skillSelection);
         }
         
         public void ReStart()
         {
-            Time.timeScale = 1;
+            RemoveAllUIElement();
             SceneManager.LoadScene("MainMenu");
         }
         
@@ -143,6 +144,86 @@ namespace Pandora.Scripts.UI
                 var pos = playerPos + new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
                 Instantiate(mob, pos, Quaternion.identity);
             }
+        }
+        // TODO : 최종 시연용
+        public void PlayerStronger()
+        {
+            var players = PlayerManager.Instance.GetPlayers();
+            for (var i = 0; i < players.Length; i++)
+            {
+                var player = players[i];
+                var playerStatus = player.GetComponent<PlayerController>().playerCurrentStat;
+                var pcs = playerStatus.playerStat;
+                pcs.maxHealth += 10;
+                pcs.baseDamage += 1;
+                pcs.attackPower *= 0.1f;
+                pcs.defencePower *= 0.1f;
+                pcs.speed += 1;
+                pcs.attackRange *= 1.1f;
+                pcs.attackSpeed += 0.1f;
+                pcs.criticalChance *= 0.1f;
+                pcs.criticalDamageTimes += 0.1f;
+                pcs.dodgeChance *= 1.1f;
+                pcs.nonControlHpRecovery += 1;
+                playerStatus.NowHealth = pcs.maxHealth;
+                var param = new PlayerHealthChangedParam(pcs.maxHealth, pcs.maxHealth, i);
+                EventManager.Instance.TriggerEvent(PandoraEventType.PlayerHealthChanged, param);
+            }
+        }
+        
+        public void PushUIElement(GameObject uiElement)
+        {
+            if (displayedUIElementStack == null)
+            {
+                displayedUIElementStack = new List<GameObject>();
+            }
+            displayedUIElementStack.Add(uiElement);
+            uiElement.SetActive(true);
+            Time.timeScale = 0;
+        }
+        
+        public GameObject PopUIElement()
+        {
+            if (displayedUIElementStack == null || displayedUIElementStack.Count == 0)
+            {
+                return null;
+            }
+            var uiElement = displayedUIElementStack[displayedUIElementStack.Count - 1];
+            displayedUIElementStack.RemoveAt(displayedUIElementStack.Count - 1);
+            uiElement.SetActive(false);
+            if (displayedUIElementStack.Count == 0)
+            {
+                Time.timeScale = 1;
+            }
+            return uiElement;
+        }
+        
+        public void RemoveUIElement(GameObject uiElement)
+        {
+            if (displayedUIElementStack == null || displayedUIElementStack.Count == 0)
+            {
+                return;
+            }
+            displayedUIElementStack.Remove(uiElement);
+            uiElement.SetActive(false);
+            if (displayedUIElementStack.Count == 0)
+            {
+                Time.timeScale = 1;
+            }
+        }
+        
+        public void RemoveAllUIElement()
+        {
+            if (displayedUIElementStack == null || displayedUIElementStack.Count == 0)
+            {
+                return;
+            }
+            foreach (var uiElement in displayedUIElementStack)
+            {
+                uiElement.SetActive(false);
+            }
+            displayedUIElementStack.Clear();
+            Time.timeScale = 1;
         }
     }
 }
