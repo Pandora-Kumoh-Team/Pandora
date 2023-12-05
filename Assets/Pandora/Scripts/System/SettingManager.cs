@@ -36,6 +36,9 @@ namespace Pandora.Scripts.System
         {
             _keyBindingPath = Application.persistentDataPath + "/KeyBindings.json";
             _savePath = Application.persistentDataPath + "/Settings.json";
+            _saveDataStruct.masterVolume = 120f;
+            _saveDataStruct.musicVolume = 120f;
+            _saveDataStruct.sfxVolume = 120f;
             LoadSetting();
             StartCoroutine(LateAwake());
         }

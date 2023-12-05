@@ -11,7 +11,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UIElements;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 namespace Pandora.Scripts.Enemy
 {
@@ -74,7 +73,7 @@ namespace Pandora.Scripts.Enemy
             {
                 StartCoroutine(Death());
             }
-            distance = Vector2.Distance(transform.position, target.transform.position); //.ÇÃ·¹ÀÌ¾î¿ÍÀÇ °Å¸® ÃøÁ¤
+            distance = Vector2.Distance(transform.position, target.transform.position); //.ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½
             GameObject.Find("BossAI").GetComponent<BossAI>().selectBehavior(distance);
         }
         private void OnDisable()
