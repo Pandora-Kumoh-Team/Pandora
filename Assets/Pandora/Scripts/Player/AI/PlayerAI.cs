@@ -52,6 +52,7 @@ namespace Pandora.Scripts.Player.Controller
 
         /// <summary>
         /// *** AIState need to Init() before use ***
+        /// ex) ChangeState(new IdleState().Init());
         /// </summary>
         /// <param name="playerAIState"></param>
         /// <exception cref="Exception"></exception>

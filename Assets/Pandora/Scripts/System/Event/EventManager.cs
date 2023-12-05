@@ -12,7 +12,6 @@ namespace Pandora.Scripts.System.Event
         PlayerHealthChanged,
         PlayerAttackEnemy,
         PlayerSkillChanged,
-        PlayerAttackRangeChanged,
         
         BossHealthChanged,
         

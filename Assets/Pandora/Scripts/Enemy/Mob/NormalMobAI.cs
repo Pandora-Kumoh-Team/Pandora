@@ -26,7 +26,7 @@ public class NormalMobAI : MonoBehaviour
 
     //Status
     public float speed = 1.0f; //임시
-    public float attack = 1.0f; // 임시
+    public float attackDamage = 1.0f; // 임시
     private float attackCool = 0.3f;
 
     private void Start()
@@ -82,9 +82,9 @@ public class NormalMobAI : MonoBehaviour
         distance = Vector2.Distance(transform.parent.position, target.transform.position);
         isConduct = true;
         // 임시 공격
-        if(distance < 0.6f && attackCool <= 0 && collision.gameObject.CompareTag("Player"))
+        if(distance < 1f && attackCool <= 0 && collision.gameObject.CompareTag("Player"))
         {
-            target.GetComponent<PlayerController>().Hurt(attack, null, gameObject);
+            target.GetComponent<PlayerController>().Hurt(attackDamage, null, gameObject);
             attackCool = 0.3f;
         }
 

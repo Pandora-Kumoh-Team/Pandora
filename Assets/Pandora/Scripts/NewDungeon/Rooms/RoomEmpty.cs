@@ -36,8 +36,10 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             if(!isClear)
             {
                 // move other player to this room
-                PlayerManager.Instance.GetOtherPlayer(playerObject).transform.position = playerObject.transform.position;
-            
+                var otherPlayer =  PlayerManager.Instance.GetOtherPlayer(playerObject);
+                otherPlayer.transform.position = playerObject.transform.position;
+                otherPlayer.GetComponent<PlayerAI>().ChangeState(new IdleState().Init(null));
+                
                 // close all doors
                 CloseAllDoors();
                 
