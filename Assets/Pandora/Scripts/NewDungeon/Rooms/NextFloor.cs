@@ -11,7 +11,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (!col.CompareTag("Player")) return;
-            if (!col.gameObject.GetComponent<PlayerController>().onControl) return;
+            if (!col.gameObject.GetComponent<PlayerController>().isControlByPlayer) return;
             if (IsPlayerStillNearAfterEnable) return;
             StageController.Instance.currentStage++;
                 

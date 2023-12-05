@@ -22,6 +22,7 @@ namespace Pandora.Scripts.Player.Controller
         
         public float maxOtherPlayerDistance = 5f;
         public Collider2D _roomCollider;
+        public string nowState;
 
         private void Start()
         {
@@ -63,6 +64,7 @@ namespace Pandora.Scripts.Player.Controller
             _currentState?.ExitState(this);
             _currentState = playerAIState;
             playerAIState.EnterState(this);
+            nowState = playerAIState.GetType().Name;
         }
         
         private void OnDisable()

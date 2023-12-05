@@ -56,8 +56,8 @@ namespace Pandora.Scripts.Player.Controller
     
         // 태그 관련
         [HideInInspector]
-        public bool onControl;
-        public bool onControlInit = true;
+        public bool isControlByPlayer;
+        [FormerlySerializedAs("onControlInit")] public bool isStartWithPlayerControl = true;
         
         [HideInInspector]
         public bool isDead;
@@ -108,8 +108,8 @@ namespace Pandora.Scripts.Player.Controller
 
         public virtual void Start()
         {
-            onControl = onControlInit;
-            ai.enabled = !onControlInit;
+            isControlByPlayer = isStartWithPlayerControl;
+            ai.enabled = !isStartWithPlayerControl;
             anim.SetInteger(CachedMoveDir, -1);
             playerCurrentStat.playerStat = playerNumber == 0
                 ? PermanentStatController.Instance.p0PermanentStats
@@ -146,10 +146,15 @@ namespace Pandora.Scripts.Player.Controller
                 rb.velocity = moveDir * playerCurrentStat.Speed;
                 SetMoveAnimation(moveDir);
             }
-            else if(canControlMove && moveDir.magnitude <= 0.5f)
+            else if(canControlMove && moveDir.magnitude <= 0.5f && isControlByPlayer)
             {
                 rb.velocity = Vector2.zero;
                 anim.SetInteger(CachedMoveDir, -1);
+            }
+            else if(canControlMove && moveDir.magnitude <= 0.5f && !isControlByPlayer)
+            {
+                rb.velocity = moveDir * playerCurrentStat.Speed;
+                SetMoveAnimation(moveDir);
             }
             else
             {
@@ -181,7 +186,7 @@ namespace Pandora.Scripts.Player.Controller
             {
                 attackCoolTime -= Time.deltaTime;
             }
-            if(onControl && isAttackKeyPressed && CanAttack())
+            if(isControlByPlayer && isAttackKeyPressed && CanAttack())
             {
                 Attack();
             }
@@ -216,7 +221,7 @@ namespace Pandora.Scripts.Player.Controller
             CallHealthChangedEvent();
             
             // AI 공격 대상 변경
-            if (!onControl)
+            if (!isControlByPlayer)
             {
                 ai._target = attacker;
                 ai.ChangeState(new AttackTargetState().Init(attacker));
@@ -268,10 +273,10 @@ namespace Pandora.Scripts.Player.Controller
             var go = gameObject;
             go.layer = LayerMask.NameToLayer("DeadPlayer");
             go.tag = "Untagged";
-            if(onControl)
+            if(isControlByPlayer)
             {
-                onControl = false;
-                ai.enabled = !onControl;
+                isControlByPlayer = false;
+                ai.enabled = !isControlByPlayer;
                 var otherController =
                     PlayerManager.Instance.GetOtherPlayer(gameObject).GetComponent<PlayerController>();
                 if(otherController.isDead)
@@ -279,8 +284,8 @@ namespace Pandora.Scripts.Player.Controller
                     GameManager.Instance.GameOver();
                     return;
                 }
-                otherController.onControl = true;
-                otherController.ai.enabled = !otherController.onControl;
+                otherController.isControlByPlayer = true;
+                otherController.ai.enabled = !otherController.isControlByPlayer;
             }
         }
         
@@ -300,11 +305,12 @@ namespace Pandora.Scripts.Player.Controller
         // Input System에서 호출
         public void OnAttack(InputValue value)
         {
-            if (!onControl) return;
+            if (!isControlByPlayer) return;
             // press 여부 저장
-            attackDir = value.Get<Vector2>();
-            if(attackDir.magnitude > 0.5f)
+            var keyDir = value.Get<Vector2>();
+            if(keyDir.magnitude > 0.5f)
             {
+                attackDir = keyDir;
                 isAttackKeyPressed = true;
             }
             else
@@ -390,7 +396,7 @@ namespace Pandora.Scripts.Player.Controller
 
         public void OnMove(InputValue value)
         {
-            if (!onControl || !canControlMove) return;
+            if (!isControlByPlayer || !canControlMove) return;
             moveDir = value.Get<Vector2>();
             if(moveDir.magnitude > 0.5f)
                 lookDir = moveDir;
@@ -398,6 +404,12 @@ namespace Pandora.Scripts.Player.Controller
 
         private void SetMoveAnimation(Vector2 moveDirection)
         {
+            if (moveDirection == Vector2.zero)
+            {
+                anim.SetInteger(CachedMoveDir, -1);
+                return;
+            }
+            
             // Vector2.right 와 moveDir 사이의 각도 계산
             float angle = Vector2.SignedAngle(Vector2.right, moveDirection);
             // 각도에 따라 8방향으로 애니메이션 설정
@@ -471,7 +483,7 @@ namespace Pandora.Scripts.Player.Controller
 
         private void OnSkill(InputValue value, int skillIndex)
         {
-            if (!onControl) return;
+            if (!isControlByPlayer) return;
             if (activeSkills == null) return;
             if (skillCoolTimes[skillIndex] < 0)
             {
@@ -510,13 +522,13 @@ namespace Pandora.Scripts.Player.Controller
         {
             var otherController = PlayerManager.Instance.GetOtherPlayer(gameObject).GetComponent<PlayerController>();
             if (otherController.isDead || isDead) return;
-            if(!onControl)
+            if(!isControlByPlayer)
             {
                 attackDir = Vector2.zero;
                 isAttackKeyPressed = false;
             }
-            onControl = !onControl;
-            ai.enabled = !onControl;
+            isControlByPlayer = !isControlByPlayer;
+            ai.enabled = !isControlByPlayer;
         }
         
         private IEnumerator RemoveBuffAfterDuration(Buff buff)
