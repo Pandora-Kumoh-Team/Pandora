@@ -26,11 +26,6 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             currentPos = transform.position;
         }
 
-        private void Start()
-        {
-            //StartCoroutine(SkillDelay());
-        }
-
         private void Update()
         {
             if (_nowDuration > 0)
@@ -90,20 +85,17 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             }
         }
 
-        private IEnumerator SkillDelay()
-        {
-            while (true)
-            {
-                transform.GetComponent<BoxCollider2D>().enabled = false;
-                yield return new WaitForSeconds(0.5f);
-            }
-        }
-
         private IEnumerator ColDelayCoroutine()
         {
             transform.GetComponent<BoxCollider2D>().enabled = true;
             yield return new WaitForSeconds(0.1f);
             transform.GetComponent<BoxCollider2D>().enabled = false;
+        }
+
+        private void OnDisable()
+        {
+            if (_nowDuration > 0)
+                OnEndSkill();
         }
     }
 

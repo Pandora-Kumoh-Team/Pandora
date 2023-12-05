@@ -93,5 +93,11 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                 yield return new WaitForSeconds(0.1f);
             }
         }
+
+        private void OnDisable()
+        {
+            if (_nowDuration > 0)
+                OnEndSkill();
+        }
     }
 }
