@@ -5,6 +5,7 @@ namespace Pandora.Scripts.UI
 {
     public class MainMenuController : MonoBehaviour
     {
+        GameObject _nowUIElement;
         public void StageStart()
         {
             // TODO : 플레이어 영구 스텟 반영하여 destroy로 생성
@@ -20,8 +21,19 @@ namespace Pandora.Scripts.UI
         
         public void GameExit()
         {
-            // TODO : JSON 저장
+            Debug.Log("Game Exit");
             Application.Quit();
+        }
+
+        public void OnPause()
+        {
+            transform.Find("MainMenuWindow").gameObject.SetActive(true);
+            _nowUIElement.SetActive(false);
+        }
+        
+        public void ResisterUIElement(GameObject uiElement)
+        {
+            _nowUIElement = uiElement;
         }
     }
 }
