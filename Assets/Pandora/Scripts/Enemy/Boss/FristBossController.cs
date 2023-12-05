@@ -11,6 +11,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UIElements;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 namespace Pandora.Scripts.Enemy
 {
@@ -23,6 +24,8 @@ namespace Pandora.Scripts.Enemy
         private GameObject target;
         private bool isKnife;
         public List<GameObject> knifes;
+        private float distance;
+        public bool canAttack = false;
 
         //Animator Hashes
 
@@ -71,6 +74,8 @@ namespace Pandora.Scripts.Enemy
             {
                 StartCoroutine(Death());
             }
+            distance = Vector2.Distance(transform.position, target.transform.position); //.플레이어와의 거리 측정
+            GameObject.Find("BossAI").GetComponent<BossAI>().selectBehavior(distance);
         }
         private void OnDisable()
         {
@@ -91,7 +96,11 @@ namespace Pandora.Scripts.Enemy
         }
         public void Attack()
         {
-            target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage, null, gameObject);
+            if (canAttack)
+            {
+                target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage, null, gameObject);
+            }
+            canAttack = false;
         }
         private void CallHealthChangeEvetnt()
         {

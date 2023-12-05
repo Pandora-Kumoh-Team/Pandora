@@ -198,7 +198,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3045115076386196151, guid: ba46c278029a6414c87fa6ba919a5fb2, type: 3}
       propertyPath: orthographic size
-      value: 5.625
+      value: 24.952162
       objectReference: {fileID: 0}
     - target: {fileID: 6788776813605825001, guid: ba46c278029a6414c87fa6ba919a5fb2, type: 3}
       propertyPath: m_Name
@@ -537,7 +537,7 @@ MonoBehaviour:
     - {fileID: 6721360954202745135, guid: ab7993e427cf34f468cc5173e72afe39, type: 3}
     - {fileID: 303729082407283959, guid: a2f8dc468a44beb499513212a7889efd, type: 3}
     boss: {fileID: 8787276181247009172, guid: 7c8d9fbdb3bd8594b80164775b181369, type: 3}
-  currentStage: 0
+  currentStage: 1
   currentStageInfo:
     stageNumber: 0
     difficulty: 0

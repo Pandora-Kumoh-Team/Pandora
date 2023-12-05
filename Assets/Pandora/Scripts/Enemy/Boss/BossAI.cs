@@ -73,7 +73,7 @@ namespace Pandora.Scripts.Enemy
                 GameObject.Find(parentName).transform.Find("AttackRange").transform.localPosition = new Vector3(attackRangePos.x, attackRangePos.y, 0);
             }
         }
-        private void selectBehavior(float distance)
+        public void selectBehavior(float distance)
         {
             if (distance > attackRange) //거리가 공격 범위 밖에 있을 때
             {

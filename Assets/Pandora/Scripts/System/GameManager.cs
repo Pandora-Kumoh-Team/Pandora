@@ -46,7 +46,7 @@ namespace Pandora.Scripts.System
             }
             else
             {
-                inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<Canvas>();
+                //inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<Canvas>();
                 if (FindObjectOfType<DamageTextEffectManager>() == null)
                 {
                     var damageTextEffectManager = new GameObject("DamageTextEffectManager");

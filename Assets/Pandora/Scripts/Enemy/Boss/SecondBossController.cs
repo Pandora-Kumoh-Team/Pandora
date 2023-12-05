@@ -23,6 +23,7 @@ namespace Pandora.Scripts.Enemy
         public float chargeDuration = 0.5f; // 돌진 지속 시간
         public float cooldownTime = 5f; // 돌진 쿨타임
         private bool isCooldown = false;
+        public bool canAttack = false;
 
         //Status
         public EnemyStatus _enemyStatus;
@@ -58,7 +59,7 @@ namespace Pandora.Scripts.Enemy
 
             _enemyStatus.NowHealth -= reduceDamage;
             CallHealthChangeEvetnt();
-            
+
             if (_enemyStatus.NowHealth <= _enemyStatus.MaxHealth * 0.6 && isCharging == false)
             {
                 StartCoroutine(StartChargingWithCooldown());
@@ -79,11 +80,19 @@ namespace Pandora.Scripts.Enemy
         }
         public void Attack()
         {
-            target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage, null, gameObject);
+            if (canAttack)
+            {
+                target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage, null, gameObject);
+            }
+            canAttack = false;
         }
         public void AnotherAttack() //기본 공격에 n만큼만 강해지게 때림
         {
-            target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage + 3f, null, gameObject);
+            if (canAttack)
+            {
+                target.GetComponent<PlayerController>().Hurt(_enemyStatus.BaseDamage + 3f, null, gameObject);
+            }
+            canAttack = false;
         }
         private void CallHealthChangeEvetnt()
         {
@@ -134,16 +143,16 @@ namespace Pandora.Scripts.Enemy
 
         IEnumerator Charge()
         {
+            float distance = Vector2.Distance(target.transform.position, gameObject.transform.position);
             float startTime = Time.time;
-
-            while (Time.time - startTime < chargeDuration)
+            anim.SetBool("isFollow", false);
+            anim.SetTrigger("Rush");
+            while (distance <= 1f)
             {
-                anim.SetBool("isFollow", false);
-                anim.SetTrigger("Rush");
                 // 돌진 방향으로 이동
                 transform.Translate((target.transform.position - gameObject.transform.position).normalized * chargeSpeed * Time.deltaTime);
-                yield return null; // 다음 프레임까지 대기
             }
+            yield return null; // 다음 프레임까지 대기
 
             // 돌진 종료
             isCharging = false;
