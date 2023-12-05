@@ -36,6 +36,9 @@ namespace Pandora.Scripts.System
         {
             _keyBindingPath = Application.persistentDataPath + "/KeyBindings.json";
             _savePath = Application.persistentDataPath + "/Settings.json";
+            _saveDataStruct.masterVolume = 120f;
+            _saveDataStruct.musicVolume = 120f;
+            _saveDataStruct.sfxVolume = 120f;
             LoadSetting();
             StartCoroutine(LateAwake());
         }
@@ -45,7 +48,7 @@ namespace Pandora.Scripts.System
             // Save Resolution
             _saveDataStruct.resolution = Screen.currentResolution.ToString();
             
-            SaveKeyBindings();
+            // SaveKeyBindings();
             
             // Save at file
             var str = JsonUtility.ToJson(_saveDataStruct);
@@ -84,7 +87,7 @@ namespace Pandora.Scripts.System
             OnMusicVolumeChanged(_saveDataStruct.musicVolume);
             OnSfxVolumeChanged(_saveDataStruct.sfxVolume);
             
-            LoadKeyBindings();
+            // LoadKeyBindings();
         }
         
         private IEnumerator LateAwake()
@@ -96,7 +99,7 @@ namespace Pandora.Scripts.System
             OnMasterVolumeChanged(_saveDataStruct.masterVolume);
             OnMusicVolumeChanged(_saveDataStruct.musicVolume);
             OnSfxVolumeChanged(_saveDataStruct.sfxVolume);
-            PlayerManager.Instance.SetPlayerInput(inputActionAsset);
+            // PlayerManager.Instance.SetPlayerInput(inputActionAsset);
         }
         
         public void SaveKeyBindings()
@@ -124,6 +127,7 @@ namespace Pandora.Scripts.System
         
         public void OnMasterVolumeChanged(float changedValue)
         {
+            _saveDataStruct.masterVolume = changedValue;
             changedValue /= 100;
             var dbToRate = changedValue != 0 ? Mathf.Log10(changedValue) * 20 : -80;
             SoundManager.Instance.SetAudioGroupVolume("MasterVolume", dbToRate);
@@ -131,6 +135,7 @@ namespace Pandora.Scripts.System
         
         public void OnMusicVolumeChanged(float changedValue)
         {
+            _saveDataStruct.musicVolume = changedValue;
             changedValue /= 100;
             var dbToRate = changedValue != 0 ? Mathf.Log10(changedValue) * 20 : -80;
             SoundManager.Instance.SetAudioGroupVolume("MusicVolume", dbToRate);
@@ -138,6 +143,7 @@ namespace Pandora.Scripts.System
         
         public void OnSfxVolumeChanged(float changedValue)
         {
+            _saveDataStruct.sfxVolume = changedValue;
             changedValue /= 100;
             var dbToRate = changedValue != 0 ? Mathf.Log10(changedValue) * 20 : -80;
             SoundManager.Instance.SetAudioGroupVolume("SfxVolume", dbToRate);

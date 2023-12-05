@@ -5,37 +5,31 @@ using UnityEngine;
 
 namespace Pandora.Scripts.Player.Skill.SkillDetail
 {
-    public class SkillPoison : ActiveSkill
+    public class SkillBomb : ActiveSkill
     {
         private PlayerController _playerController;
         private float _nowDuration;
-        private GameObject effect;
+        private GameObject effect1;
+        private GameObject effect2;
+
+        private Vector2 currentPos;
         private float timer;
 
-        [Header("피해량 n%")]
+        [Header("데미지 (n%)")]
         public float damage;
-
-        [Header("피해 주기")]
-        public float delay;
-
 
         private void Awake()
         {
-            transform.localPosition = Vector3.zero;
-            effect = transform.Find("Effect").gameObject;
+            effect1 = transform.Find("Effect1").gameObject;
+            effect2 = transform.Find("Effect2").gameObject;
         }
 
         private void Update()
         {
-            timer += Time.deltaTime;
-
             if (_nowDuration > 0)
             {
-                if (timer >= delay)
-                {
-                    StartCoroutine(ColDelayCoroutine());
-                    timer = 0;
-                }
+                transform.position = currentPos;
+                effect1.GetComponent<SpriteRenderer>().color = new Color(1f , 1f/(duration-_nowDuration) , 1f/(duration - _nowDuration));
 
                 _nowDuration -= Time.deltaTime;
                 if (_nowDuration <= 0)
@@ -49,19 +43,23 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         public override void OnUseSkill()
         {
             _playerController = ownerPlayer.GetComponent<PlayerController>();
-            _nowDuration = duration;
 
-            effect.transform.localPosition = new Vector3(0, 0, 0);
-            effect.SetActive(true);
+            _nowDuration = duration;
+            currentPos = ownerPlayer.transform.position;
+            transform.localPosition = Vector3.zero;
+
+            effect1.transform.localPosition = new Vector3(0, 0, 0);
+            effect2.transform.localPosition = new Vector3(0, 0, 0);
+            StartCoroutine(BombCoroutine());
         }
 
-        public override void OnDuringSkill() {}
+        public override void OnDuringSkill() { }
 
         public override void OnEndSkill()
         {
-            transform.GetComponent<CircleCollider2D>().enabled = false;
-            effect.SetActive(false);
+            effect2.SetActive(false);
         }
+
 
         private void OnTriggerEnter2D(Collider2D col)
         {
@@ -80,10 +78,14 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             }
         }
 
-        private IEnumerator ColDelayCoroutine()
+        private IEnumerator BombCoroutine()
         {
+            effect1.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            effect1.SetActive(false);
+            effect2.SetActive(true);
             transform.GetComponent<CircleCollider2D>().enabled = true;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             transform.GetComponent<CircleCollider2D>().enabled = false;
         }
 

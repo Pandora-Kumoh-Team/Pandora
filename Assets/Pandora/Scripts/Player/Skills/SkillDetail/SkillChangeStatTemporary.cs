@@ -27,7 +27,6 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         private void Update()
         {
-            Debug.Log(_nowDuration);
             if (_nowDuration > 0)
             {
                 _nowDuration -= Time.deltaTime;

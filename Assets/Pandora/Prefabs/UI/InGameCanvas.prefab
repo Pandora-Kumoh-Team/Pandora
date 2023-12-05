@@ -296,7 +296,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8934425897566320168}
-  - component: {fileID: 4828881069536596195}
   - component: {fileID: 7355308388956335904}
   m_Layer: 5
   m_Name: BottomBarSkill
@@ -328,22 +327,6 @@ RectTransform:
   m_AnchoredPosition: {x: 148.64154, y: 23.691162}
   m_SizeDelta: {x: 65.03658, y: 70.02942}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4828881069536596195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88315993043251871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 866932ef98b71f2429dff4ad26f608a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipWindow: {fileID: 3424814082762463435}
-  header: MP Potion
-  description: Restores 50 MP
-  rectTransform: {fileID: 8934425897566320168}
 --- !u!114 &7355308388956335904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +341,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 1
   skillIndex: 1
+  skillTooltipWindow: {fileID: 3424814082762463435}
+  rectTransform: {fileID: 8934425897566320168}
 --- !u!1 &179925010427133639
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,6 +433,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 581559147531974773}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+        m_MethodName: RemoveUIElement
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8566983276997155153}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1986,7 +1983,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5878088165441548464}
+      - m_Target: {fileID: 2502801717277455369}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -1996,15 +1993,15 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 3324366335379246656}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 581559147531974773}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+        m_MethodName: PushUIElement
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 2502801717277455369}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2659,7 +2656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2369856828683510033
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4157,6 +4154,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 581559147531974773}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+        m_MethodName: RemoveUIElement
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8566983276997155153}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2141218187750268644
 GameObject:
   m_ObjectHideFlags: 0
@@ -4631,6 +4640,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 581559147531974773}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+        m_MethodName: RemoveUIElement
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7414219593265547851}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2458751944388665048
 GameObject:
   m_ObjectHideFlags: 0
@@ -4992,13 +5013,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 280173175484993471}
   - {fileID: 5897977632234932649}
   - {fileID: 2085313272282133250}
-  - {fileID: 280173175484993471}
+  - {fileID: 2159699729729624845}
   - {fileID: 255021510340995869}
   - {fileID: 1170348848476338724}
   - {fileID: 3292024932993541935}
-  - {fileID: 2159699729729624845}
   - {fileID: 2369856828683510033}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -5097,6 +5118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mob: {fileID: 0}
+  displayedUIElementStack: []
+  cantPopUpByPauseElement: []
 --- !u!1 &2853056547957736653
 GameObject:
   m_ObjectHideFlags: 0
@@ -6361,10 +6384,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Big Potion
+  m_text: "\uD55C\uAE00"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ce034de9c1fb5949bd9a9da883e7bf4, type: 2}
-  m_sharedMaterial: {fileID: -3359197029103750868, guid: 4ce034de9c1fb5949bd9a9da883e7bf4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 30dedcf0862e8164fb5b5c0d5c6ec8eb, type: 2}
+  m_sharedMaterial: {fileID: -2022600271416144310, guid: 30dedcf0862e8164fb5b5c0d5c6ec8eb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7151,7 +7174,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6999911647397236816}
-  - component: {fileID: 4621813657412070354}
   - component: {fileID: 7995365890949662072}
   m_Layer: 5
   m_Name: BottomBarSkill
@@ -7183,22 +7205,6 @@ RectTransform:
   m_AnchoredPosition: {x: 245, y: 23.691162}
   m_SizeDelta: {x: 65.03658, y: 70.02942}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4621813657412070354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662003752672890649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 866932ef98b71f2429dff4ad26f608a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipWindow: {fileID: 3424814082762463435}
-  header: MP Potion
-  description: Restores 50 MP
-  rectTransform: {fileID: 6999911647397236816}
 --- !u!114 &7995365890949662072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7213,6 +7219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 1
   skillIndex: 2
+  skillTooltipWindow: {fileID: 3424814082762463435}
+  rectTransform: {fileID: 6999911647397236816}
 --- !u!1 &3698126757634366720
 GameObject:
   m_ObjectHideFlags: 0
@@ -7492,6 +7500,82 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 6d31d7936c27d184d8a67840b40ed804, type: 3}
   m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3859252306453237635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4093041080493794163}
+  - component: {fileID: 443614085407847288}
+  - component: {fileID: 6431079905672780598}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4093041080493794163
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859252306453237635}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6348716140116525967}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &443614085407847288
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859252306453237635}
+  m_CullTransparentMesh: 1
+--- !u!114 &6431079905672780598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859252306453237635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 6b1c39a6ee4c20541a65d720c65bb85c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7893,6 +7977,7 @@ RectTransform:
   - {fileID: 2634843264726602041}
   - {fileID: 3196293548218981575}
   - {fileID: 8622271307746149059}
+  - {fileID: 6348716140116525967}
   - {fileID: 5215551505478493286}
   - {fileID: 5379629347177170530}
   - {fileID: 3035803085709116802}
@@ -9965,17 +10050,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Heals 50 HP
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ce034de9c1fb5949bd9a9da883e7bf4, type: 2}
-  m_sharedMaterial: {fileID: -3359197029103750868, guid: 4ce034de9c1fb5949bd9a9da883e7bf4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 30dedcf0862e8164fb5b5c0d5c6ec8eb, type: 2}
+  m_sharedMaterial: {fileID: -2022600271416144310, guid: 30dedcf0862e8164fb5b5c0d5c6ec8eb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282892918
-  m_fontColor: {r: 0.46274513, g: 0.7607844, b: 0.2784314, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10008,7 +10093,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -13487,7 +13572,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7299947875371415541}
-  - component: {fileID: 1912865151253885177}
   - component: {fileID: 6866701139890491624}
   m_Layer: 5
   m_Name: BottomBarSkill
@@ -13519,22 +13603,6 @@ RectTransform:
   m_AnchoredPosition: {x: -150.63416, y: 23.691162}
   m_SizeDelta: {x: 65.03659, y: 70.02942}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1912865151253885177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6428892745634110767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 866932ef98b71f2429dff4ad26f608a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipWindow: {fileID: 3424814082762463435}
-  header: Magic spell
-  description: Deal 30 damage
-  rectTransform: {fileID: 7299947875371415541}
 --- !u!114 &6866701139890491624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13549,6 +13617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 0
   skillIndex: 2
+  skillTooltipWindow: {fileID: 3424814082762463435}
+  rectTransform: {fileID: 7299947875371415541}
 --- !u!1 &6661828634890808362
 GameObject:
   m_ObjectHideFlags: 0
@@ -14556,7 +14626,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 821798431124117298}
-  - component: {fileID: 4886221055061958607}
   - component: {fileID: 7688834039742647929}
   m_Layer: 5
   m_Name: BottomBarSkill
@@ -14588,22 +14657,6 @@ RectTransform:
   m_AnchoredPosition: {x: -245.37195, y: 23.691162}
   m_SizeDelta: {x: 65.03659, y: 70.02942}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4886221055061958607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7088176727957403064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 866932ef98b71f2429dff4ad26f608a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipWindow: {fileID: 3424814082762463435}
-  header: Bow
-  description: Equip a bow
-  rectTransform: {fileID: 821798431124117298}
 --- !u!114 &7688834039742647929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14618,6 +14671,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 0
   skillIndex: 1
+  skillTooltipWindow: {fileID: 3424814082762463435}
+  rectTransform: {fileID: 821798431124117298}
 --- !u!1 &7091442378009222509
 GameObject:
   m_ObjectHideFlags: 0
@@ -16365,7 +16420,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4033127143896092389}
-  - component: {fileID: 384794343352794983}
   - component: {fileID: 3170082574110447624}
   m_Layer: 5
   m_Name: BottomBarSkill
@@ -16397,22 +16451,6 @@ RectTransform:
   m_AnchoredPosition: {x: 55, y: 27}
   m_SizeDelta: {x: 65.03658, y: 70.02942}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &384794343352794983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7876413543713087865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 866932ef98b71f2429dff4ad26f608a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipWindow: {fileID: 3424814082762463435}
-  header: Big Potion
-  description: Heals 50 HP
-  rectTransform: {fileID: 4033127143896092389}
 --- !u!114 &3170082574110447624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16427,6 +16465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 1
   skillIndex: 0
+  skillTooltipWindow: {fileID: 3424814082762463435}
+  rectTransform: {fileID: 4033127143896092389}
 --- !u!1 &7904250616218208740
 GameObject:
   m_ObjectHideFlags: 0
@@ -18068,13 +18108,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 581559147531974773}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+        m_MethodName: GoToBoss
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -18775,6 +18815,100 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8714381147609126755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6348716140116525967}
+  - component: {fileID: 4800367104459612685}
+  m_Layer: 5
+  m_Name: PlusOrangeButton (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6348716140116525967
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8714381147609126755}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4093041080493794163}
+  m_Father: {fileID: 280173175484993471}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 116, y: 40}
+  m_SizeDelta: {x: 56, y: 56}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4800367104459612685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8714381147609126755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 0
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 2
+  m_Colors:
+    m_NormalColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 21300000, guid: 6b1c39a6ee4c20541a65d720c65bb85c, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 6454f54e78e04ab48b7f8ef38a6c2fe7, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 6b1c39a6ee4c20541a65d720c65bb85c, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 6454f54e78e04ab48b7f8ef38a6c2fe7, type: 3}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 6431079905672780598}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 581559147531974773}
+        m_TargetAssemblyTypeName: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+        m_MethodName: PlayerStronger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8750122565343598683
 GameObject:
   m_ObjectHideFlags: 0
@@ -18784,7 +18918,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6606710514382775228}
-  - component: {fileID: 1103269923054934010}
   - component: {fileID: 8027655694078872902}
   m_Layer: 5
   m_Name: BottomBarSkill
@@ -18816,22 +18949,6 @@ RectTransform:
   m_AnchoredPosition: {x: -340.10974, y: 23.691162}
   m_SizeDelta: {x: 65.03658, y: 70.02942}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1103269923054934010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8750122565343598683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 866932ef98b71f2429dff4ad26f608a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipWindow: {fileID: 3424814082762463435}
-  header: Sword
-  description: Equip a sword
-  rectTransform: {fileID: 6606710514382775228}
 --- !u!114 &8027655694078872902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18846,6 +18963,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 0
   skillIndex: 0
+  skillTooltipWindow: {fileID: 3424814082762463435}
+  rectTransform: {fileID: 6606710514382775228}
 --- !u!1 &8857126210442330358
 GameObject:
   m_ObjectHideFlags: 0
@@ -19616,9 +19735,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1394813896091921451}
     m_Modifications:
+    - target: {fileID: 134736805782368620, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134736805782368620, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 455696750659220050, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 455696750659220050, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1412278765133210732, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
       propertyPath: m_Name
       value: Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233879400763678245, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2399130811746162990, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
       propertyPath: m_Pivot.x
@@ -19704,13 +19843,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5420952159317369024, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420952159317369024, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 5878088165441548464}
     - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 581559147531974773}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: RemoveUIElement
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Pandora.Scripts.UI.InGameCanvasManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 2502801717277455369}
+    - target: {fileID: 6674667043621113324, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214578341477519779, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214578341477519779, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19722,9 +19913,9 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2399130811746162990, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
   m_PrefabInstance: {fileID: 4448405915264854572}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3324366335379246656 stripped
+--- !u!1 &2502801717277455369 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1412278765133210732, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2233879400763678245, guid: a1adc0f52d0643a4d84a06a83bf3355e, type: 3}
   m_PrefabInstance: {fileID: 4448405915264854572}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5307265375613406830

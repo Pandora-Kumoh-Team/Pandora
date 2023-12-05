@@ -58,6 +58,7 @@ namespace Pandora.Scripts.Player.Controller
         [HideInInspector]
         public bool isControlByPlayer;
         [FormerlySerializedAs("onControlInit")] public bool isStartWithPlayerControl = true;
+        private GameObject angelRing;
         
         [HideInInspector]
         public bool isDead;
@@ -89,6 +90,7 @@ namespace Pandora.Scripts.Player.Controller
             skillCoolTimes = new float[3];
             activeSkillContainer = transform.Find("Skills").Find("ActiveSkills");
             passiveSkillContainer = transform.Find("Skills").Find("PassiveSkills");
+            angelRing = transform.Find("Angel").gameObject;
             audioSource = GetComponent<AudioSource>();
             isTrigger = false;
             
@@ -529,6 +531,7 @@ namespace Pandora.Scripts.Player.Controller
             }
             isControlByPlayer = !isControlByPlayer;
             ai.enabled = !isControlByPlayer;
+            angelRing.SetActive(isControlByPlayer);
         }
         
         private IEnumerator RemoveBuffAfterDuration(Buff buff)

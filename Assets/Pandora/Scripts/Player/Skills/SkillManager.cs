@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Pandora.Scripts.Player.Controller;
 using Pandora.Scripts.Player.Skill.Data;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Pandora.Scripts.Player.Skill
 {
@@ -83,6 +85,18 @@ namespace Pandora.Scripts.Player.Skill
                 p1activeSkillList.skillPrefabList.Remove(skillObject);
             else if (playerNum == 1 && type == Skill.SkillType.Passive)
                 p1passiveSkillList.skillPrefabList.Remove(skillObject);
+        }
+        
+        public static Color SKillGradeToColor(Skill.SkillGrade grade)
+        {
+            return grade switch
+            {
+                Skill.SkillGrade.Normal => new Color(1f, 1f, 1f),
+                Skill.SkillGrade.Rare => new Color(0.4f, 1f, 0.4f),
+                Skill.SkillGrade.Unique => new Color(0.4f, 0.4f, 1f),
+                Skill.SkillGrade.Legendary => new Color(1f, 1f, 0.4f),
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
     }
 }
