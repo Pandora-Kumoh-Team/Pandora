@@ -17,7 +17,7 @@ namespace Pandora.Scripts.NewDungeon
         {
             RoomController.Instance.EnqueueRoomToGeneration("Start", 0, 0);
             int roomIndex = 0;
-            int shopIndex = Random.Range(1, dungeonGenerationData.iterationMax - 1);
+            int shopIndex = Random.Range(1, 10);
             foreach (var roomPosition in roomPositions)
             {
                 if(roomPosition == dungeonRoomPositions[^1] && roomPosition != Vector2Int.zero)
