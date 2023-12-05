@@ -84,7 +84,7 @@ public class EnemyStatus
                 _code = 300; _maxHealth = 500; _nowHealth = 500; _baseDamage = 10; _attackPower = 1.5f; _defencePower = 5; _speed = 2; _attackSpeed = 3;
                 break;
             case "2StageBoss":
-                _code = 301; _maxHealth = 700; _nowHealth = 300; _baseDamage = 10; _attackPower = 2f; _defencePower = 4; _speed = 4; _attackSpeed = 1;
+                _code = 301; _maxHealth = 700; _nowHealth = 700; _baseDamage = 10; _attackPower = 2f; _defencePower = 4; _speed = 4; _attackSpeed = 1;
                 break;
             case "3StageBoss":
                 _code = 302; _maxHealth = 1000; _nowHealth = 1000; _baseDamage = 10; _attackPower = 2f; _defencePower = 6; _speed = 4; _attackSpeed = 1;
