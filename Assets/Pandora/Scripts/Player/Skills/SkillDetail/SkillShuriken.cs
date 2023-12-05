@@ -2,6 +2,7 @@ using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Pandora.Scripts.Player.Skill.SkillDetail
 {
@@ -13,6 +14,7 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
         private float currentAngle;
         private Vector2 currentPos;
         private float timer;
+        private Vector2 moveDir;
 
         [Header("데미지 (n%)")]
         public float damage;
@@ -41,11 +43,17 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
                     timer = 0;
                 }
 
+                //표창 회전
                 currentAngle += rotationSpeed;
                 transform.rotation = Quaternion.Euler(0, 0, currentAngle);
 
-                //currentPos = currentPos + 각 방향에 맞는 값 더하기
-                //transform.position = currentPos;
+                //표창 이동
+                if(_nowDuration >= _nowDuration-1 && moveDir != Vector2.zero)
+                {
+                    currentPos += moveDir/60;
+                    transform.position = currentPos;
+                    effect.transform.localPosition = Vector3.zero;
+                }
 
                 _nowDuration -= Time.deltaTime;
                 if (_nowDuration <= 0)
@@ -58,11 +66,12 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
 
         public override void OnUseSkill()
         {
-            currentPos = transform.position;
+            currentPos = ownerPlayer.transform.position;
             currentAngle = 0;
             _nowDuration = duration;
             _playerController = ownerPlayer.GetComponent<PlayerController>();
             transform.localPosition = Vector3.zero;
+            moveDir = _playerController.moveDir;
 
             effect.transform.localPosition = new Vector3(0, 0, 0);
             effect.SetActive(true);
