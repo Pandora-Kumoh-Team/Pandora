@@ -25,29 +25,24 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             effect = transform.Find("Effect").gameObject;
         }
 
-        private void Start()
-        {
-            StartCoroutine(SkillDelay());
-        }
-
         private void Update()
         {
             timer += Time.deltaTime;
 
             if (_nowDuration > 0)
             {
+                if (timer >= delay)
+                {
+                    StartCoroutine(ColDelayCoroutine());
+                    timer = 0;
+                }
+
                 _nowDuration -= Time.deltaTime;
                 if (_nowDuration <= 0)
                 {
                     OnEndSkill();
                 }
                 OnDuringSkill();
-            }
-
-            if(timer >= delay)
-            {
-                transform.GetComponent<CircleCollider2D>().enabled = true;
-                timer = 0;
             }
         }
 
@@ -85,13 +80,11 @@ namespace Pandora.Scripts.Player.Skill.SkillDetail
             }
         }
 
-        private IEnumerator SkillDelay()
+        private IEnumerator ColDelayCoroutine()
         {
-            while(true)
-            {
-                transform.GetComponent<CircleCollider2D>().enabled = false;
-                yield return new WaitForSeconds(0.1f);
-            }
+            transform.GetComponent<CircleCollider2D>().enabled = true;
+            yield return new WaitForSeconds(0.1f);
+            transform.GetComponent<CircleCollider2D>().enabled = false;
         }
 
         private void OnDisable()
