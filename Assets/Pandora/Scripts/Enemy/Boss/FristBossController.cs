@@ -6,6 +6,7 @@ using Pandora.Scripts.System;
 using Pandora.Scripts.System.Event;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
@@ -21,6 +22,7 @@ namespace Pandora.Scripts.Enemy
         private PolygonCollider2D polygonCollider;
         private GameObject target;
         private bool isKnife;
+        public List<GameObject> knifes;
 
         //Animator Hashes
 
@@ -29,6 +31,7 @@ namespace Pandora.Scripts.Enemy
         private void Awake()
         {
             _enemyStatus = new EnemyStatus("1StageBoss");
+            knifes = new List<GameObject>();
         }
 
         void Start()
@@ -76,6 +79,10 @@ namespace Pandora.Scripts.Enemy
             {
                 if (child.gameObject.GetComponent<FadeTextEffect>() != null)
                     Destroy(child.gameObject);
+            }
+            foreach (var knife in knifes)
+            {
+                Destroy(knife);
             }
         }
         public void OnHitAnimationEnd()

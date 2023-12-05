@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Pandora.Scripts.System.Event;
+using Pathfinding;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Pandora.Scripts.NewDungeon.Rooms
 {
@@ -19,8 +21,10 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         public List<Door> doors = new List<Door>();
 
         protected bool isClear = false;
+        
+        private Coroutine _scanCoroutine;
 
-        private void Awake()
+        private  void Awake()
         {
             EventManager.Instance.AddListener(PandoraEventType.MapGenerateComplete, this);
         
@@ -29,6 +33,7 @@ namespace Pandora.Scripts.NewDungeon.Rooms
 
         private IEnumerator LateAwake()
         {
+            yield return null;
             yield return null;
         
             Door[] ds = GetComponentsInChildren<Door>();
@@ -138,8 +143,8 @@ namespace Pandora.Scripts.NewDungeon.Rooms
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, 0));
+            // Gizmos.color = Color.red;
+            // Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, 0));
         }
 
         public Vector3 GetRoomCenter()
@@ -154,14 +159,16 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             var confinder = vcam.GetComponent<CinemachineConfiner2D>();
             confinder.m_BoundingShape2D = transform.Find("EnterCollider").GetComponent<CompositeCollider2D>();
         }
-        public void OnClearRoom()
+        
+        public virtual void OnPlayerExit(GameObject playerObject)
+        {
+            // Nothing
+        }
+        
+        public virtual void OnClearRoom()
         {
             isClear = true;
-            foreach(Door door in doors)
-            {
-                door.OpenDoor();
-            }
-            StageController.Instance.OnRoomClear();
+            OpenAllDoors();
         }
 
         public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)
@@ -177,6 +184,42 @@ namespace Pandora.Scripts.NewDungeon.Rooms
                 if (GetBottom() != null)
                     doors.Add(GetBottom().topDoor);
                 transform.Find("EnterCollider").gameObject.SetActive(true);
+                OnMapGenerateComplete();
+            }
+        }
+        
+        protected virtual void OnMapGenerateComplete()
+        {
+            // Nothing
+        }
+        
+        public void OpenAllDoors()
+        {
+            foreach(Door door in doors)
+            {
+                door.OpenDoor();
+            }
+            if(_scanCoroutine != null)
+                StopCoroutine(_scanCoroutine);
+            _scanCoroutine = StartCoroutine(ScanAsync());
+        }
+        
+        public void CloseAllDoors()
+        {
+            foreach(Door door in doors)
+            {
+                door.CloseDoor();
+            }
+            if(_scanCoroutine != null)
+                StopCoroutine(_scanCoroutine);
+            _scanCoroutine = StartCoroutine(ScanAsync());
+        }
+        
+        private IEnumerator ScanAsync()
+        {
+            var graphToScan = AstarPath.active.data.gridGraph;
+            foreach (var progress in AstarPath.active.ScanAsync(graphToScan)) {
+                yield return null;
             }
         }
     }

@@ -30,12 +30,12 @@ namespace Pandora.Scripts.Enemy
             Color textColor;
             if (hitParams.damage > 0)
             {
-                text = hitParams.damage + (hitParams.isCritical ? "!" : "");
+                text = Math.Round(hitParams.damage) + (hitParams.isCritical ? "!" : "");
                 textColor = hitParams.isCritical ? Color.yellow : Color.white;
             }
             else if (hitParams.damage < 0)
             {
-                text = (-hitParams.damage).ToString();
+                text = Math.Round(-hitParams.damage).ToString();
                 textColor = Color.green;
             }
             else
@@ -43,7 +43,7 @@ namespace Pandora.Scripts.Enemy
                 text = "Miss";
                 textColor = Color.gray;
             }
-            damageEffect.GetComponent<DamageTextEffect>().Init(text, textColor, 1f, 0.5f, 0.05f, Vector3.up, hitParams.damage);
+            damageEffect.GetComponent<DamageTextEffect>().Init(text, textColor, 1f, 0.5f, 0.05f, Vector3.up, hitParams);
         }
     }
 }

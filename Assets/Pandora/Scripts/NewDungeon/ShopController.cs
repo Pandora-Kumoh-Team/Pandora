@@ -1,4 +1,5 @@
 using System;
+using Pandora.Scripts.Player.Controller;
 using UnityEngine;
 
 namespace Pandora.Scripts.NewDungeon
@@ -12,36 +13,33 @@ namespace Pandora.Scripts.NewDungeon
         private void Update()
         {
             // move ui from under screen to above screen
-            if (isPlayerOnTrigger)
-            {
-                if (uiGroup.anchoredPosition.y < 0)
-                {
-                    uiGroup.anchoredPosition += new Vector2(0, 10);
-                }
-            }
-            else
-            {
-                if (uiGroup.anchoredPosition.y > -1200)
-                {
-                    uiGroup.anchoredPosition -= new Vector2(0, 10);
-                }
-            }
+            // if (isPlayerOnTrigger)
+            // {
+            //     if (uiGroup.anchoredPosition.y < 0)
+            //     {
+            //         uiGroup.anchoredPosition += new Vector2(0, 10);
+            //     }
+            // }
+            // else
+            // {
+            //     if (uiGroup.anchoredPosition.y > -1200)
+            //     {
+            //         uiGroup.anchoredPosition -= new Vector2(0, 10);
+            //     }
+            // }
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
+        private void OnTriggerStay2D(Collider2D col)
         {
             if (col.CompareTag("Player"))
             {
-                isPlayerOnTrigger = true;
+                if (col.GetComponent<PlayerController>().isControlByPlayer)
+                {
+                    isPlayerOnTrigger = true;
+                    return;
+                }
             }
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                isPlayerOnTrigger = false;
-            }
+            isPlayerOnTrigger = false;
         }
     }
 }

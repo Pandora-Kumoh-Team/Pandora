@@ -26,18 +26,25 @@ namespace Pandora.Scripts.Player.Controller
             return this;
         }
 
-        public override void Enter(PlayerAI player)
+        public override void EnterState(PlayerAI player)
         {
             _seeker = player.GetComponent<Seeker>();
             maxOtherPlayerDistance = player.maxOtherPlayerDistance;
         }
 
-        public override void Update(PlayerAI player)
+        public override void UpdateState(PlayerAI player)
         {
             _target = PlayerManager.Instance.GetOtherPlayer(player.gameObject);
             if(_currentWaypoint == Vector2.zero)
                 _currentWaypoint = _target.transform.position;
             var distance= Vector2.Distance(player.transform.position, _target.transform.position);
+            // 거리가 멀면 바로 텔레포트
+            if (distance > maxOtherPlayerDistance * 2.5f)
+            {
+                player.transform.position = _target.transform.position;
+                _currentWaypoint = _target.transform.position;
+                return;
+            }
             var finalPathDistance = Vector2.Distance(_target.transform.position, _currentWaypoint);
             // if final path is null or target is too far, find new path
             if (_path == null || finalPathDistance > maxOtherPlayerDistance)
@@ -76,7 +83,7 @@ namespace Pandora.Scripts.Player.Controller
             }
         }
 
-        public override void Exit(PlayerAI player)
+        public override void ExitState(PlayerAI player)
         {
             
         }

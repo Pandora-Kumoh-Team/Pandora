@@ -16,12 +16,12 @@ namespace Pandora.Scripts.Player.Controller
             return this;
         }
 
-        public override void Enter(PlayerAI player)
+        public override void EnterState(PlayerAI player)
         {
             player._playerController.canControlMove = false;
         }
 
-        public override void Update(PlayerAI player)
+        public override void UpdateState(PlayerAI player)
         {
             player._playerController.playerCurrentStat.NowHealth +=
                 player._playerController.playerCurrentStat.NonControlHpRecovery * Time.deltaTime;
@@ -34,7 +34,7 @@ namespace Pandora.Scripts.Player.Controller
             }
         }
 
-        public override void Exit(PlayerAI player)
+        public override void ExitState(PlayerAI player)
         {
             player._playerController.canControlMove = true;
         }

@@ -4,6 +4,7 @@ using Cinemachine;
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Pandora.Scripts.NewDungeon.Rooms
 {
@@ -18,10 +19,9 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             {
                 foreach (var enemy in _enemies)
                 {
-                    if(enemy.activeSelf == true)
+                    if(enemy.activeSelf)
                         return;
                 }
-                isClear = true;
                 OnClearRoom();
             }
         }
@@ -36,13 +36,12 @@ namespace Pandora.Scripts.NewDungeon.Rooms
             if(!isClear)
             {
                 // move other player to this room
-                PlayerManager.Instance.GetOtherPlayer(playerObject).transform.position = playerObject.transform.position;
-            
+                var otherPlayer =  PlayerManager.Instance.GetOtherPlayer(playerObject);
+                otherPlayer.transform.position = playerObject.transform.position;
+                otherPlayer.GetComponent<PlayerAI>().ChangeState(new AttackTargetState().Init(null));
+                
                 // close all doors
-                foreach(Door door in doors)
-                {
-                    door.CloseDoor();
-                }
+                CloseAllDoors();
                 
                 // spawn enemies
                 GameObject enemyPrefab;
@@ -62,9 +61,17 @@ namespace Pandora.Scripts.NewDungeon.Rooms
         private Vector3 GetRandomSpawnPoint()
         {
             // get 4 corners of the room
-            var isLeft = UnityEngine.Random.Range(0, 2) == 0 ? -0.8f : 0.8f;
-            var isUp = UnityEngine.Random.Range(0, 2) == 0 ? -0.8f : 0.8f;
+            var isLeft = Random.Range(0, 2) == 0 ? -0.8f : 0.8f;
+            isLeft += Random.Range(-0.1f, 0.1f);
+            var isUp = Random.Range(0, 2) == 0 ? -0.8f : 0.8f;
+            isUp += Random.Range(-0.1f, 0.1f);
             return transform.position + new Vector3(isLeft * Width / 2, isUp * Height / 2, 0);
+        }
+
+        public override void OnClearRoom()
+        {
+            base.OnClearRoom();
+            transform.Find("SkillGiver").gameObject.SetActive(true);
         }
     }
 }

@@ -35,8 +35,9 @@ namespace Pandora.Scripts.UI
             if (pandoraEventType != PandoraEventType.PlayerHealthChanged || param == null) return;
             var paramData = (PlayerHealthChangedParam) param;
             if (paramData.PlayerCharacterId != playerId) return;
+            // 올림 처리
+            _slider.value = Mathf.CeilToInt(paramData.CurrentHealth);
             _slider.maxValue = paramData.MaxHealth;
-            _slider.value = paramData.CurrentHealth;
         }
     }
 }

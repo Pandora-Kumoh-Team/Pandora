@@ -26,7 +26,7 @@ public class NormalMobAI : MonoBehaviour
 
     //Status
     public float speed = 1.0f; //임시
-    public float attack = 1.0f; // 임시
+    public float attackDamage = 1.0f; // 임시
     private float attackCool = 0.3f;
 
     private void Start()
@@ -48,16 +48,7 @@ public class NormalMobAI : MonoBehaviour
     private void Update()
     {
         Vector3 patternVec = new Vector3();
-        if (isConduct)
-        {
-            if (chaseMoveTime >= 0 && chaseMoveTime < 0.25)
-                patternVec = chaseVec1;
-            else if (chaseMoveTime >= 0.25 && chaseMoveTime < 0.5)
-                patternVec = chaseVec2;
-            else
-                chaseMoveTime = 0;
-        }
-        else
+        if (!isConduct)
         {
             if (patternMoveTime >= 0 && patternMoveTime < 0.25)
                 patternVec = patternVec1;
@@ -69,8 +60,8 @@ public class NormalMobAI : MonoBehaviour
                 patternVec = patternVec4;
             else
                 patternMoveTime = 0;
+            transform.parent.GetComponent<Rigidbody2D>().velocity = patternVec.normalized * speed;
         }
-        transform.parent.GetComponent<Rigidbody2D>().velocity = patternVec * speed;
 
         patternMoveTime += Time.deltaTime;
         chaseMoveTime += Time.deltaTime;
@@ -82,39 +73,29 @@ public class NormalMobAI : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        float distance = 0.0f;
-
         //플레이어 식별
-        if (collision.gameObject.tag == "Player" && target == null)
-            target = collision.gameObject;
-
-        //플레이어와의 거리 측정
-        if (target != null)
-            distance = Vector2.Distance(transform.parent.position, target.transform.position);
-
-        if (distance > chaseRange)
-            isConduct = true;
-        else
-            isConduct = false;
+        if (!collision.gameObject.CompareTag("Player")) return;
         
+        float distance = 0.0f;
+        target = collision.gameObject;
+
+        distance = Vector2.Distance(transform.parent.position, target.transform.position);
+        isConduct = true;
         // 임시 공격
-        if(distance < 0.6f && attackCool <= 0 && collision.gameObject.CompareTag("Player"))
+        if(distance < 1f && attackCool <= 0 && collision.gameObject.CompareTag("Player"))
         {
-            target.GetComponent<PlayerController>().Hurt(attack, null, gameObject);
+            target.GetComponent<PlayerController>().Hurt(attackDamage, null, gameObject);
             attackCool = 0.3f;
         }
 
-        if (target == collision.gameObject)
-        {
-            
-            direction = target.transform.position - transform.parent.position;
-            direction.Normalize();
-            transform.parent.GetComponent<Rigidbody2D>().velocity = direction * speed;
-            if (direction.x < 0)
-                transform.parent.GetComponent<SpriteRenderer>().flipX = true;
-            else
-                transform.parent.GetComponent<SpriteRenderer>().flipX = false;
-        }
+        direction = target.transform.position - transform.parent.position;
+        direction.Normalize();
+        transform.parent.GetComponent<Rigidbody2D>().velocity = direction * speed;
+        if (direction.x < 0)
+            transform.parent.GetComponent<SpriteRenderer>().flipX = true;
+        else
+            transform.parent.GetComponent<SpriteRenderer>().flipX = false;
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)

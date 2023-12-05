@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Pandora.Scripts.Enemy;
 using Pandora.Scripts.Player.Controller;
 using Pandora.Scripts.Player.Skill;
@@ -45,6 +46,11 @@ namespace Pandora.Scripts.NewDungeon
             currentStageInfo = stages[currentStage];
             // add scene load event
             SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        
+        private IEnumerator LateAwake()
+        {
+            yield return null;
             EventManager.Instance.AddListener(PandoraEventType.MapGenerateComplete, this);
         }
         
@@ -71,8 +77,6 @@ namespace Pandora.Scripts.NewDungeon
 
         public void OnRoomClear()
         {
-            var randomPlayer = Random.Range(0, 2);
-            GameManager.Instance.GetPassiveSkill(randomPlayer);
         }
 
         public void OnEvent(PandoraEventType pandoraEventType, Component sender, object param = null)

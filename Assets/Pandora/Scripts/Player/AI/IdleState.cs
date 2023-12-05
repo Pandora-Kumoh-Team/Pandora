@@ -5,9 +5,9 @@ namespace Pandora.Scripts.Player.Controller
 {
     public class IdleState : PlayerAIState
     {
-        private bool isIdleWait;
-        private float idleWaitTimer;
-        private float idleWalkTimer;
+        private bool isIdleWait = true;
+        private float idleWaitTimer = 2f;
+        private float idleWalkTimer = 1f;
         private Vector2 _moveDirection;
         public float idleWalkSpeed = 0.25f;
 
@@ -22,18 +22,20 @@ namespace Pandora.Scripts.Player.Controller
             return this;
         }
 
-        public override void Enter(PlayerAI player)
+        public override void EnterState(PlayerAI player)
         {
             player._playerController.moveDir = Vector2.zero;
         }
 
-        public override void Update(PlayerAI player)
+        public override void UpdateState(PlayerAI player)
         {
             // idle wait
             if (isIdleWait)
             {
                 if(idleWaitTimer > 0)
+                {
                     idleWaitTimer -= Time.deltaTime;
+                }
                 else
                 {
                     isIdleWait = false;
@@ -55,6 +57,7 @@ namespace Pandora.Scripts.Player.Controller
             {
                 if (idleWalkTimer > 0)
                 {
+                    player._playerController.rb.velocity = _moveDirection;
                     player._playerController.moveDir = _moveDirection;
                     idleWalkTimer -= Time.deltaTime;
                 }
@@ -67,7 +70,7 @@ namespace Pandora.Scripts.Player.Controller
             }
         }
 
-        public override void Exit(PlayerAI player)
+        public override void ExitState(PlayerAI player)
         {
             player._playerController.moveDir = Vector2.zero;
         }
