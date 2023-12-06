@@ -22,6 +22,13 @@ namespace Pandora.Scripts.UI
             {
                 Destroy(playerManager.gameObject);
             }
+
+            var roomgenerater = FindObjectOfType<RoomPositionsGenerator>();
+            if (roomgenerater != null)
+            {
+                RoomPositionsGenerator.stage = 0;
+                RoomPositionsGenerator.RoomPositions.Clear();
+            }
         }
 
         public void StageStart()

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Pandora.Scripts.DebugConsole;
 using UnityEngine;
 
 namespace Pandora.Scripts.NewDungeon
@@ -17,10 +18,29 @@ namespace Pandora.Scripts.NewDungeon
         {
             RoomController.Instance.EnqueueRoomToGeneration("Start", 0, 0);
             int roomIndex = 0;
-            int shopIndex = Random.Range(1, dungeonGenerationData.iterationMax - 1);
+            int shopIndex = Random.Range(1, 10);
+            int bossIndex = dungeonRoomPositions.Count - 1;
+            while (dungeonRoomPositions[bossIndex] == Vector2Int.zero)
+            {
+                bossIndex--;
+                if (bossIndex >= -1) continue;
+                RoomPositionsGenerator.stage = 0;
+                RoomPositionsGenerator.RoomPositions.Clear();
+                dungeonRoomPositions = RoomPositionsGenerator.GenerateRoomPositions(dungeonGenerationData);
+                SpawnRooms(roomPositions);
+                return;
+            }
             foreach (var roomPosition in roomPositions)
             {
-                if(roomPosition == dungeonRoomPositions[^1] && roomPosition != Vector2Int.zero)
+                if (roomPosition == dungeonRoomPositions[bossIndex] && roomPosition == Vector2.zero)
+                {
+                    Debug.LogWarning("Boss room is zero (" + roomPosition.x + ", " + roomPosition.y + ")");
+                    if(DebugBossMapGenerateTest._instance != null)
+                    {
+                        DebugBossMapGenerateTest._instance.AddBossDenied("Boss room is zero (" + roomPosition.x + ", " + roomPosition.y + ")");
+                    }
+                }
+                if(bossIndex == roomIndex)
                 {
                     RoomController.Instance.EnqueueRoomToGeneration("End", roomPosition.x, roomPosition.y);
                 }
