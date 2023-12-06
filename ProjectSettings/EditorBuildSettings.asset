@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Pandora/Scenes/DungeonRooms/BasementEnd.unity
     guid: d2ab8b32ae60f30439b474de101d1497
+  - enabled: 1
+    path: Assets/Pandora/Scenes/BossMapGenerateTest.unity
+    guid: fdb043d88ba9c004b8257d6400e47be4
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4f8f98cbfe38a334a9acefa968e38202, type: 2}
