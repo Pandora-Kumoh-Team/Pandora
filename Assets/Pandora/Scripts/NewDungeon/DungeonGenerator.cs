@@ -32,7 +32,7 @@ namespace Pandora.Scripts.NewDungeon
             }
             foreach (var roomPosition in roomPositions)
             {
-                if (roomPosition == dungeonRoomPositions[^1] && roomPosition == Vector2.zero)
+                if (roomPosition == dungeonRoomPositions[bossIndex] && roomPosition == Vector2.zero)
                 {
                     Debug.LogWarning("Boss room is zero (" + roomPosition.x + ", " + roomPosition.y + ")");
                     if(DebugBossMapGenerateTest._instance != null)
@@ -40,7 +40,7 @@ namespace Pandora.Scripts.NewDungeon
                         DebugBossMapGenerateTest._instance.AddBossDenied("Boss room is zero (" + roomPosition.x + ", " + roomPosition.y + ")");
                     }
                 }
-                if(roomPosition == dungeonRoomPositions[^1] && roomPosition != Vector2Int.zero)
+                if(bossIndex == roomIndex)
                 {
                     RoomController.Instance.EnqueueRoomToGeneration("End", roomPosition.x, roomPosition.y);
                 }
