@@ -62,7 +62,7 @@ namespace Pandora.Scripts.DebugConsole
                 else
                 {
                     // get all child
-                    Debug.Log("Map generate " + (RoomPositionsGenerator.stage + 1) + "stage : " + generateTimes + " Error!");
+                    Debug.LogWarning("Map generate " + (RoomPositionsGenerator.stage + 1) + "stage : " + generateTimes + " Error!");
                     errorWriter.WriteLine("Map generate " + (RoomPositionsGenerator.stage + 1) + "stage : " + generateTimes + " Error!");
                     errorWriter.WriteLine("RoomController children count: " + children.Count);
                     foreach (var child in children)
