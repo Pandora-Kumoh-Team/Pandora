@@ -73,3 +73,7 @@ crashlytics-build.properties
 
 # idea
 /.idea/*
+
+# External Assets
+Assets/ExternalAssets/
+
